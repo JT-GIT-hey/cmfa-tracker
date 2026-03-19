@@ -2050,7 +2050,7 @@ updateStats=function(){
   _origUpdateStats();
   const s=$('stBm');if(s)s.textContent=BM.size;
   if(statsExtOpen)refreshExtStats();
-  drawScrubber();
+  requestAnimationFrame(drawScrubber);
 };
 
 // ── PATCH: render — inject bookmark buttons into table rows ──────────
@@ -2089,7 +2089,9 @@ const _origInit=init;
 init=function(){
   _origInit();
   renderPresets();
-  drawScrubber();
+  requestAnimationFrame(drawScrubber);
+};
+
 // ── HELP MODAL ─────────────────────────────────────────────────────
 function openHelp(){$('helpMov').classList.add('open');document.body.style.overflow='hidden';}
 function closeHelp(){$('helpMov').classList.remove('open');document.body.style.overflow='';}
@@ -2099,8 +2101,8 @@ function showPanel(id,navEl){
   const panel=$(id);if(panel)panel.classList.add('on');
   if(navEl)navEl.classList.add('on');
 }
-$('helpMov').addEventListener('click',e=>{if(e.target===$('helpMov'))closeHelp();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('helpMov').classList.contains('open'))closeHelp();});
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='helpMov')closeHelp();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('helpMov').classList.contains('open'))closeHelp();}});
 </script>
 </body>
 </html>
