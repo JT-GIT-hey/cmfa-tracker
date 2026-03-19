@@ -114,6 +114,8 @@ footer strong{color:rgba(255,255,255,.65)}
       <li><a href="#spokespeople">Spokespeople</a></li>
       <li><a href="#hostility">Hostility Matrix</a></li>
       <li><a href="#media">Media</a></li>
+      <li><a href="#kwic">KWIC</a></li>
+      <li><a href="#bilateral">Bilateral</a></li>
       <li><a href="#words">Era Words</a></li>
       <li><a href="#length">Length</a></li>
     </ul>
@@ -321,6 +323,76 @@ footer strong{color:rgba(255,255,255,.65)}
         <div style="padding:10px;background:var(--paper);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);line-height:1.6">Scale: 0 (most negative) → 5 (most positive). Gap between BBC (1.49) and Xinhua (2.78) = 1.29 points across 100–450 questions each.</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- KWIC -->
+<section id="kwic">
+  <div class="sh"><h2>Keyword in Context (KWIC)</h2><span class="tag tag-teal">Collocation Analysis · Cached Data</span></div>
+  <p class="sd">Enter any word to find its most frequent neighbours in MFA answers — the 5 words that most often appear alongside it. This reveals framing and narrative structure rather than just raw frequency. Requires the dataset to be cached: visit the <a href="index.html" style="color:var(--red)">Data Browser</a> first (one-time, ~10 seconds).</p>
+  <div class="card">
+    <div class="ct">Collocation Search</div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
+      <input type="text" id="kwicInput" placeholder="e.g. taiwan, sanctions, cooperation, pompeo…" disabled style="flex:1;min-width:200px;padding:9px 14px;border:1px solid var(--mist);border-radius:3px;font-size:13px;outline:none;font-family:'IBM Plex Sans',sans-serif;background:var(--paper)" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--mist)'" onkeydown="if(event.key==='Enter')runKWIC()">
+      <select id="kwicField" style="padding:9px 12px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--paper);cursor:pointer;outline:none">
+        <option value="answer">In Answers</option>
+        <option value="question">In Questions</option>
+        <option value="both">In Both</option>
+      </select>
+      <button id="kwicBtn" onclick="runKWIC()" disabled style="padding:9px 20px;background:var(--red);color:white;border:none;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;opacity:.5">Search</button>
+    </div>
+    <div id="kwicStatus" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub);margin-bottom:10px;line-height:1.6">Checking cache…</div>
+    <div id="kwicResults" style="display:none">
+      <div class="g2" style="margin-bottom:20px">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--sub);margin-bottom:10px" id="kwicColTitle">Top 20 Collocates (within 5 words)</div>
+          <div id="kwicCollocates" class="hbar-list"></div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--sub);margin-bottom:10px">Collocate Frequency Chart</div>
+          <div style="height:300px"><canvas id="kwicChart"></canvas></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--sub);margin-bottom:10px" id="kwicLineTitle">Concordance Lines (sample of 25)</div>
+        <div id="kwicLines" style="font-size:12px;border:1px solid var(--mist);border-radius:3px;overflow:hidden;max-height:400px;overflow-y:auto"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BILATERAL COMPARISON -->
+<section id="bilateral">
+  <div class="sh"><h2>Bilateral Comparison Mode</h2><span class="tag tag-purple">Country vs Country · 2002–2025</span></div>
+  <p class="sd">Select two countries to compare how frequently they appear in MFA answers over time. Reveals how Beijing's diplomatic attention shifts between bilateral relationships across different political eras.</p>
+  <div class="card" style="margin-bottom:20px">
+    <div class="ct">Select Countries</div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--red);white-space:nowrap">Country A</span>
+        <select id="countryA" onchange="renderBilateral()" style="padding:8px 12px;border:2px solid var(--red);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--paper);cursor:pointer;outline:none"></select>
+      </div>
+      <span style="font-size:18px;color:var(--smoke);font-weight:300">vs</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#1565C0;white-space:nowrap">Country B</span>
+        <select id="countryB" onchange="renderBilateral()" style="padding:8px 12px;border:2px solid #1565C0;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--paper);cursor:pointer;outline:none"></select>
+      </div>
+    </div>
+  </div>
+  <div class="g2" style="margin-bottom:20px">
+    <div class="card">
+      <div class="ct" id="bilTitleA">Country A — Annual Mentions</div>
+      <div style="height:240px"><canvas id="bilChartA"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct" id="bilTitleB">Country B — Annual Mentions</div>
+      <div style="height:240px"><canvas id="bilChartB"></canvas></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ct" id="bilTitleC">Combined Comparison</div>
+    <div style="height:260px"><canvas id="bilChartC"></canvas></div>
+    <div id="bilStats" style="margin-top:14px;display:flex;gap:24px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);border-top:1px solid var(--mist);padding-top:12px"></div>
   </div>
 </section>
 
@@ -623,7 +695,145 @@ const MEDIA_ORDER=Object.entries(MEDIA_DATA).filter(([,d])=>d.count>=50).sort((a
 const MCAT_COLORS={western:'#C41E3A',regional:'#D4A843',chinese:'#2E7D32'};
 new Chart(document.getElementById('mediaC'),{type:'bar',data:{labels:MEDIA_ORDER.map(([n])=>n),datasets:[{data:MEDIA_ORDER.map(([,d])=>d.avg_q),backgroundColor:MEDIA_ORDER.map(([n])=>{const cat=MEDIA_CAT[n]||'regional';return MCAT_COLORS[cat]+'99';}),borderRadius:2}]},options:{...BASE,indexAxis:'y',scales:{x:{grid:{color:'#E8E1D6'},ticks:TX,min:1.2},y:{grid:{display:false},ticks:{...TX,font:{family:'IBM Plex Mono',size:10}}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` Avg Q sentiment: ${c.parsed.x.toFixed(3)}`}}}}});
 
-// ── ERA WORD CLOUD ────────────────────────────────────────────────────
+// ── KWIC ──────────────────────────────────────────────────────────────
+const KWIC_STOPWORDS=new Set('the a an and or but in on at to for of with by from is are was were be been being have has had do does did will would could should may might shall not no this that these those it its we us our they them their i you your he she his her china chinese press foreign ministry spokesperson noted also about more very some such one two three first second third any all both upon well even through over under within between among please know note what how when where who why which if since including included already still last year years time times government authorities officials'.split(' '));
+let kwicData=null,kwicChartInst=null;
+
+// Open same IDB as index.html
+async function kwicOpenIDB(){
+  return new Promise((res,rej)=>{
+    const r=indexedDB.open('cmfa_cache',1);
+    r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains('rows'))db.createObjectStore('rows');};
+    r.onsuccess=e=>res(e.target.result);
+    r.onerror=rej;
+  });
+}
+
+async function initKWIC(){
+  const st=$('kwicStatus'),inp=$('kwicInput'),btn=$('kwicBtn');
+  try{
+    const db=await kwicOpenIDB();
+    const data=await new Promise((res,rej)=>{
+      const t=db.transaction('rows','readonly');
+      const r=t.objectStore('rows').get('cmfa_v6');
+      r.onsuccess=e=>res(e.target.result||null);
+      r.onerror=()=>res(null);
+    });
+    if(data&&data.length>0){
+      kwicData=data;
+      st.innerHTML=`<span style="color:#2E7D32">✓ ${data.length.toLocaleString()} entries loaded from cache.</span> Enter a keyword and press Search (or Enter).`;
+      inp.disabled=false;btn.disabled=false;btn.style.opacity='1';
+    } else {
+      st.innerHTML=`No cached data found. <a href="index.html" style="color:var(--red)">Visit the Data Browser</a> first — it caches the dataset in your browser (~10 seconds, one-time only). Then return here.`;
+    }
+  } catch(e){
+    st.innerHTML=`Cache unavailable. <a href="index.html" style="color:var(--red)">Visit the Data Browser</a> to cache the dataset first.`;
+  }
+}
+initKWIC();
+
+function runKWIC(){
+  const kw=($('kwicInput').value||'').trim().toLowerCase();
+  if(!kw||!kwicData){return;}
+  const field=$('kwicField').value;
+  const WIN=5;
+  const colls={};
+  const lines=[];
+  let total=0;
+
+  kwicData.forEach(row=>{
+    const texts=[];
+    if(field==='answer'||field==='both') texts.push(row.answer||'');
+    if(field==='question'||field==='both') texts.push(row.question||'');
+    texts.forEach(text=>{
+      const lower=text.toLowerCase();
+      let idx=lower.indexOf(kw);
+      while(idx!==-1){
+        total++;
+        // Tokenise surrounding words
+        const before=lower.slice(0,idx).trim().split(/\s+/).filter(Boolean);
+        const after=lower.slice(idx+kw.length).trim().split(/\s+/).filter(Boolean);
+        // Collocates
+        [...before.slice(-WIN),...after.slice(0,WIN)].forEach(w=>{
+          const clean=w.replace(/[^a-z]/g,'');
+          if(clean.length>2&&!KWIC_STOPWORDS.has(clean)&&clean!==kw){
+            colls[clean]=(colls[clean]||0)+1;
+          }
+        });
+        // Concordance line (max 30)
+        if(lines.length<30){
+          const bStr=before.slice(-5).join(' ');
+          const aStr=after.slice(0,5).join(' ');
+          lines.push({bStr,kw:text.slice(idx,idx+kw.length),aStr,date:(row.date||'').slice(0,10),sp:row.spokesperson||''});
+        }
+        idx=lower.indexOf(kw,idx+1);
+      }
+    });
+  });
+
+  const topColls=Object.entries(colls).sort((a,b)=>b[1]-a[1]).slice(0,20);
+  const maxC=topColls[0]?topColls[0][1]:1;
+
+  // Update title
+  $('kwicColTitle').textContent=`Top 20 Collocates for "${kw}" (${total.toLocaleString()} occurrences)`;
+  $('kwicLineTitle').textContent=`Concordance Lines for "${kw}" (sample of ${Math.min(lines.length,30)})`;
+
+  // Horizontal bars
+  $('kwicCollocates').innerHTML=topColls.map(([w,c])=>`<div class="hbar"><div class="hbar-top"><span class="hbar-lbl">${w}</span><span class="hbar-val">${c}</span></div><div class="hbar-track"><div class="hbar-fill" style="width:${(c/maxC*100).toFixed(1)}%"></div></div></div>`).join('');
+
+  // Chart
+  if(kwicChartInst)kwicChartInst.destroy();
+  kwicChartInst=new Chart(document.getElementById('kwicChart'),{
+    type:'bar',
+    data:{labels:topColls.map(([w])=>w),datasets:[{data:topColls.map(([,c])=>c),backgroundColor:topColls.map((_,i)=>i<5?'rgba(196,30,58,.8)':i<10?'rgba(212,168,67,.7)':'rgba(107,98,89,.5)'),borderRadius:2}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{grid:{color:'#E8E1D6'},ticks:{font:{family:'IBM Plex Mono',size:10},color:'#6B6259'}},y:{grid:{display:false},ticks:{font:{family:'IBM Plex Mono',size:10},color:'#6B6259'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.x} co-occurrences`}}}}
+  });
+
+  // Concordance lines
+  $('kwicLines').innerHTML=lines.map(l=>`<div style="padding:7px 14px;border-bottom:1px solid var(--mist);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);white-space:nowrap;min-width:80px">${l.date}</span>
+    <span style="text-align:right;flex:1;min-width:120px;color:var(--sub)">${l.bStr}</span>
+    <span style="font-weight:700;color:var(--red);background:rgba(196,30,58,.08);padding:1px 6px;border-radius:2px;white-space:nowrap">${l.kw}</span>
+    <span style="flex:1;min-width:120px;color:var(--sub)">${l.aStr}</span>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);white-space:nowrap">${l.sp}</span>
+  </div>`).join('');
+
+  $('kwicResults').style.display='block';
+}
+
+// ── BILATERAL COMPARISON ──────────────────────────────────────────────
+const BIL_COUNTRIES=['US','Japan','Taiwan','DPRK','Russia','Ukraine','India','South China Sea','Hong Kong','Pakistan'];
+const BIL_COLORS={A:'#C41E3A',B:'#1565C0'};
+let bilCharts={};
+
+function initBilateral(){
+  const opts=BIL_COUNTRIES.map(c=>`<option value="${c}">${c}</option>`).join('');
+  $('countryA').innerHTML=opts; $('countryB').innerHTML=opts;
+  $('countryA').value='US'; $('countryB').value='Taiwan';
+  renderBilateral();
+}
+
+function renderBilateral(){
+  const cA=$('countryA').value,cB=$('countryB').value;
+  const dA=YEARS.map(y=>AD.loc_trend[cA]?AD.loc_trend[cA][y]||0:0);
+  const dB=YEARS.map(y=>AD.loc_trend[cB]?AD.loc_trend[cB][y]||0:0);
+  $('bilTitleA').textContent=`${cA} — Annual Mentions in Answers`;
+  $('bilTitleB').textContent=`${cB} — Annual Mentions in Answers`;
+  $('bilTitleC').textContent=`${cA} vs ${cB} — Combined`;
+  ['bilChartA','bilChartB','bilChartC'].forEach(id=>{if(bilCharts[id])bilCharts[id].destroy();});
+  const TX={font:{family:'IBM Plex Mono',size:10},color:'#6B6259'};
+  bilCharts['bilChartA']=new Chart($('bilChartA'),{type:'bar',data:{labels:YEARS,datasets:[{data:dA,backgroundColor:'rgba(196,30,58,.75)',borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y} mentions`}}},scales:{x:{grid:{display:false},ticks:TX},y:{grid:{color:'#E8E1D6'},ticks:TX}}}});
+  bilCharts['bilChartB']=new Chart($('bilChartB'),{type:'bar',data:{labels:YEARS,datasets:[{data:dB,backgroundColor:'rgba(21,101,192,.75)',borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y} mentions`}}},scales:{x:{grid:{display:false},ticks:TX},y:{grid:{color:'#E8E1D6'},ticks:TX}}}});
+  bilCharts['bilChartC']=new Chart($('bilChartC'),{type:'line',data:{labels:YEARS,datasets:[{label:cA,data:dA,borderColor:BIL_COLORS.A,backgroundColor:'rgba(196,30,58,.05)',borderWidth:2,pointRadius:3,tension:.3,fill:true},{label:cB,data:dB,borderColor:BIL_COLORS.B,backgroundColor:'rgba(21,101,192,.05)',borderWidth:2,pointRadius:3,tension:.3,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{font:{family:'IBM Plex Mono',size:10},color:'#6B6259',boxWidth:10}},tooltip:{mode:'index'}},scales:{x:{grid:{display:false},ticks:TX},y:{grid:{color:'#E8E1D6'},ticks:TX}}}});
+  const totA=dA.reduce((a,b)=>a+b,0),totB=dB.reduce((a,b)=>a+b,0);
+  const pkA=Math.max(...dA),pkYA=YEARS[dA.indexOf(pkA)];
+  const pkB=Math.max(...dB),pkYB=YEARS[dB.indexOf(pkB)];
+  $('bilStats').innerHTML=`
+    <span><strong style="color:${BIL_COLORS.A}">${cA}</strong>: ${totA.toLocaleString()} total · Peak: ${pkA} (${pkYA})</span>
+    <span><strong style="color:${BIL_COLORS.B}">${cB}</strong>: ${totB.toLocaleString()} total · Peak: ${pkB} (${pkYB})</span>
+    <span style="color:var(--sub)">${cA} mentioned <strong style="color:var(--text)">${totB>0?(totA/totB).toFixed(1):totA}×</strong> more than ${cB} over 23 years</span>`;
+}
+initBilateral();
 const ERA_WORDS=ND.era_words;
 const ERA_NAMES=Object.keys(ERA_WORDS);
 const ERA_PALETTE=['#C41E3A','#1565C0','#8B1A1A','#2E7D32'];
