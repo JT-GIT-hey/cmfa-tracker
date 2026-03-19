@@ -239,6 +239,15 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 .mthemes{display:flex;flex-wrap:wrap;gap:5px}
 .mlink{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--red);word-break:break-all}
 @media(max-width:900px){:root{--sb:0px}#sidebar{display:none}.cg{grid-template-columns:1fr}}
+/* Sidebar collapse */
+#sidebar{transition:width .25s cubic-bezier(.4,0,.2,1),min-width .25s cubic-bezier(.4,0,.2,1)}
+#sidebar.collapsed{width:0!important;min-width:0!important;overflow:hidden;border-right:none}
+#toggleSB{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border:1px solid var(--mist);border-radius:3px;background:var(--paper);cursor:pointer;color:var(--sub);font-size:13px;transition:all .2s;flex-shrink:0}
+#toggleSB:hover{border-color:var(--red);color:var(--red);background:white}
+/* Floating re-open tab when sidebar is collapsed */
+#showFiltersTab{display:none;position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:150;writing-mode:vertical-rl;background:var(--red);color:white;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:14px 8px;cursor:pointer;border-radius:0 4px 4px 0;box-shadow:2px 0 8px rgba(0,0,0,.15);transition:background .2s}
+#showFiltersTab:hover{background:var(--red-dim)}
+#showFiltersTab.visible{display:block}
 </style>
 </head>
 <body>
@@ -290,12 +299,18 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
     </div>
   </div>
 </div>
+<!-- Floating re-open tab -->
+<div id="showFiltersTab" onclick="toggleSidebar()" title="Show filters">☰ Filters</div>
+
 <div id="app">
   <!-- SIDEBAR -->
   <div id="sidebar">
     <div class="sb-head">
       <span class="sb-title">Filters</span>
-      <button id="resetAllBtn" onclick="resetAll()">Clear All</button>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button id="resetAllBtn" onclick="resetAll()">Clear All</button>
+        <button id="toggleSB" onclick="toggleSidebar()" title="Hide filters panel">◀</button>
+      </div>
     </div>
     <div class="sb-scroll">
 
@@ -374,14 +389,21 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
       <!-- 5. RHETORICAL REGISTER -->
       <div class="fg">
         <label class="fg-label">Rhetorical Register</label>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">How the spokesperson responds — detected from answer text</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:6px">Detected from answer text — select one or more, results match any selected</div>
         <div class="rr-grid">
-          <span class="rr-chip" data-rr="wolf"        style="color:#8B1A1A;border-color:#8B1A1A55" title="strongly condemn, firmly oppose, gross interference, double standard">🐺 Wolf Warrior<br><span style="font-size:8px;opacity:.7">2,417 entries</span></span>
-          <span class="rr-chip" data-rr="sovereignty" style="color:#C41E3A;border-color:#C41E3A55" title="internal affairs, sovereignty, core interests, territorial integrity">🛡 Sovereignty<br><span style="font-size:8px;opacity:.7">4,010 entries</span></span>
-          <span class="rr-chip" data-rr="coop"        style="color:#2E7D32;border-color:#2E7D3255" title="win-win, cooperation, partnership, mutual benefit, shared future">🤝 Cooperative<br><span style="font-size:8px;opacity:.7">12,740 entries</span></span>
-          <span class="rr-chip" data-rr="denial"      style="color:#E65100;border-color:#E6510055" title="fabricated, groundless, baseless, disinformation, false accusation">🚫 Denial<br><span style="font-size:8px;opacity:.7">1,942 entries</span></span>
-          <span class="rr-chip" data-rr="warning"     style="color:#B71C1C;border-color:#B71C1C55" title="grave concern, strongly urge, stern warning, must stop">⚠ Warning<br><span style="font-size:8px;opacity:.7">2,693 entries</span></span>
-          <span class="rr-chip" data-rr="multilateral" style="color:#1565C0;border-color:#1565C055" title="UN, Security Council, WTO, G20, multilateral, global governance">🌐 Multilateral<br><span style="font-size:8px;opacity:.7">7,992 entries</span></span>
+          <span class="rr-chip" data-rr="bureaucratic" style="color:#455A64;border-color:#455A6455" title="Five Principles of Peaceful Coexistence, in accordance with international law, mutual respect, we have noted the relevant reports">📋 Bureaucratic<br><span style="font-size:8px;opacity:.7">3,614 entries</span></span>
+          <span class="rr-chip" data-rr="sovereignty"  style="color:#C41E3A;border-color:#C41E3A55" title="internal affairs, sovereignty, core interests, territorial integrity, firmly oppose, resolute measures">🛡 Sovereignty<br><span style="font-size:8px;opacity:.7">4,010 entries</span></span>
+          <span class="rr-chip" data-rr="wolf"         style="color:#8B1A1A;border-color:#8B1A1A55" title="strongly condemn, firmly oppose, gross interference, double standard, cold war mentality, smearing, irresponsible remarks">🐺 Wolf Warrior<br><span style="font-size:8px;opacity:.7">2,417 entries</span></span>
+          <span class="rr-chip" data-rr="coop"         style="color:#2E7D32;border-color:#2E7D3255" title="win-win, community with a shared future, Belt and Road, shared prosperity, Global Development Initiative">🤝 Cooperative<br><span style="font-size:8px;opacity:.7">12,740 entries</span></span>
+          <span class="rr-chip" data-rr="evasive"      style="color:#6B6259;border-color:#6B625955" title="not aware of the situation, refer you to the competent authorities, no information on, cannot confirm, I have no information">🚪 Evasive / Stonewall<br><span style="font-size:8px;opacity:.7">1,489 entries</span></span>
+          <span class="rr-chip" data-rr="denial"       style="color:#E65100;border-color:#E6510055" title="fabricated, groundless, baseless, disinformation, smear, false accusation, pure fabrication">🚫 Denial / Refutation<br><span style="font-size:8px;opacity:.7">1,942 entries</span></span>
+          <span class="rr-chip" data-rr="warning"      style="color:#B71C1C;border-color:#B71C1C55" title="grave concern, strongly urge, stern warning, must stop, immediately stop, stop interfering">⚠ Strong Warning<br><span style="font-size:8px;opacity:.7">2,693 entries</span></span>
+          <span class="rr-chip" data-rr="coercive"     style="color:#880E4F;border-color:#880E4F55" title="play with fire will perish, pay a heavy price, do not say we did not warn, resolute countermeasures, serious consequences">🔥 Coercive / Ultimatum<br><span style="font-size:8px;opacity:.7">270 entries</span></span>
+          <span class="rr-chip" data-rr="nationalist"  style="color:#BF360C;border-color:#BF360C55" title="1.4 billion Chinese people, hurt the feelings of the Chinese people, national rejuvenation, flesh and blood ties">🇨🇳 Nationalist / Populist<br><span style="font-size:8px;opacity:.7">215 entries</span></span>
+          <span class="rr-chip" data-rr="grievance"    style="color:#4A148C;border-color:#4A148C55" title="century of humiliation, unequal treaties, hegemony and bullying, imperialist mindset, gunboat diplomacy">📜 Historical Grievance<br><span style="font-size:8px;opacity:.7">170 entries</span></span>
+          <span class="rr-chip" data-rr="pedagogical"  style="color:#1A237E;border-color:#1A237E55" title="look in the mirror, mind their own business, fix their own problems first, systemic racism, advise certain countries">🪞 Whataboutism<br><span style="font-size:8px;opacity:.7">91 entries</span></span>
+          <span class="rr-chip" data-rr="multilateral" style="color:#1565C0;border-color:#1565C055" title="UN, Security Council, WTO, G20, multilateral, global governance, international community">🌐 Multilateral<br><span style="font-size:8px;opacity:.7">7,992 entries</span></span>
+          <span class="rr-chip" data-rr="idiomatic"    style="color:#00695C;border-color:#00695C55" title="mantis trying to stop a chariot, bottom of a well, lifting a rock, paper tiger, daydreaming, ants trying to topple">📖 Idiomatic / Mocking<br><span style="font-size:8px;opacity:.7">254 entries</span></span>
         </div>
       </div>
 
@@ -410,7 +432,15 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
         </div>
       </div>
 
-      <!-- 7. LOCATION FILTER -->
+      <!-- 7. SPECIFIC MEDIA OUTLET -->
+      <div class="fg">
+        <label class="fg-label">Specific Media Outlet</label>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:6px">Search or select individual outlets (from March 2020)</div>
+        <input type="search" id="mSearch" placeholder="Search outlets…" style="width:100%;padding:7px 10px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:var(--text);background:var(--paper);outline:none;margin-bottom:6px" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--mist)'">
+        <div class="cb-list" id="mList"></div>
+      </div>
+
+      <!-- 8. LOCATION FILTER -->
       <div class="fg">
         <label class="fg-label">Country / Region Focus</label>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Searches named-entity location fields</div>
@@ -633,15 +663,27 @@ const THEMES = {
 };
 
 const RR = {
-  wolf:        {label:'Wolf Warrior',    kw:['strongly condemn','firmly oppose','gross interference','stop immediately','double standard','never allow','resolute opposition','strong dissatisfaction']},
-  sovereignty: {label:'Sovereignty',     kw:['internal affairs','sovereignty','non-interference','territorial integrity','core interests','infringe','never tolerate']},
-  coop:        {label:'Cooperative',     kw:['win-win','mutual benefit','cooperation','partnership','jointly','shared future','community with']},
-  denial:      {label:'Denial/Refutation',kw:['fabricated','groundless','without basis','baseless','distort','disinformation','smear','false accusation','not true','pure fabrication']},
-  warning:     {label:'Strong Warning',  kw:['grave concern','serious concern','urge ','stern warning','must stop','immediately stop','stop interfering','strongly urge']},
-  multilateral:{label:'Multilateral',    kw:['united nations','security council',' wto ','g20','multilateral','global governance','international community',' iaea ']}
+  bureaucratic: {label:'Bureaucratic',   kw:['five principles','peaceful coexistence','win-win cooperation','mutual respect','in accordance with international law','we have noted the relevant','noted the relevant reports']},
+  sovereignty:  {label:'Sovereignty',    kw:['internal affairs','sovereignty','non-interference','territorial integrity','core interests','infringe','never tolerate','indisputable sovereignty']},
+  wolf:         {label:'Wolf Warrior',   kw:['strongly condemn','firmly oppose','gross interference','stop immediately','double standard','never allow','resolute opposition','strong dissatisfaction','cold war mentality','ideological bias','irresponsible remarks']},
+  coop:         {label:'Cooperative',    kw:['win-win','mutual benefit','community with a shared future','belt and road','shared prosperity','global development initiative','south-south cooperation','shared future for mankind']},
+  evasive:      {label:'Evasive',        kw:['not aware of the situation','not aware of','refer you to the competent','not a diplomatic','i have no information','have not verified','cannot confirm','no further information on this']},
+  denial:       {label:'Denial',         kw:['fabricated','groundless','without basis','baseless','distort','disinformation','smear','false accusation','not true','pure fabrication']},
+  warning:      {label:'Strong Warning', kw:['grave concern','serious concern','urge ','stern warning','must stop','immediately stop','stop interfering','strongly urge']},
+  coercive:     {label:'Coercive',       kw:['play with fire','pay a heavy price','doomed to fail','do not say we did not warn','resolute countermeasures','will perish by it','serious consequences will follow','do not underestimate']},
+  nationalist:  {label:'Nationalist',    kw:['1.4 billion','hurt the feelings of the chinese people','flesh and blood','national rejuvenation','great rejuvenation','chinese people will never','14 billion chinese']},
+  grievance:    {label:'Hist. Grievance',kw:['century of humiliation','unequal treaties','hegemony and bullying','imperialist','gunboat diplomacy','no longer what it was 100','not 1900','colonial era']},
+  pedagogical:  {label:'Whataboutism',   kw:['look in the mirror','mind their own business','fix their own problems','systemic racism','gun violence','human rights deficit','advise certain countries to','certain countries should']},
+  multilateral: {label:'Multilateral',   kw:['united nations','security council',' wto ','g20','multilateral','global governance','international community',' iaea ']},
+  idiomatic:    {label:'Idiomatic',      kw:['mantis','bottom of a well','lifting a rock only to drop','paper tiger','daydreaming','ants trying to topple','civilizational confidence','doomed to perish']}
 };
 
-const RR_COLORS = {wolf:'#8B1A1A',sovereignty:'#C41E3A',coop:'#2E7D32',denial:'#E65100',warning:'#B71C1C',multilateral:'#1565C0'};
+const RR_COLORS = {
+  bureaucratic:'#455A64',sovereignty:'#C41E3A',wolf:'#8B1A1A',coop:'#2E7D32',
+  evasive:'#6B6259',denial:'#E65100',warning:'#B71C1C',coercive:'#880E4F',
+  nationalist:'#BF360C',grievance:'#4A148C',pedagogical:'#1A237E',
+  multilateral:'#1565C0',idiomatic:'#00695C'
+};
 const THEME_COLORS = {crisis:'#C41E3A',conflict:'#8B1A1A',health:'#2E7D32',trade:'#1565C0',rights:'#6A1B9A',nuclear:'#E65100',terror:'#37474F',climate:'#00695C',taiwan:'#C62828',scs:'#0277BD',russia:'#4E342E',us:'#1A237E',dprk:'#4A148C'};
 
 const WESTERN_OUTLETS = new Set(['AFP','Reuters','Bloomberg','BBC','CNN','The New York Times','NBC','EFE','AP','Financial Times','The Guardian','Der Spiegel','Associated Press']);
@@ -690,7 +732,7 @@ function init(){
   const sps=Object.entries(spC).filter(([k])=>k&&k!=='-'&&k!=='missing').sort((a,b)=>b[1]-a[1]);
   if($('spList')) $('spList').innerHTML=sps.map(([n,c])=>`<div class="cb-item"><input type="checkbox" id="sp_${n.replace(/\s/g,'_')}" value="${n}" onchange="af()"><label for="sp_${n.replace(/\s/g,'_')}">${n}</label><span class="cb-cnt">${c.toLocaleString()}</span></div>`).join('');
   window._allMedia=Object.entries(mC).sort((a,b)=>b[1]-a[1]);
-  if($('mList')) renderML(window._allMedia.slice(0,20));
+  if($('mList')) renderML(window._allMedia.slice(0,25));
 
   // Theme chips
   document.querySelectorAll('.th-chip').forEach(c=>c.addEventListener('click',()=>{const t=c.dataset.theme;if(activeThemes.has(t)){activeThemes.delete(t);c.classList.remove('on');}else{activeThemes.add(t);c.classList.add('on');}af();}));
@@ -729,7 +771,10 @@ function init(){
   $('yTo').addEventListener('input',()=>{$('ytS').value=$('yTo').value;$('ytV').textContent=$('yTo').value;af();});
   $('yfS').addEventListener('input',()=>{$('yFrom').value=$('yfS').value;$('yfV').textContent=$('yfS').value;af();});
   $('ytS').addEventListener('input',()=>{$('yTo').value=$('ytS').value;$('ytV').textContent=$('ytS').value;af();});
-  if($('mSearch')) $('mSearch').addEventListener('input',filterML);
+  if($('mSearch')) $('mSearch').addEventListener('input', ()=>{
+    const q=$('mSearch').value.toLowerCase();
+    renderML(q?window._allMedia.filter(([n])=>n.toLowerCase().includes(q)):window._allMedia.slice(0,25));
+  });
   document.querySelectorAll('thead th[data-col]').forEach(th=>th.addEventListener('click',()=>{const col=th.dataset.col;if(sCol===col)sDir*=-1;else{sCol=col;sDir=1;}$('sortSel').value=`${sCol}-${sDir===1?'asc':'desc'}`;document.querySelectorAll('thead th').forEach(t=>t.classList.remove('sa','sd'));th.classList.add(sDir===1?'sa':'sd');page=1;render();}));
   $('mov').addEventListener('click',e=>{if(e.target===$('mov'))closeM();});
   $('pgJ').addEventListener('keydown',e=>{if(e.key==='Enter'){const v=+$('pgJ').value,t=Math.ceil(FIL.length/pp);if(v>=1&&v<=t){page=v;render();}}});
@@ -1033,6 +1078,16 @@ function exportCSV(){
   const cols=['id','spokesperson','date','year','question','answer','who_asked','q_loc','q_per','q_org','a_loc','a_per','a_org','q_sentiment','a_sentiment'];
   const rows=[cols.join(','),...FIL.map(r=>cols.map(c=>{const v=String(r[c]||'').replace(/"/g,'""');return/[,"\n]/.test(v)?`"${v}"`:v;}).join(','))];
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download=`cmfa_${Date.now()}.csv`;a.click();
+}
+
+// ── SIDEBAR TOGGLE ─────────────────────────────────────────────────────
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  const tab=document.getElementById('showFiltersTab');
+  const btn=document.getElementById('toggleSB');
+  const collapsed=sb.classList.toggle('collapsed');
+  tab.classList.toggle('visible', collapsed);
+  if(btn) btn.textContent = collapsed ? '' : '◀';
 }
 
 function resetAll(){
