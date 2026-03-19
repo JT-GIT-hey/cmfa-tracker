@@ -254,21 +254,74 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 .cache-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.06em;padding:3px 8px;border-radius:2px;margin-left:8px}
 .cache-hit{background:rgba(46,125,50,.15);color:#2E7D32}
 .cache-miss{background:rgba(212,168,67,.15);color:#8a6a00}
-/* ── DARK MODE ────────────────────────────────────────── */
-body.dark{--paper:#111008;--mist:#1e1c18;--smoke:#3a3530;--card:#181510;--text:#E8E1D6;--sub:#BFB8AC}
-body.dark #topbar{background:#0a0805;border-bottom-color:#8a1428}
-body.dark #creditbar{background:#080600}
-body.dark #stats{background:#0a0805}
-body.dark table thead th{background:var(--paper)}
-body.dark .fg input,body.dark .fg select,body.dark .s-wrap input,body.dark .tb-sel{background:var(--card);color:var(--text);border-color:var(--mist)}
-body.dark .era-item,body.dark .mo-item,body.dark .qf,body.dark .th-chip,body.dark .sq-btn,body.dark .rr-chip{background:var(--card)}
+/* ── DARK MODE — warm amber-cognac palette ──────────────────────── */
+body.dark{
+  --paper:#1C1914;--mist:#2D2820;--smoke:#4A4038;
+  --card:#231F1A;--text:#DDD5C8;--sub:#A89880
+}
+/* Structure */
+body.dark #topbar{background:#130F0B;border-bottom-color:#7a1228}
+body.dark #creditbar{background:#0F0C09;border-bottom-color:rgba(212,168,67,.12)}
+body.dark #sidebar{background:var(--card);border-right-color:var(--mist)}
+body.dark #toolbar{background:var(--card);border-bottom-color:var(--mist)}
+body.dark #afBar{background:var(--paper);border-bottom-color:var(--mist)}
+body.dark #stats{background:#130F0B}
+body.dark #statsExt{background:rgba(0,0,0,.2);border-bottom-color:rgba(255,255,255,.04)}
+body.dark #scrubber{background:var(--paper);border-bottom-color:var(--mist)}
+body.dark #pgbar{background:var(--card);border-top-color:var(--mist)}
+body.dark #results{background:var(--paper)}
+/* Table */
+body.dark table thead th{background:var(--paper);border-bottom-color:var(--mist)}
+body.dark tbody tr{border-bottom-color:var(--mist)}
+body.dark tbody tr:hover{background:rgba(212,168,67,.035)}
+/* Sidebar inputs */
+body.dark .fg input[type=text],body.dark .fg input[type=search],
+body.dark .fg input[type=number],body.dark .fg select{background:var(--paper);color:var(--text);border-color:var(--mist)}
+body.dark .fg input:focus,body.dark .fg select:focus{background:#1A1612;border-color:var(--red)}
+body.dark .sb-scroll::-webkit-scrollbar-thumb{background:var(--smoke)}
+/* Toolbar inputs */
+body.dark .s-wrap input{background:var(--paper);color:var(--text);border-color:var(--mist)}
+body.dark .s-wrap input:focus{background:#1A1612;border-color:var(--red)}
+body.dark .s-wrap .sk{background:var(--mist);color:var(--smoke)}
+body.dark .tb-sel{background:var(--paper);color:var(--text);border-color:var(--mist)}
+body.dark .dvsm{background:var(--mist)}
+/* Chips & filter buttons */
+body.dark .era-item,body.dark .mo-item{background:var(--paper);border-color:var(--mist)}
+body.dark .era-item:hover,body.dark .mo-item:hover{border-color:var(--red)}
+body.dark .qf{background:var(--paper);border-color:var(--mist)}
+body.dark .th-chip{background:var(--paper)}
+body.dark .th-chip:hover{background:color-mix(in srgb,var(--tc,var(--smoke)) 18%,#1C1914)}
+body.dark .sq-btn{background:var(--paper);border-color:var(--mist)}
+body.dark .rr-chip{background:var(--paper)}
+body.dark .vbtns{border-color:var(--mist)}
+body.dark .vbtn{background:var(--paper);color:var(--smoke)}
+/* Cards */
+body.dark .ec{background:var(--card);border-color:var(--mist)}
+body.dark .ec:hover{border-color:var(--red);box-shadow:0 4px 20px rgba(0,0,0,.45)}
+/* Pagination */
+body.dark .pb{background:var(--card);color:var(--sub);border-color:var(--mist)}
+body.dark .pb:hover:not(:disabled){background:var(--mist);color:var(--text)}
+/* Buttons */
 body.dark .exp-btn,body.dark .bm-only-btn{background:transparent;border-color:var(--mist);color:var(--sub)}
-body.dark #pgbar,body.dark .pb{background:var(--card);color:var(--sub);border-color:var(--mist)}
-body.dark .pb:hover:not(:disabled){background:var(--mist)}
-body.dark mark{background:rgba(212,168,67,.3);color:#f0e8d6}
-body.dark .meth-text,body.dark .cite-pre{background:#111;color:var(--text)}
-#darkToggle{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);padding:7px 10px;border-radius:2px;cursor:pointer;font-size:14px;line-height:1;transition:all .2s}
-#darkToggle:hover{border-color:rgba(255,255,255,.5);color:white}
+body.dark .exp-btn:hover{border-color:var(--gold);color:var(--gold)}
+/* Highlights */
+body.dark mark{background:rgba(212,168,67,.22);color:#EAD9B8;border-radius:2px}
+/* Presets */
+body.dark .preset-wrap{background:rgba(212,168,67,.025);border-bottom-color:var(--mist)}
+body.dark .preset-tag{color:#D4A843;background:rgba(212,168,67,.08);border-color:rgba(212,168,67,.18)}
+/* Modals */
+body.dark #mbox{background:var(--card)}
+body.dark .mh{border-bottom-color:var(--mist)}
+body.dark .meth-box,body.dark .cite-box{background:var(--card)}
+body.dark .meth-hd,body.dark .cite-hd{border-bottom-color:var(--mist)}
+body.dark .meth-text,body.dark .cite-pre{background:var(--paper);color:var(--text);border-color:var(--mist)}
+body.dark .msb{background:var(--paper)}
+body.dark .msec p{color:var(--text)}
+/* Loading screen */
+body.dark #ld{background:var(--paper)}
+/* Dark toggle button */
+#darkToggle{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.55);padding:6px 9px;border-radius:2px;cursor:pointer;font-size:14px;line-height:1;transition:all .2s}
+#darkToggle:hover{border-color:rgba(255,255,255,.45);color:white}
 /* ── BOOKMARKS ────────────────────────────────────────── */
 .bk-btn{background:none;border:none;cursor:pointer;font-size:13px;color:var(--smoke);transition:all .2s;padding:2px 4px;line-height:1;opacity:.4}
 .bk-btn:hover,.bk-btn.on{opacity:1;color:var(--gold)}
@@ -322,6 +375,64 @@ body.dark .preset-tag{color:var(--gold)}
 .cite-pre{background:var(--paper);border:1px solid var(--mist);border-radius:3px;padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-all}
 .cite-copybtn{padding:3px 10px;background:var(--red);color:white;border:none;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-top:3px;float:right;transition:background .2s}
 .cite-copybtn:hover{background:#8a1428}
+/* ── HELP / GUIDE MODAL ──────────────────────────────────────────── */
+#helpMov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.7);z-index:700;backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
+#helpMov.open{display:flex}
+#helpBox{background:var(--card);border-radius:8px;width:min(960px,100%);height:min(88vh,820px);display:flex;flex-direction:column;box-shadow:0 32px 100px rgba(0,0,0,.4);overflow:hidden}
+body.dark #helpBox{background:#231F1A}
+.help-hd{padding:18px 24px 14px;border-bottom:1px solid var(--mist);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.help-hd-left{display:flex;align-items:center;gap:14px}
+.help-hd-left h2{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink)}
+body.dark .help-hd-left h2{color:var(--text)}
+.help-hd-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);padding:3px 9px;background:var(--paper);border-radius:2px}
+.help-body{display:flex;flex:1;overflow:hidden}
+/* Left nav */
+.help-nav{width:188px;min-width:188px;border-right:1px solid var(--mist);padding:10px 0;overflow-y:auto;flex-shrink:0;background:var(--paper)}
+body.dark .help-nav{background:#1C1914}
+.help-nav-item{display:flex;align-items:center;gap:9px;padding:9px 16px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;color:var(--sub);transition:all .15s;border-left:2px solid transparent;user-select:none}
+.help-nav-item:hover{color:var(--text);background:rgba(196,30,58,.04)}
+.help-nav-item.on{color:var(--red);border-left-color:var(--red);background:rgba(196,30,58,.06);font-weight:600}
+.help-nav-icon{font-size:14px;flex-shrink:0}
+/* Content */
+.help-content{flex:1;overflow-y:auto;padding:28px 32px}
+.help-content::-webkit-scrollbar{width:4px}
+.help-content::-webkit-scrollbar-thumb{background:var(--mist);border-radius:2px}
+.help-panel{display:none}
+.help-panel.on{display:block}
+.help-panel h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:6px}
+body.dark .help-panel h3{color:var(--text)}
+.help-panel h4{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin:20px 0 8px}
+.help-panel p{font-size:13px;line-height:1.85;color:var(--sub);margin-bottom:10px}
+.help-panel p strong{color:var(--text);font-weight:600}
+body.dark .help-panel p{color:#9A8870}
+.help-kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin-bottom:14px;align-items:baseline}
+.help-k{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);white-space:nowrap}
+.help-v{font-size:12px;color:var(--sub);line-height:1.6}
+.help-chip-row{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 14px}
+.help-chip{padding:3px 9px;border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:9px;border:1px solid var(--mist);background:var(--paper);color:var(--sub)}
+.help-chip.red{background:rgba(196,30,58,.1);border-color:rgba(196,30,58,.3);color:var(--red)}
+.help-chip.gold{background:rgba(212,168,67,.1);border-color:rgba(212,168,67,.3);color:#8a6a00}
+.help-chip.blue{background:rgba(21,101,192,.1);border-color:rgba(21,101,192,.3);color:#1565C0}
+.help-chip.green{background:rgba(46,125,50,.1);border-color:rgba(46,125,50,.3);color:#2E7D32}
+body.dark .help-chip{background:var(--paper)}
+body.dark .help-chip.gold{color:#D4A843}
+.help-scale{display:flex;gap:0;border-radius:4px;overflow:hidden;height:26px;margin:8px 0 14px;font-family:'IBM Plex Mono',monospace;font-size:9px}
+.help-scale-band{flex:1;display:flex;align-items:center;justify-content:center;color:white;font-weight:600}
+.help-divider{height:1px;background:var(--mist);margin:20px 0}
+.help-note{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2);border-radius:4px;padding:10px 14px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#7a5e00;line-height:1.6;margin:10px 0 14px}
+body.dark .help-note{color:#D4A843;background:rgba(212,168,67,.06)}
+.help-feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.help-feat{background:var(--paper);border-radius:4px;padding:12px 14px;border:1px solid var(--mist)}
+body.dark .help-feat{background:#1C1914}
+.help-feat-icon{font-size:18px;margin-bottom:6px}
+.help-feat-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--text);font-weight:600;margin-bottom:4px}
+.help-feat-desc{font-size:11px;color:var(--sub);line-height:1.6}
+.help-btn-row{display:flex;gap:8px;margin-top:16px}
+.help-footer{flex-shrink:0;padding:12px 24px;border-top:1px solid var(--mist);display:flex;align-items:center;justify-content:space-between;background:var(--paper)}
+body.dark .help-footer{background:#1C1914}
+.help-footer-text{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);line-height:1.6}
+.help-footer a{color:var(--gold);text-decoration:none}
+.help-footer a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -335,6 +446,7 @@ body.dark .preset-tag{color:var(--gold)}
     <div class="dv"></div>
     <a href="analytics.html" class="tb-btn tb-an">📊 Analytics →</a>
     <button class="tb-btn tb-an" onclick="openMethModal()" title="Generate methods paragraph for current filters">📝 Methods Note</button>
+    <button class="tb-btn tb-an" onclick="openHelp()" title="Guide to the dataset, filters and analytics">❓ Guide</button>
     <button class="tb-btn tb-o" onclick="exportCSV()">↓ Export Filtered</button>
     <button class="tb-btn tb-o" onclick="copyLink()" title="Copy shareable URL for current filter state">🔗 Copy Link</button>
     <a href="data.csv" download class="tb-btn tb-g">↓ Full Dataset</a>
@@ -1420,6 +1532,252 @@ function resetAll(){
   af();
 }
 </script>
+<!-- ── HELP / GUIDE MODAL ──────────────────────────────────── -->
+<div id="helpMov">
+  <div id="helpBox">
+    <div class="help-hd">
+      <div class="help-hd-left">
+        <h2>CMFA PressCon — User Guide</h2>
+        <span class="help-hd-sub">Dataset · Filters · Analytics</span>
+      </div>
+      <button class="mclose" onclick="closeHelp()">×</button>
+    </div>
+    <div class="help-body">
+      <!-- NAV -->
+      <nav class="help-nav">
+        <div class="help-nav-item on" onclick="showPanel('p-about',this)"><span class="help-nav-icon">📖</span>About</div>
+        <div class="help-nav-item" onclick="showPanel('p-dataset',this)"><span class="help-nav-icon">🗄️</span>The Dataset</div>
+        <div class="help-nav-item" onclick="showPanel('p-sentiment',this)"><span class="help-nav-icon">📊</span>Sentiment Scores</div>
+        <div class="help-nav-item" onclick="showPanel('p-filters',this)"><span class="help-nav-icon">🔍</span>Filters Guide</div>
+        <div class="help-nav-item" onclick="showPanel('p-themes',this)"><span class="help-nav-icon">🏷️</span>Topics & Registers</div>
+        <div class="help-nav-item" onclick="showPanel('p-analytics',this)"><span class="help-nav-icon">📈</span>Analytics Guide</div>
+        <div class="help-nav-item" onclick="showPanel('p-features',this)"><span class="help-nav-icon">⚡</span>New Features</div>
+        <div class="help-nav-item" onclick="showPanel('p-credits',this)"><span class="help-nav-icon">🎓</span>Credits & Cite</div>
+      </nav>
+
+      <!-- CONTENT PANELS -->
+      <div class="help-content">
+
+        <!-- ABOUT -->
+        <div id="p-about" class="help-panel on">
+          <h3>What is CMFA PressCon Tracker?</h3>
+          <p>This tool is an interactive browser and analytics dashboard for the <strong>Chinese Ministry of Foreign Affairs Press Conferences Corpus (CMFA PressCon v6)</strong> — the largest publicly available dataset of Chinese diplomatic discourse, covering 23 years of daily MFA press briefings.</p>
+          <p>It was built to help researchers, journalists, and students explore patterns in how Beijing frames foreign policy positions, responds to international scrutiny, and shifts its diplomatic register across political eras — without requiring any programming knowledge.</p>
+          <div class="help-divider"></div>
+          <h4>What can you do here?</h4>
+          <div class="help-feat-grid">
+            <div class="help-feat"><div class="help-feat-icon">🔍</div><div class="help-feat-title">Browse & Search</div><div class="help-feat-desc">Full-text search across 35,346 Q&A pairs. Filter by era, spokesperson, topic, media outlet, sentiment and more.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">📊</div><div class="help-feat-title">Analyse Trends</div><div class="help-feat-desc">Sentiment over time, topic prevalence, media hostility matrix, Q–A correlation, era word profiles and more.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">📋</div><div class="help-feat-title">Export & Cite</div><div class="help-feat-desc">Export any filtered subset as CSV. Generate Chicago, APA, BibTeX citations for individual entries.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">📝</div><div class="help-feat-title">Write Methods</div><div class="help-feat-desc">One-click methodology paragraph describing your exact filter selection — ready to paste into a paper.</div></div>
+          </div>
+          <div class="help-note">💡 This tracker is a visualisation layer on top of the dataset. The underlying data, sentiment scores, and named entities were produced by Mochtak & Turcsanyi (2021) and subsequent NLP processing — not by this interface.</div>
+        </div>
+
+        <!-- DATASET -->
+        <div id="p-dataset" class="help-panel">
+          <h3>The Dataset</h3>
+          <p>The corpus was built from official transcripts of Chinese MFA press conferences — a unique daily format where Chinese and foreign journalists ask questions on any topic and a spokesperson responds on behalf of the government.</p>
+          <div class="help-kv">
+            <span class="help-k">Full name</span><span class="help-v">Chinese Ministry of Foreign Affairs Press Conferences Corpus (CMFA PressCon)</span>
+            <span class="help-k">Version</span><span class="help-v">v6 (most recent)</span>
+            <span class="help-k">Authors</span><span class="help-v">Michal Mochtak & Richard Q. Turcsanyi</span>
+            <span class="help-k">Published</span><span class="help-v">Harvard Dataverse, 2021</span>
+            <span class="help-k">DOI</span><span class="help-v">doi:10.7910/DVN/BAKGET</span>
+            <span class="help-k">Journal paper</span><span class="help-v">Journal of Chinese Political Science, 26(4), 743–761</span>
+            <span class="help-k">Coverage</span><span class="help-v">October 2002 – December 2025</span>
+            <span class="help-k">Total entries</span><span class="help-v">35,346 Q&A dyads (question + answer pairs)</span>
+            <span class="help-k">Spokespeople</span><span class="help-v">16 individuals across four political eras</span>
+            <span class="help-k">Media attribution</span><span class="help-v">Recorded from March 2020 onward (21,117 earlier entries are unattributed)</span>
+          </div>
+          <h4>Political Eras</h4>
+          <p>The dataset spans four distinct leadership periods, each with a different diplomatic style:</p>
+          <div class="help-kv">
+            <span class="help-k">Hu Jintao Era</span><span class="help-v">2002–2012 · "Harmonious Society" · 9,736 entries · Restrained, multilateral, relationship-focused</span>
+            <span class="help-k">Early Xi Era</span><span class="help-v">2013–2017 · "Chinese Dream" · 6,480 entries · More assertive on territorial issues, AIIB, BRI</span>
+            <span class="help-k">Wolf Warrior Era</span><span class="help-v">2018–2022 · Trade War + COVID · 12,231 entries · Sharply confrontational, lowest avg sentiment</span>
+            <span class="help-k">Post-Pandemic Era</span><span class="help-v">2023–2025 · Re-engagement · 6,899 entries · Partial diplomatic normalization</span>
+          </div>
+          <h4>Dataset Columns (17 fields)</h4>
+          <div class="help-kv">
+            <span class="help-k">id</span><span class="help-v">Unique numeric identifier for each Q&A pair</span>
+            <span class="help-k">date / year</span><span class="help-v">Date of the press conference</span>
+            <span class="help-k">spokesperson</span><span class="help-v">Name of the MFA spokesperson who answered</span>
+            <span class="help-k">question</span><span class="help-v">The journalist's question (English translation)</span>
+            <span class="help-k">answer</span><span class="help-v">The spokesperson's answer (English translation)</span>
+            <span class="help-k">who_asked</span><span class="help-v">Media outlet name (from March 2020 onward)</span>
+            <span class="help-k">q_sentiment / a_sentiment</span><span class="help-v">XLM-R-ParlaSent scores (0–5 scale)</span>
+            <span class="help-k">q_loc / a_loc</span><span class="help-v">Named locations extracted via NER</span>
+            <span class="help-k">q_per / a_per</span><span class="help-v">Named persons extracted via NER</span>
+            <span class="help-k">q_org / a_org</span><span class="help-v">Named organisations extracted via NER</span>
+          </div>
+        </div>
+
+        <!-- SENTIMENT -->
+        <div id="p-sentiment" class="help-panel">
+          <h3>Understanding Sentiment Scores</h3>
+          <p>Every question and answer in the dataset has been scored using <strong>XLM-R-ParlaSent</strong> (classla/xlm-r-parlasent), a multilingual transformer model trained on parliamentary speech. The scale runs from 0 to 5.</p>
+          <div class="help-scale">
+            <div class="help-scale-band" style="background:#C41E3A">0–1<br><span style="font-size:8px">Very neg.</span></div>
+            <div class="help-scale-band" style="background:#E07B3A">1–2<br><span style="font-size:8px">Negative</span></div>
+            <div class="help-scale-band" style="background:#B5960A">2–3<br><span style="font-size:8px">Neutral</span></div>
+            <div class="help-scale-band" style="background:#4C8F3A">3–4<br><span style="font-size:8px">Positive</span></div>
+            <div class="help-scale-band" style="background:#2E7D32">4–5<br><span style="font-size:8px">Very pos.</span></div>
+          </div>
+          <div class="help-kv">
+            <span class="help-k">Avg Q sentiment</span><span class="help-v">2.18 — press questions trend slightly negative, reflecting journalistic challenge</span>
+            <span class="help-k">Avg A sentiment</span><span class="help-v">3.08 — spokesperson answers are typically more positive than the questions asked</span>
+            <span class="help-k">Q–A gap</span><span class="help-v">~0.90 on average. A shrinking gap signals diplomatic tension (Wolf Warrior era gap: 0.63)</span>
+          </div>
+          <h4>The Q–A Gap as an Analytical Tool</h4>
+          <p>The difference between question sentiment and answer sentiment is one of the most analytically useful signals in the dataset. A <strong>large gap</strong> (assertive answers to hostile questions) characterises confident, proactive diplomacy. A <strong>small gap</strong> (answers converge with hostile question tone) signals a more defensive, embattled posture — the "Wolf Warrior" pattern.</p>
+          <h4>Named Entity Recognition</h4>
+          <p>Locations, persons, and organisations mentioned in each question and answer were extracted using <strong>Trankit</strong> and <strong>XLM-RoBERTa-base</strong>. These appear in the Country, Person, and Organisation filter panels and are displayed as coloured tags when you open an individual entry.</p>
+          <div class="help-note">⚠️ Sentiment scores reflect the <em>tone</em> of the text, not factual content. A diplomat saying "China firmly opposes any interference" scores low even though it represents a confident position. Use scores as proxies for rhetorical register, not policy substance.</div>
+        </div>
+
+        <!-- FILTERS -->
+        <div id="p-filters" class="help-panel">
+          <h3>Filters Reference</h3>
+          <h4>Search</h4>
+          <p><strong>Full-text search</strong> matches your query against questions, answers, or both (toggle with the Q+A / Q only / A only selector). Search is case-insensitive. Matching text is highlighted in yellow in results.</p>
+          <h4>Year Range & Political Era</h4>
+          <p>Use the <strong>sliders</strong> or type directly into the year boxes. Clicking a <strong>Political Era</strong> button automatically sets the year range. You can also drag the <strong>Timeline Scrubber</strong> (the bar chart above results) to zoom into any period — double-click to reset.</p>
+          <h4>Spokesperson</h4>
+          <p>Check one or more spokespeople to filter results. Multiple selections show entries from <em>any</em> of the selected spokespeople. Counts next to each name reflect the total in the full dataset.</p>
+          <h4>Media Origin</h4>
+          <p>Filter by <strong>outlet type</strong> (Western Wire/Print, Chinese State Media, Asian/Regional, Unattributed). Unattributed covers entries before March 2020 when outlets were not recorded. Use <strong>Specific Media Outlet</strong> to select or search individual outlets.</p>
+          <div class="help-kv">
+            <span class="help-k">Western Wire/Print</span><span class="help-v">Reuters, AFP, Bloomberg, BBC, CNN, NYT, AP, Financial Times, Guardian…</span>
+            <span class="help-k">Chinese State Media</span><span class="help-v">CCTV, Xinhua, China Daily, Global Times, CRI, CGTN, People's Daily…</span>
+            <span class="help-k">Asian / Regional</span><span class="help-v">NHK, Kyodo, Yonhap, PTI, TASS, RIA Novosti, Al Jazeera…</span>
+          </div>
+          <h4>Country / Organisation / Person</h4>
+          <p>These filters search the <strong>named-entity fields</strong> (extracted by NER, not full-text). Click quick-select chips or type a custom value. Only one country/org/person can be active at a time.</p>
+          <h4>Diplomatic Tone (Quick Select)</h4>
+          <div class="help-kv">
+            <span class="help-k">Hostile Q &lt;2.0</span><span class="help-v">Most adversarial press questions — useful for confrontational exchanges</span>
+            <span class="help-k">Defensive A</span><span class="help-v">Answers with below-average sentiment (below 2.7)</span>
+            <span class="help-k">Assertive A</span><span class="help-v">Answers with high sentiment (above 3.5) — confident diplomatic voice</span>
+            <span class="help-k">High Gap</span><span class="help-v">MFA answers much more positive than the hostile questions asked</span>
+            <span class="help-k">Converged</span><span class="help-v">Q and A sentiment are close — embattled / under-pressure scenario</span>
+          </div>
+          <h4>Sentiment Sliders</h4>
+          <p>Fine-tune the exact Q or A sentiment range. Combined with the quick-select presets or used independently. Range is 0–5 in steps of 0.1.</p>
+          <div class="help-note">💡 Use <strong>URL deep-linking</strong> — every filter combination is encoded in the URL. Copy Link button copies the current filter state as a shareable URL. Use Saved Presets to store named filter configurations locally.</div>
+        </div>
+
+        <!-- TOPICS & REGISTERS -->
+        <div id="p-themes" class="help-panel">
+          <h3>Topics & Rhetorical Registers</h3>
+          <p>Both topic themes and rhetorical registers are <strong>keyword-detected</strong> from the Q+A text at load time — they are not pre-labelled in the original dataset. Multiple themes or registers can match a single entry.</p>
+          <h4>13 Topic / Theme Filters</h4>
+          <div class="help-chip-row">
+            <span class="help-chip red">⚠ Crisis</span><span class="help-chip red">⚔ Conflict</span><span class="help-chip green">🏥 Health</span>
+            <span class="help-chip blue">💹 Trade</span><span class="help-chip">⚖ Human Rights</span><span class="help-chip">☢ Nuclear</span>
+            <span class="help-chip">💣 Terrorism</span><span class="help-chip green">🌍 Climate</span><span class="help-chip red">🇹🇼 Taiwan</span>
+            <span class="help-chip blue">🌊 S.China Sea</span><span class="help-chip">🇷🇺 Russia-Ukraine</span><span class="help-chip blue">🇺🇸 US-China</span><span class="help-chip">🇰🇵 DPRK</span>
+          </div>
+          <p>Use <strong>Match: Any</strong> to find entries touching at least one selected theme. Use <strong>Match: All</strong> to find entries that address all selected themes simultaneously (much narrower results).</p>
+          <h4>13 Rhetorical Register Filters</h4>
+          <div class="help-kv">
+            <span class="help-k">📋 Bureaucratic</span><span class="help-v">Five Principles, "in accordance with international law", "win-win cooperation"</span>
+            <span class="help-k">🛡 Sovereignty</span><span class="help-v">Core interests, non-interference, territorial integrity, internal affairs</span>
+            <span class="help-k">🐺 Wolf Warrior</span><span class="help-v">Strongly condemn, cold war mentality, double standard, gross interference</span>
+            <span class="help-k">🤝 Cooperative</span><span class="help-v">Community with shared future, Belt and Road, Global Development Initiative</span>
+            <span class="help-k">🚪 Evasive</span><span class="help-v">"Not aware of", "refer you to", "cannot confirm", "no information on"</span>
+            <span class="help-k">🚫 Denial</span><span class="help-v">Fabricated, groundless, baseless, disinformation, false accusation</span>
+            <span class="help-k">⚠ Strong Warning</span><span class="help-v">Grave concern, sternly urge, must stop, immediately stop interfering</span>
+            <span class="help-k">🔥 Coercive</span><span class="help-v">Play with fire, pay a heavy price, do not say we did not warn</span>
+            <span class="help-k">🇨🇳 Nationalist</span><span class="help-v">1.4 billion Chinese people, hurt the feelings of, national rejuvenation</span>
+            <span class="help-k">📜 Hist. Grievance</span><span class="help-v">Century of humiliation, unequal treaties, hegemony and bullying</span>
+            <span class="help-k">🪞 Whataboutism</span><span class="help-v">Look in the mirror, mind their own business, systemic racism</span>
+            <span class="help-k">🌐 Multilateral</span><span class="help-v">UN, Security Council, G20, global governance, international community</span>
+            <span class="help-k">📖 Idiomatic</span><span class="help-v">Paper tiger, mantis trying to stop a chariot, bottom of a well</span>
+          </div>
+          <div class="help-note">⚠️ Register detection is heuristic — based on keyword lists, not NLP classification. An entry may match a register even if the keyword appears in a denial or quotation context. Use as an exploratory tool, not a definitive label.</div>
+        </div>
+
+        <!-- ANALYTICS -->
+        <div id="p-analytics" class="help-panel">
+          <h3>Analytics Dashboard Guide</h3>
+          <p>The <strong>Analytics page</strong> (<a href="analytics.html" target="_blank">open ↗</a>) contains 15 research visualisations built from pre-computed statistics across the full 35,346-entry corpus.</p>
+          <div class="help-kv">
+            <span class="help-k">Activity Chart</span><span class="help-v">Annual Q&A volume 2002–2025, annotated with geopolitical events. Red bars = Wolf Warrior era.</span>
+            <span class="help-k">Sentiment Dynamics</span><span class="help-v">Mean Q and A sentiment per year + the Q–A gap chart + year-on-year volatility. The gap narrowed from ~1.5 (2010) to ~0.6 (2021).</span>
+            <span class="help-k">Q–A Scatter</span><span class="help-v">~4,400 sampled entries plotted by question vs answer sentiment, colour-coded by spokesperson. Regression line + r², p-value, and plain-English interpretation.</span>
+            <span class="help-k">Topic Frequency</span><span class="help-v">% of entries per year mentioning each of the 13 themes. Use the group buttons to focus. In 2020, Health/Pandemic reached 49.6% — the highest single-theme concentration.</span>
+            <span class="help-k">Geography</span><span class="help-v">Annual mention counts for 10 countries/regions in spokesperson answers. Toggle trend lines per country.</span>
+            <span class="help-k">Spokespeople</span><span class="help-v">Avg answer sentiment and Q–A gap per spokesperson. Zhao Lijian (2.74 avg A) vs Jiang Yu (3.42 avg A) show the widest range.</span>
+            <span class="help-k">Hostility Matrix</span><span class="help-v">2D bubble scatter: X = avg Q sentiment (outlet hostility), Y = avg A sentiment received. BBC and Xinhua define the two extremes.</span>
+            <span class="help-k">Media Rankings</span><span class="help-v">Bar chart of avg Q sentiment by outlet. BBC (1.49) vs Xinhua (2.78) = 1.29-point gap across hundreds of questions each.</span>
+            <span class="help-k">KWIC Collocation</span><span class="help-v">Enter any keyword to find its 20 most frequent neighbours in MFA answers. Reveals framing patterns. Requires dataset to be cached.</span>
+            <span class="help-k">Bilateral Comparison</span><span class="help-v">Pick two countries to compare annual mention frequency in answers across all 23 years.</span>
+            <span class="help-k">Era Word Profiles</span><span class="help-v">TF-IDF-scored word bubbles for each era's distinctive vocabulary. "Pompeo", "COVID", "Xinjiang" dominate 2018–22.</span>
+            <span class="help-k">Q&A Length</span><span class="help-v">Average character count per year. Answer length peaked at ~1,254 chars (2021) — verbosity as a proxy for narrative control.</span>
+            <span class="help-k">Head-to-Head</span><span class="help-v">Select any two spokespeople for a direct sentiment, gap, and entry-count comparison.</span>
+            <span class="help-k">Co-occurrence Matrix</span><span class="help-v">13×13 heatmap showing which topics appear together. Nuclear + DPRK (68%) is the strongest pairing.</span>
+            <span class="help-k">Register × Era Cross-tab</span><span class="help-v">Entry counts and avg answer sentiment for each rhetorical register across all four political eras.</span>
+          </div>
+        </div>
+
+        <!-- FEATURES -->
+        <div id="p-features" class="help-panel">
+          <h3>New Features in This Version</h3>
+          <div class="help-feat-grid">
+            <div class="help-feat"><div class="help-feat-icon">🌙</div><div class="help-feat-title">Dark Mode</div><div class="help-feat-desc">Toggle with the ☀️/🌙 button in the top-right. Your preference is saved and persists across sessions.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">⭐</div><div class="help-feat-title">Bookmarks</div><div class="help-feat-desc">Star any entry from the table or modal. Filter to bookmarked-only with the ⭐ button. Export bookmarks as a CSV from the modal.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">💾</div><div class="help-feat-title">Filter Presets</div><div class="help-feat-desc">Save any filter combination by name using the sidebar preset panel. Load, rename or delete presets at any time.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">📊</div><div class="help-feat-title">Timeline Scrubber</div><div class="help-feat-desc">Drag across the histogram above results to zoom into any year range. Double-click to reset to full 2002–2025.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">📋</div><div class="help-feat-title">Citation Generator</div><div class="help-feat-desc">Open any entry and click "Cite" to get Chicago, APA, BibTeX and a direct URL — all one-click copy.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">📝</div><div class="help-feat-title">Methods Paragraph</div><div class="help-feat-desc">Top-bar "Methods Note" button generates a full academic paragraph describing your current filter state. Paste directly into your paper.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">▾</div><div class="help-feat-title">Extended Stats</div><div class="help-feat-desc">Click "▾ more" in the stats bar to reveal std deviation, median Q/A sentiment, the Q–A gap, and top spokesperson for your current filter.</div></div>
+            <div class="help-feat"><div class="help-feat-icon">🔗</div><div class="help-feat-title">Deep Linking</div><div class="help-feat-desc">Every filter state is encoded in the URL. "Copy Link" copies the full shareable URL. Paste it in a paper, email, or browser to restore your exact view.</div></div>
+          </div>
+          <div class="help-divider"></div>
+          <h4>Keyboard Shortcuts</h4>
+          <div class="help-kv">
+            <span class="help-k">/</span><span class="help-v">Focus the search box from anywhere on the page</span>
+            <span class="help-k">ESC</span><span class="help-v">Close any open modal</span>
+            <span class="help-k">← →</span><span class="help-v">Navigate between result pages (when no modal is open)</span>
+            <span class="help-k">← → (in modal)</span><span class="help-v">Navigate to previous / next entry in the current filtered set</span>
+          </div>
+        </div>
+
+        <!-- CREDITS -->
+        <div id="p-credits" class="help-panel">
+          <h3>Credits & Citation</h3>
+          <h4>Dataset</h4>
+          <p><strong>Mochtak, Michal, and Richard Q. Turcsanyi.</strong> "Studying Chinese Foreign Policy Narratives with Automated Text Analysis: The Chinese Ministry of Foreign Affairs Press Conferences Corpus (CMFA PressCon)." <em>Journal of Chinese Political Science</em>, 26(4), 743–761, 2021.</p>
+          <p>Harvard Dataverse, v6. <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/BAKGET" target="_blank" rel="noopener" style="color:var(--gold)">doi:10.7910/DVN/BAKGET ↗</a></p>
+          <div class="help-divider"></div>
+          <h4>Sentiment Model</h4>
+          <p><strong>XLM-R-ParlaSent</strong> by CLARIN ERIC / classla. Available at <a href="https://huggingface.co/classla/xlm-r-parlasent" target="_blank" rel="noopener" style="color:var(--gold)">huggingface.co/classla/xlm-r-parlasent ↗</a></p>
+          <div class="help-divider"></div>
+          <h4>Named Entity Recognition</h4>
+          <p>Trankit multilingual NLP toolkit + XLM-RoBERTa-base.</p>
+          <div class="help-divider"></div>
+          <h4>Visualisation</h4>
+          <p><strong>Kunal Kumar</strong>, PhD Candidate, Centre for East Asian Studies, School of International Studies, Jawaharlal Nehru University, New Delhi.</p>
+          <p>Built with: PapaParse · Chart.js 4.4 · IBM Plex typefaces · Pure HTML/CSS/JS, no build step. Hosted on GitHub Pages.</p>
+          <div class="help-divider"></div>
+          <h4>How to Cite This Tool</h4>
+          <p style="background:var(--paper);border:1px solid var(--mist);border-radius:4px;padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.8;color:var(--text)">Kumar, Kunal. (2025). <em>CMFA PressCon Tracker: Interactive Browser and Analytics Dashboard for Chinese Diplomatic Discourse</em>. Visualisation of: Mochtak, M. & Turcsanyi, R.Q. (2021). CMFA PressCon v6, Harvard Dataverse. doi:10.7910/DVN/BAKGET. Available at: https://JT-GIT-hey.github.io/cmfa-tracker/</p>
+          <div class="help-note">Always cite the <strong>original dataset</strong> (Mochtak & Turcsanyi 2021) as the primary source, and this interface as a secondary tool for access and visualisation.</div>
+        </div>
+
+      </div><!-- /help-content -->
+    </div><!-- /help-body -->
+    <div class="help-footer">
+      <div class="help-footer-text">
+        CMFA PressCon v6 · Mochtak &amp; Turcsanyi (2021) · <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/BAKGET" target="_blank">doi:10.7910/DVN/BAKGET</a>
+        &nbsp;·&nbsp; Visualisation by Kunal Kumar, JNU New Delhi
+      </div>
+      <button class="meth-copybtn" onclick="closeHelp()" style="font-size:9px;padding:5px 14px">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- ── CITATION MODAL ─────────────────────────────────────── -->
 <div id="citeMov">
   <div class="cite-box">
@@ -1674,7 +2032,7 @@ function openMethModal(){
   if(q)parts.push(`Full-text keyword filter: "${q}" (scope: ${$('sScopeBar').value==='both'?'questions and answers':$('sScopeBar').value==='q'?'questions only':'answers only'}).`);
   if(parseFloat(qmin)>0||parseFloat(qmax)<5)parts.push(`Question sentiment restricted to ${qmin}–${qmax} (XLM-R-ParlaSent scale, 0–5).`);
   if(parseFloat(amin)>0||parseFloat(amax)<5)parts.push(`Answer sentiment restricted to ${amin}–${amax} on the same scale.`);
-  parts.push(`Sentiment scores are derived from the XLM-R-ParlaSent model (classla/xlm-r-parlasent; scale: 0 = most negative, 5 = most positive). Named entity recognition (persons, organisations, locations) was performed with Trankit and XLM-RoBERTa-base. Visualisation and corpus interface by Kunal Kumar, PhD Candidate, Centre for East Asian Studies, School of International Studies, Jawaharlal Nehru University, New Delhi.`);
+  parts.push(`Sentiment scores are derived from the XLM-R-ParlaSent model (classla/xlm-r-parlasent; scale: 0 = most negative, 5 = most positive). Named entity recognition (persons, organisations, locations) was performed with Trankit and XLM-RoBERTa-base.`);
   $('methText').textContent=parts.join(' ');
   $('methMov').classList.add('open');
 }
@@ -1732,7 +2090,17 @@ init=function(){
   _origInit();
   renderPresets();
   drawScrubber();
-};
+// ── HELP MODAL ─────────────────────────────────────────────────────
+function openHelp(){$('helpMov').classList.add('open');document.body.style.overflow='hidden';}
+function closeHelp(){$('helpMov').classList.remove('open');document.body.style.overflow='';}
+function showPanel(id,navEl){
+  document.querySelectorAll('.help-panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.help-nav-item').forEach(n=>n.classList.remove('on'));
+  const panel=$(id);if(panel)panel.classList.add('on');
+  if(navEl)navEl.classList.add('on');
+}
+$('helpMov').addEventListener('click',e=>{if(e.target===$('helpMov'))closeHelp();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('helpMov').classList.contains('open'))closeHelp();});
 </script>
 </body>
 </html>
