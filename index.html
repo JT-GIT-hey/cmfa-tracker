@@ -200,6 +200,7 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 .mo-item input{cursor:pointer;flex-shrink:0}
 .mo-label{font-size:11px;color:var(--text);flex:1}
 .mo-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)}
+.mo-cnt{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);flex-shrink:0}
 /* Sentiment quick-pick */
 .sq-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px}
 .sq-btn{padding:5px 6px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:9px;cursor:pointer;border:1px solid var(--mist);background:var(--paper);color:var(--sub);transition:all .15s;text-align:center;line-height:1.4}
@@ -298,15 +299,27 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
     </div>
     <div class="sb-scroll">
 
+      <!-- SEARCH IN -->
       <div class="fg">
         <label class="fg-label">Search In</label>
         <select id="sScope"><option value="both">Questions + Answers</option><option value="q">Questions Only</option><option value="a">Answers Only</option></select>
       </div>
 
-      <!-- 1. POLITICAL ERA -->
+      <!-- 1. YEAR RANGE (top) -->
+      <div class="fg">
+        <label class="fg-label">Year Range</label>
+        <div class="year-grid">
+          <input type="number" id="yFrom" min="2002" max="2025" value="2002" placeholder="From">
+          <input type="number" id="yTo"   min="2002" max="2025" value="2025" placeholder="To">
+        </div>
+        <div class="range-row"><span class="range-lbl">2002</span><input type="range" id="yfS" min="2002" max="2025" value="2002" step="1"><span class="range-val" id="yfV">2002</span></div>
+        <div class="range-row"><span class="range-lbl">2025</span><input type="range" id="ytS" min="2002" max="2025" value="2025" step="1" style="accent-color:var(--gold)"><span class="range-val" id="ytV">2025</span></div>
+      </div>
+
+      <!-- 2. POLITICAL ERA -->
       <div class="fg">
         <label class="fg-label">Political Era</label>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:2px">Filter by China's diplomatic period</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Clicking an era auto-sets the year range above</div>
         <div class="era-list">
           <div class="era-item on" data-era="" onclick="setEra(this,'')">
             <span class="era-title">All Eras</span><span class="era-cnt">35,346</span>
@@ -326,7 +339,13 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
         </div>
       </div>
 
-      <!-- 2. TOPIC / THEME -->
+      <!-- 3. SPOKESPERSON -->
+      <div class="fg">
+        <label class="fg-label">Spokesperson</label>
+        <div class="cb-list" id="spList"></div>
+      </div>
+
+      <!-- 4. TOPIC / THEME -->
       <div class="fg">
         <label class="fg-label">Topic / Theme</label>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Keyword-matched across Q&amp;A text</div>
@@ -352,105 +371,154 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
         </div>
       </div>
 
-      <!-- 3. RHETORICAL REGISTER -->
+      <!-- 5. RHETORICAL REGISTER -->
       <div class="fg">
         <label class="fg-label">Rhetorical Register</label>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:2px">How the spokesperson responds — detected from answer text</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">How the spokesperson responds — detected from answer text</div>
         <div class="rr-grid">
-          <span class="rr-chip" data-rr="wolf"       style="color:#8B1A1A;border-color:#8B1A1A55" title="strongly condemn, firmly oppose, gross interference, double standard">🐺 Wolf Warrior<br><span style="font-size:8px;opacity:.7">2,417 entries</span></span>
+          <span class="rr-chip" data-rr="wolf"        style="color:#8B1A1A;border-color:#8B1A1A55" title="strongly condemn, firmly oppose, gross interference, double standard">🐺 Wolf Warrior<br><span style="font-size:8px;opacity:.7">2,417 entries</span></span>
           <span class="rr-chip" data-rr="sovereignty" style="color:#C41E3A;border-color:#C41E3A55" title="internal affairs, sovereignty, core interests, territorial integrity">🛡 Sovereignty<br><span style="font-size:8px;opacity:.7">4,010 entries</span></span>
           <span class="rr-chip" data-rr="coop"        style="color:#2E7D32;border-color:#2E7D3255" title="win-win, cooperation, partnership, mutual benefit, shared future">🤝 Cooperative<br><span style="font-size:8px;opacity:.7">12,740 entries</span></span>
-          <span class="rr-chip" data-rr="denial"      style="color:#E65100;border-color:#E6510055" title="fabricated, groundless, baseless, disinformation, false accusation">🚫 Denial/Refutation<br><span style="font-size:8px;opacity:.7">1,942 entries</span></span>
-          <span class="rr-chip" data-rr="warning"     style="color:#B71C1C;border-color:#B71C1C55" title="grave concern, strongly urge, stern warning, must stop, immediately stop">⚠ Strong Warning<br><span style="font-size:8px;opacity:.7">2,693 entries</span></span>
+          <span class="rr-chip" data-rr="denial"      style="color:#E65100;border-color:#E6510055" title="fabricated, groundless, baseless, disinformation, false accusation">🚫 Denial<br><span style="font-size:8px;opacity:.7">1,942 entries</span></span>
+          <span class="rr-chip" data-rr="warning"     style="color:#B71C1C;border-color:#B71C1C55" title="grave concern, strongly urge, stern warning, must stop">⚠ Warning<br><span style="font-size:8px;opacity:.7">2,693 entries</span></span>
           <span class="rr-chip" data-rr="multilateral" style="color:#1565C0;border-color:#1565C055" title="UN, Security Council, WTO, G20, multilateral, global governance">🌐 Multilateral<br><span style="font-size:8px;opacity:.7">7,992 entries</span></span>
         </div>
       </div>
 
-      <!-- 4. MEDIA ORIGIN -->
+      <!-- 6. MEDIA ORIGIN -->
       <div class="fg">
         <label class="fg-label">Media Origin</label>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Who is asking — by outlet type</div>
         <div class="mo-list">
-          <div class="mo-item on" data-mo="" onclick="setMO(this,'')">
-            <span class="mo-label">All outlets</span>
-          </div>
-          <div class="mo-item" data-mo="western" onclick="setMO(this,'western')" style="--moc:#C41E3A">
+          <div class="mo-item on" data-mo="" onclick="setMO(this,'')"><span class="mo-label">All outlets</span></div>
+          <div class="mo-item" data-mo="western" onclick="setMO(this,'western')">
             <div style="flex:1"><div class="mo-label">🌍 Western Wire / Print</div><div class="mo-sub">Reuters · AFP · Bloomberg · BBC · CNN · NYT…</div></div>
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">5,044</span>
+            <span class="mo-cnt">5,044</span>
           </div>
-          <div class="mo-item" data-mo="chinese" onclick="setMO(this,'chinese')" style="--moc:#D4A843">
+          <div class="mo-item" data-mo="chinese" onclick="setMO(this,'chinese')">
             <div style="flex:1"><div class="mo-label">🇨🇳 Chinese State Media</div><div class="mo-sub">CCTV · Xinhua · China Daily · Global Times…</div></div>
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">4,426</span>
+            <span class="mo-cnt">4,426</span>
           </div>
-          <div class="mo-item" data-mo="asian" onclick="setMO(this,'asian')" style="--moc:#1565C0">
+          <div class="mo-item" data-mo="asian" onclick="setMO(this,'asian')">
             <div style="flex:1"><div class="mo-label">🌏 Asian / Regional</div><div class="mo-sub">NHK · Kyodo · Yonhap · PTI · TASS · Al Jazeera…</div></div>
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">4,759</span>
+            <span class="mo-cnt">4,759</span>
           </div>
-          <div class="mo-item" data-mo="unattributed" onclick="setMO(this,'unattributed')" style="--moc:#6B6259">
+          <div class="mo-item" data-mo="unattributed" onclick="setMO(this,'unattributed')">
             <div style="flex:1"><div class="mo-label">— Unattributed</div><div class="mo-sub">Before March 2020 (no outlet recorded)</div></div>
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">21,117</span>
+            <span class="mo-cnt">21,117</span>
           </div>
         </div>
       </div>
 
-      <!-- 5. LOCATION FOCUS -->
+      <!-- 7. LOCATION FILTER -->
       <div class="fg">
         <label class="fg-label">Country / Region Focus</label>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Searches named-entity location fields</div>
+        <div style="position:relative;margin-bottom:7px">
+          <input type="search" id="locSearch" placeholder="Type any country or region…" style="width:100%;padding:7px 10px 7px 28px;border:1px solid var(--mist);border-radius:3px;font-size:12px;color:var(--text);background:var(--paper);outline:none;font-family:'IBM Plex Sans',sans-serif" oninput="onLocSearch()" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--mist)'">
+          <span style="position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--smoke);font-size:12px;pointer-events:none">📍</span>
+        </div>
         <div class="qf-wrap" id="qfw">
           <span class="qf" data-loc="US">🇺🇸 US</span>
           <span class="qf" data-loc="Japan">🇯🇵 Japan</span>
-          <span class="qf" data-loc="India">🇮🇳 India</span>
-          <span class="qf" data-loc="Pakistan">🇵🇰 Pakistan</span>
           <span class="qf" data-loc="Taiwan">🇹🇼 Taiwan</span>
+          <span class="qf" data-loc="India">🇮🇳 India</span>
+          <span class="qf" data-loc="Russia">🇷🇺 Russia</span>
+          <span class="qf" data-loc="Ukraine">🇺🇦 Ukraine</span>
+          <span class="qf" data-loc="DPRK">🇰🇵 DPRK</span>
+          <span class="qf" data-loc="Pakistan">🇵🇰 Pakistan</span>
           <span class="qf" data-loc="Hong Kong">🏙 HK</span>
           <span class="qf" data-loc="Xinjiang">Xinjiang</span>
           <span class="qf" data-loc="Tibet">Tibet</span>
-          <span class="qf" data-loc="Russia">🇷🇺 Russia</span>
-          <span class="qf" data-loc="Ukraine">🇺🇦 Ukraine</span>
           <span class="qf" data-loc="Iran">Iran</span>
+          <span class="qf" data-loc="Philippines">Philippines</span>
           <span class="qf" data-loc="Afghanistan">Afghanistan</span>
           <span class="qf" data-loc="Myanmar">Myanmar</span>
           <span class="qf" data-loc="Australia">Australia</span>
-          <span class="qf" data-loc="EU">EU</span>
           <span class="qf" data-loc="South China Sea">S.China Sea</span>
+          <span class="qf" data-loc="Middle East">Middle East</span>
+          <span class="qf" data-loc="Africa">Africa</span>
+          <span class="qf" data-loc="Europe">Europe</span>
         </div>
       </div>
 
-      <!-- 6. SENTIMENT QUICK-PICK -->
+      <!-- 8. ORGANIZATION FILTER -->
+      <div class="fg">
+        <label class="fg-label">Organisation / Institution</label>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Searches named-entity organisation fields</div>
+        <div style="position:relative;margin-bottom:7px">
+          <input type="search" id="orgSearch" placeholder="e.g. NATO, WHO, ASEAN…" style="width:100%;padding:7px 10px 7px 28px;border:1px solid var(--mist);border-radius:3px;font-size:12px;color:var(--text);background:var(--paper);outline:none;font-family:'IBM Plex Sans',sans-serif" oninput="onOrgSearch()" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--mist)'">
+          <span style="position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--smoke);font-size:12px;pointer-events:none">🏛</span>
+        </div>
+        <div class="qf-wrap" id="orgfw">
+          <span class="qf" data-org="UN">UN</span>
+          <span class="qf" data-org="NATO">NATO</span>
+          <span class="qf" data-org="WHO">WHO</span>
+          <span class="qf" data-org="EU">EU</span>
+          <span class="qf" data-org="IAEA">IAEA</span>
+          <span class="qf" data-org="WTO">WTO</span>
+          <span class="qf" data-org="ASEAN">ASEAN</span>
+          <span class="qf" data-org="SCO">SCO</span>
+          <span class="qf" data-org="BRICS">BRICS</span>
+          <span class="qf" data-org="IMF">IMF</span>
+          <span class="qf" data-org="G20">G20</span>
+          <span class="qf" data-org="UN Security Council">UNSC</span>
+          <span class="qf" data-org="Huawei">Huawei</span>
+          <span class="qf" data-org="BRI">BRI</span>
+          <span class="qf" data-org="US State Department">State Dept.</span>
+        </div>
+      </div>
+
+      <!-- 9. NAMED PERSON FILTER -->
+      <div class="fg">
+        <label class="fg-label">Named Person Tracker</label>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Searches named-entity person fields</div>
+        <div style="position:relative;margin-bottom:7px">
+          <input type="search" id="perSearch" placeholder="e.g. Trump, Tsai Ing-wen…" style="width:100%;padding:7px 10px 7px 28px;border:1px solid var(--mist);border-radius:3px;font-size:12px;color:var(--text);background:var(--paper);outline:none;font-family:'IBM Plex Sans',sans-serif" oninput="onPerSearch()" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--mist)'">
+          <span style="position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--smoke);font-size:12px;pointer-events:none">👤</span>
+        </div>
+        <div class="qf-wrap" id="perfw">
+          <span class="qf" data-per="Trump">Trump</span>
+          <span class="qf" data-per="Biden">Biden</span>
+          <span class="qf" data-per="Obama">Obama</span>
+          <span class="qf" data-per="Putin">Putin</span>
+          <span class="qf" data-per="Xi Jinping">Xi Jinping</span>
+          <span class="qf" data-per="Shinzo Abe">Shinzo Abe</span>
+          <span class="qf" data-per="Tsai Ing-wen">Tsai Ing-wen</span>
+          <span class="qf" data-per="Dalai Lama">Dalai Lama</span>
+          <span class="qf" data-per="Pompeo">Pompeo</span>
+          <span class="qf" data-per="Blinken">Blinken</span>
+          <span class="qf" data-per="Modi">Modi</span>
+          <span class="qf" data-per="Meng Wanzhou">Meng Wanzhou</span>
+          <span class="qf" data-per="Hu Jintao">Hu Jintao</span>
+          <span class="qf" data-per="Moon Jae-in">Moon Jae-in</span>
+        </div>
+      </div>
+
+      <!-- 10. DIPLOMATIC TONE -->
       <div class="fg">
         <label class="fg-label">Diplomatic Tone (Quick Select)</label>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Pre-set sentiment windows — click to apply</div>
         <div class="sq-grid">
           <button class="sq-btn" data-sq="hostile_q"   onclick="setSQ(this)" title="Q sentiment < 2.0 — most adversarial questions">Hostile Q&lt;2.0</button>
-          <button class="sq-btn" data-sq="neutral_q"   onclick="setSQ(this)" title="Q sentiment 2.0–2.5 — typical press questions">Neutral Q 2–2.5</button>
-          <button class="sq-btn" data-sq="defensive_a" onclick="setSQ(this)" title="A sentiment < 2.7 — most defensive/negative answers">Defensive A&lt;2.7</button>
-          <button class="sq-btn" data-sq="assertive_a" onclick="setSQ(this)" title="A sentiment > 3.5 — most confident/positive answers">Assertive A&gt;3.5</button>
-          <button class="sq-btn" data-sq="high_gap"    onclick="setSQ(this)" title="A much more positive than Q — strong rhetorical gap">High Gap A−Q</button>
+          <button class="sq-btn" data-sq="neutral_q"   onclick="setSQ(this)" title="Q sentiment 2.0–2.5 — typical press questions">Neutral Q</button>
+          <button class="sq-btn" data-sq="defensive_a" onclick="setSQ(this)" title="A sentiment < 2.7 — most defensive answers">Defensive A</button>
+          <button class="sq-btn" data-sq="assertive_a" onclick="setSQ(this)" title="A sentiment > 3.5 — most confident answers">Assertive A</button>
+          <button class="sq-btn" data-sq="high_gap"    onclick="setSQ(this)" title="A much more positive than Q — strong rhetorical gap">High Gap</button>
           <button class="sq-btn" data-sq="low_gap"     onclick="setSQ(this)" title="A and Q sentiment converge — under pressure">Converged</button>
         </div>
         <div style="margin-top:10px">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Fine-tune answer sentiment range</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:3px">Answer sentiment range</div>
           <div class="sent-bar"></div>
           <div class="range-row"><span class="range-lbl">Min</span><input type="range" id="aMin" min="0" max="5" step="0.1" value="0"><span class="range-val" id="aMV">0.0</span></div>
           <div class="range-row"><span class="range-lbl">Max</span><input type="range" id="aMax" min="0" max="5" step="0.1" value="5" style="accent-color:var(--gold)"><span class="range-val" id="aMxV">5.0</span></div>
         </div>
         <div style="margin-top:8px">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Fine-tune question sentiment range</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:3px">Question sentiment range</div>
           <div class="sent-bar"></div>
           <div class="range-row"><span class="range-lbl">Min</span><input type="range" id="qMin" min="0" max="5" step="0.1" value="0"><span class="range-val" id="qMV">0.0</span></div>
           <div class="range-row"><span class="range-lbl">Max</span><input type="range" id="qMax" min="0" max="5" step="0.1" value="5" style="accent-color:var(--gold)"><span class="range-val" id="qMxV">5.0</span></div>
         </div>
-      </div>
-
-      <!-- 9. YEAR RANGE -->
-      <div class="fg">
-        <label class="fg-label">Year Range (Fine Control)</label>
-        <div class="year-grid">
-          <input type="number" id="yFrom" min="2002" max="2025" value="2002" placeholder="From">
-          <input type="number" id="yTo"   min="2002" max="2025" value="2025" placeholder="To">
-        </div>
-        <div class="range-row"><span class="range-lbl">2002</span><input type="range" id="yfS" min="2002" max="2025" value="2002" step="1"><span class="range-val" id="yfV">2002</span></div>
-        <div class="range-row"><span class="range-lbl">2025</span><input type="range" id="ytS" min="2002" max="2025" value="2025" step="1" style="accent-color:var(--gold)"><span class="range-val" id="ytV">2025</span></div>
       </div>
 
     </div>
@@ -586,7 +654,7 @@ function getEra(yr){const y=parseInt(yr);if(y>=2002&&y<=2012)return'hu';if(y>=20
 
 // ── STATE ──────────────────────────────────────────────────────────────
 let ALL=[],FIL=[],page=1,pp=50,sCol='id',sDir=1,view='table',mIdx=-1,sDeb;
-let activeLoc=null,activeThemes=new Set(),activeRR=new Set(),activeEra='',activeMO='',activeSQ='';
+let activeLoc=null,activeOrg=null,activePer=null,activeThemes=new Set(),activeRR=new Set(),activeEra='',activeMO='',activeSQ='';
 const $=id=>document.getElementById(id);
 const esc=s=>s==null?'—':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const trunc=(s,n=180)=>!s?'—':s.length>n?s.slice(0,n)+'…':s;
@@ -614,7 +682,11 @@ Papa.parse('data.csv',{
 function init(){
   $('ld').style.display='none';
   let spC={},mC={};
-  ALL.forEach(r=>{spC[r.spokesperson]=(spC[r.spokesperson]||0)+1;if(r.who_asked&&r.who_asked!=='-')mC[r.who_asked]=(mC[r.who_asked]||0)+1;});
+  ALL.forEach(r=>{
+    spC[r.spokesperson]=(spC[r.spokesperson]||0)+1;
+    if(r.who_asked&&r.who_asked!=='-') mC[r.who_asked]=(mC[r.who_asked]||0)+1;
+  });
+  // Spokesperson list
   const sps=Object.entries(spC).filter(([k])=>k&&k!=='-'&&k!=='missing').sort((a,b)=>b[1]-a[1]);
   if($('spList')) $('spList').innerHTML=sps.map(([n,c])=>`<div class="cb-item"><input type="checkbox" id="sp_${n.replace(/\s/g,'_')}" value="${n}" onchange="af()"><label for="sp_${n.replace(/\s/g,'_')}">${n}</label><span class="cb-cnt">${c.toLocaleString()}</span></div>`).join('');
   window._allMedia=Object.entries(mC).sort((a,b)=>b[1]-a[1]);
@@ -626,8 +698,28 @@ function init(){
   // RR chips
   document.querySelectorAll('.rr-chip').forEach(c=>c.addEventListener('click',()=>{const r=c.dataset.rr;if(activeRR.has(r)){activeRR.delete(r);c.classList.remove('on');c.style.background='transparent';}else{activeRR.add(r);c.classList.add('on');c.style.background=RR_COLORS[r];}af();}));
   // Location chips
-  document.querySelectorAll('.qf').forEach(c=>c.addEventListener('click',()=>{const loc=c.dataset.loc;if(activeLoc===loc){activeLoc=null;c.classList.remove('on');}else{document.querySelectorAll('.qf').forEach(x=>x.classList.remove('on'));activeLoc=loc;c.classList.add('on');}af();}));
-  // Sentiment range inputs
+  document.querySelectorAll('.qf[data-loc]').forEach(c=>c.addEventListener('click',()=>{
+    const loc=c.dataset.loc;
+    if(activeLoc===loc){activeLoc=null;c.classList.remove('on');if($('locSearch'))$('locSearch').value='';}
+    else{document.querySelectorAll('.qf[data-loc]').forEach(x=>x.classList.remove('on'));activeLoc=loc;c.classList.add('on');if($('locSearch'))$('locSearch').value=loc;}
+    af();
+  }));
+  // Org chips
+  document.querySelectorAll('.qf[data-org]').forEach(c=>c.addEventListener('click',()=>{
+    const org=c.dataset.org;
+    if(activeOrg===org){activeOrg=null;c.classList.remove('on');if($('orgSearch'))$('orgSearch').value='';}
+    else{document.querySelectorAll('.qf[data-org]').forEach(x=>x.classList.remove('on'));activeOrg=org;c.classList.add('on');if($('orgSearch'))$('orgSearch').value=org;}
+    af();
+  }));
+  // Person chips
+  document.querySelectorAll('.qf[data-per]').forEach(c=>c.addEventListener('click',()=>{
+    const per=c.dataset.per;
+    if(activePer===per){activePer=null;c.classList.remove('on');if($('perSearch'))$('perSearch').value='';}
+    else{document.querySelectorAll('.qf[data-per]').forEach(x=>x.classList.remove('on'));activePer=per;c.classList.add('on');if($('perSearch'))$('perSearch').value=per;}
+    af();
+  }));
+
+  // Inputs
   $('sInput').addEventListener('input',()=>{clearTimeout(sDeb);sDeb=setTimeout(af,250);});
   $('sScopeBar').addEventListener('change',()=>{$('sScope').value=$('sScopeBar').value;af();});
   $('sScope').addEventListener('change',()=>{$('sScopeBar').value=$('sScope').value;af();});
@@ -637,7 +729,7 @@ function init(){
   $('yTo').addEventListener('input',()=>{$('ytS').value=$('yTo').value;$('ytV').textContent=$('yTo').value;af();});
   $('yfS').addEventListener('input',()=>{$('yFrom').value=$('yfS').value;$('yfV').textContent=$('yfS').value;af();});
   $('ytS').addEventListener('input',()=>{$('yTo').value=$('ytS').value;$('ytV').textContent=$('ytS').value;af();});
-  $('mSearch').addEventListener('input',filterML);
+  if($('mSearch')) $('mSearch').addEventListener('input',filterML);
   document.querySelectorAll('thead th[data-col]').forEach(th=>th.addEventListener('click',()=>{const col=th.dataset.col;if(sCol===col)sDir*=-1;else{sCol=col;sDir=1;}$('sortSel').value=`${sCol}-${sDir===1?'asc':'desc'}`;document.querySelectorAll('thead th').forEach(t=>t.classList.remove('sa','sd'));th.classList.add(sDir===1?'sa':'sd');page=1;render();}));
   $('mov').addEventListener('click',e=>{if(e.target===$('mov'))closeM();});
   $('pgJ').addEventListener('keydown',e=>{if(e.key==='Enter'){const v=+$('pgJ').value,t=Math.ceil(FIL.length/pp);if(v>=1&&v<=t){page=v;render();}}});
@@ -652,7 +744,26 @@ function init(){
 
 function renderML(list){if(!$('mList'))return;$('mList').innerHTML=list.map(([n,c])=>`<div class="cb-item"><input type="checkbox" id="m_${n.replace(/\W/g,'_')}" value="${n}" onchange="af()"><label for="m_${n.replace(/\W/g,'_')}">${n}</label><span class="cb-cnt">${c.toLocaleString()}</span></div>`).join('');}
 function filterML(){const q=$('mSearch').value.toLowerCase();renderML(q?window._allMedia.filter(([n])=>n.toLowerCase().includes(q)):window._allMedia.slice(0,20));}
-function getCB(id){return[...document.querySelectorAll(`#${id} input[type=checkbox]:checked`)].map(c=>c.value);}
+function getCB(id){const el=$(id);if(!el)return[];return[...el.querySelectorAll('input[type=checkbox]:checked')].map(c=>c.value);}
+
+function onLocSearch(){
+  const v=($('locSearch').value||'').trim();
+  activeLoc=v||null;
+  document.querySelectorAll('.qf[data-loc]').forEach(c=>c.classList.toggle('on',c.dataset.loc===v));
+  af();
+}
+function onOrgSearch(){
+  const v=($('orgSearch').value||'').trim();
+  activeOrg=v||null;
+  document.querySelectorAll('.qf[data-org]').forEach(c=>c.classList.toggle('on',c.dataset.org===v));
+  af();
+}
+function onPerSearch(){
+  const v=($('perSearch').value||'').trim();
+  activePer=v||null;
+  document.querySelectorAll('.qf[data-per]').forEach(c=>c.classList.toggle('on',c.dataset.per===v));
+  af();
+}
 
 // Era selector
 function setEra(el,era){
@@ -715,12 +826,16 @@ function af(){
   const aMin=parseFloat($('aMin').value),aMax=parseFloat($('aMax').value);
   const qMin=parseFloat($('qMin').value),qMax=parseFloat($('qMax').value);
   const themeMode=document.querySelector('input[name=themeMode]:checked')?.value||'any';
+  // Sync search boxes to active state
+  const locQ=(activeLoc||'').toLowerCase();
+  const orgQ=(activeOrg||'').toLowerCase();
+  const perQ=(activePer||'').toLowerCase();
 
   FIL=ALL.filter(r=>{
-    // Year range
+    // Year
     const yr=parseInt(r.year);
     if(yr<yF||yr>yT) return false;
-    // Era (already synced via year range, but double-check)
+    // Era
     if(activeEra&&r._era!==activeEra) return false;
     // Spokesperson
     if(sps.length&&!sps.includes(r.spokesperson)) return false;
@@ -732,8 +847,21 @@ function af(){
     const av=parseFloat(r.a_sentiment),qv=parseFloat(r.q_sentiment);
     if(!isNaN(av)&&(av<aMin||av>aMax)) return false;
     if(!isNaN(qv)&&(qv<qMin||qv>qMax)) return false;
-    // Location
-    if(activeLoc){const locs=((r.a_loc||'')+' '+(r.q_loc||'')).toLowerCase();if(!locs.includes(activeLoc.toLowerCase()))return false;}
+    // Location (searches both a_loc and q_loc)
+    if(locQ){
+      const lf=((r.a_loc||'')+' '+(r.q_loc||'')).toLowerCase();
+      if(!lf.includes(locQ)) return false;
+    }
+    // Organisation (searches both a_org and q_org)
+    if(orgQ){
+      const of=((r.a_org||'')+' '+(r.q_org||'')).toLowerCase();
+      if(!of.includes(orgQ)) return false;
+    }
+    // Named person (searches both a_per and q_per)
+    if(perQ){
+      const pf=((r.a_per||'')+' '+(r.q_per||'')).toLowerCase();
+      if(!pf.includes(perQ)) return false;
+    }
     // Theme
     if(activeThemes.size){
       if(themeMode==='any'){if(!r._themes.some(t=>activeThemes.has(t)))return false;}
@@ -772,7 +900,9 @@ function updateAF(q,yF,yT,sps,med,aMin,aMax,qMin,qMax){
   sps.forEach(s=>chips.push({l:s,c:()=>{const el=document.querySelector(`#spList input[value="${s}"]`);if(el)el.checked=false;af();}}));
   med.forEach(m=>chips.push({l:m,c:()=>{const el=document.querySelector(`#mList input[value="${m}"]`);if(el)el.checked=false;af();}}));
   if(activeMO){const labels={western:'Western Media',chinese:'Chinese State Media',asian:'Asian/Regional',unattributed:'Unattributed'};chips.push({l:labels[activeMO],c:()=>setMO(null,'')});}
-  if(activeLoc)chips.push({l:`📍 ${activeLoc}`,c:()=>{activeLoc=null;document.querySelectorAll('.qf').forEach(c=>c.classList.remove('on'));af();}});
+  if(activeLoc)chips.push({l:`📍 ${activeLoc}`,c:()=>{activeLoc=null;document.querySelectorAll('.qf[data-loc]').forEach(c=>c.classList.remove('on'));if($('locSearch'))$('locSearch').value='';af();}});
+  if(activeOrg)chips.push({l:`🏛 ${activeOrg}`,c:()=>{activeOrg=null;document.querySelectorAll('.qf[data-org]').forEach(c=>c.classList.remove('on'));if($('orgSearch'))$('orgSearch').value='';af();}});
+  if(activePer)chips.push({l:`👤 ${activePer}`,c:()=>{activePer=null;document.querySelectorAll('.qf[data-per]').forEach(c=>c.classList.remove('on'));if($('perSearch'))$('perSearch').value='';af();}});
   [...activeThemes].forEach(t=>chips.push({l:`🏷 ${THEMES[t].label}`,c:()=>{activeThemes.delete(t);document.querySelector(`.th-chip[data-theme="${t}"]`)?.classList.remove('on');af();}}));
   [...activeRR].forEach(r=>chips.push({l:`💬 ${RR[r].label}`,c:()=>{activeRR.delete(r);const el=document.querySelector(`.rr-chip[data-rr="${r}"]`);if(el){el.classList.remove('on');el.style.background='transparent';}af();}}));
   if(activeSQ)chips.push({l:`Tone: ${activeSQ.replace('_',' ')}`,c:()=>{activeSQ='';document.querySelectorAll('.sq-btn').forEach(b=>b.classList.remove('on'));$('aMin').value=0;$('aMax').value=5;$('aMV').textContent='0.0';$('aMxV').textContent='5.0';$('qMin').value=0;$('qMax').value=5;$('qMV').textContent='0.0';$('qMxV').textContent='5.0';af();}});
@@ -907,7 +1037,7 @@ function exportCSV(){
 
 function resetAll(){
   $('sInput').value='';
-  activeEra='';activeMO='';activeLoc=null;activeSQ='';
+  activeEra='';activeMO='';activeLoc=null;activeOrg=null;activePer=null;activeSQ='';
   activeThemes.clear();activeRR.clear();
   document.querySelectorAll('.era-item').forEach(e=>e.classList.toggle('on',e.dataset.era===''));
   document.querySelectorAll('.mo-item').forEach(e=>{e.classList.toggle('on',e.dataset.mo==='');e.style.borderColor='';});
@@ -915,9 +1045,13 @@ function resetAll(){
   document.querySelectorAll('.rr-chip').forEach(c=>{c.classList.remove('on');c.style.background='transparent';});
   ['yFrom','yfS'].forEach(id=>{$(id).value=2002;});['yTo','ytS'].forEach(id=>{$(id).value=2025;});
   $('yfV').textContent=2002;$('ytV').textContent=2025;
-  document.querySelectorAll('#spList input,#mList input').forEach(i=>i.checked=false);
+  if($('spList')) $('spList').querySelectorAll('input').forEach(i=>i.checked=false);
+  if($('mList'))  $('mList').querySelectorAll('input').forEach(i=>i.checked=false);
   $('aMin').value=0;$('aMax').value=5;$('aMV').textContent='0.0';$('aMxV').textContent='5.0';
   $('qMin').value=0;$('qMax').value=5;$('qMV').textContent='0.0';$('qMxV').textContent='5.0';
+  if($('locSearch'))$('locSearch').value='';
+  if($('orgSearch'))$('orgSearch').value='';
+  if($('perSearch'))$('perSearch').value='';
   af();
 }
 </script>
