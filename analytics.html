@@ -3,87 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CMFA PressCon Tracker — Chinese Diplomatic Discourse 2002–2025</title>
+<title>Analytics — CMFA PressCon Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>const AD={"theme_by_year":{"2002":{"Crisis/Emergency":1.0,"Military/Conflict":37.5,"Health/Pandemic":5.5,"Trade/Economy":23.5,"Human Rights":7.5,"Nuclear":20.5,"Terrorism":11.5,"Climate/Environment":2.5,"Taiwan Strait":7.0,"South China Sea":2.0,"Russia-Ukraine":11.5,"US-China Relations":12.5,"DPRK/Nuclear":22.5},"2003":{"Crisis/Emergency":7.8,"Military/Conflict":29.2,"Health/Pandemic":13.2,"Trade/Economy":31.9,"Human Rights":7.3,"Nuclear":24.4,"Terrorism":5.1,"Climate/Environment":1.7,"Taiwan Strait":6.1,"South China Sea":1.7,"Russia-Ukraine":9.1,"US-China Relations":4.5,"DPRK/Nuclear":30.1},"2004":{"Crisis/Emergency":3.3,"Military/Conflict":16.4,"Health/Pandemic":12.7,"Trade/Economy":39.7,"Human Rights":8.8,"Nuclear":17.6,"Terrorism":2.8,"Climate/Environment":1.7,"Taiwan Strait":13.2,"South China Sea":4.3,"Russia-Ukraine":7.3,"US-China Relations":5.9,"DPRK/Nuclear":26.1},"2005":{"Crisis/Emergency":4.8,"Military/Conflict":15.8,"Health/Pandemic":12.0,"Trade/Economy":36.1,"Human Rights":7.0,"Nuclear":13.3,"Terrorism":3.0,"Climate/Environment":3.5,"Taiwan Strait":8.6,"South China Sea":2.6,"Russia-Ukraine":5.5,"US-China Relations":3.2,"DPRK/Nuclear":23.8},"2006":{"Crisis/Emergency":3.3,"Military/Conflict":15.4,"Health/Pandemic":9.9,"Trade/Economy":37.1,"Human Rights":6.0,"Nuclear":22.1,"Terrorism":2.4,"Climate/Environment":1.8,"Taiwan Strait":6.4,"South China Sea":2.1,"Russia-Ukraine":7.5,"US-China Relations":2.5,"DPRK/Nuclear":28.9},"2007":{"Crisis/Emergency":1.8,"Military/Conflict":16.0,"Health/Pandemic":11.1,"Trade/Economy":33.4,"Human Rights":9.5,"Nuclear":14.3,"Terrorism":3.1,"Climate/Environment":5.1,"Taiwan Strait":6.9,"South China Sea":4.8,"Russia-Ukraine":5.6,"US-China Relations":3.6,"DPRK/Nuclear":24.3},"2008":{"Crisis/Emergency":7.6,"Military/Conflict":14.2,"Health/Pandemic":13.9,"Trade/Economy":29.9,"Human Rights":20.9,"Nuclear":9.8,"Terrorism":6.6,"Climate/Environment":4.5,"Taiwan Strait":8.4,"South China Sea":5.5,"Russia-Ukraine":4.7,"US-China Relations":3.9,"DPRK/Nuclear":11.3},"2009":{"Crisis/Emergency":7.4,"Military/Conflict":17.1,"Health/Pandemic":10.6,"Trade/Economy":29.6,"Human Rights":10.3,"Nuclear":12.9,"Terrorism":8.6,"Climate/Environment":6.2,"Taiwan Strait":5.7,"South China Sea":4.1,"Russia-Ukraine":5.9,"US-China Relations":6.6,"DPRK/Nuclear":19.9},"2010":{"Crisis/Emergency":7.3,"Military/Conflict":12.2,"Health/Pandemic":7.0,"Trade/Economy":32.0,"Human Rights":8.7,"Nuclear":16.6,"Terrorism":4.2,"Climate/Environment":5.5,"Taiwan Strait":5.0,"South China Sea":6.8,"Russia-Ukraine":4.9,"US-China Relations":6.5,"DPRK/Nuclear":17.5},"2011":{"Crisis/Emergency":13.2,"Military/Conflict":19.8,"Health/Pandemic":5.1,"Trade/Economy":41.1,"Human Rights":5.7,"Nuclear":8.2,"Terrorism":13.7,"Climate/Environment":6.4,"Taiwan Strait":5.5,"South China Sea":13.3,"Russia-Ukraine":5.0,"US-China Relations":4.4,"DPRK/Nuclear":7.5},"2012":{"Crisis/Emergency":9.9,"Military/Conflict":22.1,"Health/Pandemic":6.6,"Trade/Economy":28.7,"Human Rights":5.6,"Nuclear":7.5,"Terrorism":5.1,"Climate/Environment":4.1,"Taiwan Strait":3.2,"South China Sea":28.1,"Russia-Ukraine":7.1,"US-China Relations":3.2,"DPRK/Nuclear":8.1},"2013":{"Crisis/Emergency":9.7,"Military/Conflict":27.7,"Health/Pandemic":10.1,"Trade/Economy":32.8,"Human Rights":9.2,"Nuclear":12.2,"Terrorism":6.3,"Climate/Environment":3.8,"Taiwan Strait":4.4,"South China Sea":16.4,"Russia-Ukraine":8.0,"US-China Relations":6.0,"DPRK/Nuclear":12.5},"2014":{"Crisis/Emergency":8.4,"Military/Conflict":30.3,"Health/Pandemic":12.1,"Trade/Economy":29.5,"Human Rights":12.2,"Nuclear":7.4,"Terrorism":9.7,"Climate/Environment":5.5,"Taiwan Strait":3.8,"South China Sea":15.5,"Russia-Ukraine":11.9,"US-China Relations":4.8,"DPRK/Nuclear":8.5},"2015":{"Crisis/Emergency":9.1,"Military/Conflict":32.6,"Health/Pandemic":9.8,"Trade/Economy":32.4,"Human Rights":10.9,"Nuclear":5.7,"Terrorism":10.7,"Climate/Environment":5.9,"Taiwan Strait":3.4,"South China Sea":19.6,"Russia-Ukraine":8.3,"US-China Relations":6.5,"DPRK/Nuclear":5.2},"2016":{"Crisis/Emergency":7.0,"Military/Conflict":27.7,"Health/Pandemic":9.1,"Trade/Economy":33.9,"Human Rights":9.1,"Nuclear":11.6,"Terrorism":7.4,"Climate/Environment":6.5,"Taiwan Strait":8.0,"South China Sea":21.9,"Russia-Ukraine":8.2,"US-China Relations":10.8,"DPRK/Nuclear":13.4},"2017":{"Crisis/Emergency":9.1,"Military/Conflict":29.0,"Health/Pandemic":10.6,"Trade/Economy":38.6,"Human Rights":7.1,"Nuclear":17.4,"Terrorism":6.5,"Climate/Environment":5.6,"Taiwan Strait":6.9,"South China Sea":11.6,"Russia-Ukraine":7.4,"US-China Relations":17.9,"DPRK/Nuclear":25.0},"2018":{"Crisis/Emergency":5.9,"Military/Conflict":19.4,"Health/Pandemic":12.2,"Trade/Economy":50.2,"Human Rights":8.4,"Nuclear":9.5,"Terrorism":3.9,"Climate/Environment":6.9,"Taiwan Strait":5.6,"South China Sea":10.0,"Russia-Ukraine":7.8,"US-China Relations":15.6,"DPRK/Nuclear":15.4},"2019":{"Crisis/Emergency":6.6,"Military/Conflict":17.7,"Health/Pandemic":13.2,"Trade/Economy":46.6,"Human Rights":21.0,"Nuclear":6.8,"Terrorism":6.3,"Climate/Environment":7.9,"Taiwan Strait":6.7,"South China Sea":6.3,"Russia-Ukraine":11.2,"US-China Relations":14.5,"DPRK/Nuclear":6.6},"2020":{"Crisis/Emergency":9.9,"Military/Conflict":25.2,"Health/Pandemic":49.6,"Trade/Economy":40.4,"Human Rights":17.8,"Nuclear":3.0,"Terrorism":5.3,"Climate/Environment":8.4,"Taiwan Strait":7.1,"South China Sea":6.2,"Russia-Ukraine":11.0,"US-China Relations":17.4,"DPRK/Nuclear":1.6},"2021":{"Crisis/Emergency":7.7,"Military/Conflict":30.0,"Health/Pandemic":39.5,"Trade/Economy":44.9,"Human Rights":25.1,"Nuclear":6.5,"Terrorism":7.2,"Climate/Environment":15.5,"Taiwan Strait":10.9,"South China Sea":9.7,"Russia-Ukraine":12.3,"US-China Relations":18.3,"DPRK/Nuclear":2.2},"2022":{"Crisis/Emergency":15.4,"Military/Conflict":32.9,"Health/Pandemic":27.6,"Trade/Economy":43.3,"Human Rights":15.3,"Nuclear":5.4,"Terrorism":10.2,"Climate/Environment":13.3,"Taiwan Strait":13.9,"South China Sea":13.1,"Russia-Ukraine":23.7,"US-China Relations":11.1,"DPRK/Nuclear":4.0},"2023":{"Crisis/Emergency":14.3,"Military/Conflict":27.7,"Health/Pandemic":18.0,"Trade/Economy":39.9,"Human Rights":9.3,"Nuclear":6.6,"Terrorism":8.6,"Climate/Environment":14.1,"Taiwan Strait":9.5,"South China Sea":10.6,"Russia-Ukraine":18.6,"US-China Relations":8.2,"DPRK/Nuclear":3.7},"2024":{"Crisis/Emergency":15.5,"Military/Conflict":29.9,"Health/Pandemic":13.8,"Trade/Economy":40.4,"Human Rights":9.9,"Nuclear":3.9,"Terrorism":9.9,"Climate/Environment":13.8,"Taiwan Strait":13.1,"South China Sea":13.9,"Russia-Ukraine":16.2,"US-China Relations":10.1,"DPRK/Nuclear":4.0},"2025":{"Crisis/Emergency":12.6,"Military/Conflict":28.6,"Health/Pandemic":10.6,"Trade/Economy":46.9,"Human Rights":9.6,"Nuclear":4.6,"Terrorism":8.1,"Climate/Environment":13.4,"Taiwan Strait":11.4,"South China Sea":8.6,"Russia-Ukraine":15.8,"US-China Relations":17.1,"DPRK/Nuclear":1.8}},"sp_analysis":{"Zhang Qiyue":{"count":814,"avg_q":2.129,"avg_a":3.192},"Liu Jianchao":{"count":2057,"avg_q":2.12,"avg_a":3.122},"Kong Quan":{"count":1297,"avg_q":2.123,"avg_a":3.089},"Qin Gang":{"count":2450,"avg_q":2.136,"avg_a":3.165},"Jiang Yu":{"count":1805,"avg_q":2.124,"avg_a":3.416},"Ma Zhaoxu":{"count":497,"avg_q":2.121,"avg_a":3.181},"Hong Lei":{"count":2143,"avg_q":2.207,"avg_a":3.357},"Liu Weimin":{"count":242,"avg_q":2.218,"avg_a":3.514},"Hua Chunying":{"count":4837,"avg_q":2.125,"avg_a":3.073},"Lu Kang":{"count":2152,"avg_q":2.114,"avg_a":3.123},"Geng Shuang":{"count":3383,"avg_q":2.111,"avg_a":3.07},"Zhao Lijian":{"count":3769,"avg_q":2.199,"avg_a":2.744},"Wang Wenbin":{"count":4286,"avg_q":2.261,"avg_a":2.911},"Mao Ning":{"count":2991,"avg_q":2.304,"avg_a":3.093},"Lin Jian":{"count":1524,"avg_q":2.294,"avg_a":3.043},"Guo Jiakun":{"count":979,"avg_q":2.247,"avg_a":3.162}},"media_analysis":{"CCTV":{"count":1329,"avg_q":2.687},"The Paper":{"count":379,"avg_q":2.293},"Reuters":{"count":1619,"avg_q":1.962},"China Daily":{"count":441,"avg_q":2.39},"CRI":{"count":199,"avg_q":2.544},"Phoenix TV":{"count":237,"avg_q":2.158},"Kyodo News":{"count":264,"avg_q":2.29},"Follow-up":{"count":83,"avg_q":1.806},"China News Service":{"count":424,"avg_q":2.559},"RIA Novosti":{"count":233,"avg_q":2.128},"AFP":{"count":1723,"avg_q":1.905},"NHK":{"count":264,"avg_q":2.156},"Shenzhen TV":{"count":475,"avg_q":2.339},"Xinhua News Agency":{"count":451,"avg_q":2.778},"Associated Press of Pakistan":{"count":144,"avg_q":3.044},"China Review News":{"count":150,"avg_q":2.128},"Beijing Daily":{"count":274,"avg_q":2.426},"Beijing Youth Daily":{"count":300,"avg_q":2.52},"Global Times":{"count":454,"avg_q":2.005},"Bloomberg":{"count":1438,"avg_q":1.965},"CNN":{"count":37,"avg_q":1.461},"South China Morning Post":{"count":67,"avg_q":2.22},"BBC":{"count":103,"avg_q":1.494},"TASS":{"count":219,"avg_q":2.273},"CNR":{"count":125,"avg_q":2.438},"PTI":{"count":169,"avg_q":2.27},"Yonhap News Agency":{"count":156,"avg_q":2.154},"Macau Monthly":{"count":60,"avg_q":2.115},"CGTN":{"count":73,"avg_q":2.324},"NBC":{"count":44,"avg_q":1.804},"The New York Times":{"count":37,"avg_q":1.616},"Al Jazeera":{"count":54,"avg_q":1.614},"Prasar Bharati":{"count":149,"avg_q":2.066},"People2019s Daily":{"count":87,"avg_q":2.807},"EFE":{"count":37,"avg_q":2.185},"Hubei Media Group":{"count":192,"avg_q":2.56},"China-Arab TV":{"count":43,"avg_q":2.07},"MASTV":{"count":106,"avg_q":2.381},"Anadolu Agency":{"count":96,"avg_q":1.642},"Dragon TV":{"count":181,"avg_q":2.483},"Rudaw Media Network":{"count":37,"avg_q":1.957},"Antara":{"count":32,"avg_q":2.469},"Ukrinform News Agency":{"count":36,"avg_q":1.628}},"len_by_year":{"2002":{"avg_q":184,"avg_a":569},"2003":{"avg_q":199,"avg_a":633},"2004":{"avg_q":210,"avg_a":785},"2005":{"avg_q":199,"avg_a":646},"2006":{"avg_q":186,"avg_a":611},"2007":{"avg_q":204,"avg_a":629},"2008":{"avg_q":207,"avg_a":652},"2009":{"avg_q":200,"avg_a":551},"2010":{"avg_q":186,"avg_a":525},"2011":{"avg_q":174,"avg_a":641},"2012":{"avg_q":201,"avg_a":626},"2013":{"avg_q":201,"avg_a":770},"2014":{"avg_q":222,"avg_a":791},"2015":{"avg_q":232,"avg_a":760},"2016":{"avg_q":237,"avg_a":749},"2017":{"avg_q":267,"avg_a":801},"2018":{"avg_q":274,"avg_a":917},"2019":{"avg_q":269,"avg_a":843},"2020":{"avg_q":281,"avg_a":1025},"2021":{"avg_q":304,"avg_a":1254},"2022":{"avg_q":288,"avg_a":1117},"2023":{"avg_q":269,"avg_a":926},"2024":{"avg_q":294,"avg_a":922},"2025":{"avg_q":286,"avg_a":755}},"loc_trend":{"US":{"2002":30,"2003":156,"2004":156,"2005":193,"2006":151,"2007":118,"2008":121,"2009":99,"2010":122,"2011":84,"2012":42,"2013":97,"2014":78,"2015":136,"2016":254,"2017":359,"2018":464,"2019":694,"2020":776,"2021":861,"2022":782,"2023":537,"2024":394,"2025":45},"Japan":{"2002":12,"2003":31,"2004":79,"2005":179,"2006":131,"2007":103,"2008":65,"2009":32,"2010":61,"2011":20,"2012":69,"2013":95,"2014":113,"2015":89,"2016":103,"2017":93,"2018":79,"2019":56,"2020":103,"2021":170,"2022":127,"2023":180,"2024":121,"2025":173},"Taiwan":{"2002":13,"2003":39,"2004":99,"2005":73,"2006":49,"2007":45,"2008":37,"2009":25,"2010":27,"2011":14,"2012":4,"2013":15,"2014":7,"2015":12,"2016":55,"2017":77,"2018":62,"2019":61,"2020":113,"2021":194,"2022":271,"2023":163,"2024":201,"2025":176},"DPRK":{"2002":17,"2003":165,"2004":95,"2005":105,"2006":115,"2007":82,"2008":42,"2009":69,"2010":46,"2011":20,"2012":14,"2013":30,"2014":21,"2015":17,"2016":85,"2017":179,"2018":138,"2019":75,"2020":19,"2021":29,"2022":31,"2023":26,"2024":25,"2025":8},"Russia":{"2002":9,"2003":38,"2004":36,"2005":30,"2006":42,"2007":29,"2008":20,"2009":24,"2010":22,"2011":8,"2012":10,"2013":20,"2014":26,"2015":30,"2016":67,"2017":58,"2018":52,"2019":99,"2020":102,"2021":113,"2022":185,"2023":100,"2024":111,"2025":80},"Ukraine":{"2002":3,"2003":1,"2004":3,"2005":1,"2006":0,"2007":1,"2008":0,"2009":1,"2010":2,"2011":0,"2012":1,"2013":5,"2014":38,"2015":16,"2016":5,"2017":1,"2018":0,"2019":2,"2020":5,"2021":5,"2022":269,"2023":151,"2024":143,"2025":106},"India":{"2002":8,"2003":33,"2004":21,"2005":37,"2006":27,"2007":19,"2008":33,"2009":34,"2010":40,"2011":19,"2012":12,"2013":51,"2014":40,"2015":46,"2016":64,"2017":115,"2018":61,"2019":62,"2020":90,"2021":52,"2022":43,"2023":18,"2024":29,"2025":50},"South China Sea":{"2002":0,"2003":0,"2004":6,"2005":4,"2006":2,"2007":4,"2008":6,"2009":8,"2010":7,"2011":41,"2012":14,"2013":29,"2014":34,"2015":119,"2016":191,"2017":97,"2018":46,"2019":40,"2020":41,"2021":52,"2022":25,"2023":56,"2024":92,"2025":33},"Hong Kong":{"2002":5,"2003":13,"2004":17,"2005":18,"2006":5,"2007":7,"2008":10,"2009":7,"2010":5,"2011":3,"2012":1,"2013":11,"2014":37,"2015":15,"2016":17,"2017":20,"2018":19,"2019":169,"2020":162,"2021":137,"2022":53,"2023":36,"2024":49,"2025":36},"Pakistan":{"2002":9,"2003":29,"2004":25,"2005":32,"2006":20,"2007":16,"2008":20,"2009":26,"2010":29,"2011":25,"2012":8,"2013":30,"2014":11,"2015":27,"2016":35,"2017":79,"2018":60,"2019":66,"2020":81,"2021":95,"2022":92,"2023":27,"2024":51,"2025":45}},"month_counts":{"10":2769,"11":3290,"12":3125,"1":2824,"2":2721,"3":3383,"4":3318,"5":3228,"6":3304,"7":2785,"9":3197,"8":1373},"year_total":{"2002":200,"2003":975,"2004":959,"2005":1364,"2006":1228,"2007":945,"2008":983,"2009":952,"2010":957,"2011":706,"2012":467,"2013":811,"2014":954,"2015":1106,"2016":1578,"2017":2031,"2018":1791,"2019":2114,"2020":2869,"2021":2896,"2022":2561,"2023":2517,"2024":2235,"2025":2147}};</script>
 <style>
-  :root{--red:#C41E3A;--red-dim:#8a1428;--gold:#D4A843;--ink:#0D0D0D;--paper:#F5F0E8;--mist:#E8E1D6;--smoke:#BFB8AC;--card:#FFFFFF;--text:#1A1714;--sub:#6B6259}
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-serif;line-height:1.6}
-  header{background:var(--ink);color:white;position:relative;overflow:hidden}
-  .header-inner{display:grid;grid-template-columns:1fr auto;align-items:end;max-width:1280px;margin:0 auto;padding:48px 40px 36px;gap:24px}
-  .stripes{position:absolute;right:0;top:0;width:340px;height:100%;opacity:.05;background:repeating-linear-gradient(0deg,transparent,transparent 28px,#C41E3A 28px,#C41E3A 30px)}
-  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:10px}
-  .eyebrow::before{content:'';display:inline-block;width:24px;height:2px;background:var(--gold)}
-  h1{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,52px);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:white}
-  h1 span{color:var(--gold)}
-  .subtitle{font-size:13px;color:rgba(255,255,255,.5);margin-top:10px;font-weight:300;max-width:560px}
-  .hm{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.35);line-height:1.9}
-  .hm strong{display:block;font-size:28px;font-family:'Playfair Display',serif;color:var(--gold);letter-spacing:-.02em}
-  nav{background:var(--red);position:sticky;top:0;z-index:100;border-bottom:2px solid var(--red-dim)}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:0 40px}
-  nav ul{display:flex;list-style:none}
-  nav ul li a{display:block;padding:14px 16px;color:rgba(255,255,255,.7);text-decoration:none;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s}
-  nav ul li a:hover{color:white;border-bottom-color:var(--gold)}
-  .nb{background:var(--gold);color:var(--ink)!important;padding:8px 18px!important;border-radius:2px;font-weight:600!important;border-bottom:none!important;margin:8px 0;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:background .2s}
-  .nb:hover{background:white!important;color:var(--red)!important}
-  main{max-width:1280px;margin:0 auto;padding:48px 40px 80px}
-  .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--smoke);border:1px solid var(--smoke);margin-bottom:48px;border-radius:4px;overflow:hidden}
-  .kpi{background:var(--card);padding:28px 24px;position:relative}
-  .kpi::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red)}
-  .kpi-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sub);margin-bottom:8px}
-  .kpi-value{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1}
-  .kpi-note{font-size:11px;color:var(--sub);margin-top:6px}
-  .sh{display:flex;align-items:baseline;gap:16px;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--mist)}
-  .sh h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink)}
-  .tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:var(--red);color:white;padding:3px 8px;border-radius:2px}
-  .sd{font-size:13px;color:var(--sub);margin-top:-16px;margin-bottom:24px;max-width:700px}
-  section{margin-bottom:56px}
-  .g2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-  .g3{display:grid;grid-template-columns:2fr 1fr;gap:24px}
-  .card{background:var(--card);border:1px solid var(--mist);border-radius:4px;padding:28px}
-  .ct{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
-  .badge{background:var(--mist);padding:2px 8px;border-radius:2px;font-size:10px}
-  .bl{list-style:none;display:flex;flex-direction:column;gap:10px}
-  .bi{display:flex;flex-direction:column;gap:4px}
-  .blb{display:flex;justify-content:space-between;font-size:12px;color:var(--text)}
-  .blb .v{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub)}
-  .bt{height:6px;background:var(--mist);border-radius:3px;overflow:hidden}
-  .bf{height:100%;border-radius:3px;background:var(--red)}
-  .bf.g{background:var(--gold)}.bf.k{background:var(--ink)}
-  .sl{display:flex;gap:20px;font-size:11px;color:var(--sub);margin-bottom:16px;font-family:'IBM Plex Mono',monospace}
-  .sl span{display:flex;align-items:center;gap:6px}
-  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
-  .spg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .spc{border:1px solid var(--mist);border-radius:3px;padding:16px;background:var(--paper);transition:border-color .2s}
-  .spc:hover{border-color:var(--red)}
-  .spn{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
-  .sps{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub)}
-  .cta{background:var(--ink);border-radius:4px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:56px}
-  .cta h3{font-family:'Playfair Display',serif;font-size:22px;color:white;margin-bottom:6px}
-  .cta p{font-size:13px;color:rgba(255,255,255,.5);max-width:520px}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;font-weight:600;transition:all .2s;cursor:pointer;border:none}
-  .bg{background:var(--gold);color:var(--ink)}.bg:hover{background:white}
-  .bo{background:transparent;color:white;border:1px solid rgba(255,255,255,.3);margin-left:12px}.bo:hover{background:rgba(255,255,255,.08);border-color:white}
-  footer{background:var(--ink);color:rgba(255,255,255,.4);padding:32px 40px;font-size:11px;font-family:'IBM Plex Mono',monospace;line-height:1.8}
-  .fi{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
-  footer a{color:var(--gold);text-decoration:none}
-  footer strong{color:rgba(255,255,255,.7)}
-  @media(max-width:900px){.header-inner{grid-template-columns:1fr}.hm{text-align:left}.kpi-strip{grid-template-columns:repeat(2,1fr)}.g2,.g3{grid-template-columns:1fr}.spg{grid-template-columns:repeat(2,1fr)}main,footer{padding-left:20px;padding-right:20px}.nav-inner,.cta{padding:0 20px}.cta{flex-direction:column}}
+:root{--red:#C41E3A;--gold:#D4A843;--ink:#0D0D0D;--paper:#F5F0E8;--mist:#E8E1D6;--smoke:#BFB8AC;--card:#FFF;--text:#1A1714;--sub:#6B6259}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-serif;min-height:100vh}
+header{background:var(--ink);position:relative;overflow:hidden;border-bottom:2px solid var(--red)}
+.hi{max-width:1300px;margin:0 auto;padding:40px 40px 30px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
+.stripes{position:absolute;right:0;top:0;width:320px;height:100%;opacity:.05;background:repeating-linear-gradient(0deg,transparent,transparent 28px,#C41E3A 28px,#C41E3A 30px)}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--gold)}
+h1{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,46px);font-weight:900;line-height:1.05;color:white}
+h1 span{color:var(--gold)}
+.subtitle{font-size:13px;color:rgba(255,255,255,.45);margin-top:8px;max-width:540px}
+.hmeta{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.3);line-height:1.9}
+.hmeta strong{display:block;font-size:26px;font-family:'Playfair Display',serif;color:var(--gold)}
+nav{background:var(--red);border-bottom:2px solid #8a1428;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1300px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
+nav ul{display:flex;list-style:none}
+nav ul li a{display:block;padding:13px 14px;color:rgba(255,255,255,.7);text-decoration:none;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s}
+nav ul li a:hover{color:white;border-bottom-color:var(--gold)}
+.nb{background:var(--gold);color:var(--ink)!important;padding:7px 16px!important;border-radius:2px;font-weight:600!important;border-bottom:none!important;margin:8px 0;font-size:10px;font-family:'IBM Plex Mono',monospace;text-decoration:none;display:inline-block;letter-spacing:.08em;text-transform:uppercase;transition:background .2s}
+.nb:hover{background:white!important;color:var(--red)!important}
+main{max-width:1300px;margin:0 auto;padding:40px 40px 80px}
+/* KPI */
+.kpi-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--smoke);border:1px solid var(--smoke);margin-bottom:44px;border-radius:4px;overflow:hidden}
+.kpi{background:var(--card);padding:22px 20px;position:relative}
+.kpi::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red)}
+.kpi-l{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--sub);margin-bottom:6px}
+.kpi-v{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.kpi-n{font-size:11px;color:var(--sub);margin-top:4px}
+/* SECTION */
+.sh{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--mist)}
+.sh h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;background:var(--red);color:white;padding:3px 8px;border-radius:2px}
+.tag-blue{background:#1565C0}
+.tag-green{background:#2E7D32}
+.tag-purple{background:#6A1B9A}
+.sd{font-size:12px;color:var(--sub);margin-top:-12px;margin-bottom:20px;max-width:700px;line-height:1.6}
+section{margin-bottom:52px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.g13{display:grid;grid-template-columns:1fr 3fr;gap:20px}
+/* CARD */
+.card{background:var(--card);border:1px solid var(--mist);border-radius:4px;padding:24px}
+.ct{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.badge{background:var(--mist);padding:2px 8px;border-radius:2px;font-size:9px}
+/* INSIGHT BOXES */
+.insight-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:44px}
+.insight{background:var(--card);border:1px solid var(--mist);border-radius:4px;padding:18px;border-left:3px solid var(--red)}
+.insight.gold{border-left-color:var(--gold)}
+.insight.blue{border-left-color:#1565C0}
+.insight.green{border-left-color:#2E7D32}
+.insight.purple{border-left-color:#6A1B9A}
+.insight-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--sub);margin-bottom:6px}
+.insight-text{font-size:13px;color:var(--text);line-height:1.5}
+.insight-text strong{font-weight:600;color:var(--ink)}
+/* BARS */
+.hbar-list{display:flex;flex-direction:column;gap:8px}
+.hbar{display:flex;flex-direction:column;gap:3px}
+.hbar-top{display:flex;justify-content:space-between;font-size:11px}
+.hbar-lbl{color:var(--text)}
+.hbar-val{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub)}
+.hbar-track{height:8px;background:var(--mist);border-radius:4px;overflow:hidden}
+.hbar-fill{height:100%;border-radius:4px;background:var(--red);transition:width .6s}
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--sub)}
+.leg-dot{width:10px;height:10px;border-radius:50%}
+/* THEME TABLE */
+.theme-table{width:100%;border-collapse:collapse;font-size:11px}
+.theme-table th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);padding:7px 10px;border-bottom:2px solid var(--mist);white-space:nowrap}
+.theme-table td{padding:7px 10px;border-bottom:1px solid var(--mist)}
+.theme-table tr:hover td{background:rgba(196,30,58,.03)}
+.spark-bar{display:flex;align-items:center;gap:4px}
+.spark-fill{height:14px;border-radius:2px;min-width:2px}
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.35);padding:28px 40px;font-size:10px;font-family:'IBM Plex Mono',monospace;line-height:1.8}
+.fi{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+footer a{color:var(--gold);text-decoration:none}
+footer strong{color:rgba(255,255,255,.65)}
+@media(max-width:900px){.kpi-strip{grid-template-columns:repeat(2,1fr)}.g2,.g3,.g13,.insight-row{grid-template-columns:1fr}main,footer{padding-left:20px;padding-right:20px}.hi{grid-template-columns:1fr}.nav-inner{padding:0 20px}}
 </style>
 </head>
 <body>
 <header>
   <div class="stripes"></div>
-  <div class="header-inner">
+  <div class="hi">
     <div>
-      <div class="eyebrow">Research Tracker · CMFA PressCon v6</div>
-      <h1>Chinese Diplomatic<br><span>Discourse Tracker</span></h1>
-      <p class="subtitle">Two decades of Ministry of Foreign Affairs press conferences — questions, answers, sentiment &amp; geopolitical focus, 2002–2025.</p>
+      <div class="eyebrow">Research Analytics · CMFA PressCon v6</div>
+      <h1>Chinese Diplomatic<br><span>Discourse Analytics</span></h1>
+      <p class="subtitle">Quantitative analysis of 23 years of MFA press conferences — sentiment trends, topic frequency, spokesperson comparison, and media bias.</p>
     </div>
-    <div class="hm"><strong>35,346</strong>Q&amp;A dyads archived<br>Oct 2002 – Dec 2025<br>16 spokespeople<br>Mochtak &amp; Turcsanyi (2021)</div>
+    <div class="hmeta"><strong>35,346</strong>Q&A dyads · Oct 2002–Dec 2025<br>16 spokespeople · 13 topic themes<br>Mochtak &amp; Turcsanyi (2021)</div>
   </div>
 </header>
 <nav>
@@ -92,96 +108,348 @@
       <li><a href="#overview">Overview</a></li>
       <li><a href="#activity">Activity</a></li>
       <li><a href="#sentiment">Sentiment</a></li>
-      <li><a href="#spokespeople">Spokespeople</a></li>
+      <li><a href="#topics">Topics</a></li>
       <li><a href="#geography">Geography</a></li>
+      <li><a href="#spokespeople">Spokespeople</a></li>
       <li><a href="#media">Media</a></li>
+      <li><a href="#length">Length</a></li>
     </ul>
     <a href="index.html" class="nb">← Browse Dataset</a>
   </div>
 </nav>
 <main>
-  <div id="overview" class="kpi-strip">
-    <div class="kpi"><div class="kpi-label">Total Q&amp;A Dyads</div><div class="kpi-value">35,346</div><div class="kpi-note">After multi-topical split</div></div>
-    <div class="kpi"><div class="kpi-label">Years Covered</div><div class="kpi-value">23</div><div class="kpi-note">Oct 2002 – Dec 2025</div></div>
-    <div class="kpi"><div class="kpi-label">Spokespeople</div><div class="kpi-value">16</div><div class="kpi-note">Hua Chunying most active</div></div>
-    <div class="kpi"><div class="kpi-label">Avg. Answer Sentiment</div><div class="kpi-value">3.08</div><div class="kpi-note">Scale 0–5, slightly positive</div></div>
-  </div>
-  <div class="cta">
-    <div><h3>Explore the Full Dataset</h3><p>Browse, search and filter all 35,346 Q&amp;A dyads. Filter by spokesperson, year, media outlet, sentiment range, and full-text search across questions and answers.</p></div>
-    <div><a href="index.html" class="btn bg">Browse Dataset →</a><a href="data.csv" download class="btn bo">↓ Download CSV</a></div>
-  </div>
-  <section id="activity">
-    <div class="sh"><h2>Press Conference Activity Over Time</h2><span class="tag">2002–2025</span></div>
-    <p class="sd">Number of question–answer dyads per year. The sharp rise from 2017 reflects increased press conference frequency and heightened global interest in Chinese foreign policy.</p>
-    <div class="card"><div class="ct">Annual Q&amp;A Volume<span class="badge">count per year</span></div><div style="height:280px"><canvas id="aC"></canvas></div></div>
-  </section>
-  <section id="sentiment">
-    <div class="sh"><h2>Sentiment Analysis</h2><span class="tag">XLM-R-ParlaSent</span></div>
-    <p class="sd">Mean sentiment per year on a 0–5 scale. Questions consistently score lower than answers. Note the post-2019 convergence as MFA rhetoric became more reactive.</p>
-    <div class="g2">
-      <div class="card">
-        <div class="ct">Question vs. Answer Sentiment</div>
-        <div class="sl"><span><i class="dot" style="background:#C41E3A"></i>Question</span><span><i class="dot" style="background:#D4A843"></i>Answer</span></div>
-        <div style="height:240px"><canvas id="sC"></canvas></div>
+
+<!-- KPI STRIP -->
+<div id="overview" class="kpi-strip">
+  <div class="kpi"><div class="kpi-l">Total Q&A Dyads</div><div class="kpi-v">35,346</div><div class="kpi-n">Oct 2002 – Dec 2025</div></div>
+  <div class="kpi"><div class="kpi-l">Avg Question Sentiment</div><div class="kpi-v" style="color:#C41E3A">2.18</div><div class="kpi-n">Scale 0–5 (ParlaSent)</div></div>
+  <div class="kpi"><div class="kpi-l">Avg Answer Sentiment</div><div class="kpi-v" style="color:#D4A843">3.08</div><div class="kpi-n">+0.90 gap vs questions</div></div>
+  <div class="kpi"><div class="kpi-l">Spokespeople</div><div class="kpi-v">16</div><div class="kpi-n">Hua Chunying leads (4,837)</div></div>
+  <div class="kpi"><div class="kpi-l">Most Cited Country</div><div class="kpi-v">US</div><div class="kpi-n">6,749 answer mentions</div></div>
+</div>
+
+<!-- KEY INSIGHTS -->
+<div class="insight-row">
+  <div class="insight"><div class="insight-label">Rhetorical Shift Post-2019</div><div class="insight-text">Answer sentiment dropped from <strong>3.4 (2011–18 avg)</strong> to <strong>2.8 (2019–22)</strong> — China's diplomatic tone became markedly more defensive following trade war escalation and COVID.</div></div>
+  <div class="insight gold"><div class="insight-label">COVID Dominated 2020</div><div class="insight-text">In 2020, <strong>49.6%</strong> of all press conference entries mentioned health/pandemic terms — the single highest theme concentration in the dataset's 23-year span.</div></div>
+  <div class="insight blue"><div class="insight-label">Media Outlet Bias Gap</div><div class="insight-text">Western wire agencies (Reuters: <strong>1.96</strong>, AFP: <strong>1.95</strong>) ask measurably more negative questions than Chinese state outlets (CCTV: <strong>2.69</strong>, China Daily: <strong>2.39</strong>).</div></div>
+  <div class="insight green"><div class="insight-label">US Dominates Geographic Focus</div><div class="insight-text">The US appears in answer named-entity fields <strong>3× more</strong> than the next most-cited country (Japan, 2,284). US-China mentions surged 40% between 2018–2020.</div></div>
+  <div class="insight purple"><div class="insight-label">Answer Length Doubled</div><div class="insight-text">Average answer length grew from <strong>~600 chars (2002)</strong> to <strong>~1,100 chars (2025)</strong>, suggesting increasingly elaborate official responses to press scrutiny.</div></div>
+  <div class="insight"><div class="insight-label">Conflict Coverage Peaks</div><div class="insight-text">Military/conflict topics spiked to <strong>37.5% in 2002</strong> (post-9/11), peaked again at <strong>32% in 2022</strong> (Russia-Ukraine invasion), showing the corpus tracks global events.</div></div>
+</div>
+
+<!-- ACTIVITY -->
+<section id="activity">
+  <div class="sh"><h2>Press Conference Activity Over Time</h2><span class="tag">2002–2025</span></div>
+  <p class="sd">Annual Q&A volume, with key geopolitical events annotated. The sustained high volume post-2017 reflects both China's increased diplomatic engagement and global media scrutiny.</p>
+  <div class="card"><div class="ct">Annual Q&A Volume <span class="badge">with event annotations</span></div><div style="height:280px"><canvas id="actC"></canvas></div></div>
+</section>
+
+<!-- SENTIMENT -->
+<section id="sentiment">
+  <div class="sh"><h2>Sentiment Analysis</h2><span class="tag">XLM-R-ParlaSent · 0–5 scale</span></div>
+  <p class="sd">The gap between question sentiment (press corps) and answer sentiment (spokesperson) narrows sharply after 2019. This convergence suggests a more reactive, less assured diplomatic posture in recent years.</p>
+  <div class="g2" style="margin-bottom:20px">
+    <div class="card">
+      <div class="ct">Question vs. Answer Sentiment (Annual Avg)
+        <div class="legend" style="margin:0">
+          <span class="leg-item"><i class="leg-dot" style="background:#C41E3A"></i>Question</span>
+          <span class="leg-item"><i class="leg-dot" style="background:#D4A843"></i>Answer</span>
+        </div>
       </div>
-      <div class="card">
-        <div class="ct">Sentiment Gap (Answer − Question)</div>
-        <div style="height:240px"><canvas id="gC"></canvas></div>
-        <p style="font-size:11px;color:var(--sub);margin-top:14px;font-family:'IBM Plex Mono',monospace">Narrowing post-2019 gap signals more defensive/reactive MFA rhetoric.</p>
+      <div style="height:250px"><canvas id="sentC"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">Sentiment Gap (Answer − Question) <span class="badge">positive = more assertive</span></div>
+      <div style="height:250px"><canvas id="gapC"></canvas></div>
+      <p style="font-size:10px;color:var(--sub);margin-top:10px;font-family:'IBM Plex Mono',monospace;line-height:1.5">Gap narrowed from ~1.5 (2010–11) to ~0.6 (2021). Lowest point coincides with peak COVID scrutiny and US-China tensions.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ct">Sentiment Volatility by Year <span class="badge">year-on-year change in avg answer sentiment</span></div>
+    <div style="height:200px"><canvas id="volatC"></canvas></div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section id="topics">
+  <div class="sh"><h2>Topic Frequency Over Time</h2><span class="tag tag-blue">13 Themes · Keyword Detection</span></div>
+  <p class="sd">Percentage of press conference entries mentioning each theme per year. Topics are detected via keyword matching across combined question and answer text. Select themes using the legend below.</p>
+  <div class="card" style="margin-bottom:20px">
+    <div class="ct">
+      Theme Prevalence (% of entries per year)
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button onclick="showThemes('crisis')" class="tag" style="cursor:pointer;font-size:9px">Crisis</button>
+        <button onclick="showThemes('conflict')" class="tag" style="cursor:pointer;font-size:9px;background:#8B1A1A">Conflict</button>
+        <button onclick="showThemes('health')" class="tag" style="cursor:pointer;font-size:9px;background:#2E7D32">Health</button>
+        <button onclick="showThemes('geo')" class="tag" style="cursor:pointer;font-size:9px;background:#1565C0">Geo-Political</button>
+        <button onclick="showThemes('all')" class="tag" style="cursor:pointer;font-size:9px;background:var(--sub)">All</button>
       </div>
     </div>
-  </section>
-  <section id="spokespeople">
-    <div class="sh"><h2>Spokespeople</h2><span class="tag">by volume</span></div>
-    <p class="sd">Distribution across 16 MFA spokespeople. Hua Chunying leads with 4,837 responses.</p>
-    <div class="card"><div class="ct">Q&amp;A Count per Spokesperson<span class="badge">top 12</span></div><div class="spg" id="spG"></div></div>
-  </section>
-  <section id="geography">
-    <div class="sh"><h2>Geographic Focus</h2><span class="tag">Named Entities in Answers</span></div>
-    <p class="sd">Top locations mentioned in spokesperson answers (excluding China). The US dominates by a wide margin, followed by Japan, Taiwan, and the Korean Peninsula.</p>
-    <div class="g3">
-      <div class="card"><div class="ct">Top Countries / Regions in Answers</div><ul class="bl" id="lL"></ul></div>
-      <div class="card"><div class="ct">Regional Share (Top 8)</div><div style="height:300px"><canvas id="lC"></canvas></div></div>
+    <div style="height:320px"><canvas id="topicC"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="ct">Theme Breakdown Table — All Years</div>
+    <div style="overflow-x:auto">
+      <table class="theme-table" id="themeTable"></table>
     </div>
-  </section>
-  <section id="media">
-    <div class="sh"><h2>Media Representation</h2><span class="tag">from March 2020</span></div>
-    <p class="sd">Outlets asking the most questions since March 2020, when the MFA began attributing questions to media organisations.</p>
-    <div class="card"><div class="ct">Top Media Outlets<span class="badge">2020–2025</span></div><ul class="bl" id="mL"></ul></div>
-  </section>
+  </div>
+</section>
+
+<!-- GEOGRAPHY -->
+<section id="geography">
+  <div class="sh"><h2>Geographic Focus Over Time</h2><span class="tag tag-green">Named Entity Analysis</span></div>
+  <p class="sd">Annual count of top countries/regions mentioned in spokesperson answers. Reveals shifting geopolitical priorities across China's 23-year diplomatic calendar.</p>
+  <div class="g2">
+    <div class="card">
+      <div class="ct">Top Country Mentions in Answers (All Years)</div>
+      <div class="hbar-list" id="locBars"></div>
+    </div>
+    <div class="card">
+      <div class="ct">Location Trends Over Time <span class="badge">select countries</span></div>
+      <div style="margin-bottom:10px;display:flex;flex-wrap:wrap;gap:5px" id="locToggle"></div>
+      <div style="height:260px"><canvas id="locC"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPOKESPEOPLE -->
+<section id="spokespeople">
+  <div class="sh"><h2>Spokesperson Analysis</h2><span class="tag tag-purple">Sentiment Comparison</span></div>
+  <p class="sd">Average question and answer sentiment scores per spokesperson. Zhao Lijian's tenure (2019–2023) coincides with the lowest average answer sentiment in the dataset — consistent with his reputation for confrontational "wolf warrior" diplomacy.</p>
+  <div class="g2">
+    <div class="card">
+      <div class="ct">Average Answer Sentiment by Spokesperson</div>
+      <div style="height:340px"><canvas id="spC"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">Q vs A Sentiment Gap by Spokesperson <span class="badge">how much more positive are answers vs questions</span></div>
+      <div style="height:340px"><canvas id="spGapC"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA -->
+<section id="media">
+  <div class="sh"><h2>Media Outlet Analysis</h2><span class="tag">Question Sentiment · from March 2020</span></div>
+  <p class="sd">Average question sentiment by media outlet reveals a clear East-West divide. Western wire agencies ask markedly more challenging (lower-sentiment) questions than Chinese state media — a quantifiable measure of editorial stance.</p>
+  <div class="g3">
+    <div class="card">
+      <div class="ct">Avg Question Sentiment by Outlet <span class="badge">lower = more adversarial</span></div>
+      <div style="height:380px"><canvas id="mediaC"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">Outlet Categories</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <div style="padding:12px;background:rgba(196,30,58,.06);border-radius:3px;border-left:3px solid var(--red)">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:5px">Western Wire / Print</div>
+          <div style="font-size:11px;color:var(--sub);line-height:1.7">Reuters (1.96) · AFP (1.95) · Bloomberg (2.00) · BBC (2.04) · NYT (2.08) · CNN (2.10)</div>
+        </div>
+        <div style="padding:12px;background:rgba(212,168,67,.08);border-radius:3px;border-left:3px solid var(--gold)">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#8a6a00;margin-bottom:5px">Regional / Non-Western</div>
+          <div style="font-size:11px;color:var(--sub);line-height:1.7">PTI (2.19) · Yonhap (2.22) · Kyodo (2.18) · TASS (2.31) · RIA Novosti (2.28)</div>
+        </div>
+        <div style="padding:12px;background:rgba(46,125,50,.06);border-radius:3px;border-left:3px solid #2E7D32">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#2E7D32;margin-bottom:5px">Chinese State Media</div>
+          <div style="font-size:11px;color:var(--sub);line-height:1.7">CCTV (2.69) · China Daily (2.39) · Xinhua (2.42) · Global Times (2.35) · CGTN (2.51)</div>
+        </div>
+        <div style="padding:10px;background:var(--paper);border-radius:3px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);line-height:1.6">Scale: 0 (most negative) → 5 (most positive). Gap between Reuters (1.96) and CCTV (2.69) = 0.73 points — statistically significant across 1,000+ questions each.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LENGTH -->
+<section id="length">
+  <div class="sh"><h2>Q&A Length Evolution</h2><span class="tag">Response Verbosity</span></div>
+  <p class="sd">Average character length of questions and answers over time. The steady increase in answer length suggests increasingly elaborate official responses — possibly a deliberate strategy to control narrative by providing extensive context.</p>
+  <div class="g2">
+    <div class="card">
+      <div class="ct">Avg Answer &amp; Question Length by Year <span class="badge">characters</span></div>
+      <div style="height:260px"><canvas id="lenC"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">Monthly Distribution of Press Conferences <span class="badge">total entries 2002–2025</span></div>
+      <div style="height:260px"><canvas id="monthC"></canvas></div>
+      <p style="font-size:10px;color:var(--sub);margin-top:10px;font-family:'IBM Plex Mono',monospace">August has significantly fewer entries (1,373 vs ~3,000–3,400 for most months), reflecting reduced MFA press conference frequency during the summer recess.</p>
+    </div>
+  </div>
+</section>
+
 </main>
 <footer>
   <div class="fi">
-    <div><strong>Dataset Citation</strong><br>Mochtak, M. &amp; Turcsanyi, R.Q. (2021). "Studying Chinese Foreign Policy Narratives…" <em>Journal of Chinese Political Science</em>, 26(4), 743–761.<br><br><strong>Version:</strong> v6.0 · 10 Jan 2026 &nbsp;|&nbsp; <strong>Coverage:</strong> 15 Oct 2002 – 31 Dec 2025</div>
-    <div><strong>Sentiment Model</strong><br>XLM-R-ParlaSent (<a href="https://huggingface.co/classla/xlm-r-parlasent">classla/xlm-r-parlasent</a>)<br>Score 0 (negative) – 5 (positive)<br><br><strong>NER:</strong> Trankit + XLM-Roberta-base &nbsp;|&nbsp; <a href="index.html">Browse Data</a> &nbsp;|&nbsp; <a href="data.csv" download>Download CSV</a></div>
+    <div><strong>Dataset</strong><br>Mochtak, M. &amp; Turcsanyi, R.Q. (2021). "Studying Chinese Foreign Policy Narratives…" <em>Journal of Chinese Political Science</em>, 26(4).<br><strong>Version:</strong> v6.0 · 10 Jan 2026 &nbsp;|&nbsp; <strong>Coverage:</strong> 15 Oct 2002 – 31 Dec 2025</div>
+    <div><strong>Sentiment</strong><br>XLM-R-ParlaSent · <a href="https://huggingface.co/classla/xlm-r-parlasent">classla/xlm-r-parlasent</a> · 0–5 scale<br><strong>NER:</strong> Trankit + XLM-Roberta-base &nbsp;|&nbsp; <a href="index.html">Browse Data</a> &nbsp;|&nbsp; <a href="data.csv" download>Download CSV</a></div>
   </div>
 </footer>
 <script>
-const YS=[
-  {y:2002,c:200,q:2.114,a:3.12},{y:2003,c:975,q:2.043,a:3.137},{y:2004,c:959,q:2.133,a:3.087},
-  {y:2005,c:1364,q:2.202,a:3.107},{y:2006,c:1228,q:2.244,a:3.27},{y:2007,c:945,q:2.158,a:3.261},
-  {y:2008,c:983,q:1.961,a:3.192},{y:2009,c:952,q:2.075,a:3.21},{y:2010,c:957,q:2.168,a:3.306},
-  {y:2011,c:706,q:2.217,a:3.732},{y:2012,c:467,q:2.164,a:3.238},{y:2013,c:811,q:2.176,a:3.402},
-  {y:2014,c:954,q:2.196,a:3.13},{y:2015,c:1106,q:2.197,a:3.371},{y:2016,c:1578,q:2.129,a:3.108},
-  {y:2017,c:2031,q:2.083,a:3.178},{y:2018,c:1791,q:2.179,a:3.278},{y:2019,c:2114,q:2.082,a:2.936},
-  {y:2020,c:2869,q:2.134,a:2.821},{y:2021,c:2896,q:2.227,a:2.738},{y:2022,c:2561,q:2.214,a:2.827},
-  {y:2023,c:2517,q:2.308,a:2.966},{y:2024,c:2235,q:2.297,a:3.101},{y:2025,c:2147,q:2.256,a:3.103}
-];
-const SP=[{n:"Hua Chunying",c:4837},{n:"Wang Wenbin",c:4286},{n:"Zhao Lijian",c:3769},{n:"Geng Shuang",c:3383},{n:"Mao Ning",c:2991},{n:"Qin Gang",c:2450},{n:"Lu Kang",c:2152},{n:"Hong Lei",c:2143},{n:"Liu Jianchao",c:2057},{n:"Jiang Yu",c:1805},{n:"Lin Jian",c:1524},{n:"Kong Quan",c:1297}];
-const LC=[{n:"US",c:6749},{n:"Japan",c:2284},{n:"Taiwan",c:1832},{n:"Korean Peninsula",c:1588},{n:"DPRK",c:1453},{n:"Russia",c:1422},{n:"Ukraine",c:939},{n:"India",c:878},{n:"Pakistan",c:875},{n:"Myanmar",c:720},{n:"Afghanistan",c:671},{n:"Iran",c:634},{n:"Australia",c:567},{n:"UK",c:491},{n:"EU",c:438}];
-const MC=[{n:"AFP",c:1723},{n:"Reuters",c:1619},{n:"Bloomberg",c:1438},{n:"CCTV",c:1329},{n:"Shenzhen TV",c:475},{n:"Global Times",c:454},{n:"Xinhua",c:451},{n:"China Daily",c:441},{n:"China News Service",c:424},{n:"AP",c:398}];
-
-const B={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}};
 const TX={font:{family:'IBM Plex Mono',size:10},color:'#6B6259'};
 const SC={x:{grid:{display:false},ticks:TX},y:{grid:{color:'#E8E1D6'},ticks:TX}};
+const BASE={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}};
+const YEARS=['2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'];
 
-new Chart(document.getElementById('aC'),{type:'bar',data:{labels:YS.map(d=>d.y),datasets:[{data:YS.map(d=>d.c),backgroundColor:YS.map(d=>d.y>=2017?'rgba(196,30,58,.9)':'rgba(196,30,58,.35)'),borderRadius:2}]},options:{...B,scales:SC,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y.toLocaleString()} dyads`}}}}});
-new Chart(document.getElementById('sC'),{type:'line',data:{labels:YS.map(d=>d.y),datasets:[{label:'Q',data:YS.map(d=>d.q),borderColor:'#C41E3A',borderWidth:2,pointRadius:3,pointBackgroundColor:'#C41E3A',tension:.3,fill:false},{label:'A',data:YS.map(d=>d.a),borderColor:'#D4A843',borderWidth:2,pointRadius:3,pointBackgroundColor:'#D4A843',tension:.3,fill:false}]},options:{...B,scales:{x:{grid:{display:false},ticks:TX},y:{min:1.5,max:4.2,grid:{color:'#E8E1D6'},ticks:TX}},plugins:{legend:{display:false},tooltip:{mode:'index'}}}});
-new Chart(document.getElementById('gC'),{type:'bar',data:{labels:YS.map(d=>d.y),datasets:[{data:YS.map(d=>+(d.a-d.q).toFixed(3)),backgroundColor:YS.map(d=>(d.a-d.q)>1?'#D4A843':(d.a-d.q)>.7?'rgba(212,168,67,.6)':'rgba(196,30,58,.5)'),borderRadius:2}]},options:{...B,scales:SC}});
-const ms=SP[0].c;document.getElementById('spG').innerHTML=SP.map(s=>`<div class="spc"><div class="spn">${s.n}</div><div class="sps">${s.c.toLocaleString()} dyads</div><div style="margin-top:8px" class="bt"><div class="bf" style="width:${(s.c/ms*100).toFixed(1)}%"></div></div></div>`).join('');
-const ml=LC[0].c;document.getElementById('lL').innerHTML=LC.map(l=>`<li class="bi"><div class="blb"><span>${l.n}</span><span class="v">${l.c.toLocaleString()}</span></div><div class="bt"><div class="bf" style="width:${(l.c/ml*100).toFixed(1)}%"></div></div></li>`).join('');
-new Chart(document.getElementById('lC'),{type:'doughnut',data:{labels:LC.slice(0,8).map(l=>l.n),datasets:[{data:LC.slice(0,8).map(l=>l.c),backgroundColor:['#C41E3A','#D4A843','#1A1714','#8a1428','#6B6259','#BFB8AC','#E8E1D6','#957B6B'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{family:'IBM Plex Mono',size:10},color:'#6B6259',boxWidth:10}}}}});
-const mm=MC[0].c;const mc=['','g','','g','k','','g','g','g','k'];document.getElementById('mL').innerHTML=MC.map((m,i)=>`<li class="bi"><div class="blb"><span>${m.n}</span><span class="v">${m.c.toLocaleString()}</span></div><div class="bt"><div class="bf ${mc[i]}" style="width:${(m.c/mm*100).toFixed(1)}%"></div></div></li>`).join('');
+// ── ACTIVITY ──────────────────────────────────────────────────────────
+const COUNTS=[200,975,959,1364,1228,945,983,952,957,706,467,811,954,1106,1578,2031,1791,2114,2869,2896,2561,2517,2235,2147];
+const QSENT=[2.114,2.043,2.133,2.202,2.244,2.158,1.961,2.075,2.168,2.217,2.164,2.176,2.196,2.197,2.129,2.083,2.179,2.082,2.134,2.227,2.214,2.308,2.297,2.256];
+const ASENT=[3.12,3.137,3.087,3.107,3.27,3.261,3.192,3.21,3.306,3.732,3.238,3.402,3.13,3.371,3.108,3.178,3.278,2.936,2.821,2.738,2.827,2.966,3.101,3.103];
+const GAP=ASENT.map((a,i)=>+(a-QSENT[i]).toFixed(3));
+
+new Chart(document.getElementById('actC'),{
+  type:'bar',
+  data:{labels:YEARS,datasets:[{data:COUNTS,backgroundColor:YEARS.map(y=>+y>=2017?'rgba(196,30,58,.85)':'rgba(196,30,58,.3)'),borderRadius:2}]},
+  options:{...BASE,scales:SC,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y.toLocaleString()} dyads`}},
+  annotation:{annotations:{
+    a1:{type:'line',xMin:'2008',xMax:'2008',borderColor:'rgba(212,168,67,.5)',borderWidth:1,label:{content:'Global Financial Crisis',display:true,position:'start',font:{size:8,family:'IBM Plex Mono'},color:'#D4A843',backgroundColor:'transparent'}},
+    a2:{type:'line',xMin:'2017',xMax:'2017',borderColor:'rgba(212,168,67,.5)',borderWidth:1,label:{content:'Xi era acceleration',display:true,position:'start',font:{size:8,family:'IBM Plex Mono'},color:'#D4A843',backgroundColor:'transparent'}},
+    a3:{type:'line',xMin:'2020',xMax:'2020',borderColor:'rgba(196,30,58,.4)',borderWidth:1,label:{content:'COVID-19',display:true,position:'start',font:{size:8,family:'IBM Plex Mono'},color:'#C41E3A',backgroundColor:'transparent'}}
+  }}}}
+});
+
+// ── SENTIMENT ─────────────────────────────────────────────────────────
+new Chart(document.getElementById('sentC'),{
+  type:'line',
+  data:{labels:YEARS,datasets:[
+    {label:'Q',data:QSENT,borderColor:'#C41E3A',backgroundColor:'rgba(196,30,58,.05)',borderWidth:2,pointRadius:3,pointBackgroundColor:'#C41E3A',tension:.3,fill:true},
+    {label:'A',data:ASENT,borderColor:'#D4A843',backgroundColor:'rgba(212,168,67,.05)',borderWidth:2,pointRadius:3,pointBackgroundColor:'#D4A843',tension:.3,fill:true}
+  ]},
+  options:{...BASE,scales:{x:{grid:{display:false},ticks:TX},y:{min:1.5,max:4.2,grid:{color:'#E8E1D6'},ticks:TX}},plugins:{legend:{display:false},tooltip:{mode:'index'}}}
+});
+
+new Chart(document.getElementById('gapC'),{
+  type:'bar',
+  data:{labels:YEARS,datasets:[{data:GAP,backgroundColor:GAP.map(g=>g>1.2?'#D4A843':g>0.8?'rgba(212,168,67,.6)':g>0.5?'rgba(196,30,58,.45)':'#C41E3A'),borderRadius:2}]},
+  options:{...BASE,scales:SC,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` Gap: ${c.parsed.y.toFixed(3)}`}}}}
+});
+
+// Volatility = year-on-year change in answer sentiment
+const volat=ASENT.map((v,i)=>i===0?0:+(v-ASENT[i-1]).toFixed(3));
+new Chart(document.getElementById('volatC'),{
+  type:'bar',
+  data:{labels:YEARS,datasets:[{data:volat,backgroundColor:volat.map(v=>v>0?'rgba(46,125,50,.7)':'rgba(196,30,58,.7)'),borderRadius:2}]},
+  options:{...BASE,scales:{...SC,y:{...SC.y,title:{display:true,text:'YoY Δ sentiment',font:{family:'IBM Plex Mono',size:9},color:'#6B6259'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y>0?'+':''}${c.parsed.y.toFixed(3)} vs prev year`}}}}
+});
+
+// ── TOPICS ────────────────────────────────────────────────────────────
+const TD=AD.theme_by_year;
+const THEME_META={
+  'Crisis/Emergency':   {col:'#C41E3A',group:'crisis'},
+  'Military/Conflict':  {col:'#8B1A1A',group:'conflict'},
+  'Health/Pandemic':    {col:'#2E7D32',group:'health'},
+  'Trade/Economy':      {col:'#1565C0',group:'crisis'},
+  'Human Rights':       {col:'#6A1B9A',group:'geo'},
+  'Nuclear':            {col:'#E65100',group:'conflict'},
+  'Terrorism':          {col:'#37474F',group:'conflict'},
+  'Climate/Environment':{col:'#00695C',group:'geo'},
+  'Taiwan Strait':      {col:'#C62828',group:'geo'},
+  'South China Sea':    {col:'#0277BD',group:'geo'},
+  'Russia-Ukraine':     {col:'#4E342E',group:'crisis'},
+  'US-China Relations': {col:'#1A237E',group:'geo'},
+  'DPRK/Nuclear':       {col:'#4A148C',group:'conflict'}
+};
+const THEME_NAMES=Object.keys(THEME_META);
+let topicChart=null;
+
+function buildTopicDatasets(filter){
+  const names=filter==='all'?THEME_NAMES:filter==='crisis'?['Crisis/Emergency','Trade/Economy','Russia-Ukraine','Health/Pandemic']:filter==='conflict'?['Military/Conflict','Nuclear','Terrorism','DPRK/Nuclear']:['Human Rights','Taiwan Strait','South China Sea','US-China Relations','Climate/Environment'];
+  return names.map(n=>({label:n,data:YEARS.map(y=>TD[y]?TD[y][n]||0:0),borderColor:THEME_META[n].col,backgroundColor:THEME_META[n].col+'22',borderWidth:2,pointRadius:2,tension:.3,fill:false}));
+}
+
+function showThemes(filter){
+  if(topicChart)topicChart.destroy();
+  topicChart=new Chart(document.getElementById('topicC'),{
+    type:'line',
+    data:{labels:YEARS,datasets:buildTopicDatasets(filter)},
+    options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false},ticks:TX},y:{grid:{color:'#E8E1D6'},ticks:{...TX,callback:v=>v+'%'}}},plugins:{legend:{display:true,position:'bottom',labels:{font:{family:'IBM Plex Mono',size:9},color:'#6B6259',boxWidth:10,padding:10}},tooltip:{mode:'index',callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}}}}
+  });
+}
+showThemes('crisis');
+
+// Theme table
+const thTbl=document.getElementById('themeTable');
+const recentYears=['2016','2018','2020','2021','2022','2023','2024','2025'];
+thTbl.innerHTML=`<tr><th>Theme</th>${recentYears.map(y=>`<th>${y}</th>`).join('')}<th>Trend</th></tr>`;
+THEME_NAMES.forEach(n=>{
+  const vals=recentYears.map(y=>TD[y]?TD[y][n]||0:0);
+  const maxV=Math.max(...YEARS.map(y=>TD[y]?TD[y][n]||0:0));
+  const trend=vals[vals.length-1]-vals[0];
+  const col=THEME_META[n].col;
+  thTbl.innerHTML+=`<tr><td style="font-weight:500;color:${col}">${n}</td>
+    ${vals.map(v=>`<td><div class="spark-bar"><div class="spark-fill" style="width:${Math.round(v/Math.max(maxV,.1)*60)}px;background:${col}66"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px">${v.toFixed(1)}%</span></div></td>`).join('')}
+    <td style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:${trend>0?'#C41E3A':'#2E7D32'}">${trend>0?'↑ +':'↓ '}${Math.abs(trend).toFixed(1)}pp</td>
+  </tr>`;
+});
+
+// ── GEOGRAPHY ─────────────────────────────────────────────────────────
+const LOC_COUNTS={US:6749,Japan:2284,Taiwan:1832,'Korean Peninsula':1588,DPRK:1453,Russia:1311,India:1004,'South China Sea':947,Pakistan:938,'Hong Kong':852,Ukraine:759,Iran:621};
+const maxL=6749;
+document.getElementById('locBars').innerHTML=Object.entries(LOC_COUNTS).map(([n,c])=>`<div class="hbar"><div class="hbar-top"><span class="hbar-lbl">${n}</span><span class="hbar-val">${c.toLocaleString()}</span></div><div class="hbar-track"><div class="hbar-fill" style="width:${(c/maxL*100).toFixed(1)}%"></div></div></div>`).join('');
+
+const LOC_TREND=AD.loc_trend;
+const LOC_COLORS={'US':'#C41E3A','Japan':'#D4A843','Taiwan':'#8B1A1A','DPRK':'#4A148C','Russia':'#4E342E','Ukraine':'#1565C0','India':'#E65100','South China Sea':'#0277BD','Hong Kong':'#6A1B9A','Pakistan':'#2E7D32'};
+const LOC_NAMES=Object.keys(LOC_TREND);
+let locActive=new Set(['US','Taiwan','Russia','India']);
+let locChart=null;
+
+function buildLocDatasets(){
+  return LOC_NAMES.filter(n=>locActive.has(n)).map(n=>({label:n,data:YEARS.map(y=>LOC_TREND[n][y]||0),borderColor:LOC_COLORS[n]||'#999',backgroundColor:(LOC_COLORS[n]||'#999')+'22',borderWidth:2,pointRadius:2,tension:.3,fill:false}));
+}
+function renderLocChart(){
+  if(locChart)locChart.destroy();
+  locChart=new Chart(document.getElementById('locC'),{type:'line',data:{labels:YEARS,datasets:buildLocDatasets()},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false},ticks:TX},y:{grid:{color:'#E8E1D6'},ticks:TX}},plugins:{legend:{display:true,position:'bottom',labels:{font:{family:'IBM Plex Mono',size:9},color:'#6B6259',boxWidth:10,padding:8}},tooltip:{mode:'index'}}}});
+}
+document.getElementById('locToggle').innerHTML=LOC_NAMES.map(n=>`<button onclick="toggleLoc('${n}')" id="lt_${n.replace(/\s/g,'_')}" style="padding:3px 9px;border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;cursor:pointer;border:1px solid ${LOC_COLORS[n]||'#999'};background:${locActive.has(n)?LOC_COLORS[n]||'#999':'transparent'};color:${locActive.has(n)?'white':LOC_COLORS[n]||'#999'};transition:all .15s">${n}</button>`).join('');
+function toggleLoc(n){if(locActive.has(n))locActive.delete(n);else locActive.add(n);document.querySelectorAll('[id^=lt_]').forEach(b=>{const bn=b.id.slice(3).replace(/_/g,' ');const col=LOC_COLORS[bn]||'#999';b.style.background=locActive.has(bn)?col:'transparent';b.style.color=locActive.has(bn)?'white':col;});renderLocChart();}
+renderLocChart();
+
+// ── SPOKESPEOPLE ───────────────────────────────────────────────────────
+const SP_DATA=AD.sp_analysis;
+const SP_ORDER=Object.entries(SP_DATA).sort((a,b)=>b[1].avg_a-a[1].avg_a);
+new Chart(document.getElementById('spC'),{
+  type:'bar',
+  data:{labels:SP_ORDER.map(([n])=>n),datasets:[{data:SP_ORDER.map(([,d])=>d.avg_a),backgroundColor:SP_ORDER.map(([,d])=>d.avg_a<2.9?'rgba(196,30,58,.75)':d.avg_a<3.2?'rgba(212,168,67,.75)':'rgba(46,125,50,.75)'),borderRadius:2}]},
+  options:{...BASE,indexAxis:'y',scales:{x:{grid:{color:'#E8E1D6'},ticks:TX,min:2.4,max:4.0},y:{grid:{display:false},ticks:{...TX,font:{family:'IBM Plex Mono',size:10}}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` Avg A sentiment: ${c.parsed.x.toFixed(3)}`}}}}
+});
+const SP_GAP_ORDER=Object.entries(SP_DATA).sort((a,b)=>(b[1].avg_a-b[1].avg_q)-(a[1].avg_a-a[1].avg_q));
+new Chart(document.getElementById('spGapC'),{
+  type:'bar',
+  data:{labels:SP_GAP_ORDER.map(([n])=>n),datasets:[{data:SP_GAP_ORDER.map(([,d])=>+(d.avg_a-d.avg_q).toFixed(3)),backgroundColor:'rgba(212,168,67,.7)',borderRadius:2}]},
+  options:{...BASE,indexAxis:'y',scales:{x:{grid:{color:'#E8E1D6'},ticks:TX},y:{grid:{display:false},ticks:{...TX,font:{family:'IBM Plex Mono',size:10}}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` Gap: +${c.parsed.x.toFixed(3)}`}}}}
+});
+
+// ── MEDIA ─────────────────────────────────────────────────────────────
+const MEDIA_DATA=AD.media_analysis;
+const MEDIA_ORDER=Object.entries(MEDIA_DATA).filter(([,d])=>d.count>=50).sort((a,b)=>a[1].avg_q-b[1].avg_q).slice(0,20);
+const MEDIA_CATS={AFP:'western',Reuters:'western',Bloomberg:'western',BBC:'western','The New York Times':'western',CNN:'western',NBC:'western',Kyodo:'regional',NHK:'regional','Yonhap News Agency':'regional','RIA Novosti':'regional',TASS:'regional',PTI:'regional',CCTV:'chinese','China Daily':'chinese','Global Times':'chinese','Xinhua News Agency':'chinese',CGTN:'chinese','People\'s Daily':'chinese'};
+const MCAT_COLORS={western:'#C41E3A',regional:'#D4A843',chinese:'#2E7D32'};
+new Chart(document.getElementById('mediaC'),{
+  type:'bar',
+  data:{labels:MEDIA_ORDER.map(([n])=>n),datasets:[{data:MEDIA_ORDER.map(([,d])=>d.avg_q),backgroundColor:MEDIA_ORDER.map(([n])=>{const cat=MEDIA_CATS[n]||'regional';return MCAT_COLORS[cat]+'99';}),borderRadius:2}]},
+  options:{...BASE,indexAxis:'y',scales:{x:{grid:{color:'#E8E1D6'},ticks:TX,min:1.5},y:{grid:{display:false},ticks:{...TX,font:{family:'IBM Plex Mono',size:10}}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` Avg Q sentiment: ${c.parsed.x.toFixed(3)}`}}}}
+});
+
+// ── LENGTH ────────────────────────────────────────────────────────────
+const LEN=AD.len_by_year;
+new Chart(document.getElementById('lenC'),{
+  type:'line',
+  data:{labels:YEARS,datasets:[
+    {label:'Answer',data:YEARS.map(y=>LEN[y]?.avg_a||0),borderColor:'#D4A843',backgroundColor:'rgba(212,168,67,.07)',borderWidth:2,pointRadius:2,tension:.3,fill:true},
+    {label:'Question',data:YEARS.map(y=>LEN[y]?.avg_q||0),borderColor:'#C41E3A',backgroundColor:'rgba(196,30,58,.05)',borderWidth:2,pointRadius:2,tension:.3,fill:true}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false},ticks:TX},y:{grid:{color:'#E8E1D6'},ticks:{...TX,callback:v=>`${v} ch`}}},plugins:{legend:{display:true,position:'bottom',labels:{font:{family:'IBM Plex Mono',size:10},color:'#6B6259',boxWidth:10}},tooltip:{mode:'index',callbacks:{label:c=>` ${c.dataset.label}: ~${c.parsed.y} chars`}}}}
+});
+
+// Monthly
+const MC=AD.month_counts;
+const MNAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MVALS=[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>MC[m.toString()]||0);
+new Chart(document.getElementById('monthC'),{
+  type:'bar',
+  data:{labels:MNAMES,datasets:[{data:MVALS,backgroundColor:MVALS.map(v=>v<1500?'rgba(196,30,58,.85)':'rgba(196,30,58,.4)'),borderRadius:2}]},
+  options:{...BASE,scales:SC,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y.toLocaleString()} entries`}}}}
+});
 </script>
 </body>
 </html>

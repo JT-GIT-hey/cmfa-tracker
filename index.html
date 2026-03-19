@@ -8,12 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <style>
-:root{--red:#C41E3A;--red-dim:#8a1428;--gold:#D4A843;--ink:#0D0D0D;--paper:#F5F0E8;--mist:#E8E1D6;--smoke:#BFB8AC;--card:#FFF;--text:#1A1714;--sub:#6B6259;--sb:280px;--tb:56px}
+:root{--red:#C41E3A;--red-dim:#8a1428;--gold:#D4A843;--ink:#0D0D0D;--paper:#F5F0E8;--mist:#E8E1D6;--smoke:#BFB8AC;--card:#FFF;--text:#1A1714;--sub:#6B6259;--sb:300px;--tb:56px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-serif;display:flex;flex-direction:column;overflow:hidden}
-
-/* TOP BAR */
 #topbar{height:var(--tb);min-height:var(--tb);background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 20px 0 24px;gap:16px;z-index:200;border-bottom:2px solid var(--red);flex-shrink:0}
 .tb-brand{display:flex;align-items:center;gap:14px}
 .tb-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:white;white-space:nowrap}
@@ -26,87 +24,90 @@ body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-
 .tb-an{background:rgba(255,255,255,.08);color:rgba(255,255,255,.65)}.tb-an:hover{background:rgba(255,255,255,.15);color:white}
 .tb-g{background:var(--gold);color:var(--ink)}.tb-g:hover{background:white}
 .tb-o{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}.tb-o:hover{border-color:rgba(255,255,255,.5);color:white}
-.div-v{width:1px;height:22px;background:rgba(255,255,255,.1)}
-
-/* APP SHELL */
+.dv{width:1px;height:22px;background:rgba(255,255,255,.1)}
+#creditbar{background:#1a1208;border-bottom:1px solid rgba(212,168,67,.2);padding:7px 24px;display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap}
+#creditbar .cr-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+#creditbar .cr-sep{color:rgba(255,255,255,.15);font-size:11px}
+#creditbar .cr-text{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);line-height:1.4}
+#creditbar .cr-link{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(212,168,67,.3);transition:border-color .2s,color .2s;font-family:'IBM Plex Mono',monospace;font-size:10px}
+#creditbar .cr-link:hover{color:white;border-bottom-color:white}
+#creditbar .cr-cite{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.25);font-style:italic}
 #app{display:flex;flex:1;overflow:hidden}
-
 /* SIDEBAR */
 #sidebar{width:var(--sb);min-width:var(--sb);background:var(--card);border-right:1px solid var(--mist);display:flex;flex-direction:column;overflow:hidden;z-index:100;flex-shrink:0}
 .sb-head{padding:12px 16px 10px;border-bottom:1px solid var(--mist);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .sb-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sub)}
-#resetAllBtn{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--red);background:none;border:none;cursor:pointer;text-transform:uppercase;opacity:.7;transition:opacity .2s;letter-spacing:.05em}
+#resetAllBtn{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--red);background:none;border:none;cursor:pointer;text-transform:uppercase;opacity:.7;transition:opacity .2s}
 #resetAllBtn:hover{opacity:1}
-.sb-scroll{flex:1;overflow-y:auto;padding:10px 0}
+.sb-scroll{flex:1;overflow-y:auto;padding:8px 0}
 .sb-scroll::-webkit-scrollbar{width:3px}
-.sb-scroll::-webkit-scrollbar-thumb{background:var(--mist)}
-
-/* Filter groups */
-.fg{padding:8px 16px 14px;border-bottom:1px solid var(--mist)}
+.sb-scroll::-webkit-scrollbar-thumb{background:var(--mist);border-radius:2px}
+.fg{padding:8px 16px 12px;border-bottom:1px solid var(--mist)}
 .fg:last-child{border-bottom:none}
-.fg-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);margin-bottom:8px;display:block}
+.fg-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);margin-bottom:7px;display:block}
 .fg input[type=text],.fg input[type=search],.fg input[type=number],.fg select{width:100%;padding:7px 10px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:var(--text);background:var(--paper);outline:none;transition:border-color .2s}
-.fg input:focus,.fg select:focus{border-color:var(--red)}
+.fg input:focus,.fg select:focus{border-color:var(--red);background:white}
 .fg select{font-family:'IBM Plex Mono',monospace;font-size:11px;cursor:pointer}
 .year-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .year-grid input{text-align:center;font-family:'IBM Plex Mono',monospace!important;font-size:12px!important}
-.range-row{display:flex;align-items:center;gap:6px;margin-top:6px}
+.range-row{display:flex;align-items:center;gap:6px;margin-top:5px}
 .range-row input[type=range]{flex:1;accent-color:var(--red);cursor:pointer}
 .range-val{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--red);font-weight:600;min-width:28px;text-align:right}
-.range-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)}
-.cb-list{display:flex;flex-direction:column;gap:4px;max-height:170px;overflow-y:auto;margin-top:6px}
+.range-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);min-width:24px}
+.cb-list{display:flex;flex-direction:column;gap:3px;max-height:160px;overflow-y:auto;margin-top:6px}
 .cb-list::-webkit-scrollbar{width:3px}
 .cb-list::-webkit-scrollbar-thumb{background:var(--mist)}
 .cb-item{display:flex;align-items:center;gap:7px;cursor:pointer;padding:2px 0}
 .cb-item input[type=checkbox]{accent-color:var(--red);cursor:pointer;width:13px;height:13px;flex-shrink:0}
-.cb-item label{font-size:11px;cursor:pointer;color:var(--text);flex:1;line-height:1.3}
+.cb-item label{font-size:11px;cursor:pointer;color:var(--text);flex:1}
 .cb-cnt{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)}
+/* THEME CHIPS — the new feature */
+.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px}
+.th-chip{padding:5px 7px;border-radius:3px;font-size:10px;font-family:'IBM Plex Mono',monospace;cursor:pointer;border:1px solid var(--mist);background:var(--paper);color:var(--sub);transition:all .15s;text-align:center;line-height:1.3;user-select:none}
+.th-chip:hover{border-color:currentColor}
+.th-chip.on{color:white;border-color:transparent}
+/* theme colours */
+.th-crisis{--tc:#C41E3A}.th-conflict{--tc:#8B1A1A}.th-health{--tc:#2E7D32}.th-trade{--tc:#1565C0}.th-rights{--tc:#6A1B9A}.th-nuclear{--tc:#E65100}.th-terror{--tc:#37474F}.th-climate{--tc:#00695C}.th-taiwan{--tc:#C62828}.th-scs{--tc:#0277BD}.th-russia{--tc:#4E342E}.th-us{--tc:#1A237E}.th-dprk{--tc:#4A148C}
+.th-chip{color:var(--tc,var(--sub));border-color:color-mix(in srgb,var(--tc,var(--smoke)) 30%,transparent)}
+.th-chip:hover{background:color-mix(in srgb,var(--tc,var(--smoke)) 10%,white)}
+.th-chip.on{background:var(--tc,var(--red));color:white;border-color:var(--tc,var(--red))}
+/* quick loc chips */
 .qf-wrap{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
 .qf{padding:3px 9px;border-radius:10px;font-size:10px;font-family:'IBM Plex Mono',monospace;cursor:pointer;border:1px solid var(--mist);background:var(--paper);color:var(--sub);transition:all .15s;white-space:nowrap}
 .qf:hover{border-color:var(--red);color:var(--red)}
 .qf.on{background:var(--red);color:white;border-color:var(--red)}
-.sent-bar{height:6px;border-radius:3px;margin:6px 0;background:linear-gradient(to right,#C41E3A,#E07B3A,#D4A843,#7BAF3A,#2E7D32)}
-
+.sent-bar{height:5px;border-radius:3px;margin:5px 0 2px;background:linear-gradient(to right,#C41E3A,#E07B3A,#D4A843,#7BAF3A,#2E7D32)}
 /* MAIN */
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-
-/* ACTIVE FILTERS */
-#afBar{background:var(--paper);border-bottom:1px solid var(--mist);padding:6px 16px;display:none;align-items:center;flex-wrap:wrap;gap:6px;flex-shrink:0}
+#afBar{background:var(--paper);border-bottom:1px solid var(--mist);padding:6px 16px;display:none;align-items:center;flex-wrap:wrap;gap:5px;flex-shrink:0}
 #afBar.on{display:flex}
 .af-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);text-transform:uppercase;letter-spacing:.1em;margin-right:4px}
 .af-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px 3px 10px;border-radius:10px;background:var(--red);color:white;font-family:'IBM Plex Mono',monospace;font-size:10px}
 .af-chip button{background:none;border:none;color:rgba(255,255,255,.65);cursor:pointer;font-size:13px;line-height:1;padding:0}
 .af-chip button:hover{color:white}
-
-/* TOOLBAR */
 #toolbar{background:var(--card);border-bottom:1px solid var(--mist);padding:0 16px;height:48px;display:flex;align-items:center;gap:10px;flex-shrink:0}
 .s-wrap{flex:1;position:relative}
 .s-wrap input{width:100%;padding:8px 12px 8px 32px;border:1px solid var(--mist);border-radius:3px;font-size:13px;color:var(--text);background:var(--paper);outline:none;transition:all .2s;font-family:'IBM Plex Sans',sans-serif}
 .s-wrap input:focus{border-color:var(--red);background:white}
 .s-wrap .si{position:absolute;left:9px;top:50%;transform:translateY(-52%);color:var(--smoke);font-size:14px;pointer-events:none}
 .s-wrap .sk{position:absolute;right:9px;top:50%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);background:var(--mist);padding:2px 5px;border-radius:2px}
-.tb-sel{padding:8px 10px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);background:var(--paper);cursor:pointer;outline:none;transition:border-color .2s}
+.tb-sel{padding:8px 10px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);background:var(--paper);cursor:pointer;outline:none}
 .tb-sel:focus{border-color:var(--red)}
-.dv{width:1px;height:22px;background:var(--mist);flex-shrink:0}
+.dvsm{width:1px;height:22px;background:var(--mist);flex-shrink:0}
 .vbtns{display:flex;border:1px solid var(--mist);border-radius:3px;overflow:hidden;flex-shrink:0}
 .vbtn{padding:7px 10px;background:var(--paper);border:none;cursor:pointer;font-size:14px;color:var(--smoke);transition:all .15s}
 .vbtn.on{background:var(--red);color:white}
-.exp-btn{padding:7px 12px;background:transparent;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);cursor:pointer;letter-spacing:.05em;text-transform:uppercase;transition:all .15s;white-space:nowrap}
+.exp-btn{padding:7px 12px;background:transparent;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);cursor:pointer;text-transform:uppercase;transition:all .15s;white-space:nowrap}
 .exp-btn:hover{border-color:var(--gold);color:var(--gold)}
-
-/* STATS */
 #stats{background:var(--ink);padding:5px 16px;display:flex;gap:20px;align-items:center;flex-shrink:0;flex-wrap:wrap}
 .st{display:flex;align-items:center;gap:6px}
 .st-l{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
 .st-v{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600}
 .st-hint{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.2)}
-
 /* RESULTS */
 #results{flex:1;overflow-y:auto}
 #results::-webkit-scrollbar{width:6px}
 #results::-webkit-scrollbar-thumb{background:var(--smoke);border-radius:3px}
-
-/* TABLE */
 .vt{display:none}.vt.on{display:block}
 table{width:100%;border-collapse:collapse;font-size:12px}
 thead th{position:sticky;top:0;background:var(--paper);z-index:10;padding:9px 12px;text-align:left;border-bottom:2px solid var(--mist);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);white-space:nowrap;cursor:pointer;user-select:none;transition:color .15s}
@@ -121,14 +122,15 @@ td{padding:10px 12px;vertical-align:top}
 .cs{width:118px}
 .sp-p{display:inline-block;padding:2px 7px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:10px;background:var(--mist);white-space:nowrap}
 .cw{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);width:108px}
-.cq{max-width:280px;line-height:1.4}
-.ca{max-width:300px;font-size:11px;color:var(--sub);line-height:1.4}
+.cq{max-width:270px;line-height:1.4}
+.ca{max-width:290px;font-size:11px;color:var(--sub);line-height:1.4}
 .clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .cse{width:56px;text-align:center}
 .sc{display:inline-block;padding:2px 6px;border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
+/* theme badge on rows */
+.th-badges{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.th-badge{font-family:'IBM Plex Mono',monospace;font-size:8px;padding:1px 5px;border-radius:2px;white-space:nowrap}
 mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1px}
-
-/* CARDS */
 .vc{display:none}.vc.on{display:block;padding:14px}
 .cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:12px}
 .ec{background:var(--card);border:1px solid var(--mist);border-radius:6px;padding:16px;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;gap:10px}
@@ -145,11 +147,8 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 .ec-f{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .lt{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 6px;border-radius:2px;background:var(--paper);color:var(--sub);border:1px solid var(--mist)}
 .ss{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;margin-left:auto}
-
-/* EMPTY */
 .empty{padding:60px 40px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--sub);display:none}
 .empty h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--ink);margin-bottom:8px;font-weight:700}
-
 /* PAGINATION */
 #pgbar{background:var(--card);border-top:1px solid var(--mist);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:12px;flex-wrap:wrap}
 .pg-info{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub)}
@@ -164,7 +163,6 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 .pg-j{display:flex;align-items:center;gap:6px}
 .pg-j input{width:50px;padding:6px 8px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;text-align:center;background:var(--paper);outline:none}
 .pg-j input:focus{border-color:var(--red)}
-
 /* LOADING */
 #ld{position:absolute;inset:0;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:300;gap:18px}
 .ld-t{font-family:'Playfair Display',serif;font-size:24px;color:var(--ink)}
@@ -172,12 +170,11 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 .ld-bw{width:300px;background:var(--mist);height:4px;border-radius:2px;overflow:hidden}
 .ld-b{height:100%;background:var(--red);transition:width .3s;width:0}
 .ld-n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--smoke)}
-
 /* MODAL */
 #mov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.75);z-index:500;backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px}
 #mov.open{display:flex}
 #mbox{background:var(--card);border-radius:8px;max-width:820px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.35)}
-.mh{padding:20px 26px 14px;border-bottom:1px solid var(--mist);background:var(--card);flex-shrink:0}
+.mh{padding:20px 26px 14px;border-bottom:1px solid var(--mist);flex-shrink:0}
 .mn{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .mnb{display:flex;gap:6px;align-items:center}
 .mnbtn{padding:5px 12px;border:1px solid var(--mist);border-radius:3px;background:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:10px;cursor:pointer;color:var(--sub);transition:all .15s}
@@ -203,14 +200,12 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 .msbl{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--sub);margin-bottom:4px}
 .msbv{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;line-height:1}
 .msbd{font-size:11px;color:var(--sub);margin-top:4px}
+.mthemes{display:flex;flex-wrap:wrap;gap:5px}
 .mlink{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--red);word-break:break-all}
-
 @media(max-width:900px){:root{--sb:0px}#sidebar{display:none}.cg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<!-- TOP BAR -->
 <div id="topbar">
   <div class="tb-brand">
     <div class="tb-logo">CMFA <span>PressCon</span></div>
@@ -218,24 +213,34 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
   </div>
   <div class="tb-right">
     <span class="tb-count"><span id="filteredCount">…</span> / 35,346 entries</span>
-    <div class="div-v"></div>
+    <div class="dv"></div>
     <a href="analytics.html" class="tb-btn tb-an">📊 Analytics →</a>
     <button class="tb-btn tb-o" onclick="exportCSV()">↓ Export Filtered</button>
     <a href="data.csv" download class="tb-btn tb-g">↓ Full Dataset</a>
   </div>
 </div>
+<!-- CREDIT BAR -->
+<div id="creditbar">
+  <span class="cr-label">Dataset</span>
+  <span class="cr-sep">|</span>
+  <span class="cr-text">
+    Mochtak, M. &amp; Turcsanyi, R.Q. (2021). <em>Chinese Ministry of Foreign Affairs Press Conferences Corpus (CMFA PressCon)</em>.
+    Harvard Dataverse, v6. &nbsp;
+    <a class="cr-link" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/BAKGET" target="_blank" rel="noopener">
+      doi:10.7910/DVN/BAKGET ↗
+    </a>
+  </span>
+  <span class="cr-sep" style="margin-left:auto">|</span>
+  <span class="cr-cite">Journal of Chinese Political Science, 26(4), 743–761</span>
+</div>
 
-<!-- LOADING -->
 <div id="ld">
   <div class="ld-t">Loading Dataset…</div>
   <div class="ld-s">Streaming 35,346 Q&amp;A entries — takes about 5–10 seconds.</div>
   <div class="ld-bw"><div class="ld-b" id="ldB"></div></div>
   <div class="ld-n" id="ldN">Initialising…</div>
 </div>
-
-<!-- APP -->
 <div id="app">
-
   <!-- SIDEBAR -->
   <div id="sidebar">
     <div class="sb-head">
@@ -246,21 +251,43 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 
       <div class="fg">
         <label class="fg-label">Search In</label>
-        <select id="sScope">
-          <option value="both">Questions + Answers</option>
-          <option value="q">Questions Only</option>
-          <option value="a">Answers Only</option>
-        </select>
+        <select id="sScope"><option value="both">Questions + Answers</option><option value="q">Questions Only</option><option value="a">Answers Only</option></select>
       </div>
 
       <div class="fg">
         <label class="fg-label">Year Range</label>
         <div class="year-grid">
-          <input type="number" id="yFrom" placeholder="From" min="2002" max="2025" value="2002">
-          <input type="number" id="yTo"   placeholder="To"   min="2002" max="2025" value="2025">
+          <input type="number" id="yFrom" min="2002" max="2025" value="2002" placeholder="From">
+          <input type="number" id="yTo"   min="2002" max="2025" value="2025" placeholder="To">
         </div>
         <div class="range-row"><span class="range-lbl">2002</span><input type="range" id="yfS" min="2002" max="2025" value="2002" step="1"><span class="range-val" id="yfV">2002</span></div>
         <div class="range-row"><span class="range-lbl">2025</span><input type="range" id="ytS" min="2002" max="2025" value="2025" step="1" style="accent-color:var(--gold)"><span class="range-val" id="ytV">2025</span></div>
+      </div>
+
+      <!-- THEME FILTERS — NEW -->
+      <div class="fg">
+        <label class="fg-label">Topic / Theme</label>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Select one or more — matches entries mentioning these topics</div>
+        <div class="theme-grid">
+          <span class="th-chip th-crisis"  data-theme="crisis"   title="crisis, emergency, disaster, escalation">⚠ Crisis</span>
+          <span class="th-chip th-conflict" data-theme="conflict" title="military, war, troops, weapons, combat">⚔ Conflict</span>
+          <span class="th-chip th-health"  data-theme="health"   title="COVID, pandemic, disease, WHO, vaccine">🏥 Health</span>
+          <span class="th-chip th-trade"   data-theme="trade"    title="trade, tariffs, sanctions, WTO, economy">💹 Trade</span>
+          <span class="th-chip th-rights"  data-theme="rights"   title="human rights, Uyghur, Tibet, Hong Kong, democracy">⚖ Human Rights</span>
+          <span class="th-chip th-nuclear" data-theme="nuclear"  title="nuclear, IAEA, non-proliferation, atomic">☢ Nuclear</span>
+          <span class="th-chip th-terror"  data-theme="terror"   title="terrorism, extremism, ISIS, al-Qaeda">💣 Terrorism</span>
+          <span class="th-chip th-climate" data-theme="climate"  title="climate, emissions, COP, Paris Agreement">🌍 Climate</span>
+          <span class="th-chip th-taiwan"  data-theme="taiwan"   title="Taiwan, One China, reunification, strait">🇹🇼 Taiwan</span>
+          <span class="th-chip th-scs"     data-theme="scs"      title="South China Sea, Spratly, maritime, reef">🌊 S.China Sea</span>
+          <span class="th-chip th-russia"  data-theme="russia"   title="Russia, Ukraine, NATO, Kyiv, invasion">🇷🇺 Russia-Ukraine</span>
+          <span class="th-chip th-us"      data-theme="us"       title="United States, Washington, US-China relations">🇺🇸 US-China</span>
+          <span class="th-chip th-dprk"    data-theme="dprk"     title="North Korea, Kim Jong-un, Korean Peninsula">🇰🇵 DPRK</span>
+        </div>
+        <div style="margin-top:6px;display:flex;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">
+          <span>Match:</span>
+          <label style="cursor:pointer;display:flex;align-items:center;gap:3px;color:var(--sub)"><input type="radio" name="themeMode" id="tmAny" value="any" checked style="accent-color:var(--red)"> Any selected</label>
+          <label style="cursor:pointer;display:flex;align-items:center;gap:3px;color:var(--sub)"><input type="radio" name="themeMode" id="tmAll" value="all" style="accent-color:var(--red)"> All selected</label>
+        </div>
       </div>
 
       <div class="fg">
@@ -275,20 +302,20 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
       </div>
 
       <div class="fg">
-        <label class="fg-label">Quick Topic (Location)</label>
+        <label class="fg-label">Quick Location Focus</label>
         <div class="qf-wrap" id="qfw">
           <span class="qf" data-loc="US">🇺🇸 US</span>
-          <span class="qf" data-loc="Taiwan">🇹🇼 Taiwan</span>
           <span class="qf" data-loc="Japan">🇯🇵 Japan</span>
-          <span class="qf" data-loc="DPRK">🇰🇵 DPRK</span>
-          <span class="qf" data-loc="Russia">🇷🇺 Russia</span>
-          <span class="qf" data-loc="Ukraine">🇺🇦 Ukraine</span>
           <span class="qf" data-loc="India">🇮🇳 India</span>
-          <span class="qf" data-loc="South China Sea">🌊 S.China Sea</span>
-          <span class="qf" data-loc="Hong Kong">🏙 Hong Kong</span>
+          <span class="qf" data-loc="Pakistan">🇵🇰 Pakistan</span>
+          <span class="qf" data-loc="Hong Kong">🏙 HK</span>
           <span class="qf" data-loc="Xinjiang">Xinjiang</span>
           <span class="qf" data-loc="Iran">Iran</span>
           <span class="qf" data-loc="Afghanistan">Afghanistan</span>
+          <span class="qf" data-loc="Myanmar">Myanmar</span>
+          <span class="qf" data-loc="Australia">Australia</span>
+          <span class="qf" data-loc="EU">EU</span>
+          <span class="qf" data-loc="Africa">Africa</span>
         </div>
       </div>
 
@@ -306,59 +333,69 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
         <div class="range-row"><span class="range-lbl">Max</span><input type="range" id="qMax" min="0" max="5" step="0.1" value="5" style="accent-color:var(--gold)"><span class="range-val" id="qMxV">5.0</span></div>
       </div>
 
+      <div class="fg">
+        <label class="fg-label">Entry Length</label>
+        <div style="margin-top:4px">
+          <label style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);display:block;margin-bottom:4px">Answer length</label>
+          <select id="lenSel" onchange="af()" style="width:100%;padding:7px 10px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--paper);outline:none;cursor:pointer">
+            <option value="">Any length</option>
+            <option value="short">Short (&lt; 300 chars)</option>
+            <option value="medium">Medium (300–1000 chars)</option>
+            <option value="long">Long (1000–2000 chars)</option>
+            <option value="very_long">Very long (&gt; 2000 chars)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="fg-label">Has Named Entities</label>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <label class="cb-item"><input type="checkbox" id="hasLoc" onchange="af()"><label for="hasLoc" style="font-size:11px;color:var(--text)">Has location mentions</label></label>
+          <label class="cb-item"><input type="checkbox" id="hasPer" onchange="af()"><label for="hasPer" style="font-size:11px;color:var(--text)">Has person mentions</label></label>
+          <label class="cb-item"><input type="checkbox" id="hasOrg" onchange="af()"><label for="hasOrg" style="font-size:11px;color:var(--text)">Has org mentions</label></label>
+          <label class="cb-item"><input type="checkbox" id="hasMedia" onchange="af()"><label for="hasMedia" style="font-size:11px;color:var(--text)">Has media attribution</label></label>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <!-- MAIN -->
   <div id="main">
-
-    <!-- ACTIVE FILTERS BAR -->
-    <div id="afBar">
-      <span class="af-lbl">Active:</span>
-      <div id="afChips"></div>
-    </div>
-
-    <!-- TOOLBAR -->
+    <div id="afBar"><span class="af-lbl">Active:</span><div id="afChips"></div></div>
     <div id="toolbar">
       <div class="s-wrap">
         <span class="si">⌕</span>
         <input type="text" id="sInput" placeholder="Search questions and answers… (press / to focus)" autocomplete="off">
-        <span class="sk">/ to focus</span>
+        <span class="sk">/ focus</span>
       </div>
-      <select class="tb-sel" id="sScopeBar">
-        <option value="both">Q + A</option>
-        <option value="q">Q only</option>
-        <option value="a">A only</option>
-      </select>
-      <div class="dv"></div>
+      <select class="tb-sel" id="sScopeBar"><option value="both">Q + A</option><option value="q">Q only</option><option value="a">A only</option></select>
+      <div class="dvsm"></div>
       <select class="tb-sel" id="sortSel">
         <option value="id-asc">ID ↑</option>
         <option value="id-desc">ID ↓</option>
         <option value="date-desc">Newest first</option>
         <option value="date-asc">Oldest first</option>
-        <option value="a_sentiment-desc">A Sentiment high→low</option>
-        <option value="a_sentiment-asc">A Sentiment low→high</option>
-        <option value="q_sentiment-desc">Q Sentiment high→low</option>
-        <option value="q_sentiment-asc">Q Sentiment low→high</option>
+        <option value="a_sentiment-desc">A Sent high→low</option>
+        <option value="a_sentiment-asc">A Sent low→high</option>
+        <option value="q_sentiment-desc">Q Sent high→low</option>
+        <option value="q_sentiment-asc">Q Sent low→high</option>
       </select>
-      <div class="dv"></div>
+      <div class="dvsm"></div>
       <div class="vbtns">
-        <button class="vbtn on" id="btnT" onclick="setView('table')" title="Table view">☰</button>
-        <button class="vbtn" id="btnC" onclick="setView('cards')" title="Card view">⊞</button>
+        <button class="vbtn on" id="btnT" onclick="setView('table')" title="Table">☰</button>
+        <button class="vbtn" id="btnC" onclick="setView('cards')" title="Cards">⊞</button>
       </div>
       <button class="exp-btn" onclick="exportCSV()">↓ Export</button>
     </div>
-
-    <!-- STATS -->
     <div id="stats">
       <div class="st"><span class="st-l">Results</span><span class="st-v" id="stN" style="color:white">—</span></div>
       <div class="st"><span class="st-l">Avg Q Sent.</span><span class="st-v" id="stQ" style="color:var(--red)">—</span></div>
       <div class="st"><span class="st-l">Avg A Sent.</span><span class="st-v" id="stA" style="color:var(--gold)">—</span></div>
       <div class="st"><span class="st-l">Date Range</span><span class="st-v" id="stR" style="color:rgba(255,255,255,.45);font-size:10px">—</span></div>
-      <span class="st-hint">/ = search focus &nbsp;·&nbsp; ESC = close modal &nbsp;·&nbsp; ← → = paginate &nbsp;·&nbsp; click row = details</span>
+      <div class="st"><span class="st-l">Active Theme</span><span class="st-v" id="stTh" style="color:rgba(255,255,255,.5);font-size:10px">None</span></div>
+      <span class="st-hint">/ = search · ESC = close · ← → = paginate</span>
     </div>
-
-    <!-- RESULTS -->
     <div id="results">
       <div class="vt on" id="vTable">
         <table>
@@ -381,26 +418,17 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
         <div class="empty" id="emC"><h3>No results</h3>Try broadening your search or filters.</div>
       </div>
     </div>
-
-    <!-- PAGINATION -->
     <div id="pgbar">
-      <div class="pg-pp">
-        <label>Per page</label>
+      <div class="pg-pp"><label>Per page</label>
         <select id="ppSel" onchange="setPerPage(+this.value)">
-          <option value="25">25</option>
-          <option value="50" selected>50</option>
-          <option value="100">100</option>
-          <option value="200">200</option>
+          <option value="25">25</option><option value="50" selected>50</option>
+          <option value="100">100</option><option value="200">200</option>
         </select>
       </div>
       <div class="pbtns" id="pBtns"></div>
-      <div class="pg-j">
-        <label>Go to page</label>
-        <input type="number" id="pgJ" min="1" placeholder="…">
-      </div>
+      <div class="pg-j"><label>Go to page</label><input type="number" id="pgJ" min="1" placeholder="…"></div>
       <span class="pg-info" id="pgI"></span>
     </div>
-
   </div>
 </div>
 
@@ -423,7 +451,40 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 </div>
 
 <script>
-let ALL=[],FIL=[],page=1,pp=50,sCol='id',sDir=1,view='table',mIdx=-1,sDeb,activeLoc=null;
+// ── THEME KEYWORD SETS ─────────────────────────────────────────────────
+const THEMES = {
+  crisis:   {label:'Crisis',     kw:['crisis','emergency','disaster','catastrophe','urgent','escalat','humanitarian']},
+  conflict: {label:'Conflict',   kw:['military','troops','war ','combat','conflict','weapon','missile','army','navy',' attack','invasion','occupation','ceasefire','warfare','armed force','soldier']},
+  health:   {label:'Health',     kw:['covid','pandemic','virus','health','disease','epidemic','outbreak','vaccine','who ','infectious','quarantine','public health','monkeypox','ebola']},
+  trade:    {label:'Trade',      kw:['trade','tariff','sanction','economic','investment','export','import','commerce','supply chain','wto','bilateral trade','tech war','decoupling']},
+  rights:   {label:'Human Rights',kw:['human rights','democracy','freedom','uyghur','xinjiang','tibet','hong kong','protest','civil right','oppression','detention','minority','genocide','concentration']},
+  nuclear:  {label:'Nuclear',    kw:['nuclear','iaea','non-proliferation','atomic','warhead','denuclearization','npt','fissile']},
+  terror:   {label:'Terrorism',  kw:['terrorism','terrorist','extremism','isis','al-qaeda','jihadist','radicali','suicide bomb']},
+  climate:  {label:'Climate',    kw:['climate','environment','carbon','emission','green','sustainable','cop ','global warming','paris agreement','renewable','net zero']},
+  taiwan:   {label:'Taiwan',     kw:['taiwan','strait','reunification','one china','independence','taipei','dpp','cross-strait']},
+  scs:      {label:'S.China Sea',kw:['south china sea','spratly','paracel','arbitration','maritime','territorial water','reef','shoal','nine-dash']},
+  russia:   {label:'Russia-Ukr', kw:['ukraine','russia','zelensky','putin','nato','kyiv','moscow','crimea','donbas','mariupol']},
+  us:       {label:'US-China',   kw:['united states','washington','biden','trump','obama','white house','pentagon','state department','sino-american','us-china','american']},
+  dprk:     {label:'DPRK',       kw:['dprk','north korea','kim jong','denuclearization','korean peninsula','six-party','pyongyang','intercontinental']}
+};
+
+function detectThemes(text) {
+  const t = text.toLowerCase();
+  const detected = [];
+  for (const [key, def] of Object.entries(THEMES)) {
+    if (def.kw.some(k => t.includes(k))) detected.push(key);
+  }
+  return detected;
+}
+
+const THEME_COLORS = {
+  crisis:'#C41E3A',conflict:'#8B1A1A',health:'#2E7D32',trade:'#1565C0',
+  rights:'#6A1B9A',nuclear:'#E65100',terror:'#37474F',climate:'#00695C',
+  taiwan:'#C62828',scs:'#0277BD',russia:'#4E342E',us:'#1A237E',dprk:'#4A148C'
+};
+
+// ── STATE ──────────────────────────────────────────────────────────────
+let ALL=[],FIL=[],page=1,pp=50,sCol='id',sDir=1,view='table',mIdx=-1,sDeb,activeLoc=null,activeThemes=new Set();
 const $=id=>document.getElementById(id);
 const esc=s=>s==null?'—':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const trunc=(s,n=180)=>!s?'—':s.length>n?s.slice(0,n)+'…':s;
@@ -431,7 +492,10 @@ const trunc=(s,n=180)=>!s?'—':s.length>n?s.slice(0,n)+'…':s;
 Papa.parse('data.csv',{
   download:true,header:true,skipEmptyLines:true,
   step(r){ALL.push(r.data);if(ALL.length%5000===0){const p=Math.min(88,(ALL.length/353).toFixed(0));$('ldB').style.width=p+'%';$('ldN').textContent=`Parsed ${ALL.length.toLocaleString()} rows…`;}},
-  complete(){$('ldB').style.width='100%';$('ldN').textContent='Building index…';setTimeout(init,120);},
+  complete(){$('ldB').style.width='100%';$('ldN').textContent='Indexing themes…';
+    // Pre-index themes
+    ALL.forEach(r=>{r._themes=detectThemes((r.question||'')+' '+(r.answer||''));r._alen=(r.answer||'').length;});
+    setTimeout(init,120);},
   error(e){$('ldN').textContent='Error: '+e.message;}
 });
 
@@ -439,20 +503,25 @@ function init(){
   $('ld').style.display='none';
   let spC={},mC={};
   ALL.forEach(r=>{spC[r.spokesperson]=(spC[r.spokesperson]||0)+1;if(r.who_asked&&r.who_asked!=='-')mC[r.who_asked]=(mC[r.who_asked]||0)+1;});
-
   const sps=Object.entries(spC).filter(([k])=>k&&k!=='-'&&k!=='missing').sort((a,b)=>b[1]-a[1]);
   $('spList').innerHTML=sps.map(([n,c])=>`<div class="cb-item"><input type="checkbox" id="sp_${n.replace(/\s/g,'_')}" value="${n}" onchange="af()"><label for="sp_${n.replace(/\s/g,'_')}">${n}</label><span class="cb-cnt">${c.toLocaleString()}</span></div>`).join('');
-
   window._allMedia=Object.entries(mC).sort((a,b)=>b[1]-a[1]);
   renderML(window._allMedia.slice(0,20));
 
-  // events
+  // Theme chip events
+  document.querySelectorAll('.th-chip').forEach(c=>c.addEventListener('click',()=>{
+    const t=c.dataset.theme;
+    if(activeThemes.has(t)){activeThemes.delete(t);c.classList.remove('on');}
+    else{activeThemes.add(t);c.classList.add('on');}
+    af();
+  }));
+  document.querySelectorAll('input[name=themeMode]').forEach(r=>r.addEventListener('change',af));
+
   $('sInput').addEventListener('input',()=>{clearTimeout(sDeb);sDeb=setTimeout(af,250);});
   $('sScopeBar').addEventListener('change',()=>{$('sScope').value=$('sScopeBar').value;af();});
   $('sScope').addEventListener('change',()=>{$('sScopeBar').value=$('sScope').value;af();});
   $('sortSel').addEventListener('change',()=>{const[c,d]=$('sortSel').value.split('-');sCol=c;sDir=d==='asc'?1:-1;page=1;render();});
-  ['aMin','aMax','qMin','qMax'].forEach(id=>{$(id).addEventListener('input',()=>{const vId=id.replace('Min','MV').replace('Max','MxV');$(vId).textContent=parseFloat($(id).value).toFixed(1);af();});});
-  const setY=(fromVal,toVal)=>{$('yFrom').value=fromVal;$('yTo').value=toVal;$('yfS').value=fromVal;$('ytS').value=toVal;$('yfV').textContent=fromVal;$('ytV').textContent=toVal;};
+  ['aMin','aMax','qMin','qMax'].forEach(id=>{$(id).addEventListener('input',()=>{const vId=id==='aMin'?'aMV':id==='aMax'?'aMxV':id==='qMin'?'qMV':'qMxV';$(vId).textContent=parseFloat($(id).value).toFixed(1);af();});});
   $('yFrom').addEventListener('input',()=>{$('yfS').value=$('yFrom').value;$('yfV').textContent=$('yFrom').value;af();});
   $('yTo').addEventListener('input',()=>{$('ytS').value=$('yTo').value;$('ytV').textContent=$('yTo').value;af();});
   $('yfS').addEventListener('input',()=>{$('yFrom').value=$('yfS').value;$('yfV').textContent=$('yfS').value;af();});
@@ -471,9 +540,7 @@ function init(){
   af();
 }
 
-function renderML(list){
-  $('mList').innerHTML=list.map(([n,c])=>`<div class="cb-item"><input type="checkbox" id="m_${n.replace(/\W/g,'_')}" value="${n}" onchange="af()"><label for="m_${n.replace(/\W/g,'_')}">${n}</label><span class="cb-cnt">${c.toLocaleString()}</span></div>`).join('');
-}
+function renderML(list){$('mList').innerHTML=list.map(([n,c])=>`<div class="cb-item"><input type="checkbox" id="m_${n.replace(/\W/g,'_')}" value="${n}" onchange="af()"><label for="m_${n.replace(/\W/g,'_')}">${n}</label><span class="cb-cnt">${c.toLocaleString()}</span></div>`).join('');}
 function filterML(){const q=$('mSearch').value.toLowerCase();renderML(q?window._allMedia.filter(([n])=>n.toLowerCase().includes(q)):window._allMedia.slice(0,20));}
 function getCB(id){return[...document.querySelectorAll(`#${id} input[type=checkbox]:checked`)].map(c=>c.value);}
 
@@ -483,6 +550,9 @@ function af(){
   const sps=getCB('spList'),med=getCB('mList');
   const aMin=parseFloat($('aMin').value),aMax=parseFloat($('aMax').value);
   const qMin=parseFloat($('qMin').value),qMax=parseFloat($('qMax').value);
+  const lenF=$('lenSel').value;
+  const hasLoc=$('hasLoc').checked,hasPer=$('hasPer').checked,hasOrg=$('hasOrg').checked,hasMedia=$('hasMedia').checked;
+  const themeMode=document.querySelector('input[name=themeMode]:checked')?.value||'any';
 
   FIL=ALL.filter(r=>{
     const yr=parseInt(r.year);
@@ -492,57 +562,65 @@ function af(){
     const av=parseFloat(r.a_sentiment),qv=parseFloat(r.q_sentiment);
     if(!isNaN(av)&&(av<aMin||av>aMax))return false;
     if(!isNaN(qv)&&(qv<qMin||qv>qMax))return false;
-    if(activeLoc&&!(r.a_loc||'').toLowerCase().includes(activeLoc.toLowerCase()))return false;
-    if(q){const qt=(r.question||'').toLowerCase(),at=(r.answer||'').toLowerCase();
-      if(sc==='q'&&!qt.includes(q))return false;
-      if(sc==='a'&&!at.includes(q))return false;
-      if(sc==='both'&&!qt.includes(q)&&!at.includes(q))return false;}
+    if(activeLoc&&!(r.a_loc||'').toLowerCase().includes(activeLoc.toLowerCase())&&!(r.q_loc||'').toLowerCase().includes(activeLoc.toLowerCase()))return false;
+    // Theme filter
+    if(activeThemes.size){
+      const rt=r._themes;
+      if(themeMode==='any'){if(!rt.some(t=>activeThemes.has(t)))return false;}
+      else{if(![...activeThemes].every(t=>rt.includes(t)))return false;}
+    }
+    // Length filter
+    if(lenF){const al=r._alen;if(lenF==='short'&&al>=300)return false;if(lenF==='medium'&&(al<300||al>=1000))return false;if(lenF==='long'&&(al<1000||al>=2000))return false;if(lenF==='very_long'&&al<2000)return false;}
+    // Entity filters
+    if(hasLoc&&(!r.a_loc||r.a_loc==='-'))return false;
+    if(hasPer&&(!r.a_per||r.a_per==='-'))return false;
+    if(hasOrg&&(!r.a_org||r.a_org==='-'))return false;
+    if(hasMedia&&(!r.who_asked||r.who_asked==='-'))return false;
+    if(q){const qt=(r.question||'').toLowerCase(),at=(r.answer||'').toLowerCase();if(sc==='q'&&!qt.includes(q))return false;if(sc==='a'&&!at.includes(q))return false;if(sc==='both'&&!qt.includes(q)&&!at.includes(q))return false;}
     return true;
   });
-
   FIL.sort((a,b)=>{let av=a[sCol],bv=b[sCol];if(['id','q_sentiment','a_sentiment'].includes(sCol)){av=parseFloat(av)||0;bv=parseFloat(bv)||0;}if(av<bv)return-sDir;if(av>bv)return sDir;return 0;});
   page=1;
   $('filteredCount').textContent=FIL.length.toLocaleString();
-  updateAF(q,yF,yT,sps,med,aMin,aMax,qMin,qMax);
+  updateAF(q,yF,yT,sps,med,aMin,aMax,qMin,qMax,lenF);
   updateStats();
   render();
 }
 
-function updateAF(q,yF,yT,sps,med,aMin,aMax,qMin,qMax){
+function updateAF(q,yF,yT,sps,med,aMin,aMax,qMin,qMax,lenF){
   const chips=[];
   if(q)chips.push({l:`"${q}"`,c:()=>{$('sInput').value='';af();}});
   if(yF>2002||yT<2025)chips.push({l:`${yF}–${yT}`,c:()=>{['yFrom','yTo','yfS','ytS'].forEach((id,i)=>{$(id).value=[2002,2025,2002,2025][i];});['yfV','ytV'].forEach((id,i)=>{$(id).textContent=[2002,2025][i];});af();}});
   sps.forEach(s=>chips.push({l:s,c:()=>{const el=document.querySelector(`#spList input[value="${s}"]`);if(el)el.checked=false;af();}}));
   med.forEach(m=>chips.push({l:m,c:()=>{const el=document.querySelector(`#mList input[value="${m}"]`);if(el)el.checked=false;af();}}));
   if(activeLoc)chips.push({l:`📍 ${activeLoc}`,c:()=>{activeLoc=null;document.querySelectorAll('.qf').forEach(c=>c.classList.remove('on'));af();}});
+  [...activeThemes].forEach(t=>chips.push({l:`🏷 ${THEMES[t].label}`,c:()=>{activeThemes.delete(t);document.querySelector(`.th-chip[data-theme="${t}"]`)?.classList.remove('on');af();}}));
   if(aMin>0||aMax<5)chips.push({l:`A Sent ${aMin.toFixed(1)}–${aMax.toFixed(1)}`,c:()=>{$('aMin').value=0;$('aMax').value=5;$('aMV').textContent='0.0';$('aMxV').textContent='5.0';af();}});
   if(qMin>0||qMax<5)chips.push({l:`Q Sent ${qMin.toFixed(1)}–${qMax.toFixed(1)}`,c:()=>{$('qMin').value=0;$('qMax').value=5;$('qMV').textContent='0.0';$('qMxV').textContent='5.0';af();}});
+  if(lenF)chips.push({l:`Length: ${lenF}`,c:()=>{$('lenSel').value='';af();}});
   const bar=$('afBar');
-  if(chips.length){
-    bar.classList.add('on');
-    $('afChips').innerHTML=chips.map((ch,i)=>`<span class="af-chip">${esc(ch.l)}<button onclick="clrChip(${i})">×</button></span>`).join('');
-    window._chips=chips.map(c=>c.c);
-  }else bar.classList.remove('on');
+  if(chips.length){bar.classList.add('on');$('afChips').innerHTML=chips.map((ch,i)=>`<span class="af-chip">${esc(ch.l)}<button onclick="clrChip(${i})">×</button></span>`).join('');window._chips=chips.map(c=>c.c);}
+  else bar.classList.remove('on');
 }
 function clrChip(i){window._chips[i]();}
 
 function updateStats(){
   $('stN').textContent=FIL.length.toLocaleString();
-  if(!FIL.length){$('stQ').textContent='—';$('stA').textContent='—';$('stR').textContent='—';return;}
+  if(!FIL.length){$('stQ').textContent='—';$('stA').textContent='—';$('stR').textContent='—';$('stTh').textContent='None';return;}
   const qv=FIL.map(r=>parseFloat(r.q_sentiment)).filter(v=>!isNaN(v));
   const av=FIL.map(r=>parseFloat(r.a_sentiment)).filter(v=>!isNaN(v));
   $('stQ').textContent=qv.length?(qv.reduce((a,b)=>a+b,0)/qv.length).toFixed(2):'—';
   $('stA').textContent=av.length?(av.reduce((a,b)=>a+b,0)/av.length).toFixed(2):'—';
   const ds=FIL.map(r=>r.date).filter(Boolean).sort();
   if(ds.length)$('stR').textContent=`${ds[0].slice(0,10)} → ${ds[ds.length-1].slice(0,10)}`;
+  $('stTh').textContent=activeThemes.size?[...activeThemes].map(t=>THEMES[t].label).join(', '):'None';
 }
 
 const SC=v=>{const n=parseFloat(v);if(isNaN(n))return['#BFB8AC','rgba(191,184,172,.12)'];if(n<1.5)return['#C41E3A','rgba(196,30,58,.1)'];if(n<2.3)return['#E07B3A','rgba(224,123,58,.1)'];if(n<3.2)return['#B5960A','rgba(181,150,10,.1)'];if(n<4.0)return['#4C8F3A','rgba(76,143,58,.1)'];return['#2E7D32','rgba(46,125,50,.1)'];};
 const sdesc=v=>{const n=parseFloat(v);if(isNaN(n))return'No data';if(n<1.5)return'Very negative';if(n<2.5)return'Negative';if(n<3.0)return'Slightly negative';if(n<3.5)return'Neutral';if(n<4.2)return'Positive';return'Very positive';};
-
-function hi(text,q){if(!q||!text)return esc(text||'—');const e=esc(text);const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');return e.replace(re,m=>`<mark>${m}</mark>`);}
-
+function hi(text,q){if(!q||!text)return esc(text||'—');return esc(text).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m=>`<mark>${m}</mark>`);}
 function schip(val){const v=parseFloat(val);if(isNaN(v))return`<span class="sc" style="background:rgba(191,184,172,.12);color:#BFB8AC">—</span>`;const[c,b]=SC(v);return`<span class="sc" style="background:${b};color:${c}">${v.toFixed(2)}</span>`;}
+function themeBadges(themes){return themes.slice(0,3).map(t=>`<span class="th-badge" style="background:${THEME_COLORS[t]}22;color:${THEME_COLORS[t]}">${THEMES[t].label}</span>`).join('');}
 
 function render(){
   const q=$('sInput').value.trim().toLowerCase();
@@ -556,7 +634,7 @@ function render(){
         <td class="cd">${(r.date||'').slice(0,10)||'—'}</td>
         <td class="cs"><span class="sp-p">${esc(r.spokesperson)}</span></td>
         <td class="cw">${r.who_asked&&r.who_asked!=='-'?esc(r.who_asked):'<span style="color:var(--smoke)">—</span>'}</td>
-        <td class="cq"><div class="clamp">${hi(trunc(r.question),q)}</div></td>
+        <td class="cq"><div class="clamp">${hi(trunc(r.question),q)}</div>${r._themes.length?`<div class="th-badges">${themeBadges(r._themes)}</div>`:''}</td>
         <td class="ca"><div class="clamp">${hi(trunc(r.answer),q)}</div></td>
         <td class="cse">${schip(r.q_sentiment)}</td>
         <td class="cse">${schip(r.a_sentiment)}</td>
@@ -572,11 +650,11 @@ function render(){
         const as=parseFloat(r.a_sentiment),qs=parseFloat(r.q_sentiment);
         return`<div class="ec" onclick="openM(${s+i})">
           <div class="ec-h">
-            <span class="ec-id">#${r.id||'—'}</span>
-            <span class="ec-dt">${(r.date||'').slice(0,10)||'—'}</span>
+            <span class="ec-id">#${r.id||'—'}</span><span class="ec-dt">${(r.date||'').slice(0,10)||'—'}</span>
             <span class="ec-sp">${esc(r.spokesperson)}</span>
             ${r.who_asked&&r.who_asked!=='-'?`<span class="ec-who">${esc(r.who_asked)}</span>`:''}
           </div>
+          ${r._themes.length?`<div style="display:flex;flex-wrap:wrap;gap:3px">${themeBadges(r._themes)}</div>`:''}
           <div><div class="ql">Question</div><div class="qt">${hi(trunc(r.question,280),q)}</div></div>
           <div><div class="al">Answer</div><div class="at">${hi(trunc(r.answer,220),q)}</div></div>
           <div class="ec-f">
@@ -596,12 +674,9 @@ function render(){
 }
 
 function renderPG(){
-  const tot=Math.ceil(FIL.length/pp)||1;
-  if(tot<=1){$('pBtns').innerHTML='';return;}
+  const tot=Math.ceil(FIL.length/pp)||1;if(tot<=1){$('pBtns').innerHTML='';return;}
   let h=`<button class="pb" onclick="gp(${page-1})" ${page===1?'disabled':''}>←</button>`;
-  const r=[];
-  if(tot<=7){for(let i=1;i<=tot;i++)r.push(i);}
-  else{r.push(1);if(page>3)r.push('…');for(let i=Math.max(2,page-1);i<=Math.min(tot-1,page+1);i++)r.push(i);if(page<tot-2)r.push('…');r.push(tot);}
+  const r=[];if(tot<=7){for(let i=1;i<=tot;i++)r.push(i);}else{r.push(1);if(page>3)r.push('…');for(let i=Math.max(2,page-1);i<=Math.min(tot-1,page+1);i++)r.push(i);if(page<tot-2)r.push('…');r.push(tot);}
   r.forEach(p=>{if(p==='…')h+=`<button class="pb" disabled>…</button>`;else h+=`<button class="pb${p===page?' on':''}" onclick="gp(${p})">${p}</button>`;});
   h+=`<button class="pb" onclick="gp(${page+1})" ${page===tot?'disabled':''}>→</button>`;
   $('pBtns').innerHTML=h;
@@ -613,13 +688,14 @@ function setView(v){view=v;$('vTable').classList.toggle('on',v==='table');$('vCa
 function openM(idx){
   mIdx=idx;const r=FIL[idx];if(!r)return;
   const qs=parseFloat(r.q_sentiment),as=parseFloat(r.a_sentiment);
-  const[qc,qb]=SC(r.q_sentiment),[ac,ab]=SC(r.a_sentiment);
+  const[qc]=SC(r.q_sentiment),[ac]=SC(r.a_sentiment);
   function etags(str,cls){if(!str||str==='-')return'';return str.split(';').map(s=>s.trim()).filter(s=>s&&s!=='-').map(s=>`<span class="et ${cls}">${esc(s)}</span>`).join('');}
   $('mMeta').innerHTML=`
-    <span class="mtag" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);font-family:'IBM Plex Mono',monospace;font-size:10px">ID #${r.id||'—'}</span>
-    <span class="mtag" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);font-family:'IBM Plex Mono',monospace;font-size:10px">${(r.date||'').slice(0,10)||'—'}</span>
+    <span class="mtag" style="background:rgba(0,0,0,.07);color:var(--sub);font-family:'IBM Plex Mono',monospace;font-size:10px">ID #${r.id||'—'}</span>
+    <span class="mtag" style="background:rgba(0,0,0,.07);color:var(--sub);font-family:'IBM Plex Mono',monospace;font-size:10px">${(r.date||'').slice(0,10)||'—'}</span>
     <span class="mtag" style="background:var(--red);color:white;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px">${esc(r.spokesperson)}</span>
-    ${r.who_asked&&r.who_asked!=='-'?`<span class="mtag" style="background:var(--mist);color:var(--sub);font-family:'IBM Plex Mono',monospace;font-size:10px">${esc(r.who_asked)}</span>`:''}`;
+    ${r.who_asked&&r.who_asked!=='-'?`<span class="mtag" style="background:var(--mist);color:var(--sub);font-family:'IBM Plex Mono',monospace;font-size:10px">${esc(r.who_asked)}</span>`:''}
+    ${r._themes.map(t=>`<span class="mtag" style="background:${THEME_COLORS[t]}22;color:${THEME_COLORS[t]};font-family:'IBM Plex Mono',monospace;font-size:10px">${THEMES[t].label}</span>`).join('')}`;
   $('mScroll').innerHTML=`
     <div class="msec"><h4 style="color:var(--red)">Question</h4><p>${esc(r.question||'').replace(/\n/g,'<br>')}</p>
       <div class="ments">${etags(r.q_loc,'eloc')}${etags(r.q_per,'eper')}${etags(r.q_org,'eorg')}</div></div>
@@ -629,10 +705,9 @@ function openM(idx){
       <div class="msb"><div class="msbl">Question Sentiment</div><div class="msbv" style="color:${qc}">${isNaN(qs)?'—':qs.toFixed(3)}</div><div class="msbd">${sdesc(r.q_sentiment)}</div></div>
       <div class="msb"><div class="msbl">Answer Sentiment</div><div class="msbv" style="color:${ac}">${isNaN(as)?'—':as.toFixed(3)}</div><div class="msbd">${sdesc(r.a_sentiment)}</div></div>
     </div>
-    ${r.link&&r.link!=='-'?`<div class="msec"><h4>Source Link</h4><a href="${esc(r.link)}" target="_blank" class="mlink">${esc(r.link)}</a></div>`:''}`;
+    ${r.link&&r.link!=='-'?`<div class="msec"><h4>Source</h4><a href="${esc(r.link)}" target="_blank" class="mlink">${esc(r.link)}</a></div>`:''}`;
   $('mPos').textContent=`${idx+1} / ${FIL.length.toLocaleString()}`;
-  $('mPrev').disabled=idx<=0;
-  $('mNext').disabled=idx>=FIL.length-1;
+  $('mPrev').disabled=idx<=0;$('mNext').disabled=idx>=FIL.length-1;
   $('mov').classList.add('open');document.body.style.overflow='hidden';
 }
 function mNav(d){const n=mIdx+d;if(n>=0&&n<FIL.length)openM(n);}
@@ -652,7 +727,10 @@ function resetAll(){
   document.querySelectorAll('#spList input,#mList input').forEach(i=>i.checked=false);
   $('aMin').value=0;$('aMax').value=5;$('aMV').textContent='0.0';$('aMxV').textContent='5.0';
   $('qMin').value=0;$('qMax').value=5;$('qMV').textContent='0.0';$('qMxV').textContent='5.0';
+  $('lenSel').value='';
+  ['hasLoc','hasPer','hasOrg','hasMedia'].forEach(id=>{$(id).checked=false;});
   activeLoc=null;document.querySelectorAll('.qf').forEach(c=>c.classList.remove('on'));
+  activeThemes.clear();document.querySelectorAll('.th-chip').forEach(c=>c.classList.remove('on'));
   af();
 }
 </script>
