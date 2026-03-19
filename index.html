@@ -254,6 +254,74 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 .cache-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.06em;padding:3px 8px;border-radius:2px;margin-left:8px}
 .cache-hit{background:rgba(46,125,50,.15);color:#2E7D32}
 .cache-miss{background:rgba(212,168,67,.15);color:#8a6a00}
+/* ── DARK MODE ────────────────────────────────────────── */
+body.dark{--paper:#111008;--mist:#1e1c18;--smoke:#3a3530;--card:#181510;--text:#E8E1D6;--sub:#BFB8AC}
+body.dark #topbar{background:#0a0805;border-bottom-color:#8a1428}
+body.dark #creditbar{background:#080600}
+body.dark #stats{background:#0a0805}
+body.dark table thead th{background:var(--paper)}
+body.dark .fg input,body.dark .fg select,body.dark .s-wrap input,body.dark .tb-sel{background:var(--card);color:var(--text);border-color:var(--mist)}
+body.dark .era-item,body.dark .mo-item,body.dark .qf,body.dark .th-chip,body.dark .sq-btn,body.dark .rr-chip{background:var(--card)}
+body.dark .exp-btn,body.dark .bm-only-btn{background:transparent;border-color:var(--mist);color:var(--sub)}
+body.dark #pgbar,body.dark .pb{background:var(--card);color:var(--sub);border-color:var(--mist)}
+body.dark .pb:hover:not(:disabled){background:var(--mist)}
+body.dark mark{background:rgba(212,168,67,.3);color:#f0e8d6}
+body.dark .meth-text,body.dark .cite-pre{background:#111;color:var(--text)}
+#darkToggle{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);padding:7px 10px;border-radius:2px;cursor:pointer;font-size:14px;line-height:1;transition:all .2s}
+#darkToggle:hover{border-color:rgba(255,255,255,.5);color:white}
+/* ── BOOKMARKS ────────────────────────────────────────── */
+.bk-btn{background:none;border:none;cursor:pointer;font-size:13px;color:var(--smoke);transition:all .2s;padding:2px 4px;line-height:1;opacity:.4}
+.bk-btn:hover,.bk-btn.on{opacity:1;color:var(--gold)}
+.bm-only-btn{padding:7px 10px;background:transparent;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);cursor:pointer;transition:all .15s;white-space:nowrap;letter-spacing:.05em;text-transform:uppercase}
+.bm-only-btn:hover{border-color:var(--gold);color:var(--gold)}
+.bm-only-btn.on{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+/* ── PRESETS ──────────────────────────────────────────── */
+.preset-wrap{padding:7px 16px 8px;border-bottom:2px solid var(--mist);flex-shrink:0;background:rgba(212,168,67,.03)}
+.preset-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--smoke);margin-bottom:4px;display:block}
+.preset-row{display:flex;gap:5px;margin-bottom:5px;align-items:center}
+.pr-save{padding:4px 10px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:9px;cursor:pointer;border:1px solid rgba(212,168,67,.5);background:rgba(212,168,67,.08);color:#8a6a00;transition:all .15s;white-space:nowrap}
+.pr-save:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.pr-clr{padding:4px 8px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:9px;cursor:pointer;border:1px solid var(--mist);background:transparent;color:var(--smoke);transition:all .15s;margin-left:auto}
+.pr-clr:hover{color:var(--red);border-color:var(--red)}
+.preset-tags{display:flex;flex-wrap:wrap;gap:3px;min-height:8px}
+.preset-tag{display:inline-flex;align-items:center;gap:3px;padding:2px 5px 2px 8px;border-radius:2px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.3);font-family:'IBM Plex Mono',monospace;font-size:9px;color:#7a5e00;cursor:pointer;max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .15s}
+body.dark .preset-tag{color:var(--gold)}
+.preset-tag:hover{background:rgba(212,168,67,.2)}
+.preset-tag .px{background:none;border:none;color:inherit;cursor:pointer;padding:0 0 0 2px;font-size:12px;line-height:1;opacity:.55;flex-shrink:0}
+.preset-tag .px:hover{opacity:1}
+/* ── EXTENDED STATS BAR ───────────────────────────────── */
+#statsExt{background:rgba(0,0,0,.2);padding:4px 16px;display:none;flex-wrap:wrap;gap:14px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.05)}
+#statsExt.on{display:flex}
+.ste{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:4px}
+.ste strong{color:rgba(255,255,255,.65);font-size:10px}
+#statsToggle{background:none;border:none;color:rgba(255,255,255,.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:9px;padding:0 6px;transition:color .15s;margin-left:auto;flex-shrink:0}
+#statsToggle:hover{color:rgba(255,255,255,.6)}
+/* ── TIMELINE SCRUBBER ───────────────────────────────── */
+#scrubber{background:var(--paper);border-bottom:1px solid var(--mist);padding:3px 12px 3px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;min-height:42px}
+#scrubberCanvas{cursor:crosshair;flex:1;display:block}
+.scr-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);white-space:nowrap;letter-spacing:.08em}
+/* ── METHODOLOGY MODAL ────────────────────────────────── */
+#methMov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.75);z-index:600;backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px}
+#methMov.open{display:flex}
+.meth-box{background:var(--card);border-radius:8px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.35)}
+.meth-hd{padding:20px 24px 14px;border-bottom:1px solid var(--mist);display:flex;align-items:center;justify-content:space-between}
+.meth-hd h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.meth-bd{padding:16px 24px 24px;display:flex;flex-direction:column;gap:10px}
+.meth-text{font-size:12px;line-height:1.85;color:var(--text);background:var(--paper);border:1px solid var(--mist);border-radius:4px;padding:14px 16px;white-space:pre-wrap;font-family:'IBM Plex Sans',sans-serif}
+.meth-acts{display:flex;gap:8px;justify-content:flex-end}
+.meth-copybtn{padding:7px 16px;background:var(--red);color:white;border:none;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.meth-copybtn:hover{background:#8a1428}
+/* ── CITATION MODAL ───────────────────────────────────── */
+#citeMov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.75);z-index:601;backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px}
+#citeMov.open{display:flex}
+.cite-box{background:var(--card);border-radius:8px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.35)}
+.cite-hd{padding:20px 24px 14px;border-bottom:1px solid var(--mist);display:flex;align-items:center;justify-content:space-between}
+.cite-hd h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.cite-bd{padding:14px 24px 22px;display:flex;flex-direction:column;gap:3px}
+.cite-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--smoke);margin-top:10px;margin-bottom:3px}
+.cite-pre{background:var(--paper);border:1px solid var(--mist);border-radius:3px;padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-all}
+.cite-copybtn{padding:3px 10px;background:var(--red);color:white;border:none;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-top:3px;float:right;transition:background .2s}
+.cite-copybtn:hover{background:#8a1428}
 </style>
 </head>
 <body>
@@ -266,9 +334,11 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
     <span class="tb-count"><span id="filteredCount">…</span> / 35,346 entries</span>
     <div class="dv"></div>
     <a href="analytics.html" class="tb-btn tb-an">📊 Analytics →</a>
+    <button class="tb-btn tb-an" onclick="openMethModal()" title="Generate methods paragraph for current filters">📝 Methods Note</button>
     <button class="tb-btn tb-o" onclick="exportCSV()">↓ Export Filtered</button>
     <button class="tb-btn tb-o" onclick="copyLink()" title="Copy shareable URL for current filter state">🔗 Copy Link</button>
     <a href="data.csv" download class="tb-btn tb-g">↓ Full Dataset</a>
+    <button id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
   </div>
 </div>
 <!-- Copy link notification -->
@@ -320,6 +390,14 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
         <button id="resetAllBtn" onclick="resetAll()">Clear All</button>
         <button id="toggleSB" onclick="toggleSidebar()" title="Hide filters panel">◀</button>
       </div>
+    </div>
+    <div class="preset-wrap">
+      <span class="preset-lbl">Saved Presets</span>
+      <div class="preset-row">
+        <button class="pr-save" onclick="savePreset()">💾 Save Current Filters</button>
+        <button class="pr-clr" onclick="clearAllPresets()">Clear All</button>
+      </div>
+      <div class="preset-tags" id="presetTags"></div>
     </div>
     <div class="sb-scroll">
 
@@ -590,6 +668,7 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
         <button class="vbtn" id="btnC" onclick="setView('cards')" title="Cards">⊞</button>
       </div>
       <button class="exp-btn" onclick="exportCSV()">↓ Export</button>
+      <button class="bm-only-btn" id="bmOnlyBtn" onclick="toggleBmOnly()" title="Show only bookmarked entries">⭐ Bookmarked</button>
     </div>
     <div id="stats">
       <div class="st"><span class="st-l">Results</span><span class="st-v" id="stN" style="color:white">—</span></div>
@@ -598,6 +677,21 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
       <div class="st"><span class="st-l">Date Range</span><span class="st-v" id="stR" style="color:rgba(255,255,255,.45);font-size:10px">—</span></div>
       <div class="st"><span class="st-l">Active Theme</span><span class="st-v" id="stTh" style="color:rgba(255,255,255,.5);font-size:10px">None</span></div>
       <span class="st-hint">/ = search · ESC = close · ← → = paginate</span>
+      <button id="statsToggle" onclick="toggleStatsExt()" title="Show extended statistics">▾ more</button>
+    </div>
+    <div id="statsExt">
+      <span class="ste">SD (Q): <strong id="stQSD">—</strong></span>
+      <span class="ste">SD (A): <strong id="stASD">—</strong></span>
+      <span class="ste">Median Q: <strong id="stQMd">—</strong></span>
+      <span class="ste">Median A: <strong id="stAMd">—</strong></span>
+      <span class="ste">Q–A Gap: <strong id="stGap">—</strong></span>
+      <span class="ste">⭐ Bookmarked: <strong id="stBm">0</strong></span>
+      <span class="ste">Top SP: <strong id="stSP">—</strong></span>
+    </div>
+    <div id="scrubber">
+      <span class="scr-lbl">Timeline</span>
+      <canvas id="scrubberCanvas" height="36" title="Drag to zoom into a year range · Double-click to reset"></canvas>
+      <span class="scr-lbl" id="scrLbl" style="min-width:72px;text-align:right">2002–2025</span>
     </div>
     <div id="results">
       <div class="vt on" id="vTable">
@@ -611,6 +705,7 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
             <th>Answer</th>
             <th data-col="q_sentiment">Q Sent.</th>
             <th data-col="a_sentiment">A Sent.</th>
+            <th style="width:32px;text-align:center" title="Bookmark">⭐</th>
           </tr></thead>
           <tbody id="tBody"></tbody>
         </table>
@@ -644,6 +739,8 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
           <button class="mnbtn" id="mPrev" onclick="mNav(-1)">← Prev</button>
           <button class="mnbtn" id="mNext" onclick="mNav(1)">Next →</button>
           <span id="mPos" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--smoke);padding:0 6px"></span>
+          <button id="mBkBtn" class="mnbtn" onclick="mToggleBk()" style="color:var(--gold);border-color:rgba(212,168,67,.35)">⭐ Bookmark</button>
+          <button class="mnbtn" onclick="openCiteModal(mIdx)" style="font-size:9px;letter-spacing:.03em">📋 Cite</button>
         </div>
         <button class="mclose" onclick="closeM()">×</button>
       </div>
@@ -1322,6 +1419,320 @@ function resetAll(){
   if($('perSearch'))$('perSearch').value='';
   af();
 }
+</script>
+<!-- ── CITATION MODAL ─────────────────────────────────────── -->
+<div id="citeMov">
+  <div class="cite-box">
+    <div class="cite-hd">
+      <h3>📋 Cite This Entry</h3>
+      <button class="mclose" onclick="$('citeMov').classList.remove('open')">×</button>
+    </div>
+    <div class="cite-bd">
+      <div class="cite-lbl">Chicago</div>
+      <div class="cite-pre" id="citeChicago"></div>
+      <button class="cite-copybtn" onclick="copyCite('citeChicago')">Copy</button>
+      <div class="cite-lbl">APA 7th</div>
+      <div class="cite-pre" id="citeAPA"></div>
+      <button class="cite-copybtn" onclick="copyCite('citeAPA')">Copy</button>
+      <div class="cite-lbl">BibTeX</div>
+      <div class="cite-pre" id="citeBibtex"></div>
+      <button class="cite-copybtn" onclick="copyCite('citeBibtex')">Copy</button>
+      <div class="cite-lbl">Direct URL</div>
+      <div class="cite-pre" id="citeURL" style="color:var(--red)"></div>
+      <button class="cite-copybtn" onclick="copyCite('citeURL')">Copy</button>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-top:14px;padding-top:10px;border-top:1px solid var(--mist);line-height:1.6">
+        Dataset: Mochtak, M. &amp; Turcsanyi, R.Q. (2021). Harvard Dataverse v6. doi:10.7910/DVN/BAKGET<br>
+        Visualisation: Kunal Kumar, PhD Candidate, Centre for East Asian Studies, SIS, JNU New Delhi.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── METHODOLOGY MODAL ──────────────────────────────────── -->
+<div id="methMov">
+  <div class="meth-box">
+    <div class="meth-hd">
+      <h3>📝 Methods Paragraph Generator</h3>
+      <button class="mclose" onclick="closeMeth()">×</button>
+    </div>
+    <div class="meth-bd">
+      <div style="font-size:12px;color:var(--sub);line-height:1.6">This paragraph describes your current filter selection in academic prose, ready to paste into a methods section or footnote.</div>
+      <div class="meth-text" id="methText"></div>
+      <div class="meth-acts">
+        <button class="meth-copybtn" onclick="copyMeth()">📋 Copy Paragraph</button>
+        <button class="meth-copybtn" style="background:var(--sub)" onclick="closeMeth()">Close</button>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);line-height:1.5">Always verify entry counts match your final analysis. Cite dataset as: Mochtak &amp; Turcsanyi (2021), doi:10.7910/DVN/BAKGET</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+// NEW FEATURES — appended to original script, declared once only
+// ════════════════════════════════════════════════════════════════
+
+// ── DARK MODE ──────────────────────────────────────────────────
+function toggleDark(){
+  const on=document.body.classList.toggle('dark');
+  $('darkToggle').textContent=on?'☀️':'🌙';
+  try{localStorage.setItem('cmfa_dark',on?'1':'0');}catch{}
+}
+(function initDark(){
+  try{if(localStorage.getItem('cmfa_dark')==='1'){document.body.classList.add('dark');const btn=$('darkToggle');if(btn)btn.textContent='☀️';}}catch{}
+})();
+
+// ── BOOKMARKS ──────────────────────────────────────────────────
+const BM=new Set();
+let bmOnly=false;
+(function loadBM(){try{const s=localStorage.getItem('cmfa_bm');if(s)JSON.parse(s).forEach(id=>BM.add(id));}catch{}})();
+function saveBM(){try{localStorage.setItem('cmfa_bm',JSON.stringify([...BM]));}catch{}}
+function toggleBm(id){
+  if(BM.has(id)){BM.delete(id);}else{BM.add(id);}
+  saveBM();
+  document.querySelectorAll(`.bk-btn[data-bid="${id}"]`).forEach(b=>{
+    b.classList.toggle('on',BM.has(id));
+    b.textContent=BM.has(id)?'★':'☆';
+  });
+  const s=$('stBm');if(s)s.textContent=BM.size;
+}
+function mToggleBk(){
+  if(mIdx<0||!FIL[mIdx])return;
+  const id=FIL[mIdx].id;
+  toggleBm(id);
+  const btn=$('mBkBtn');if(btn)btn.textContent=BM.has(id)?'★ Bookmarked':'⭐ Bookmark';
+}
+function toggleBmOnly(){
+  bmOnly=!bmOnly;
+  const btn=$('bmOnlyBtn');
+  if(btn){btn.classList.toggle('on',bmOnly);btn.textContent=bmOnly?'★ Showing Bookmarks':'⭐ Bookmarked';}
+  af();
+}
+function exportBookmarks(){
+  const rows=ALL.filter(r=>BM.has(r.id));
+  if(!rows.length){alert('No bookmarked entries.');return;}
+  const cols=['id','spokesperson','date','year','question','answer','who_asked','q_sentiment','a_sentiment'];
+  const csv=[cols.join(','),...rows.map(r=>cols.map(c=>{const v=String(r[c]||'').replace(/"/g,'""');return/[,"\n]/.test(v)?`"${v}"`:v;}).join(','))];
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv.join('\n')],{type:'text/csv'}));a.download=`cmfa_bookmarks_${Date.now()}.csv`;a.click();
+}
+
+// ── FILTER PRESETS ──────────────────────────────────────────────
+function getPS(){try{return JSON.parse(localStorage.getItem('cmfa_presets')||'{}');}catch{return {};}}
+function savePS(p){try{localStorage.setItem('cmfa_presets',JSON.stringify(p));}catch{}}
+function renderPresets(){
+  const p=getPS(),keys=Object.keys(p),wrap=$('presetTags');if(!wrap)return;
+  if(!keys.length){wrap.innerHTML='<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--smoke);font-style:italic">No saved presets yet</span>';return;}
+  wrap.innerHTML=keys.map(k=>`<span class="preset-tag" title="${k}" onclick="loadPreset(this)" data-key="${k.replace(/"/g,'&quot;')}"><span style="overflow:hidden;text-overflow:ellipsis">${esc(k)}</span><button class="px" onclick="event.stopPropagation();deletePreset(this)" data-key="${k.replace(/"/g,'&quot;')}">×</button></span>`).join('');
+}
+function savePreset(){
+  const name=prompt('Name this preset (e.g. "BBC + Wolf Warrior"):');
+  if(!name||!name.trim())return;
+  const p=getPS();p[name.trim()]=location.search;savePS(p);renderPresets();
+}
+function loadPreset(el){
+  const k=el.dataset.key;const p=getPS();if(!p[k])return;
+  history.replaceState(null,'',p[k]||location.pathname);
+  readUrlParams();af();
+}
+function deletePreset(el){
+  const k=el.dataset.key;const p=getPS();delete p[k];savePS(p);renderPresets();
+}
+function clearAllPresets(){
+  if(!confirm('Delete all saved presets?'))return;
+  savePS({});renderPresets();
+}
+
+// ── EXTENDED STATS ───────────────────────────────────────────────
+let statsExtOpen=false;
+function toggleStatsExt(){
+  statsExtOpen=!statsExtOpen;
+  $('statsExt').classList.toggle('on',statsExtOpen);
+  $('statsToggle').textContent=statsExtOpen?'▴ less':'▾ more';
+  if(statsExtOpen)refreshExtStats();
+}
+function arrSD(arr){if(!arr.length)return NaN;const m=arr.reduce((a,b)=>a+b,0)/arr.length;return Math.sqrt(arr.reduce((a,b)=>a+(b-m)**2,0)/arr.length);}
+function arrMd(arr){if(!arr.length)return NaN;const s=[...arr].sort((a,b)=>a-b),m=Math.floor(s.length/2);return s.length%2?s[m]:(s[m-1]+s[m])/2;}
+function refreshExtStats(){
+  const qv=FIL.map(r=>parseFloat(r.q_sentiment)).filter(v=>!isNaN(v));
+  const av=FIL.map(r=>parseFloat(r.a_sentiment)).filter(v=>!isNaN(v));
+  $('stQSD').textContent=qv.length?arrSD(qv).toFixed(3):'—';
+  $('stASD').textContent=av.length?arrSD(av).toFixed(3):'—';
+  $('stQMd').textContent=qv.length?arrMd(qv).toFixed(3):'—';
+  $('stAMd').textContent=av.length?arrMd(av).toFixed(3):'—';
+  const qm=qv.length?qv.reduce((a,b)=>a+b,0)/qv.length:NaN;
+  const am=av.length?av.reduce((a,b)=>a+b,0)/av.length:NaN;
+  $('stGap').textContent=(!isNaN(qm)&&!isNaN(am))?(am-qm).toFixed(3):'—';
+  $('stBm').textContent=BM.size;
+  const spC={};FIL.forEach(r=>{if(r.spokesperson&&r.spokesperson!=='-'&&r.spokesperson!=='missing')spC[r.spokesperson]=(spC[r.spokesperson]||0)+1;});
+  const top=Object.entries(spC).sort((a,b)=>b[1]-a[1])[0];
+  $('stSP').textContent=top?`${top[0]} (${top[1]})`:'—';
+}
+
+// ── TIMELINE SCRUBBER ────────────────────────────────────────────
+let scrDrag=false,scrY1=null,scrY2=null;
+function getScrubberYearMap(){
+  const m={};ALL.forEach(r=>{const y=parseInt(r.year);if(y>=2002&&y<=2025)m[y]=(m[y]||0)+1;});return m;
+}
+function drawScrubber(){
+  const cv=$('scrubberCanvas');if(!cv)return;
+  const W=cv.parentElement.offsetWidth-120;if(W<60)return;
+  cv.width=W;cv.height=36;
+  const ctx=cv.getContext('2d');
+  const yrs=Array.from({length:24},(_,i)=>2002+i);
+  const map=getScrubberYearMap();
+  const maxV=Math.max(...yrs.map(y=>map[y]||0))||1;
+  const bw=W/yrs.length;
+  const yF=parseInt($('yFrom').value)||2002,yT=parseInt($('yTo').value)||2025;
+  ctx.clearRect(0,0,W,36);
+  yrs.forEach((y,i)=>{
+    const h=Math.max(2,((map[y]||0)/maxV)*28);
+    const x=i*bw+1;const bww=bw-2;
+    const inRange=y>=yF&&y<=yT;
+    ctx.fillStyle=inRange?'rgba(196,30,58,.72)':'rgba(191,184,172,.3)';
+    ctx.fillRect(x,36-h,bww,h);
+    if(bw>20&&(y-2002)%4===0){
+      ctx.fillStyle='rgba(107,98,89,.6)';ctx.font='7px IBM Plex Mono,monospace';ctx.textAlign='center';
+      ctx.fillText(String(y),x+bww/2,35);
+    }
+  });
+  $('scrLbl').textContent=yF===yT?String(yF):`${yF}–${yT}`;
+}
+(function initScrubber(){
+  const cv=$('scrubberCanvas');if(!cv)return;
+  function xToYear(x){const W=cv.width;return Math.max(2002,Math.min(2025,Math.round(2002+(x/W)*23)));}
+  function applyYears(y1,y2){
+    const yf=Math.min(y1,y2),yt=Math.max(y1,y2);
+    ['yFrom','yfS'].forEach(id=>{$(id).value=yf;});['yTo','ytS'].forEach(id=>{$(id).value=yt;});
+    $('yfV').textContent=yf;$('ytV').textContent=yt;
+  }
+  cv.addEventListener('mousedown',e=>{
+    const x=e.clientX-cv.getBoundingClientRect().left;
+    scrY1=scrY2=xToYear(x);scrDrag=true;
+  });
+  window.addEventListener('mousemove',e=>{
+    if(!scrDrag)return;
+    const x=e.clientX-cv.getBoundingClientRect().left;
+    scrY2=xToYear(x);applyYears(scrY1,scrY2);drawScrubber();
+  });
+  function endDrag(){if(!scrDrag)return;scrDrag=false;af();}
+  window.addEventListener('mouseup',endDrag);
+  cv.addEventListener('dblclick',()=>{
+    ['yFrom','yfS'].forEach(id=>{$(id).value=2002;});['yTo','ytS'].forEach(id=>{$(id).value=2025;});
+    $('yfV').textContent=2002;$('ytV').textContent=2025;af();
+  });
+  new ResizeObserver(()=>requestAnimationFrame(drawScrubber)).observe(cv.parentElement);
+})();
+
+// ── CITATION GENERATOR ───────────────────────────────────────────
+function openCiteModal(idx){
+  const r=FIL[idx];if(!r)return;
+  const date=(r.date||'').slice(0,10)||'n.d.';
+  const yr=date.slice(0,4)||'n.d.';
+  const sp=r.spokesperson||'MFA Spokesperson';
+  const who=r.who_asked&&r.who_asked!=='-'?` [${r.who_asked}]`:'';
+  const qS=(r.question||'').slice(0,90).trim();
+  const doi='doi:10.7910/DVN/BAKGET';
+  const url=`https://jt-git-hey.github.io/cmfa-tracker/?q=${encodeURIComponent(r.id||'')}&sort=id-asc`;
+  $('citeChicago').textContent=`${sp}${who}. "${qS}${qS.length===90?'…':''}". MFA Press Conference, ${date}. Entry ID: ${r.id||'—'}. In: Mochtak, Michal, and Richard Q. Turcsanyi. "Chinese Ministry of Foreign Affairs Press Conferences Corpus (CMFA PressCon)." Harvard Dataverse, 2021. ${doi}.`;
+  $('citeAPA').textContent=`${sp}${who}. (${yr}, ${date}). [Press conference Q&A entry #${r.id||'—'}]. In M. Mochtak & R. Q. Turcsanyi, CMFA PressCon Corpus (v6) [Dataset]. Harvard Dataverse. ${doi}`;
+  $('citeBibtex').textContent=`@misc{cmfa_${r.id||'entry'},\n  author    = {${sp}},\n  title     = {{MFA Press Conference Q\\&A: "${qS.replace(/"/g,'\\"').slice(0,50)}…"}},\n  year      = {${yr}},\n  date      = {${date}},\n  note      = {Entry ID: ${r.id||'—'}. In: Mochtak \\& Turcsanyi (2021), CMFA PressCon v6, Harvard Dataverse, ${doi}}\n}`;
+  $('citeURL').textContent=url;
+  $('citeMov').classList.add('open');
+}
+function copyCite(id){
+  const text=$(id).textContent;
+  navigator.clipboard?.writeText(text).then(()=>showToast('Copied!')).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Copied!');
+  });
+}
+function showToast(msg){const n=$('copyNotif');if(!n)return;n.textContent=msg;n.classList.add('show');setTimeout(()=>n.classList.remove('show'),2200);}
+
+// ── METHODOLOGY NOTE GENERATOR ────────────────────────────────────
+function openMethModal(){
+  const n=FIL.length;
+  const yF=$('yFrom').value,yT=$('yTo').value;
+  const sps=getCB('spList'),med=getCB('mList');
+  const themes=[...activeThemes].map(t=>THEMES[t].label);
+  const rrs=[...activeRR].map(r=>RR[r].label);
+  const q=$('sInput').value.trim();
+  const amin=$('aMin').value,amax=$('aMax').value;
+  const qmin=$('qMin').value,qmax=$('qMax').value;
+  const eraLabels={hu:'Hu Jintao era (2002–2012)',early_xi:'Early Xi Jinping era (2013–2017)',wolf_era:'Wolf Warrior era (2018–2022)',recent:'Post-Pandemic era (2023–2025)'};
+  const moLabels={western:'Western wire/print outlets (Reuters, AFP, Bloomberg, BBC, CNN, NYT)',chinese:'Chinese state media (CCTV, Xinhua, China Daily, Global Times)',asian:'Asian and regional outlets (NHK, Kyodo, Yonhap, PTI, TASS, Al Jazeera)',unattributed:'unattributed entries (pre-March 2020, no outlet recorded)'};
+  let parts=[];
+  parts.push(`This analysis draws on ${n.toLocaleString()} Q&A dyads from the Chinese Ministry of Foreign Affairs Press Conferences Corpus (CMFA PressCon v6; Mochtak & Turcsanyi, 2021; Harvard Dataverse, doi:10.7910/DVN/BAKGET), which contains ${ALL.length.toLocaleString()} press conference exchanges spanning October 2002 to December 2025.`);
+  if(yF!=='2002'||yT!=='2025')parts.push(`The analysis is temporally restricted to the period ${yF}–${yT}.`);
+  if(activeEra&&eraLabels[activeEra])parts.push(`Entries are limited to the ${eraLabels[activeEra]}.`);
+  if(sps.length)parts.push(`Only statements by the following spokesperson(s) are included: ${sps.join(', ')}.`);
+  if(activeMO&&moLabels[activeMO])parts.push(`Media origin is filtered to ${moLabels[activeMO]}.`);
+  if(med.length)parts.push(`Individual outlet filter: ${med.join(', ')}.`);
+  if(themes.length){const mode=document.querySelector('input[name=themeMode]:checked')?.value||'any';parts.push(`Thematic scope is restricted to entries matching the following topic categories (keyword-detected, match mode: ${mode}): ${themes.join(', ')}.`);}
+  if(rrs.length)parts.push(`Rhetorical register filter applied: ${rrs.join(', ')}.`);
+  if(activeLoc)parts.push(`Location filter applied: "${activeLoc}" (searched in named-entity location fields).`);
+  if(activeOrg)parts.push(`Organisation filter: "${activeOrg}".`);
+  if(activePer)parts.push(`Named person filter: "${activePer}".`);
+  if(q)parts.push(`Full-text keyword filter: "${q}" (scope: ${$('sScopeBar').value==='both'?'questions and answers':$('sScopeBar').value==='q'?'questions only':'answers only'}).`);
+  if(parseFloat(qmin)>0||parseFloat(qmax)<5)parts.push(`Question sentiment restricted to ${qmin}–${qmax} (XLM-R-ParlaSent scale, 0–5).`);
+  if(parseFloat(amin)>0||parseFloat(amax)<5)parts.push(`Answer sentiment restricted to ${amin}–${amax} on the same scale.`);
+  parts.push(`Sentiment scores are derived from the XLM-R-ParlaSent model (classla/xlm-r-parlasent; scale: 0 = most negative, 5 = most positive). Named entity recognition (persons, organisations, locations) was performed with Trankit and XLM-RoBERTa-base. Visualisation and corpus interface by Kunal Kumar, PhD Candidate, Centre for East Asian Studies, School of International Studies, Jawaharlal Nehru University, New Delhi.`);
+  $('methText').textContent=parts.join(' ');
+  $('methMov').classList.add('open');
+}
+function closeMeth(){$('methMov').classList.remove('open');}
+function copyMeth(){
+  const text=$('methText').textContent;
+  navigator.clipboard?.writeText(text).then(()=>showToast('Paragraph copied!')).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Paragraph copied!');
+  });
+}
+
+// ── PATCH: updateStats — bookmark count + draw scrubber + ext stats ──
+const _origUpdateStats=updateStats;
+updateStats=function(){
+  _origUpdateStats();
+  const s=$('stBm');if(s)s.textContent=BM.size;
+  if(statsExtOpen)refreshExtStats();
+  drawScrubber();
+};
+
+// ── PATCH: render — inject bookmark buttons into table rows ──────────
+const _origRender=render;
+render=function(){
+  _origRender();
+  if(view==='table'){
+    const s=(page-1)*pp,rows=FIL.slice(s,s+pp);
+    const trs=$('tBody').querySelectorAll('tr');
+    trs.forEach((tr,i)=>{
+      const r=rows[i];if(!r)return;
+      let td=tr.querySelector('.bk-td');
+      if(!td){td=document.createElement('td');td.className='bk-td';td.style.cssText='width:32px;text-align:center;padding:4px';tr.appendChild(td);}
+      td.innerHTML=`<button class="bk-btn${BM.has(r.id)?' on':''}" data-bid="${r.id}" onclick="event.stopPropagation();toggleBm('${r.id}')" title="${BM.has(r.id)?'Remove bookmark':'Bookmark'}">${BM.has(r.id)?'★':'☆'}</button>`;
+    });
+  }
+};
+
+// ── PATCH: af — apply bmOnly filter ────────────────────────────────
+const _origAF=af;
+af=function(){
+  _origAF();
+  if(bmOnly){FIL=FIL.filter(r=>BM.has(r.id));$('filteredCount').textContent=FIL.length.toLocaleString();render();}
+};
+
+// ── PATCH: openM — sync bookmark button state in modal ───────────────
+const _origOpenM=openM;
+openM=function(idx){
+  _origOpenM(idx);
+  const r=FIL[idx];if(!r)return;
+  const btn=$('mBkBtn');if(btn)btn.textContent=BM.has(r.id)?'★ Bookmarked':'⭐ Bookmark';
+};
+
+// ── PATCH: init — call new inits after data loads ────────────────────
+const _origInit=init;
+init=function(){
+  _origInit();
+  renderPresets();
+  drawScrubber();
+};
 </script>
 </body>
 </html>

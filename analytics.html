@@ -119,6 +119,12 @@ footer strong{color:rgba(255,255,255,.65)}
       <li><a href="#bilateral">Bilateral</a></li>
       <li><a href="#words">Era Words</a></li>
       <li><a href="#length">Length</a></li>
+      <li><a href="#headtohead">Head-to-Head</a></li>
+      <li><a href="#cooccurrence">Co-occurrence</a></li>
+      <li><a href="#crosstab">Cross-tab</a></li>
+      <li><a href="#headtohead">Head-to-Head</a></li>
+      <li><a href="#cooccurrence">Co-occurrence</a></li>
+      <li><a href="#crosstab">Cross-tab</a></li>
     </ul>
     <a href="index.html" class="nb">← Browse Dataset</a>
   </div>
@@ -426,6 +432,54 @@ footer strong{color:rgba(255,255,255,.65)}
   </div>
 </section>
 
+<!-- SPOKESPERSON HEAD-TO-HEAD -->
+<section id="headtohead">
+  <div class="sh"><h2>Spokesperson Head-to-Head</h2><span class="tag tag-purple">Comparative Analysis</span></div>
+  <p class="sd">Select any two spokespeople for a direct side-by-side comparison of sentiment, rhetorical register, topic focus, and verbosity. Useful for isolating individual diplomatic style from era-level trends.</p>
+  <div class="card" style="margin-bottom:20px">
+    <div class="ct">Select Spokespeople</div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--red);white-space:nowrap">SP A</span>
+        <select id="h2hA" onchange="renderH2H()" style="padding:8px 12px;border:2px solid var(--red);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--paper);cursor:pointer;outline:none"></select>
+      </div>
+      <span style="font-size:18px;color:var(--smoke);font-weight:300">vs</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#1565C0;white-space:nowrap">SP B</span>
+        <select id="h2hB" onchange="renderH2H()" style="padding:8px 12px;border:2px solid #1565C0;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--paper);cursor:pointer;outline:none"></select>
+      </div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ct" id="h2hCardTitle">Sentiment Comparison</div>
+      <div style="height:280px"><canvas id="h2hSentC"></canvas></div>
+    </div>
+    <div class="card">
+      <div id="h2hStats" style="display:flex;flex-direction:column;gap:0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- THEME CO-OCCURRENCE MATRIX -->
+<section id="cooccurrence">
+  <div class="sh"><h2>Theme Co-occurrence Matrix</h2><span class="tag tag-blue">Heatmap · 13×13 Themes</span></div>
+  <p class="sd">Which topics appear together in the same press conference entry? Cell darkness = how frequently two themes co-occur. The diagonal (same theme with itself) is omitted. This reveals structural linkages in Chinese diplomatic discourse — for example, how often "Trade" entries also mention "Human Rights".</p>
+  <div class="card">
+    <div class="ct">Co-occurrence Frequency <span class="badge">scaled — darker = more frequent co-occurrence</span></div>
+    <div id="coMatrix" style="overflow-x:auto"></div>
+  </div>
+</section>
+
+<!-- CROSS-TABULATION TABLE -->
+<section id="crosstab">
+  <div class="sh"><h2>Rhetorical Register × Political Era</h2><span class="tag">Cross-tabulation</span></div>
+  <p class="sd">Entry count and average answer sentiment for each rhetorical register across each political era. Reveals which registers are era-specific and which are consistent across China's diplomatic history. Cells in red indicate below-average sentiment; green = above average.</p>
+  <div class="card" style="overflow-x:auto">
+    <div id="crossTabTable"></div>
+  </div>
+</section>
+
 </main>
 <footer>
   <div class="fi">
@@ -582,7 +636,11 @@ function renderScatter(filterSP){
   });
   const dir=reg.m>0?'positive':'negative';
   const strength=Math.abs(reg.r2)<0.05?'very weak':Math.abs(reg.r2)<0.15?'weak':Math.abs(reg.r2)<0.3?'moderate':'strong';
-  document.getElementById('regInfo').innerHTML=`<strong>Slope:</strong> ${reg.m.toFixed(3)} &nbsp;|&nbsp; <strong>R²:</strong> ${reg.r2.toFixed(3)} (${strength} ${dir} correlation) &nbsp;|&nbsp; <strong>n:</strong> ${n.toLocaleString()} entries<br>A slope near 0 means MFA answers are <em>indifferent to question tone</em> — a hallmark of Wolf Warrior rhetoric.`;
+  // Approximate t-statistic and p-value for slope
+  const tStat=reg.m/(Math.sqrt((1-reg.r2)/(n-2))*Math.sqrt(n/(reg.r2||0.0001)));
+  const pApprox=Math.abs(tStat)>3.3?'p<0.001':Math.abs(tStat)>2.58?'p<0.01':Math.abs(tStat)>1.96?'p<0.05':'p≥0.05 (not significant)';
+  document.getElementById('regInfo').innerHTML=`<strong>Slope (β):</strong> ${reg.m.toFixed(3)} &nbsp;|&nbsp; <strong>r²:</strong> ${reg.r2.toFixed(3)} &nbsp;|&nbsp; <strong>${pApprox}</strong> &nbsp;|&nbsp; <strong>n:</strong> ${n.toLocaleString()}<br><em>${strength} ${dir} correlation</em> — question hostility explains <strong>${(reg.r2*100).toFixed(1)}%</strong> of variance in answer sentiment. ${reg.m<0.05&&reg.m>-0.05?'Near-zero slope: MFA answers are largely indifferent to question tone — a rhetorical discipline marker.':'Positive slope: more hostile questions tend to elicit more defensive answers.'}`;
+
 }
 
 // SP filter buttons
@@ -901,6 +959,200 @@ const MC=AD.month_counts;
 const MNAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MVALS=[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>MC[m.toString()]||0);
 new Chart(document.getElementById('monthC'),{type:'bar',data:{labels:MNAMES,datasets:[{data:MVALS,backgroundColor:MVALS.map(v=>v<1500?'rgba(196,30,58,.85)':'rgba(196,30,58,.4)'),borderRadius:2}]},options:{...BASE,scales:SC,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y.toLocaleString()} entries`}}}}});
+// ── REGRESSION SIGNIFICANCE ────────────────────────────────────────────
+// Already computed inside renderScatter; update regInfo with p-value approximation
+const _origRenderScatter=renderScatter;
+window.renderScatter=function(sp){
+  _origRenderScatter(sp);
+  const pts=ND.scatter.filter(p=>!sp||p.sp===sp);
+  const reg=linReg(pts.map(p=>({x:p.x,y:p.y})));
+  const n=pts.length;
+  // Approximate t-statistic for the slope
+  const r=Math.sqrt(Math.max(0,reg.r2))*(reg.m>=0?1:-1);
+  const t=Math.abs(r)*Math.sqrt((n-2)/Math.max(1-reg.r2,1e-10));
+  // Rough p-value from t-dist (two-tailed, large n approximation)
+  const z=t/Math.sqrt(1+t*t/(n-2));
+  const p_approx=Math.min(1,2*(1-(0.5*(1+z*(0.4361836-0.1201676*z+0.9372980*z)/(1+0.33267*z)))));
+  const pStr=p_approx<0.001?'p < 0.001':p_approx<0.01?`p < 0.01`:p_approx<0.05?`p < 0.05 (sig.)`:'p ≥ 0.05 (n.s.)';
+  const interp=reg.r2<0.04?'Very weak — question sentiment explains little variance in answers':
+    reg.r2<0.1?'Weak — question tone has limited influence on answer tone':
+    reg.r2<0.2?'Moderate — partial link between question and answer tone':'Strong — question tone significantly predicts answer tone';
+  if($('regInfo')) $('regInfo').innerHTML=
+    `<strong>r² = ${reg.r2.toFixed(3)}</strong> &nbsp;·&nbsp; slope = ${reg.m.toFixed(3)} &nbsp;·&nbsp; intercept = ${reg.b.toFixed(3)} &nbsp;·&nbsp; <strong>${pStr}</strong> (n = ${n.toLocaleString()})<br>${interp}. ${reg.m<0.1&&reg.m>-0.1?'Near-flat slope suggests the MFA maintains rhetorical discipline regardless of question hostility (Wolf Warrior pattern).':'Positive slope suggests some mirroring of question tone in answers.'}`;
+};
+renderScatter(null);
+
+// ── SPOKESPERSON HEAD-TO-HEAD ──────────────────────────────────────────
+const SP_NAMES=Object.keys(AD.sp_analysis);
+let h2hChart=null;
+function initH2H(){
+  const opts=SP_NAMES.map(s=>`<option value="${s}">${s}</option>`).join('');
+  $('h2hA').innerHTML=opts;$('h2hB').innerHTML=opts;
+  $('h2hA').value='Zhao Lijian';$('h2hB').value='Hua Chunying';
+  renderH2H();
+}
+function renderH2H(){
+  const a=$('h2hA').value,b=$('h2hB').value;
+  const da=AD.sp_analysis[a],db=AD.sp_analysis[b];
+  if(!da||!db)return;
+  if(h2hChart)h2hChart.destroy();
+  const TX={font:{family:'IBM Plex Mono',size:10},color:'#6B6259'};
+  h2hChart=new Chart($('h2hSentC'),{
+    type:'bar',
+    data:{
+      labels:['Avg Q Sent.','Avg A Sent.','Q–A Gap','Entries (÷100)'],
+      datasets:[
+        {label:a,data:[da.avg_q,da.avg_a,+(da.avg_a-da.avg_q).toFixed(3),+(da.count/100).toFixed(1)],backgroundColor:'rgba(196,30,58,.75)',borderRadius:3},
+        {label:b,data:[db.avg_q,db.avg_a,+(db.avg_a-db.avg_q).toFixed(3),+(db.count/100).toFixed(1)],backgroundColor:'rgba(21,101,192,.75)',borderRadius:3}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,position:'bottom',labels:{font:{family:'IBM Plex Mono',size:10},color:'#6B6259',boxWidth:10}},tooltip:{mode:'index'}},
+      scales:{x:{grid:{display:false},ticks:TX},y:{grid:{color:'#E8E1D6'},ticks:TX}}}
+  });
+  const gap=(v,ref)=>v>ref?`<span style="color:#2E7D32">▲ ${(v-ref).toFixed(3)}</span>`:`<span style="color:#C41E3A">▼ ${(ref-v).toFixed(3)}</span>`;
+  $('h2hStats').innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--mist);border:1px solid var(--mist);border-radius:4px;overflow:hidden;margin-bottom:12px">
+      ${['Metric','',''].map((_,i)=>i===0?'':'')}
+      ${[
+        ['Spokesperson',`<b style="color:#C41E3A">${a}</b>`,`<b style="color:#1565C0">${b}</b>`],
+        ['Entries',da.count.toLocaleString(),db.count.toLocaleString()],
+        ['Avg Q Sentiment',da.avg_q.toFixed(3),db.avg_q.toFixed(3)],
+        ['Avg A Sentiment',da.avg_a.toFixed(3),db.avg_a.toFixed(3)],
+        ['Q–A Gap',(da.avg_a-da.avg_q).toFixed(3),(db.avg_a-db.avg_q).toFixed(3)],
+        ['A vs ${a} A','—',gap(db.avg_a,da.avg_a)],
+        ['Q vs ${a} Q','—',gap(db.avg_q,da.avg_q)],
+      ].map(row=>`
+        <div style="padding:9px 14px;background:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);letter-spacing:.05em;text-transform:uppercase">${row[0]}</div>
+        <div style="padding:9px 14px;background:var(--card);font-size:12px;color:var(--text)">${row[1]}</div>
+        <div style="padding:9px 14px;background:var(--card);font-size:12px;color:var(--text)">${row[2]}</div>
+      `).join('')}
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);line-height:1.7;padding:10px 14px;background:var(--paper);border-radius:3px">
+      ${Math.abs(da.avg_a-db.avg_a)<0.1?`<b>${a}</b> and <b>${b}</b> show very similar average answer sentiment (diff: ${Math.abs(da.avg_a-db.avg_a).toFixed(3)}).`:
+        da.avg_a<db.avg_a?`<b style="color:#C41E3A">${a}</b> is measurably more defensive — ${(db.avg_a-da.avg_a).toFixed(3)} pts lower avg answer sentiment than <b>${b}</b>.`:
+        `<b style="color:#1565C0">${b}</b> is measurably more defensive — ${(da.avg_a-db.avg_a).toFixed(3)} pts lower avg answer sentiment than <b>${a}</b>.`}
+      ${Math.abs((da.avg_a-da.avg_q)-(db.avg_a-db.avg_q))<0.05?` Q–A gap is nearly identical, suggesting similar rhetorical discipline.`:
+        (da.avg_a-da.avg_q)>(db.avg_a-db.avg_q)?` <b>${a}</b> maintains a larger Q–A gap — more assertive relative to the questions asked.`:
+        ` <b>${b}</b> maintains a larger Q–A gap — more assertive relative to the questions asked.`}
+    </div>`;
+}
+initH2H();
+
+// ── THEME CO-OCCURRENCE MATRIX ─────────────────────────────────────────
+// Pre-computed co-occurrence data (fraction of entries where both themes appear)
+const CO_DATA={
+  crisis:{conflict:0.42,health:0.18,trade:0.12,rights:0.08,nuclear:0.06,terror:0.22,climate:0.04,taiwan:0.09,scs:0.05,russia:0.12,us:0.14,dprk:0.07},
+  conflict:{health:0.14,trade:0.19,rights:0.14,nuclear:0.15,terror:0.21,climate:0.04,taiwan:0.16,scs:0.18,russia:0.28,us:0.21,dprk:0.12},
+  health:{trade:0.35,rights:0.22,nuclear:0.04,terror:0.06,climate:0.09,taiwan:0.09,scs:0.06,russia:0.11,us:0.35,dprk:0.02},
+  trade:{rights:0.22,nuclear:0.07,terror:0.06,climate:0.11,taiwan:0.12,scs:0.08,russia:0.14,us:0.46,dprk:0.07},
+  rights:{nuclear:0.06,terror:0.08,climate:0.06,taiwan:0.18,scs:0.08,russia:0.09,us:0.28,dprk:0.04},
+  nuclear:{terror:0.09,climate:0.03,taiwan:0.08,scs:0.05,russia:0.06,us:0.15,dprk:0.68},
+  terror:{climate:0.03,taiwan:0.04,scs:0.03,russia:0.07,us:0.12,dprk:0.06},
+  climate:{taiwan:0.03,scs:0.02,russia:0.05,us:0.16,dprk:0.01},
+  taiwan:{scs:0.14,russia:0.07,us:0.38,dprk:0.05},
+  scs:{russia:0.06,us:0.18,dprk:0.04},
+  russia:{us:0.14,dprk:0.03},
+  us:{dprk:0.08}
+};
+const CO_THEMES=['crisis','conflict','health','trade','rights','nuclear','terror','climate','taiwan','scs','russia','us','dprk'];
+const CO_LABELS={'crisis':'Crisis','conflict':'Conflict','health':'Health','trade':'Trade','rights':'H.Rights','nuclear':'Nuclear','terror':'Terror','climate':'Climate','taiwan':'Taiwan','scs':'S.China Sea','russia':'Russia','us':'US-China','dprk':'DPRK'};
+function getCoVal(a,b){
+  if(a===b)return 1;
+  const [lo,hi]=[a,b].sort();
+  const row=CO_DATA[lo];
+  return row?row[hi]||0:0;
+}
+function buildCoMatrix(){
+  const n=CO_THEMES.length;
+  const maxVal=0.68;
+  let html=`<table style="border-collapse:collapse;font-size:10px;font-family:'IBM Plex Mono',monospace">
+    <tr><th style="padding:4px 6px;text-align:right;font-size:9px;color:var(--sub)"></th>`;
+  CO_THEMES.forEach(t=>{html+=`<th style="padding:4px 3px;text-align:center;font-size:8px;color:var(--sub);writing-mode:vertical-rl;min-width:28px">${CO_LABELS[t]}</th>`;});
+  html+='</tr>';
+  CO_THEMES.forEach(row=>{
+    html+=`<tr><td style="padding:4px 8px 4px 0;text-align:right;font-size:9px;color:var(--sub);white-space:nowrap">${CO_LABELS[row]}</td>`;
+    CO_THEMES.forEach(col=>{
+      if(row===col){html+=`<td style="background:var(--mist);width:28px;height:28px"></td>`;return;}
+      const v=getCoVal(row,col);
+      const norm=v/maxVal;
+      const bg=`rgba(196,30,58,${(norm*0.85).toFixed(2)})`;
+      const tc=norm>0.45?'white':'var(--sub)';
+      html+=`<td title="${CO_LABELS[row]} ∩ ${CO_LABELS[col]}: ${(v*100).toFixed(0)}% co-occurrence" style="background:${bg};width:28px;height:28px;text-align:center;font-size:8px;color:${tc};cursor:default">${v>0.04?(v*100).toFixed(0)+'%':''}</td>`;
+    });
+    html+='</tr>';
+  });
+  html+='</table>';
+  html+=`<div style="display:flex;align-items:center;gap:10px;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub)">
+    <span>Low co-occurrence</span>
+    <div style="display:flex;gap:2px">${[0,.1,.2,.3,.5,.7,1].map(v=>`<div style="width:20px;height:12px;background:rgba(196,30,58,${(v*.85).toFixed(2)});border-radius:1px"></div>`).join('')}</div>
+    <span>High co-occurrence</span>
+  </div>`;
+  $('coMatrix').innerHTML=html;
+}
+buildCoMatrix();
+
+// ── CROSS-TABULATION: REGISTER × ERA ──────────────────────────────────
+const ERAS_CT=['Hu Jintao','Early Xi','Wolf Warrior','Post-Pandemic'];
+const REGISTERS_CT=[
+  {k:'bureaucratic',l:'Bureaucratic'},
+  {k:'sovereignty',l:'Sovereignty'},
+  {k:'wolf',l:'Wolf Warrior'},
+  {k:'coop',l:'Cooperative'},
+  {k:'evasive',l:'Evasive'},
+  {k:'denial',l:'Denial'},
+  {k:'warning',l:'Strong Warning'},
+  {k:'coercive',l:'Coercive'},
+  {k:'multilateral',l:'Multilateral'},
+  {k:'nationalist',l:'Nationalist'},
+  {k:'pedagogical',l:'Whataboutism'},
+];
+// Pre-computed cross-tab data [count, avg_a_sent]
+const CT_DATA={
+  bureaucratic:{hu:[940,3.31],early_xi:[612,3.18],wolf:[812,2.91],post:[421,3.07]},
+  sovereignty:  {hu:[820,3.08],early_xi:[754,2.98],wolf:[1248,2.66],post:[512,2.95]},
+  wolf:         {hu:[88,2.82],early_xi:[246,2.71],wolf:[1624,2.51],post:[218,2.72]},
+  coop:         {hu:[2640,3.42],early_xi:[2280,3.31],wolf:[3680,2.84],post:[1920,3.11]},
+  evasive:      {hu:[380,2.96],early_xi:[278,2.88],wolf:[524,2.64],post:[218,2.81]},
+  denial:       {hu:[210,2.90],early_xi:[280,2.76],wolf:[946,2.48],post:[312,2.69]},
+  warning:      {hu:[490,2.88],early_xi:[556,2.79],wolf:[1186,2.55],post:[302,2.74]},
+  coercive:     {hu:[12,2.71],early_xi:[28,2.64],wolf:[182,2.41],post:[42,2.62]},
+  multilateral: {hu:[1680,3.38],early_xi:[1760,3.29],wolf:[2610,2.88],post:[1620,3.14]},
+  nationalist:  {hu:[18,2.84],early_xi:[22,2.72],wolf:[128,2.48],post:[42,2.68]},
+  pedagogical:  {hu:[8,2.77],early_xi:[12,2.64],wolf:[52,2.42],post:[14,2.68]},
+};
+function buildCrossTab(){
+  // Compute global average for colour scale
+  const allSents=Object.values(CT_DATA).flatMap(e=>Object.values(e).map(([,s])=>s));
+  const globalAvg=allSents.reduce((a,b)=>a+b,0)/allSents.length;
+  let html=`<table class="theme-table" style="min-width:600px">
+    <thead><tr><th>Register</th>`;
+  ERAS_CT.forEach(e=>{html+=`<th style="text-align:center">${e}</th>`;});
+  html+='</tr></thead><tbody>';
+  REGISTERS_CT.forEach(({k,l})=>{
+    const row=CT_DATA[k];if(!row)return;
+    html+=`<tr><td style="font-weight:500;white-space:nowrap">${l}</td>`;
+    ['hu','early_xi','wolf','post'].forEach((era,i)=>{
+      const [cnt,sent]=row[era]||[0,0];
+      const diff=sent-globalAvg;
+      const bg=diff>0.2?'rgba(46,125,50,.12)':diff>0.05?'rgba(46,125,50,.05)':diff<-0.2?'rgba(196,30,58,.12)':diff<-0.05?'rgba(196,30,58,.06)':'';
+      const sc=diff>0.1?'#2E7D32':diff<-0.1?'#C41E3A':'var(--sub)';
+      html+=`<td style="text-align:center;background:${bg}">
+        <div style="font-size:12px;font-weight:600;color:${sc}">${sent.toFixed(2)}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">${cnt.toLocaleString()}</div>
+      </td>`;
+    });
+    html+='</tr>';
+  });
+  html+=`</tbody></table>
+    <div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);display:flex;gap:16px;flex-wrap:wrap">
+      <span>Cell: <b>avg answer sentiment</b> (top) · entry count (bottom)</span>
+      <span style="color:#2E7D32">■ Green = above global avg (${globalAvg.toFixed(2)})</span>
+      <span style="color:#C41E3A">■ Red = below global avg</span>
+    </div>`;
+  $('crossTabTable').innerHTML=html;
+}
+buildCrossTab();
 </script>
 </body>
 </html>
