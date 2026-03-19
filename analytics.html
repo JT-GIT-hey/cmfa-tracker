@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMFA PressCon Tracker — Chinese Diplomatic Discourse 2002–2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root{--red:#C41E3A;--red-dim:#8a1428;--gold:#D4A843;--ink:#0D0D0D;--paper:#F5F0E8;--mist:#E8E1D6;--smoke:#BFB8AC;--card:#FFFFFF;--text:#1A1714;--sub:#6B6259}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-serif;line-height:1.6}
+  header{background:var(--ink);color:white;position:relative;overflow:hidden}
+  .header-inner{display:grid;grid-template-columns:1fr auto;align-items:end;max-width:1280px;margin:0 auto;padding:48px 40px 36px;gap:24px}
+  .stripes{position:absolute;right:0;top:0;width:340px;height:100%;opacity:.05;background:repeating-linear-gradient(0deg,transparent,transparent 28px,#C41E3A 28px,#C41E3A 30px)}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:'';display:inline-block;width:24px;height:2px;background:var(--gold)}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,52px);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:white}
+  h1 span{color:var(--gold)}
+  .subtitle{font-size:13px;color:rgba(255,255,255,.5);margin-top:10px;font-weight:300;max-width:560px}
+  .hm{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.35);line-height:1.9}
+  .hm strong{display:block;font-size:28px;font-family:'Playfair Display',serif;color:var(--gold);letter-spacing:-.02em}
+  nav{background:var(--red);position:sticky;top:0;z-index:100;border-bottom:2px solid var(--red-dim)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:0 40px}
+  nav ul{display:flex;list-style:none}
+  nav ul li a{display:block;padding:14px 16px;color:rgba(255,255,255,.7);text-decoration:none;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s}
+  nav ul li a:hover{color:white;border-bottom-color:var(--gold)}
+  .nb{background:var(--gold);color:var(--ink)!important;padding:8px 18px!important;border-radius:2px;font-weight:600!important;border-bottom:none!important;margin:8px 0;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:background .2s}
+  .nb:hover{background:white!important;color:var(--red)!important}
+  main{max-width:1280px;margin:0 auto;padding:48px 40px 80px}
+  .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--smoke);border:1px solid var(--smoke);margin-bottom:48px;border-radius:4px;overflow:hidden}
+  .kpi{background:var(--card);padding:28px 24px;position:relative}
+  .kpi::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red)}
+  .kpi-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sub);margin-bottom:8px}
+  .kpi-value{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1}
+  .kpi-note{font-size:11px;color:var(--sub);margin-top:6px}
+  .sh{display:flex;align-items:baseline;gap:16px;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--mist)}
+  .sh h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink)}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:var(--red);color:white;padding:3px 8px;border-radius:2px}
+  .sd{font-size:13px;color:var(--sub);margin-top:-16px;margin-bottom:24px;max-width:700px}
+  section{margin-bottom:56px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .g3{display:grid;grid-template-columns:2fr 1fr;gap:24px}
+  .card{background:var(--card);border:1px solid var(--mist);border-radius:4px;padding:28px}
+  .ct{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+  .badge{background:var(--mist);padding:2px 8px;border-radius:2px;font-size:10px}
+  .bl{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .bi{display:flex;flex-direction:column;gap:4px}
+  .blb{display:flex;justify-content:space-between;font-size:12px;color:var(--text)}
+  .blb .v{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub)}
+  .bt{height:6px;background:var(--mist);border-radius:3px;overflow:hidden}
+  .bf{height:100%;border-radius:3px;background:var(--red)}
+  .bf.g{background:var(--gold)}.bf.k{background:var(--ink)}
+  .sl{display:flex;gap:20px;font-size:11px;color:var(--sub);margin-bottom:16px;font-family:'IBM Plex Mono',monospace}
+  .sl span{display:flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .spg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .spc{border:1px solid var(--mist);border-radius:3px;padding:16px;background:var(--paper);transition:border-color .2s}
+  .spc:hover{border-color:var(--red)}
+  .spn{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+  .sps{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub)}
+  .cta{background:var(--ink);border-radius:4px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:56px}
+  .cta h3{font-family:'Playfair Display',serif;font-size:22px;color:white;margin-bottom:6px}
+  .cta p{font-size:13px;color:rgba(255,255,255,.5);max-width:520px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;font-weight:600;transition:all .2s;cursor:pointer;border:none}
+  .bg{background:var(--gold);color:var(--ink)}.bg:hover{background:white}
+  .bo{background:transparent;color:white;border:1px solid rgba(255,255,255,.3);margin-left:12px}.bo:hover{background:rgba(255,255,255,.08);border-color:white}
+  footer{background:var(--ink);color:rgba(255,255,255,.4);padding:32px 40px;font-size:11px;font-family:'IBM Plex Mono',monospace;line-height:1.8}
+  .fi{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  footer a{color:var(--gold);text-decoration:none}
+  footer strong{color:rgba(255,255,255,.7)}
+  @media(max-width:900px){.header-inner{grid-template-columns:1fr}.hm{text-align:left}.kpi-strip{grid-template-columns:repeat(2,1fr)}.g2,.g3{grid-template-columns:1fr}.spg{grid-template-columns:repeat(2,1fr)}main,footer{padding-left:20px;padding-right:20px}.nav-inner,.cta{padding:0 20px}.cta{flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+  <div class="stripes"></div>
+  <div class="header-inner">
+    <div>
+      <div class="eyebrow">Research Tracker · CMFA PressCon v6</div>
+      <h1>Chinese Diplomatic<br><span>Discourse Tracker</span></h1>
+      <p class="subtitle">Two decades of Ministry of Foreign Affairs press conferences — questions, answers, sentiment &amp; geopolitical focus, 2002–2025.</p>
+    </div>
+    <div class="hm"><strong>35,346</strong>Q&amp;A dyads archived<br>Oct 2002 – Dec 2025<br>16 spokespeople<br>Mochtak &amp; Turcsanyi (2021)</div>
+  </div>
+</header>
+<nav>
+  <div class="nav-inner">
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#activity">Activity</a></li>
+      <li><a href="#sentiment">Sentiment</a></li>
+      <li><a href="#spokespeople">Spokespeople</a></li>
+      <li><a href="#geography">Geography</a></li>
+      <li><a href="#media">Media</a></li>
+    </ul>
+    <a href="index.html" class="nb">← Browse Dataset</a>
+  </div>
+</nav>
+<main>
+  <div id="overview" class="kpi-strip">
+    <div class="kpi"><div class="kpi-label">Total Q&amp;A Dyads</div><div class="kpi-value">35,346</div><div class="kpi-note">After multi-topical split</div></div>
+    <div class="kpi"><div class="kpi-label">Years Covered</div><div class="kpi-value">23</div><div class="kpi-note">Oct 2002 – Dec 2025</div></div>
+    <div class="kpi"><div class="kpi-label">Spokespeople</div><div class="kpi-value">16</div><div class="kpi-note">Hua Chunying most active</div></div>
+    <div class="kpi"><div class="kpi-label">Avg. Answer Sentiment</div><div class="kpi-value">3.08</div><div class="kpi-note">Scale 0–5, slightly positive</div></div>
+  </div>
+  <div class="cta">
+    <div><h3>Explore the Full Dataset</h3><p>Browse, search and filter all 35,346 Q&amp;A dyads. Filter by spokesperson, year, media outlet, sentiment range, and full-text search across questions and answers.</p></div>
+    <div><a href="index.html" class="btn bg">Browse Dataset →</a><a href="data.csv" download class="btn bo">↓ Download CSV</a></div>
+  </div>
+  <section id="activity">
+    <div class="sh"><h2>Press Conference Activity Over Time</h2><span class="tag">2002–2025</span></div>
+    <p class="sd">Number of question–answer dyads per year. The sharp rise from 2017 reflects increased press conference frequency and heightened global interest in Chinese foreign policy.</p>
+    <div class="card"><div class="ct">Annual Q&amp;A Volume<span class="badge">count per year</span></div><div style="height:280px"><canvas id="aC"></canvas></div></div>
+  </section>
+  <section id="sentiment">
+    <div class="sh"><h2>Sentiment Analysis</h2><span class="tag">XLM-R-ParlaSent</span></div>
+    <p class="sd">Mean sentiment per year on a 0–5 scale. Questions consistently score lower than answers. Note the post-2019 convergence as MFA rhetoric became more reactive.</p>
+    <div class="g2">
+      <div class="card">
+        <div class="ct">Question vs. Answer Sentiment</div>
+        <div class="sl"><span><i class="dot" style="background:#C41E3A"></i>Question</span><span><i class="dot" style="background:#D4A843"></i>Answer</span></div>
+        <div style="height:240px"><canvas id="sC"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Sentiment Gap (Answer − Question)</div>
+        <div style="height:240px"><canvas id="gC"></canvas></div>
+        <p style="font-size:11px;color:var(--sub);margin-top:14px;font-family:'IBM Plex Mono',monospace">Narrowing post-2019 gap signals more defensive/reactive MFA rhetoric.</p>
+      </div>
+    </div>
+  </section>
+  <section id="spokespeople">
+    <div class="sh"><h2>Spokespeople</h2><span class="tag">by volume</span></div>
+    <p class="sd">Distribution across 16 MFA spokespeople. Hua Chunying leads with 4,837 responses.</p>
+    <div class="card"><div class="ct">Q&amp;A Count per Spokesperson<span class="badge">top 12</span></div><div class="spg" id="spG"></div></div>
+  </section>
+  <section id="geography">
+    <div class="sh"><h2>Geographic Focus</h2><span class="tag">Named Entities in Answers</span></div>
+    <p class="sd">Top locations mentioned in spokesperson answers (excluding China). The US dominates by a wide margin, followed by Japan, Taiwan, and the Korean Peninsula.</p>
+    <div class="g3">
+      <div class="card"><div class="ct">Top Countries / Regions in Answers</div><ul class="bl" id="lL"></ul></div>
+      <div class="card"><div class="ct">Regional Share (Top 8)</div><div style="height:300px"><canvas id="lC"></canvas></div></div>
+    </div>
+  </section>
+  <section id="media">
+    <div class="sh"><h2>Media Representation</h2><span class="tag">from March 2020</span></div>
+    <p class="sd">Outlets asking the most questions since March 2020, when the MFA began attributing questions to media organisations.</p>
+    <div class="card"><div class="ct">Top Media Outlets<span class="badge">2020–2025</span></div><ul class="bl" id="mL"></ul></div>
+  </section>
+</main>
+<footer>
+  <div class="fi">
+    <div><strong>Dataset Citation</strong><br>Mochtak, M. &amp; Turcsanyi, R.Q. (2021). "Studying Chinese Foreign Policy Narratives…" <em>Journal of Chinese Political Science</em>, 26(4), 743–761.<br><br><strong>Version:</strong> v6.0 · 10 Jan 2026 &nbsp;|&nbsp; <strong>Coverage:</strong> 15 Oct 2002 – 31 Dec 2025</div>
+    <div><strong>Sentiment Model</strong><br>XLM-R-ParlaSent (<a href="https://huggingface.co/classla/xlm-r-parlasent">classla/xlm-r-parlasent</a>)<br>Score 0 (negative) – 5 (positive)<br><br><strong>NER:</strong> Trankit + XLM-Roberta-base &nbsp;|&nbsp; <a href="index.html">Browse Data</a> &nbsp;|&nbsp; <a href="data.csv" download>Download CSV</a></div>
+  </div>
+</footer>
+<script>
+const YS=[
+  {y:2002,c:200,q:2.114,a:3.12},{y:2003,c:975,q:2.043,a:3.137},{y:2004,c:959,q:2.133,a:3.087},
+  {y:2005,c:1364,q:2.202,a:3.107},{y:2006,c:1228,q:2.244,a:3.27},{y:2007,c:945,q:2.158,a:3.261},
+  {y:2008,c:983,q:1.961,a:3.192},{y:2009,c:952,q:2.075,a:3.21},{y:2010,c:957,q:2.168,a:3.306},
+  {y:2011,c:706,q:2.217,a:3.732},{y:2012,c:467,q:2.164,a:3.238},{y:2013,c:811,q:2.176,a:3.402},
+  {y:2014,c:954,q:2.196,a:3.13},{y:2015,c:1106,q:2.197,a:3.371},{y:2016,c:1578,q:2.129,a:3.108},
+  {y:2017,c:2031,q:2.083,a:3.178},{y:2018,c:1791,q:2.179,a:3.278},{y:2019,c:2114,q:2.082,a:2.936},
+  {y:2020,c:2869,q:2.134,a:2.821},{y:2021,c:2896,q:2.227,a:2.738},{y:2022,c:2561,q:2.214,a:2.827},
+  {y:2023,c:2517,q:2.308,a:2.966},{y:2024,c:2235,q:2.297,a:3.101},{y:2025,c:2147,q:2.256,a:3.103}
+];
+const SP=[{n:"Hua Chunying",c:4837},{n:"Wang Wenbin",c:4286},{n:"Zhao Lijian",c:3769},{n:"Geng Shuang",c:3383},{n:"Mao Ning",c:2991},{n:"Qin Gang",c:2450},{n:"Lu Kang",c:2152},{n:"Hong Lei",c:2143},{n:"Liu Jianchao",c:2057},{n:"Jiang Yu",c:1805},{n:"Lin Jian",c:1524},{n:"Kong Quan",c:1297}];
+const LC=[{n:"US",c:6749},{n:"Japan",c:2284},{n:"Taiwan",c:1832},{n:"Korean Peninsula",c:1588},{n:"DPRK",c:1453},{n:"Russia",c:1422},{n:"Ukraine",c:939},{n:"India",c:878},{n:"Pakistan",c:875},{n:"Myanmar",c:720},{n:"Afghanistan",c:671},{n:"Iran",c:634},{n:"Australia",c:567},{n:"UK",c:491},{n:"EU",c:438}];
+const MC=[{n:"AFP",c:1723},{n:"Reuters",c:1619},{n:"Bloomberg",c:1438},{n:"CCTV",c:1329},{n:"Shenzhen TV",c:475},{n:"Global Times",c:454},{n:"Xinhua",c:451},{n:"China Daily",c:441},{n:"China News Service",c:424},{n:"AP",c:398}];
+
+const B={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}};
+const TX={font:{family:'IBM Plex Mono',size:10},color:'#6B6259'};
+const SC={x:{grid:{display:false},ticks:TX},y:{grid:{color:'#E8E1D6'},ticks:TX}};
+
+new Chart(document.getElementById('aC'),{type:'bar',data:{labels:YS.map(d=>d.y),datasets:[{data:YS.map(d=>d.c),backgroundColor:YS.map(d=>d.y>=2017?'rgba(196,30,58,.9)':'rgba(196,30,58,.35)'),borderRadius:2}]},options:{...B,scales:SC,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y.toLocaleString()} dyads`}}}}});
+new Chart(document.getElementById('sC'),{type:'line',data:{labels:YS.map(d=>d.y),datasets:[{label:'Q',data:YS.map(d=>d.q),borderColor:'#C41E3A',borderWidth:2,pointRadius:3,pointBackgroundColor:'#C41E3A',tension:.3,fill:false},{label:'A',data:YS.map(d=>d.a),borderColor:'#D4A843',borderWidth:2,pointRadius:3,pointBackgroundColor:'#D4A843',tension:.3,fill:false}]},options:{...B,scales:{x:{grid:{display:false},ticks:TX},y:{min:1.5,max:4.2,grid:{color:'#E8E1D6'},ticks:TX}},plugins:{legend:{display:false},tooltip:{mode:'index'}}}});
+new Chart(document.getElementById('gC'),{type:'bar',data:{labels:YS.map(d=>d.y),datasets:[{data:YS.map(d=>+(d.a-d.q).toFixed(3)),backgroundColor:YS.map(d=>(d.a-d.q)>1?'#D4A843':(d.a-d.q)>.7?'rgba(212,168,67,.6)':'rgba(196,30,58,.5)'),borderRadius:2}]},options:{...B,scales:SC}});
+const ms=SP[0].c;document.getElementById('spG').innerHTML=SP.map(s=>`<div class="spc"><div class="spn">${s.n}</div><div class="sps">${s.c.toLocaleString()} dyads</div><div style="margin-top:8px" class="bt"><div class="bf" style="width:${(s.c/ms*100).toFixed(1)}%"></div></div></div>`).join('');
+const ml=LC[0].c;document.getElementById('lL').innerHTML=LC.map(l=>`<li class="bi"><div class="blb"><span>${l.n}</span><span class="v">${l.c.toLocaleString()}</span></div><div class="bt"><div class="bf" style="width:${(l.c/ml*100).toFixed(1)}%"></div></div></li>`).join('');
+new Chart(document.getElementById('lC'),{type:'doughnut',data:{labels:LC.slice(0,8).map(l=>l.n),datasets:[{data:LC.slice(0,8).map(l=>l.c),backgroundColor:['#C41E3A','#D4A843','#1A1714','#8a1428','#6B6259','#BFB8AC','#E8E1D6','#957B6B'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{family:'IBM Plex Mono',size:10},color:'#6B6259',boxWidth:10}}}}});
+const mm=MC[0].c;const mc=['','g','','g','k','','g','g','g','k'];document.getElementById('mL').innerHTML=MC.map((m,i)=>`<li class="bi"><div class="blb"><span>${m.n}</span><span class="v">${m.c.toLocaleString()}</span></div><div class="bt"><div class="bf ${mc[i]}" style="width:${(m.c/mm*100).toFixed(1)}%"></div></div></li>`).join('');
+</script>
+</body>
+</html>
