@@ -163,13 +163,48 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 .pg-j{display:flex;align-items:center;gap:6px}
 .pg-j input{width:50px;padding:6px 8px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;text-align:center;background:var(--paper);outline:none}
 .pg-j input:focus{border-color:var(--red)}
-/* LOADING */
-#ld{position:absolute;inset:0;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:300;gap:18px}
+/* Loading screen */
+#ld{position:absolute;inset:0;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:300;gap:10px;padding:40px}
 .ld-t{font-family:'Playfair Display',serif;font-size:24px;color:var(--ink)}
-.ld-s{font-size:13px;color:var(--sub);max-width:340px;text-align:center}
-.ld-bw{width:300px;background:var(--mist);height:4px;border-radius:2px;overflow:hidden}
+.ld-dsname{font-family:'Playfair Display',serif;font-size:16px;color:var(--red);font-weight:700;text-align:center;max-width:520px;line-height:1.3}
+.ld-dssub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub);text-align:center;letter-spacing:.05em}
+.ld-bw{width:300px;background:var(--mist);height:4px;border-radius:2px;overflow:hidden;margin:8px 0 4px}
 .ld-b{height:100%;background:var(--red);transition:width .3s;width:0}
 .ld-n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--smoke)}
+.ld-credits{margin-top:20px;display:flex;flex-direction:column;gap:8px;max-width:620px;width:100%;border-top:1px solid var(--mist);padding-top:18px}
+.ld-cr{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.ld-crlbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);background:var(--ink);padding:2px 7px;border-radius:2px;white-space:nowrap;flex-shrink:0}
+.ld-cr span:last-child{font-size:11px;color:var(--sub);line-height:1.6}
+.ld-crlink{color:var(--red);text-decoration:none;border-bottom:1px solid rgba(196,30,58,.3)}
+.ld-crlink:hover{color:var(--ink);border-bottom-color:var(--ink)}
+/* Era filter */
+.era-list{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.era-item{display:flex;align-items:center;gap:8px;cursor:pointer;padding:5px 8px;border-radius:3px;border:1px solid var(--mist);background:var(--paper);transition:all .15s}
+.era-item:hover{border-color:var(--red)}
+.era-item.on{background:var(--red);border-color:var(--red)}
+.era-item.on *{color:white!important}
+.era-item input{accent-color:var(--red);cursor:pointer;flex-shrink:0}
+.era-title{font-size:11px;font-weight:500;color:var(--text)}
+.era-years{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub)}
+.era-cnt{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-left:auto}
+/* Rhetorical register */
+.rr-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px}
+.rr-chip{padding:6px 8px;border-radius:3px;font-size:10px;font-family:'IBM Plex Mono',monospace;cursor:pointer;border:1px solid;background:transparent;transition:all .15s;text-align:center;line-height:1.3;user-select:none}
+.rr-chip:hover{opacity:.85}
+.rr-chip.on{color:white!important}
+/* Media origin */
+.mo-list{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.mo-item{display:flex;align-items:center;gap:8px;cursor:pointer;padding:5px 8px;border-radius:3px;border:1px solid var(--mist);background:var(--paper);transition:all .15s}
+.mo-item:hover{border-color:var(--red)}
+.mo-item.on{border-color:currentColor}
+.mo-item input{cursor:pointer;flex-shrink:0}
+.mo-label{font-size:11px;color:var(--text);flex:1}
+.mo-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)}
+/* Sentiment quick-pick */
+.sq-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px}
+.sq-btn{padding:5px 6px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:9px;cursor:pointer;border:1px solid var(--mist);background:var(--paper);color:var(--sub);transition:all .15s;text-align:center;line-height:1.4}
+.sq-btn:hover{border-color:var(--red);color:var(--red)}
+.sq-btn.on{background:var(--red);color:white;border-color:var(--red)}
 /* MODAL */
 #mov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.75);z-index:500;backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px}
 #mov.open{display:flex}
@@ -236,9 +271,23 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 
 <div id="ld">
   <div class="ld-t">Loading Dataset…</div>
-  <div class="ld-s">Streaming 35,346 Q&amp;A entries — takes about 5–10 seconds.</div>
+  <div class="ld-dsname">Chinese Ministry of Foreign Affairs Press Conferences Corpus</div>
+  <div class="ld-dssub">CMFA PressCon v6 &nbsp;·&nbsp; 35,346 Q&amp;A entries &nbsp;·&nbsp; October 2002 – December 2025</div>
   <div class="ld-bw"><div class="ld-b" id="ldB"></div></div>
   <div class="ld-n" id="ldN">Initialising…</div>
+  <div class="ld-credits">
+    <div class="ld-cr">
+      <span class="ld-crlbl">Dataset</span>
+      <span>Michal Mochtak &amp; Richard Q. Turcsanyi &nbsp;·&nbsp;
+        <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/BAKGET" target="_blank" rel="noopener" class="ld-crlink">Harvard Dataverse · doi:10.7910/DVN/BAKGET ↗</a>
+        &nbsp;·&nbsp; <em>Journal of Chinese Political Science</em>, 26(4), 743–761
+      </span>
+    </div>
+    <div class="ld-cr">
+      <span class="ld-crlbl">Visualisation</span>
+      <span>Kunal Kumar, PhD Candidate, Centre for East Asian Studies, School of International Studies, Jawaharlal Nehru University, New Delhi</span>
+    </div>
+  </div>
 </div>
 <div id="app">
   <!-- SIDEBAR -->
@@ -254,20 +303,33 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
         <select id="sScope"><option value="both">Questions + Answers</option><option value="q">Questions Only</option><option value="a">Answers Only</option></select>
       </div>
 
+      <!-- 1. POLITICAL ERA -->
       <div class="fg">
-        <label class="fg-label">Year Range</label>
-        <div class="year-grid">
-          <input type="number" id="yFrom" min="2002" max="2025" value="2002" placeholder="From">
-          <input type="number" id="yTo"   min="2002" max="2025" value="2025" placeholder="To">
+        <label class="fg-label">Political Era</label>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:2px">Filter by China's diplomatic period</div>
+        <div class="era-list">
+          <div class="era-item on" data-era="" onclick="setEra(this,'')">
+            <span class="era-title">All Eras</span><span class="era-cnt">35,346</span>
+          </div>
+          <div class="era-item" data-era="hu" onclick="setEra(this,'hu')">
+            <div style="flex:1"><div class="era-title">Hu Jintao Era</div><div class="era-years">2002–2012 · Harmonious Society</div></div><span class="era-cnt">9,736</span>
+          </div>
+          <div class="era-item" data-era="early_xi" onclick="setEra(this,'early_xi')">
+            <div style="flex:1"><div class="era-title">Early Xi Era</div><div class="era-years">2013–2017 · Chinese Dream</div></div><span class="era-cnt">6,480</span>
+          </div>
+          <div class="era-item" data-era="wolf_era" onclick="setEra(this,'wolf_era')">
+            <div style="flex:1"><div class="era-title">Wolf Warrior Era</div><div class="era-years">2018–2022 · Trade War + COVID</div></div><span class="era-cnt">12,231</span>
+          </div>
+          <div class="era-item" data-era="recent" onclick="setEra(this,'recent')">
+            <div style="flex:1"><div class="era-title">Post-Pandemic Era</div><div class="era-years">2023–2025 · Re-engagement</div></div><span class="era-cnt">6,899</span>
+          </div>
         </div>
-        <div class="range-row"><span class="range-lbl">2002</span><input type="range" id="yfS" min="2002" max="2025" value="2002" step="1"><span class="range-val" id="yfV">2002</span></div>
-        <div class="range-row"><span class="range-lbl">2025</span><input type="range" id="ytS" min="2002" max="2025" value="2025" step="1" style="accent-color:var(--gold)"><span class="range-val" id="ytV">2025</span></div>
       </div>
 
-      <!-- THEME FILTERS — NEW -->
+      <!-- 2. TOPIC / THEME -->
       <div class="fg">
         <label class="fg-label">Topic / Theme</label>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Select one or more — matches entries mentioning these topics</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Keyword-matched across Q&amp;A text</div>
         <div class="theme-grid">
           <span class="th-chip th-crisis"  data-theme="crisis"   title="crisis, emergency, disaster, escalation">⚠ Crisis</span>
           <span class="th-chip th-conflict" data-theme="conflict" title="military, war, troops, weapons, combat">⚔ Conflict</span>
@@ -285,76 +347,123 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
         </div>
         <div style="margin-top:6px;display:flex;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">
           <span>Match:</span>
-          <label style="cursor:pointer;display:flex;align-items:center;gap:3px;color:var(--sub)"><input type="radio" name="themeMode" id="tmAny" value="any" checked style="accent-color:var(--red)"> Any selected</label>
-          <label style="cursor:pointer;display:flex;align-items:center;gap:3px;color:var(--sub)"><input type="radio" name="themeMode" id="tmAll" value="all" style="accent-color:var(--red)"> All selected</label>
+          <label style="cursor:pointer;display:flex;align-items:center;gap:3px;color:var(--sub)"><input type="radio" name="themeMode" id="tmAny" value="any" checked style="accent-color:var(--red)"> Any</label>
+          <label style="cursor:pointer;display:flex;align-items:center;gap:3px;color:var(--sub)"><input type="radio" name="themeMode" id="tmAll" value="all" style="accent-color:var(--red)"> All</label>
         </div>
       </div>
 
+      <!-- 3. RHETORICAL REGISTER -->
       <div class="fg">
-        <label class="fg-label">Spokesperson</label>
-        <div class="cb-list" id="spList"></div>
+        <label class="fg-label">Rhetorical Register</label>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:2px">How the spokesperson responds — detected from answer text</div>
+        <div class="rr-grid">
+          <span class="rr-chip" data-rr="wolf"       style="color:#8B1A1A;border-color:#8B1A1A55" title="strongly condemn, firmly oppose, gross interference, double standard">🐺 Wolf Warrior<br><span style="font-size:8px;opacity:.7">2,417 entries</span></span>
+          <span class="rr-chip" data-rr="sovereignty" style="color:#C41E3A;border-color:#C41E3A55" title="internal affairs, sovereignty, core interests, territorial integrity">🛡 Sovereignty<br><span style="font-size:8px;opacity:.7">4,010 entries</span></span>
+          <span class="rr-chip" data-rr="coop"        style="color:#2E7D32;border-color:#2E7D3255" title="win-win, cooperation, partnership, mutual benefit, shared future">🤝 Cooperative<br><span style="font-size:8px;opacity:.7">12,740 entries</span></span>
+          <span class="rr-chip" data-rr="denial"      style="color:#E65100;border-color:#E6510055" title="fabricated, groundless, baseless, disinformation, false accusation">🚫 Denial/Refutation<br><span style="font-size:8px;opacity:.7">1,942 entries</span></span>
+          <span class="rr-chip" data-rr="warning"     style="color:#B71C1C;border-color:#B71C1C55" title="grave concern, strongly urge, stern warning, must stop, immediately stop">⚠ Strong Warning<br><span style="font-size:8px;opacity:.7">2,693 entries</span></span>
+          <span class="rr-chip" data-rr="multilateral" style="color:#1565C0;border-color:#1565C055" title="UN, Security Council, WTO, G20, multilateral, global governance">🌐 Multilateral<br><span style="font-size:8px;opacity:.7">7,992 entries</span></span>
+        </div>
       </div>
 
+      <!-- 4. MEDIA ORIGIN -->
       <div class="fg">
-        <label class="fg-label">Media Outlet</label>
-        <input type="search" id="mSearch" placeholder="Search outlets…" style="margin-bottom:6px">
-        <div class="cb-list" id="mList"></div>
+        <label class="fg-label">Media Origin</label>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Who is asking — by outlet type</div>
+        <div class="mo-list">
+          <div class="mo-item on" data-mo="" onclick="setMO(this,'')">
+            <span class="mo-label">All outlets</span>
+          </div>
+          <div class="mo-item" data-mo="western" onclick="setMO(this,'western')" style="--moc:#C41E3A">
+            <div style="flex:1"><div class="mo-label">🌍 Western Wire / Print</div><div class="mo-sub">Reuters · AFP · Bloomberg · BBC · CNN · NYT…</div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">5,044</span>
+          </div>
+          <div class="mo-item" data-mo="chinese" onclick="setMO(this,'chinese')" style="--moc:#D4A843">
+            <div style="flex:1"><div class="mo-label">🇨🇳 Chinese State Media</div><div class="mo-sub">CCTV · Xinhua · China Daily · Global Times…</div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">4,426</span>
+          </div>
+          <div class="mo-item" data-mo="asian" onclick="setMO(this,'asian')" style="--moc:#1565C0">
+            <div style="flex:1"><div class="mo-label">🌏 Asian / Regional</div><div class="mo-sub">NHK · Kyodo · Yonhap · PTI · TASS · Al Jazeera…</div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">4,759</span>
+          </div>
+          <div class="mo-item" data-mo="unattributed" onclick="setMO(this,'unattributed')" style="--moc:#6B6259">
+            <div style="flex:1"><div class="mo-label">— Unattributed</div><div class="mo-sub">Before March 2020 (no outlet recorded)</div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">21,117</span>
+          </div>
+        </div>
       </div>
 
+      <!-- 5. LOCATION FOCUS -->
       <div class="fg">
-        <label class="fg-label">Quick Location Focus</label>
+        <label class="fg-label">Country / Region Focus</label>
         <div class="qf-wrap" id="qfw">
           <span class="qf" data-loc="US">🇺🇸 US</span>
           <span class="qf" data-loc="Japan">🇯🇵 Japan</span>
           <span class="qf" data-loc="India">🇮🇳 India</span>
           <span class="qf" data-loc="Pakistan">🇵🇰 Pakistan</span>
+          <span class="qf" data-loc="Taiwan">🇹🇼 Taiwan</span>
           <span class="qf" data-loc="Hong Kong">🏙 HK</span>
           <span class="qf" data-loc="Xinjiang">Xinjiang</span>
+          <span class="qf" data-loc="Tibet">Tibet</span>
+          <span class="qf" data-loc="Russia">🇷🇺 Russia</span>
+          <span class="qf" data-loc="Ukraine">🇺🇦 Ukraine</span>
           <span class="qf" data-loc="Iran">Iran</span>
           <span class="qf" data-loc="Afghanistan">Afghanistan</span>
           <span class="qf" data-loc="Myanmar">Myanmar</span>
           <span class="qf" data-loc="Australia">Australia</span>
           <span class="qf" data-loc="EU">EU</span>
-          <span class="qf" data-loc="Africa">Africa</span>
+          <span class="qf" data-loc="South China Sea">S.China Sea</span>
         </div>
       </div>
 
+      <!-- 6. SPOKESPERSON -->
       <div class="fg">
-        <label class="fg-label">Answer Sentiment</label>
-        <div class="sent-bar"></div>
-        <div class="range-row"><span class="range-lbl">Min</span><input type="range" id="aMin" min="0" max="5" step="0.1" value="0"><span class="range-val" id="aMV">0.0</span></div>
-        <div class="range-row"><span class="range-lbl">Max</span><input type="range" id="aMax" min="0" max="5" step="0.1" value="5" style="accent-color:var(--gold)"><span class="range-val" id="aMxV">5.0</span></div>
+        <label class="fg-label">Spokesperson</label>
+        <div class="cb-list" id="spList"></div>
       </div>
 
+      <!-- 7. SPECIFIC MEDIA OUTLET -->
       <div class="fg">
-        <label class="fg-label">Question Sentiment</label>
-        <div class="sent-bar"></div>
-        <div class="range-row"><span class="range-lbl">Min</span><input type="range" id="qMin" min="0" max="5" step="0.1" value="0"><span class="range-val" id="qMV">0.0</span></div>
-        <div class="range-row"><span class="range-lbl">Max</span><input type="range" id="qMax" min="0" max="5" step="0.1" value="5" style="accent-color:var(--gold)"><span class="range-val" id="qMxV">5.0</span></div>
+        <label class="fg-label">Specific Media Outlet</label>
+        <input type="search" id="mSearch" placeholder="Search outlets…" style="margin-bottom:6px">
+        <div class="cb-list" id="mList"></div>
       </div>
 
+      <!-- 8. SENTIMENT QUICK-PICK -->
       <div class="fg">
-        <label class="fg-label">Entry Length</label>
-        <div style="margin-top:4px">
-          <label style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);display:block;margin-bottom:4px">Answer length</label>
-          <select id="lenSel" onchange="af()" style="width:100%;padding:7px 10px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--paper);outline:none;cursor:pointer">
-            <option value="">Any length</option>
-            <option value="short">Short (&lt; 300 chars)</option>
-            <option value="medium">Medium (300–1000 chars)</option>
-            <option value="long">Long (1000–2000 chars)</option>
-            <option value="very_long">Very long (&gt; 2000 chars)</option>
-          </select>
+        <label class="fg-label">Diplomatic Tone (Quick Select)</label>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Pre-set sentiment windows — click to apply</div>
+        <div class="sq-grid">
+          <button class="sq-btn" data-sq="hostile_q"   onclick="setSQ(this)" title="Q sentiment < 2.0 — most adversarial questions">Hostile Q&lt;2.0</button>
+          <button class="sq-btn" data-sq="neutral_q"   onclick="setSQ(this)" title="Q sentiment 2.0–2.5 — typical press questions">Neutral Q 2–2.5</button>
+          <button class="sq-btn" data-sq="defensive_a" onclick="setSQ(this)" title="A sentiment < 2.7 — most defensive/negative answers">Defensive A&lt;2.7</button>
+          <button class="sq-btn" data-sq="assertive_a" onclick="setSQ(this)" title="A sentiment > 3.5 — most confident/positive answers">Assertive A&gt;3.5</button>
+          <button class="sq-btn" data-sq="high_gap"    onclick="setSQ(this)" title="A much more positive than Q — strong rhetorical gap">High Gap A−Q</button>
+          <button class="sq-btn" data-sq="low_gap"     onclick="setSQ(this)" title="A and Q sentiment converge — under pressure">Converged</button>
+        </div>
+        <div style="margin-top:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Fine-tune answer sentiment range</div>
+          <div class="sent-bar"></div>
+          <div class="range-row"><span class="range-lbl">Min</span><input type="range" id="aMin" min="0" max="5" step="0.1" value="0"><span class="range-val" id="aMV">0.0</span></div>
+          <div class="range-row"><span class="range-lbl">Max</span><input type="range" id="aMax" min="0" max="5" step="0.1" value="5" style="accent-color:var(--gold)"><span class="range-val" id="aMxV">5.0</span></div>
+        </div>
+        <div style="margin-top:8px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Fine-tune question sentiment range</div>
+          <div class="sent-bar"></div>
+          <div class="range-row"><span class="range-lbl">Min</span><input type="range" id="qMin" min="0" max="5" step="0.1" value="0"><span class="range-val" id="qMV">0.0</span></div>
+          <div class="range-row"><span class="range-lbl">Max</span><input type="range" id="qMax" min="0" max="5" step="0.1" value="5" style="accent-color:var(--gold)"><span class="range-val" id="qMxV">5.0</span></div>
         </div>
       </div>
 
+      <!-- 9. YEAR RANGE -->
       <div class="fg">
-        <label class="fg-label">Has Named Entities</label>
-        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
-          <label class="cb-item"><input type="checkbox" id="hasLoc" onchange="af()"><label for="hasLoc" style="font-size:11px;color:var(--text)">Has location mentions</label></label>
-          <label class="cb-item"><input type="checkbox" id="hasPer" onchange="af()"><label for="hasPer" style="font-size:11px;color:var(--text)">Has person mentions</label></label>
-          <label class="cb-item"><input type="checkbox" id="hasOrg" onchange="af()"><label for="hasOrg" style="font-size:11px;color:var(--text)">Has org mentions</label></label>
-          <label class="cb-item"><input type="checkbox" id="hasMedia" onchange="af()"><label for="hasMedia" style="font-size:11px;color:var(--text)">Has media attribution</label></label>
+        <label class="fg-label">Year Range (Fine Control)</label>
+        <div class="year-grid">
+          <input type="number" id="yFrom" min="2002" max="2025" value="2002" placeholder="From">
+          <input type="number" id="yTo"   min="2002" max="2025" value="2025" placeholder="To">
         </div>
+        <div class="range-row"><span class="range-lbl">2002</span><input type="range" id="yfS" min="2002" max="2025" value="2002" step="1"><span class="range-val" id="yfV">2002</span></div>
+        <div class="range-row"><span class="range-lbl">2025</span><input type="range" id="ytS" min="2002" max="2025" value="2025" step="1" style="accent-color:var(--gold)"><span class="range-val" id="ytV">2025</span></div>
       </div>
 
     </div>
@@ -451,8 +560,382 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 </div>
 
 <script>
-// ── THEME KEYWORD SETS ─────────────────────────────────────────────────
+// ── KEYWORD SETS ───────────────────────────────────────────────────────
 const THEMES = {
+  crisis:   {label:'Crisis',      kw:['crisis','emergency','disaster','catastrophe','urgent','escalat','humanitarian']},
+  conflict: {label:'Conflict',    kw:['military','troops','war ','combat','conflict','weapon','missile','army','navy',' attack','invasion','occupation','ceasefire','warfare','armed force','soldier']},
+  health:   {label:'Health',      kw:['covid','pandemic','virus','health','disease','epidemic','outbreak','vaccine','who ','infectious','quarantine','public health','monkeypox']},
+  trade:    {label:'Trade',       kw:['trade','tariff','sanction','economic','investment','export','import','commerce','supply chain','wto','bilateral trade','tech war','decoupling']},
+  rights:   {label:'Human Rights',kw:['human rights','democracy','freedom','uyghur','xinjiang','tibet','hong kong','protest','civil right','oppression','detention','minority','genocide']},
+  nuclear:  {label:'Nuclear',     kw:['nuclear','iaea','non-proliferation','atomic','warhead','denuclearization','npt','fissile']},
+  terror:   {label:'Terrorism',   kw:['terrorism','terrorist','extremism','isis','al-qaeda','jihadist','radicali','suicide bomb']},
+  climate:  {label:'Climate',     kw:['climate','environment','carbon','emission','green','sustainable','cop ','global warming','paris agreement','renewable','net zero']},
+  taiwan:   {label:'Taiwan',      kw:['taiwan','strait','reunification','one china','independence','taipei','dpp','cross-strait']},
+  scs:      {label:'S.China Sea', kw:['south china sea','spratly','paracel','arbitration','maritime','territorial water','reef','shoal','nine-dash']},
+  russia:   {label:'Russia-Ukr',  kw:['ukraine','russia','zelensky','putin','nato','kyiv','moscow','crimea','donbas','mariupol']},
+  us:       {label:'US-China',    kw:['united states','washington','biden','trump','obama','white house','pentagon','state department','sino-american','us-china','american']},
+  dprk:     {label:'DPRK',        kw:['dprk','north korea','kim jong','denuclearization','korean peninsula','six-party','pyongyang','intercontinental']}
+};
+
+const RR = {
+  wolf:        {label:'Wolf Warrior',    kw:['strongly condemn','firmly oppose','gross interference','stop immediately','double standard','never allow','resolute opposition','strong dissatisfaction']},
+  sovereignty: {label:'Sovereignty',     kw:['internal affairs','sovereignty','non-interference','territorial integrity','core interests','infringe','never tolerate']},
+  coop:        {label:'Cooperative',     kw:['win-win','mutual benefit','cooperation','partnership','jointly','shared future','community with']},
+  denial:      {label:'Denial/Refutation',kw:['fabricated','groundless','without basis','baseless','distort','disinformation','smear','false accusation','not true','pure fabrication']},
+  warning:     {label:'Strong Warning',  kw:['grave concern','serious concern','urge ','stern warning','must stop','immediately stop','stop interfering','strongly urge']},
+  multilateral:{label:'Multilateral',    kw:['united nations','security council',' wto ','g20','multilateral','global governance','international community',' iaea ']}
+};
+
+const RR_COLORS = {wolf:'#8B1A1A',sovereignty:'#C41E3A',coop:'#2E7D32',denial:'#E65100',warning:'#B71C1C',multilateral:'#1565C0'};
+const THEME_COLORS = {crisis:'#C41E3A',conflict:'#8B1A1A',health:'#2E7D32',trade:'#1565C0',rights:'#6A1B9A',nuclear:'#E65100',terror:'#37474F',climate:'#00695C',taiwan:'#C62828',scs:'#0277BD',russia:'#4E342E',us:'#1A237E',dprk:'#4A148C'};
+
+const WESTERN_OUTLETS = new Set(['AFP','Reuters','Bloomberg','BBC','CNN','The New York Times','NBC','EFE','AP','Financial Times','The Guardian','Der Spiegel','Associated Press']);
+const CHINESE_OUTLETS = new Set(['CCTV','Xinhua News Agency','China Daily','Global Times','CRI','CGTN','China News Service','Beijing Daily','Beijing Youth Daily','Shenzhen TV','Dragon TV','CNR','MASTV','People\'s Daily']);
+
+function detectThemes(text){const t=text.toLowerCase();return Object.keys(THEMES).filter(k=>THEMES[k].kw.some(w=>t.includes(w)));}
+function detectRR(ans){const t=ans.toLowerCase();return Object.keys(RR).filter(k=>RR[k].kw.some(w=>t.includes(w)));}
+function classifyMedia(wa){if(!wa||wa==='-')return'unattributed';if(WESTERN_OUTLETS.has(wa))return'western';if(CHINESE_OUTLETS.has(wa))return'chinese';return'asian';}
+function getEra(yr){const y=parseInt(yr);if(y>=2002&&y<=2012)return'hu';if(y>=2013&&y<=2017)return'early_xi';if(y>=2018&&y<=2022)return'wolf_era';if(y>=2023)return'recent';return'';}
+
+// ── STATE ──────────────────────────────────────────────────────────────
+let ALL=[],FIL=[],page=1,pp=50,sCol='id',sDir=1,view='table',mIdx=-1,sDeb;
+let activeLoc=null,activeThemes=new Set(),activeRR=new Set(),activeEra='',activeMO='',activeSQ='';
+const $=id=>document.getElementById(id);
+const esc=s=>s==null?'—':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const trunc=(s,n=180)=>!s?'—':s.length>n?s.slice(0,n)+'…':s;
+
+// ── LOAD ───────────────────────────────────────────────────────────────
+Papa.parse('data.csv',{
+  download:true,header:true,skipEmptyLines:true,
+  step(r){ALL.push(r.data);if(ALL.length%5000===0){const p=Math.min(88,(ALL.length/353).toFixed(0));$('ldB').style.width=p+'%';$('ldN').textContent=`Parsed ${ALL.length.toLocaleString()} rows…`;}},
+  complete(){
+    $('ldB').style.width='100%';$('ldN').textContent='Indexing all entries…';
+    ALL.forEach(r=>{
+      const full=(r.question||'')+' '+(r.answer||'');
+      r._themes=detectThemes(full);
+      r._rr=detectRR(r.answer||'');
+      r._mtype=classifyMedia(r.who_asked);
+      r._era=getEra(r.year);
+      r._alen=(r.answer||'').length;
+    });
+    setTimeout(init,120);
+  },
+  error(e){$('ldN').textContent='Error: '+e.message;}
+});
+
+// ── INIT ───────────────────────────────────────────────────────────────
+function init(){
+  $('ld').style.display='none';
+  let spC={},mC={};
+  ALL.forEach(r=>{spC[r.spokesperson]=(spC[r.spokesperson]||0)+1;if(r.who_asked&&r.who_asked!=='-')mC[r.who_asked]=(mC[r.who_asked]||0)+1;});
+  const sps=Object.entries(spC).filter(([k])=>k&&k!=='-'&&k!=='missing').sort((a,b)=>b[1]-a[1]);
+  $('spList').innerHTML=sps.map(([n,c])=>`<div class="cb-item"><input type="checkbox" id="sp_${n.replace(/\s/g,'_')}" value="${n}" onchange="af()"><label for="sp_${n.replace(/\s/g,'_')}">${n}</label><span class="cb-cnt">${c.toLocaleString()}</span></div>`).join('');
+  window._allMedia=Object.entries(mC).sort((a,b)=>b[1]-a[1]);
+  renderML(window._allMedia.slice(0,20));
+
+  // Theme chips
+  document.querySelectorAll('.th-chip').forEach(c=>c.addEventListener('click',()=>{const t=c.dataset.theme;if(activeThemes.has(t)){activeThemes.delete(t);c.classList.remove('on');}else{activeThemes.add(t);c.classList.add('on');}af();}));
+  document.querySelectorAll('input[name=themeMode]').forEach(r=>r.addEventListener('change',af));
+  // RR chips
+  document.querySelectorAll('.rr-chip').forEach(c=>c.addEventListener('click',()=>{const r=c.dataset.rr;if(activeRR.has(r)){activeRR.delete(r);c.classList.remove('on');c.style.background='transparent';}else{activeRR.add(r);c.classList.add('on');c.style.background=RR_COLORS[r];}af();}));
+  // Location chips
+  document.querySelectorAll('.qf').forEach(c=>c.addEventListener('click',()=>{const loc=c.dataset.loc;if(activeLoc===loc){activeLoc=null;c.classList.remove('on');}else{document.querySelectorAll('.qf').forEach(x=>x.classList.remove('on'));activeLoc=loc;c.classList.add('on');}af();}));
+  // Sentiment range inputs
+  $('sInput').addEventListener('input',()=>{clearTimeout(sDeb);sDeb=setTimeout(af,250);});
+  $('sScopeBar').addEventListener('change',()=>{$('sScope').value=$('sScopeBar').value;af();});
+  $('sScope').addEventListener('change',()=>{$('sScopeBar').value=$('sScope').value;af();});
+  $('sortSel').addEventListener('change',()=>{const[c,d]=$('sortSel').value.split('-');sCol=c;sDir=d==='asc'?1:-1;page=1;render();});
+  ['aMin','aMax','qMin','qMax'].forEach(id=>{$(id).addEventListener('input',()=>{const m={'aMin':'aMV','aMax':'aMxV','qMin':'qMV','qMax':'qMxV'};$(m[id]).textContent=parseFloat($(id).value).toFixed(1);af();});});
+  $('yFrom').addEventListener('input',()=>{$('yfS').value=$('yFrom').value;$('yfV').textContent=$('yFrom').value;af();});
+  $('yTo').addEventListener('input',()=>{$('ytS').value=$('yTo').value;$('ytV').textContent=$('yTo').value;af();});
+  $('yfS').addEventListener('input',()=>{$('yFrom').value=$('yfS').value;$('yfV').textContent=$('yfS').value;af();});
+  $('ytS').addEventListener('input',()=>{$('yTo').value=$('ytS').value;$('ytV').textContent=$('ytS').value;af();});
+  $('mSearch').addEventListener('input',filterML);
+  document.querySelectorAll('thead th[data-col]').forEach(th=>th.addEventListener('click',()=>{const col=th.dataset.col;if(sCol===col)sDir*=-1;else{sCol=col;sDir=1;}$('sortSel').value=`${sCol}-${sDir===1?'asc':'desc'}`;document.querySelectorAll('thead th').forEach(t=>t.classList.remove('sa','sd'));th.classList.add(sDir===1?'sa':'sd');page=1;render();}));
+  $('mov').addEventListener('click',e=>{if(e.target===$('mov'))closeM();});
+  $('pgJ').addEventListener('keydown',e=>{if(e.key==='Enter'){const v=+$('pgJ').value,t=Math.ceil(FIL.length/pp);if(v>=1&&v<=t){page=v;render();}}});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='/'&&document.activeElement!==$('sInput')){e.preventDefault();$('sInput').focus();}
+    if(e.key==='Escape')closeM();
+    if($('mov').classList.contains('open')){if(e.key==='ArrowLeft')mNav(-1);if(e.key==='ArrowRight')mNav(1);}
+    else{if(e.key==='ArrowLeft'&&page>1){page--;render();}if(e.key==='ArrowRight'){const t=Math.ceil(FIL.length/pp);if(page<t){page++;render();}}}
+  });
+  af();
+}
+
+function renderML(list){$('mList').innerHTML=list.map(([n,c])=>`<div class="cb-item"><input type="checkbox" id="m_${n.replace(/\W/g,'_')}" value="${n}" onchange="af()"><label for="m_${n.replace(/\W/g,'_')}">${n}</label><span class="cb-cnt">${c.toLocaleString()}</span></div>`).join('');}
+function filterML(){const q=$('mSearch').value.toLowerCase();renderML(q?window._allMedia.filter(([n])=>n.toLowerCase().includes(q)):window._allMedia.slice(0,20));}
+function getCB(id){return[...document.querySelectorAll(`#${id} input[type=checkbox]:checked`)].map(c=>c.value);}
+
+// Era selector
+function setEra(el,era){
+  activeEra=era;
+  document.querySelectorAll('.era-item').forEach(e=>{e.classList.toggle('on',e.dataset.era===era);});
+  // Sync year range sliders
+  const ranges={'':[2002,2025],hu:[2002,2012],early_xi:[2013,2017],wolf_era:[2018,2022],recent:[2023,2025]};
+  const [yf,yt]=ranges[era]||[2002,2025];
+  ['yFrom','yfS'].forEach(id=>{$(id).value=yf;});['yTo','ytS'].forEach(id=>{$(id).value=yt;});
+  $('yfV').textContent=yf;$('ytV').textContent=yt;
+  af();
+}
+
+// Media Origin selector
+function setMO(el,mo){
+  activeMO=mo;
+  document.querySelectorAll('.mo-item').forEach(e=>{
+    const isOn=e.dataset.mo===mo;
+    e.classList.toggle('on',isOn);
+    if(isOn&&mo){e.style.borderColor=e.style.getPropertyValue('--moc')||'var(--red)';}
+    else{e.style.borderColor='';}
+  });
+  af();
+}
+
+// Sentiment quick-pick
+function setSQ(btn){
+  const sq=btn.dataset.sq;
+  if(activeSQ===sq){
+    activeSQ='';btn.classList.remove('on');
+    $('aMin').value=0;$('aMax').value=5;$('aMV').textContent='0.0';$('aMxV').textContent='5.0';
+    $('qMin').value=0;$('qMax').value=5;$('qMV').textContent='0.0';$('qMxV').textContent='5.0';
+  } else {
+    activeSQ=sq;
+    document.querySelectorAll('.sq-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    // Apply preset windows
+    const presets={
+      hostile_q:  {qMin:0,  qMax:2.0, aMin:0,  aMax:5  },
+      neutral_q:  {qMin:2.0,qMax:2.5, aMin:0,  aMax:5  },
+      defensive_a:{qMin:0,  qMax:5,   aMin:0,  aMax:2.7},
+      assertive_a:{qMin:0,  qMax:5,   aMin:3.5,aMax:5  },
+      high_gap:   {qMin:0,  qMax:2.5, aMin:3.2,aMax:5  },
+      low_gap:    {qMin:1.8,qMax:2.8, aMin:2.0,aMax:3.0},
+    };
+    const p=presets[sq];
+    if(p){
+      $('qMin').value=p.qMin;$('qMax').value=p.qMax;$('qMV').textContent=p.qMin.toFixed(1);$('qMxV').textContent=p.qMax.toFixed(1);
+      $('aMin').value=p.aMin;$('aMax').value=p.aMax;$('aMV').textContent=p.aMin.toFixed(1);$('aMxV').textContent=p.aMax.toFixed(1);
+    }
+  }
+  af();
+}
+
+// ── MAIN FILTER ────────────────────────────────────────────────────────
+function af(){
+  const q=$('sInput').value.trim().toLowerCase(),sc=$('sScopeBar').value;
+  const yF=parseInt($('yFrom').value)||2002,yT=parseInt($('yTo').value)||2025;
+  const sps=getCB('spList'),med=getCB('mList');
+  const aMin=parseFloat($('aMin').value),aMax=parseFloat($('aMax').value);
+  const qMin=parseFloat($('qMin').value),qMax=parseFloat($('qMax').value);
+  const themeMode=document.querySelector('input[name=themeMode]:checked')?.value||'any';
+
+  FIL=ALL.filter(r=>{
+    // Year range
+    const yr=parseInt(r.year);
+    if(yr<yF||yr>yT) return false;
+    // Era (already synced via year range, but double-check)
+    if(activeEra&&r._era!==activeEra) return false;
+    // Spokesperson
+    if(sps.length&&!sps.includes(r.spokesperson)) return false;
+    // Specific outlet
+    if(med.length&&!med.includes(r.who_asked)) return false;
+    // Media origin type
+    if(activeMO&&r._mtype!==activeMO) return false;
+    // Sentiment
+    const av=parseFloat(r.a_sentiment),qv=parseFloat(r.q_sentiment);
+    if(!isNaN(av)&&(av<aMin||av>aMax)) return false;
+    if(!isNaN(qv)&&(qv<qMin||qv>qMax)) return false;
+    // Location
+    if(activeLoc){const locs=((r.a_loc||'')+' '+(r.q_loc||'')).toLowerCase();if(!locs.includes(activeLoc.toLowerCase()))return false;}
+    // Theme
+    if(activeThemes.size){
+      if(themeMode==='any'){if(!r._themes.some(t=>activeThemes.has(t)))return false;}
+      else{if(![...activeThemes].every(t=>r._themes.includes(t)))return false;}
+    }
+    // Rhetorical register
+    if(activeRR.size){if(!r._rr.some(t=>activeRR.has(t)))return false;}
+    // Text search
+    if(q){
+      const qt=(r.question||'').toLowerCase(),at=(r.answer||'').toLowerCase();
+      if(sc==='q'&&!qt.includes(q))return false;
+      if(sc==='a'&&!at.includes(q))return false;
+      if(sc==='both'&&!qt.includes(q)&&!at.includes(q))return false;
+    }
+    return true;
+  });
+
+  FIL.sort((a,b)=>{
+    let av=a[sCol],bv=b[sCol];
+    if(['id','q_sentiment','a_sentiment'].includes(sCol)){av=parseFloat(av)||0;bv=parseFloat(bv)||0;}
+    if(av<bv)return-sDir;if(av>bv)return sDir;return 0;
+  });
+  page=1;
+  $('filteredCount').textContent=FIL.length.toLocaleString();
+  updateAF(q,yF,yT,sps,med,aMin,aMax,qMin,qMax);
+  updateStats();
+  render();
+}
+
+// ── ACTIVE FILTER CHIPS ────────────────────────────────────────────────
+function updateAF(q,yF,yT,sps,med,aMin,aMax,qMin,qMax){
+  const chips=[];
+  if(q) chips.push({l:`"${q}"`,c:()=>{$('sInput').value='';af();}});
+  if(activeEra){const labels={hu:'Hu Era 2002–12',early_xi:'Early Xi 2013–17',wolf_era:'Wolf Warrior 2018–22',recent:'Post-Pandemic 2023–25'};chips.push({l:labels[activeEra],c:()=>setEra(null,'')});}
+  if(yF>2002||yT<2025)chips.push({l:`${yF}–${yT}`,c:()=>{['yFrom','yfS'].forEach(id=>{$(id).value=2002;});['yTo','ytS'].forEach(id=>{$(id).value=2025;});$('yfV').textContent=2002;$('ytV').textContent=2025;af();}});
+  sps.forEach(s=>chips.push({l:s,c:()=>{const el=document.querySelector(`#spList input[value="${s}"]`);if(el)el.checked=false;af();}}));
+  med.forEach(m=>chips.push({l:m,c:()=>{const el=document.querySelector(`#mList input[value="${m}"]`);if(el)el.checked=false;af();}}));
+  if(activeMO){const labels={western:'Western Media',chinese:'Chinese State Media',asian:'Asian/Regional',unattributed:'Unattributed'};chips.push({l:labels[activeMO],c:()=>setMO(null,'')});}
+  if(activeLoc)chips.push({l:`📍 ${activeLoc}`,c:()=>{activeLoc=null;document.querySelectorAll('.qf').forEach(c=>c.classList.remove('on'));af();}});
+  [...activeThemes].forEach(t=>chips.push({l:`🏷 ${THEMES[t].label}`,c:()=>{activeThemes.delete(t);document.querySelector(`.th-chip[data-theme="${t}"]`)?.classList.remove('on');af();}}));
+  [...activeRR].forEach(r=>chips.push({l:`💬 ${RR[r].label}`,c:()=>{activeRR.delete(r);const el=document.querySelector(`.rr-chip[data-rr="${r}"]`);if(el){el.classList.remove('on');el.style.background='transparent';}af();}}));
+  if(activeSQ)chips.push({l:`Tone: ${activeSQ.replace('_',' ')}`,c:()=>{activeSQ='';document.querySelectorAll('.sq-btn').forEach(b=>b.classList.remove('on'));$('aMin').value=0;$('aMax').value=5;$('aMV').textContent='0.0';$('aMxV').textContent='5.0';$('qMin').value=0;$('qMax').value=5;$('qMV').textContent='0.0';$('qMxV').textContent='5.0';af();}});
+  if(aMin>0||aMax<5)chips.push({l:`A Sent ${aMin.toFixed(1)}–${aMax.toFixed(1)}`,c:()=>{$('aMin').value=0;$('aMax').value=5;$('aMV').textContent='0.0';$('aMxV').textContent='5.0';af();}});
+  if(qMin>0||qMax<5)chips.push({l:`Q Sent ${qMin.toFixed(1)}–${qMax.toFixed(1)}`,c:()=>{$('qMin').value=0;$('qMax').value=5;$('qMV').textContent='0.0';$('qMxV').textContent='5.0';af();}});
+  const bar=$('afBar');
+  if(chips.length){bar.classList.add('on');$('afChips').innerHTML=chips.map((ch,i)=>`<span class="af-chip">${esc(ch.l)}<button onclick="clrChip(${i})">×</button></span>`).join('');window._chips=chips.map(c=>c.c);}
+  else bar.classList.remove('on');
+}
+function clrChip(i){window._chips[i]();}
+
+function updateStats(){
+  $('stN').textContent=FIL.length.toLocaleString();
+  if(!FIL.length){['stQ','stA','stR','stTh'].forEach(id=>{$(id).textContent='—';});return;}
+  const qv=FIL.map(r=>parseFloat(r.q_sentiment)).filter(v=>!isNaN(v));
+  const av=FIL.map(r=>parseFloat(r.a_sentiment)).filter(v=>!isNaN(v));
+  $('stQ').textContent=qv.length?(qv.reduce((a,b)=>a+b,0)/qv.length).toFixed(2):'—';
+  $('stA').textContent=av.length?(av.reduce((a,b)=>a+b,0)/av.length).toFixed(2):'—';
+  const ds=FIL.map(r=>r.date).filter(Boolean).sort();
+  if(ds.length)$('stR').textContent=`${ds[0].slice(0,10)} → ${ds[ds.length-1].slice(0,10)}`;
+  const active=[...activeThemes].map(t=>THEMES[t].label).concat([...activeRR].map(r=>RR[r].label));
+  $('stTh').textContent=active.length?active.join(', '):'None';
+}
+
+// ── RENDER ─────────────────────────────────────────────────────────────
+const SC=v=>{const n=parseFloat(v);if(isNaN(n))return['#BFB8AC','rgba(191,184,172,.12)'];if(n<1.5)return['#C41E3A','rgba(196,30,58,.1)'];if(n<2.3)return['#E07B3A','rgba(224,123,58,.1)'];if(n<3.2)return['#B5960A','rgba(181,150,10,.1)'];if(n<4.0)return['#4C8F3A','rgba(76,143,58,.1)'];return['#2E7D32','rgba(46,125,50,.1)'];};
+const sdesc=v=>{const n=parseFloat(v);if(isNaN(n))return'No data';if(n<1.5)return'Very negative';if(n<2.5)return'Negative';if(n<3.0)return'Slightly negative';if(n<3.5)return'Neutral';if(n<4.2)return'Positive';return'Very positive';};
+function hi(text,q){if(!q||!text)return esc(text||'—');return esc(text).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m=>`<mark>${m}</mark>`);}
+function schip(val){const v=parseFloat(val);if(isNaN(v))return`<span class="sc" style="background:rgba(191,184,172,.12);color:#BFB8AC">—</span>`;const[c,b]=SC(v);return`<span class="sc" style="background:${b};color:${c}">${v.toFixed(2)}</span>`;}
+function themeBadges(themes){return themes.slice(0,3).map(t=>`<span class="th-badge" style="background:${THEME_COLORS[t]}22;color:${THEME_COLORS[t]}">${THEMES[t].label}</span>`).join('');}
+function rrBadges(rrs){return rrs.slice(0,2).map(r=>`<span class="th-badge" style="background:${RR_COLORS[r]}22;color:${RR_COLORS[r]}">${RR[r].label}</span>`).join('');}
+
+function render(){
+  const q=$('sInput').value.trim().toLowerCase();
+  const s=(page-1)*pp,rows=FIL.slice(s,s+pp);
+  if(view==='table'){
+    if(!FIL.length){$('tBody').innerHTML='';$('emT').style.display='block';}
+    else{
+      $('emT').style.display='none';
+      $('tBody').innerHTML=rows.map((r,i)=>`<tr onclick="openM(${s+i})">
+        <td class="ci">${r.id||'—'}</td>
+        <td class="cd">${(r.date||'').slice(0,10)||'—'}</td>
+        <td class="cs"><span class="sp-p">${esc(r.spokesperson)}</span></td>
+        <td class="cw">${r.who_asked&&r.who_asked!=='-'?esc(r.who_asked):'<span style="color:var(--smoke)">—</span>'}</td>
+        <td class="cq"><div class="clamp">${hi(trunc(r.question),q)}</div>
+          <div class="th-badges">${themeBadges(r._themes)}${rrBadges(r._rr)}</div></td>
+        <td class="ca"><div class="clamp">${hi(trunc(r.answer),q)}</div></td>
+        <td class="cse">${schip(r.q_sentiment)}</td>
+        <td class="cse">${schip(r.a_sentiment)}</td>
+      </tr>`).join('');
+    }
+  } else {
+    if(!FIL.length){$('cGrid').innerHTML='';$('emC').style.display='block';}
+    else{
+      $('emC').style.display='none';
+      $('cGrid').innerHTML=rows.map((r,i)=>{
+        const[ac,ab]=SC(r.a_sentiment),[qc]=SC(r.q_sentiment);
+        const locs=[...(r.a_loc||'').split(';'),...(r.q_loc||'').split(';')].map(l=>l.trim()).filter(l=>l&&l!=='-').filter((v,j,a)=>a.indexOf(v)===j).slice(0,4);
+        const as=parseFloat(r.a_sentiment),qs=parseFloat(r.q_sentiment);
+        return`<div class="ec" onclick="openM(${s+i})">
+          <div class="ec-h">
+            <span class="ec-id">#${r.id||'—'}</span><span class="ec-dt">${(r.date||'').slice(0,10)||'—'}</span>
+            <span class="ec-sp">${esc(r.spokesperson)}</span>
+            ${r.who_asked&&r.who_asked!=='-'?`<span class="ec-who">${esc(r.who_asked)}</span>`:''}
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:3px">${themeBadges(r._themes)}${rrBadges(r._rr)}</div>
+          <div><div class="ql">Question</div><div class="qt">${hi(trunc(r.question,280),q)}</div></div>
+          <div><div class="al">Answer</div><div class="at">${hi(trunc(r.answer,220),q)}</div></div>
+          <div class="ec-f">
+            <div style="display:flex;flex-wrap:wrap;gap:4px">${locs.map(l=>`<span class="lt">${esc(l)}</span>`).join('')}</div>
+            <div style="display:flex;gap:5px;margin-left:auto">
+              <span class="ss" style="background:rgba(196,30,58,.1);color:${qc}">Q: ${isNaN(qs)?'—':qs.toFixed(2)}</span>
+              <span class="ss" style="background:${ab};color:${ac}">A: ${isNaN(as)?'—':as.toFixed(2)}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+  }
+  renderPG();
+  const tot=FIL.length,e=Math.min(s+pp,tot);
+  $('pgI').textContent=tot?`${(s+1).toLocaleString()}–${e.toLocaleString()} of ${tot.toLocaleString()}`:'';
+}
+
+function renderPG(){
+  const tot=Math.ceil(FIL.length/pp)||1;if(tot<=1){$('pBtns').innerHTML='';return;}
+  let h=`<button class="pb" onclick="gp(${page-1})" ${page===1?'disabled':''}>←</button>`;
+  const r=[];if(tot<=7){for(let i=1;i<=tot;i++)r.push(i);}else{r.push(1);if(page>3)r.push('…');for(let i=Math.max(2,page-1);i<=Math.min(tot-1,page+1);i++)r.push(i);if(page<tot-2)r.push('…');r.push(tot);}
+  r.forEach(p=>{if(p==='…')h+=`<button class="pb" disabled>…</button>`;else h+=`<button class="pb${p===page?' on':''}" onclick="gp(${p})">${p}</button>`;});
+  h+=`<button class="pb" onclick="gp(${page+1})" ${page===tot?'disabled':''}>→</button>`;
+  $('pBtns').innerHTML=h;
+}
+function gp(p){const t=Math.ceil(FIL.length/pp);if(p<1||p>t)return;page=p;render();$('results').scrollTop=0;}
+function setPerPage(n){pp=n;page=1;render();}
+function setView(v){view=v;$('vTable').classList.toggle('on',v==='table');$('vCards').classList.toggle('on',v==='cards');$('btnT').classList.toggle('on',v==='table');$('btnC').classList.toggle('on',v==='cards');render();}
+
+function openM(idx){
+  mIdx=idx;const r=FIL[idx];if(!r)return;
+  const qs=parseFloat(r.q_sentiment),as=parseFloat(r.a_sentiment);
+  const[qc]=SC(r.q_sentiment),[ac]=SC(r.a_sentiment);
+  function etags(str,cls){if(!str||str==='-')return'';return str.split(';').map(s=>s.trim()).filter(s=>s&&s!=='-').map(s=>`<span class="et ${cls}">${esc(s)}</span>`).join('');}
+  $('mMeta').innerHTML=`
+    <span class="mtag" style="background:rgba(0,0,0,.07);color:var(--sub);font-family:'IBM Plex Mono',monospace;font-size:10px">ID #${r.id||'—'}</span>
+    <span class="mtag" style="background:rgba(0,0,0,.07);color:var(--sub);font-family:'IBM Plex Mono',monospace;font-size:10px">${(r.date||'').slice(0,10)||'—'}</span>
+    <span class="mtag" style="background:var(--red);color:white;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px">${esc(r.spokesperson)}</span>
+    ${r.who_asked&&r.who_asked!=='-'?`<span class="mtag" style="background:var(--mist);color:var(--sub);font-family:'IBM Plex Mono',monospace;font-size:10px">${esc(r.who_asked)}</span>`:''}
+    ${r._themes.map(t=>`<span class="mtag" style="background:${THEME_COLORS[t]}22;color:${THEME_COLORS[t]};font-family:'IBM Plex Mono',monospace;font-size:10px">${THEMES[t].label}</span>`).join('')}
+    ${r._rr.map(t=>`<span class="mtag" style="background:${RR_COLORS[t]}22;color:${RR_COLORS[t]};font-family:'IBM Plex Mono',monospace;font-size:10px">${RR[t].label}</span>`).join('')}`;
+  $('mScroll').innerHTML=`
+    <div class="msec"><h4 style="color:var(--red)">Question</h4><p>${esc(r.question||'').replace(/\n/g,'<br>')}</p>
+      <div class="ments">${etags(r.q_loc,'eloc')}${etags(r.q_per,'eper')}${etags(r.q_org,'eorg')}</div></div>
+    <div class="msec"><h4 style="color:var(--sub)">Answer</h4><p>${esc(r.answer||'').replace(/\n/g,'<br>')}</p>
+      <div class="ments">${etags(r.a_loc,'eloc')}${etags(r.a_per,'eper')}${etags(r.a_org,'eorg')}</div></div>
+    <div class="mss">
+      <div class="msb"><div class="msbl">Question Sentiment</div><div class="msbv" style="color:${qc}">${isNaN(qs)?'—':qs.toFixed(3)}</div><div class="msbd">${sdesc(r.q_sentiment)}</div></div>
+      <div class="msb"><div class="msbl">Answer Sentiment</div><div class="msbv" style="color:${ac}">${isNaN(as)?'—':as.toFixed(3)}</div><div class="msbd">${sdesc(r.a_sentiment)}</div></div>
+    </div>
+    ${r.link&&r.link!=='-'?`<div class="msec"><h4>Source</h4><a href="${esc(r.link)}" target="_blank" class="mlink">${esc(r.link)}</a></div>`:''}`;
+  $('mPos').textContent=`${idx+1} / ${FIL.length.toLocaleString()}`;
+  $('mPrev').disabled=idx<=0;$('mNext').disabled=idx>=FIL.length-1;
+  $('mov').classList.add('open');document.body.style.overflow='hidden';
+}
+function mNav(d){const n=mIdx+d;if(n>=0&&n<FIL.length)openM(n);}
+function closeM(){$('mov').classList.remove('open');document.body.style.overflow='';}
+
+function exportCSV(){
+  if(!FIL.length)return;
+  const cols=['id','spokesperson','date','year','question','answer','who_asked','q_loc','q_per','q_org','a_loc','a_per','a_org','q_sentiment','a_sentiment'];
+  const rows=[cols.join(','),...FIL.map(r=>cols.map(c=>{const v=String(r[c]||'').replace(/"/g,'""');return/[,"\n]/.test(v)?`"${v}"`:v;}).join(','))];
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download=`cmfa_${Date.now()}.csv`;a.click();
+}
+
+function resetAll(){
+  $('sInput').value='';
+  activeEra='';activeMO='';activeLoc=null;activeSQ='';
+  activeThemes.clear();activeRR.clear();
+  document.querySelectorAll('.era-item').forEach(e=>e.classList.toggle('on',e.dataset.era===''));
+  document.querySelectorAll('.mo-item').forEach(e=>{e.classList.toggle('on',e.dataset.mo==='');e.style.borderColor='';});
+  document.querySelectorAll('.qf,.th-chip,.sq-btn').forEach(c=>c.classList.remove('on'));
+  document.querySelectorAll('.rr-chip').forEach(c=>{c.classList.remove('on');c.style.background='transparent';});
+  ['yFrom','yfS'].forEach(id=>{$(id).value=2002;});['yTo','ytS'].forEach(id=>{$(id).value=2025;});
+  $('yfV').textContent=2002;$('ytV').textContent=2025;
+  document.querySelectorAll('#spList input,#mList input').forEach(i=>i.checked=false);
+  $('aMin').value=0;$('aMax').value=5;$('aMV').textContent='0.0';$('aMxV').textContent='5.0';
+  $('qMin').value=0;$('qMax').value=5;$('qMV').textContent='0.0';$('qMxV').textContent='5.0';
+  af();
+}
+</script>
+</body>
+</html>
   crisis:   {label:'Crisis',     kw:['crisis','emergency','disaster','catastrophe','urgent','escalat','humanitarian']},
   conflict: {label:'Conflict',   kw:['military','troops','war ','combat','conflict','weapon','missile','army','navy',' attack','invasion','occupation','ceasefire','warfare','armed force','soldier']},
   health:   {label:'Health',     kw:['covid','pandemic','virus','health','disease','epidemic','outbreak','vaccine','who ','infectious','quarantine','public health','monkeypox','ebola']},
