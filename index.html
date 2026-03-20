@@ -24,8 +24,11 @@ body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-
 .tb-an{background:rgba(255,255,255,.08);color:rgba(255,255,255,.65)}.tb-an:hover{background:rgba(255,255,255,.15);color:white}
 .tb-g{background:var(--gold);color:var(--ink)}.tb-g:hover{background:white}
 .tb-o{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}.tb-o:hover{border-color:rgba(255,255,255,.5);color:white}
+.tb-ghost{background:transparent;border:none;color:rgba(255,255,255,.45);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;padding:6px 10px;border-radius:2px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tb-ghost:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
 .dv{width:1px;height:22px;background:rgba(255,255,255,.1)}
-#creditbar{background:#1a1208;border-bottom:1px solid rgba(212,168,67,.2);padding:7px 24px;display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap}
+#creditbar{background:#1a1208;border-bottom:1px solid rgba(212,168,67,.2);padding:5px 24px;display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap;max-height:36px;overflow:hidden;transition:max-height .3s ease,padding .3s ease;cursor:pointer}
+#creditbar:hover{max-height:80px;padding:7px 24px}
 #creditbar .cr-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3)}
 #creditbar .cr-sep{color:rgba(255,255,255,.15);font-size:11px}
 #creditbar .cr-text{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);line-height:1.4}
@@ -247,7 +250,22 @@ mark{background:rgba(212,168,67,.4);color:inherit;border-radius:2px;padding:0 1p
 /* Floating re-open tab when sidebar is collapsed */
 #showFiltersTab{display:none;position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:150;writing-mode:vertical-rl;background:var(--red);color:white;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:14px 8px;cursor:pointer;border-radius:0 4px 4px 0;box-shadow:2px 0 8px rgba(0,0,0,.15);transition:background .2s}
 #showFiltersTab:hover{background:var(--red-dim)}
-#showFiltersTab.visible{display:block}
+#showFiltersTab.visible{display:flex;flex-direction:column;align-items:center;gap:6px}
+/* Active filter badge on collapsed tab */
+#filterBadge{display:none;background:white;color:var(--red);font-size:9px;font-weight:700;border-radius:50%;width:16px;height:16px;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;line-height:1;writing-mode:horizontal-tb;flex-shrink:0}
+#filterBadge.on{display:flex}
+/* Collapsible filter sections */
+.fg{padding:0;border-bottom:1px solid var(--mist)}
+.fg-head{display:flex;align-items:center;justify-content:space-between;padding:9px 16px 9px;cursor:pointer;user-select:none;transition:background .15s}
+.fg-head:hover{background:rgba(196,30,58,.03)}
+.fg-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);display:flex;align-items:center;gap:6px;margin:0}
+.fg-active-dot{width:6px;height:6px;border-radius:50%;background:var(--red);display:none;flex-shrink:0}
+.fg-active-dot.on{display:inline-block}
+.fg-caret{font-size:10px;color:var(--smoke);transition:transform .2s;flex-shrink:0}
+.fg.collapsed .fg-caret{transform:rotate(-90deg)}
+.fg-body{padding:0 16px 12px;display:block}
+.fg.collapsed .fg-body{display:none}
+.fg:last-child{border-bottom:none}
 /* Copy link notification */
 .copy-notif{position:fixed;bottom:24px;right:24px;background:var(--ink);color:white;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:12px 18px;border-radius:4px;z-index:600;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;letter-spacing:.05em}
 .copy-notif.show{opacity:1;transform:translateY(0)}
@@ -375,7 +393,11 @@ body.dark .preset-tag{color:var(--gold)}
 .cite-pre{background:var(--paper);border:1px solid var(--mist);border-radius:3px;padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-all}
 .cite-copybtn{padding:3px 10px;background:var(--red);color:white;border:none;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-top:3px;float:right;transition:background .2s}
 .cite-copybtn:hover{background:#8a1428}
-/* ── FIND SIMILAR STRIP ───────────────────────────────── */
+/* ── SENTIMENT MINI-BARS IN TABLE ─────────────────────────────────── */
+.scb{display:inline-flex;flex-direction:column;align-items:center;gap:1px;padding:2px 5px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;position:relative;min-width:38px}
+.scb::after{content:'';display:block;height:3px;border-radius:1px;background:var(--clr);width:var(--pct);max-width:100%;opacity:.6;margin-top:1px}
+/* Undo toast enhancement */
+.copy-notif button{pointer-events:all}
 #simBar{display:none;background:rgba(196,30,58,.07);border-bottom:1px solid rgba(196,30,58,.18);padding:5px 16px;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
 #simBar.on{display:flex}
 .sim-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);flex-shrink:0}
@@ -452,12 +474,17 @@ body.dark .help-footer{background:#1C1914}
   <div class="tb-right">
     <span class="tb-count"><span id="filteredCount">…</span> / 35,346 entries</span>
     <div class="dv"></div>
+    <!-- Navigation -->
     <a href="analytics.html" class="tb-btn tb-an">📊 Analytics →</a>
-    <button class="tb-btn tb-an" onclick="openMethModal()" title="Generate methods paragraph for current filters">📝 Methods Note</button>
-    <button class="tb-btn tb-an" onclick="openHelp()" title="Guide to the dataset, filters and analytics">❓ Guide</button>
-    <button class="tb-btn tb-o" onclick="exportCSV()">↓ Export Filtered</button>
-    <button class="tb-btn tb-o" onclick="copyLink()" title="Copy shareable URL for current filter state">🔗 Copy Link</button>
-    <a href="data.csv" download class="tb-btn tb-g">↓ Full Dataset</a>
+    <button class="tb-btn tb-an" onclick="openHelp()">❓ Guide</button>
+    <div class="dv"></div>
+    <!-- Research tools — lower visual weight -->
+    <button class="tb-btn tb-ghost" onclick="openMethModal()" title="Generate methods paragraph for current filters">📝 Methods</button>
+    <button class="tb-btn tb-ghost" onclick="exportCSV()" title="Export current filtered results as CSV">↓ Export</button>
+    <button class="tb-btn tb-ghost" onclick="copyLink()" title="Copy shareable URL">🔗 Link</button>
+    <div class="dv"></div>
+    <!-- Data -->
+    <a href="data.csv" download class="tb-btn tb-g" title="Download full 43MB dataset">↓ Full Dataset</a>
     <button id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
   </div>
 </div>
@@ -499,7 +526,7 @@ body.dark .help-footer{background:#1C1914}
   </div>
 </div>
 <!-- Floating re-open tab -->
-<div id="showFiltersTab" onclick="toggleSidebar()" title="Show filters">☰ Filters</div>
+<div id="showFiltersTab" onclick="toggleSidebar()" title="Show filters">☰ Filters<span id="filterBadge"></span></div>
 
 <div id="app">
   <!-- SIDEBAR -->
@@ -522,25 +549,39 @@ body.dark .help-footer{background:#1C1914}
     <div class="sb-scroll">
 
       <!-- SEARCH IN -->
-      <div class="fg">
-        <label class="fg-label">Search In</label>
+      <div class="fg" id="fg-searchin">
+        <div class="fg-head" onclick="toggleFG('fg-searchin')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-searchin"></span>Search In</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <select id="sScope"><option value="both">Questions + Answers</option><option value="q">Questions Only</option><option value="a">Answers Only</option></select>
+        </div>
       </div>
 
-      <!-- 1. YEAR RANGE (top) -->
-      <div class="fg">
-        <label class="fg-label">Year Range</label>
+      <!-- 1. YEAR RANGE -->
+      <div class="fg" id="fg-year">
+        <div class="fg-head" onclick="toggleFG('fg-year')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-year"></span>Year Range</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div class="year-grid">
           <input type="number" id="yFrom" min="2002" max="2025" value="2002" placeholder="From">
           <input type="number" id="yTo"   min="2002" max="2025" value="2025" placeholder="To">
         </div>
         <div class="range-row"><span class="range-lbl">2002</span><input type="range" id="yfS" min="2002" max="2025" value="2002" step="1"><span class="range-val" id="yfV">2002</span></div>
         <div class="range-row"><span class="range-lbl">2025</span><input type="range" id="ytS" min="2002" max="2025" value="2025" step="1" style="accent-color:var(--gold)"><span class="range-val" id="ytV">2025</span></div>
+        </div>
       </div>
 
       <!-- 2. POLITICAL ERA -->
-      <div class="fg">
-        <label class="fg-label">Political Era</label>
+      <div class="fg" id="fg-era">
+        <div class="fg-head" onclick="toggleFG('fg-era')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-era"></span>Political Era</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Clicking an era auto-sets the year range above</div>
         <div class="era-list">
           <div class="era-item on" data-era="" onclick="setEra(this,'')">
@@ -559,17 +600,27 @@ body.dark .help-footer{background:#1C1914}
             <div style="flex:1"><div class="era-title">Post-Pandemic Era</div><div class="era-years">2023–2025 · Re-engagement</div></div><span class="era-cnt">6,899</span>
           </div>
         </div>
+        </div>
       </div>
 
       <!-- 3. SPOKESPERSON -->
-      <div class="fg">
-        <label class="fg-label">Spokesperson</label>
+      <div class="fg" id="fg-sp">
+        <div class="fg-head" onclick="toggleFG('fg-sp')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-sp"></span>Spokesperson</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div class="cb-list" id="spList"></div>
+        </div>
       </div>
 
       <!-- 4. TOPIC / THEME -->
-      <div class="fg">
-        <label class="fg-label">Topic / Theme</label>
+      <div class="fg" id="fg-theme">
+        <div class="fg-head" onclick="toggleFG('fg-theme')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-theme"></span>Topic / Theme</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Keyword-matched across Q&amp;A text</div>
         <div class="theme-grid">
           <span class="th-chip th-crisis"  data-theme="crisis"   title="crisis, emergency, disaster, escalation">⚠ Crisis</span>
@@ -591,11 +642,16 @@ body.dark .help-footer{background:#1C1914}
           <label style="cursor:pointer;display:flex;align-items:center;gap:3px;color:var(--sub)"><input type="radio" name="themeMode" id="tmAny" value="any" checked style="accent-color:var(--red)"> Any</label>
           <label style="cursor:pointer;display:flex;align-items:center;gap:3px;color:var(--sub)"><input type="radio" name="themeMode" id="tmAll" value="all" style="accent-color:var(--red)"> All</label>
         </div>
+        </div>
       </div>
 
       <!-- 5. RHETORICAL REGISTER -->
-      <div class="fg">
-        <label class="fg-label">Rhetorical Register</label>
+      <div class="fg collapsed" id="fg-rr">
+        <div class="fg-head" onclick="toggleFG('fg-rr')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-rr"></span>Rhetorical Register</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:6px">Detected from answer text — select one or more, results match any selected</div>
         <div class="rr-grid">
           <span class="rr-chip" data-rr="bureaucratic" style="color:#455A64;border-color:#455A6455" title="Five Principles of Peaceful Coexistence, in accordance with international law, mutual respect, we have noted the relevant reports">📋 Bureaucratic<br><span style="font-size:8px;opacity:.7">3,614 entries</span></span>
@@ -612,11 +668,16 @@ body.dark .help-footer{background:#1C1914}
           <span class="rr-chip" data-rr="multilateral" style="color:#1565C0;border-color:#1565C055" title="UN, Security Council, WTO, G20, multilateral, global governance, international community">🌐 Multilateral<br><span style="font-size:8px;opacity:.7">7,992 entries</span></span>
           <span class="rr-chip" data-rr="idiomatic"    style="color:#00695C;border-color:#00695C55" title="mantis trying to stop a chariot, bottom of a well, lifting a rock, paper tiger, daydreaming, ants trying to topple">📖 Idiomatic / Mocking<br><span style="font-size:8px;opacity:.7">254 entries</span></span>
         </div>
+        </div>
       </div>
 
       <!-- 6. MEDIA ORIGIN -->
-      <div class="fg">
-        <label class="fg-label">Media Origin</label>
+      <div class="fg collapsed" id="fg-media">
+        <div class="fg-head" onclick="toggleFG('fg-media')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-media"></span>Media Origin</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Who is asking — by outlet type</div>
         <div class="mo-list">
           <div class="mo-item on" data-mo="" onclick="setMO(this,'')"><span class="mo-label">All outlets</span></div>
@@ -637,19 +698,28 @@ body.dark .help-footer{background:#1C1914}
             <span class="mo-cnt">21,117</span>
           </div>
         </div>
+        </div>
       </div>
 
       <!-- 7. SPECIFIC MEDIA OUTLET -->
-      <div class="fg">
-        <label class="fg-label">Specific Media Outlet</label>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:6px">Search or select individual outlets (from March 2020)</div>
+      <div class="fg collapsed" id="fg-outlet">
+        <div class="fg-head" onclick="toggleFG('fg-outlet')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-outlet"></span>Specific Outlet</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <input type="search" id="mSearch" placeholder="Search outlets…" style="width:100%;padding:7px 10px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:var(--text);background:var(--paper);outline:none;margin-bottom:6px" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--mist)'">
         <div class="cb-list" id="mList"></div>
+        </div>
       </div>
 
       <!-- 8. LOCATION FILTER -->
-      <div class="fg">
-        <label class="fg-label">Country / Region Focus</label>
+      <div class="fg collapsed" id="fg-loc">
+        <div class="fg-head" onclick="toggleFG('fg-loc')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-loc"></span>Country / Region</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Searches named-entity location fields</div>
         <div style="position:relative;margin-bottom:7px">
           <input type="search" id="locSearch" placeholder="Type any country or region…" style="width:100%;padding:7px 10px 7px 28px;border:1px solid var(--mist);border-radius:3px;font-size:12px;color:var(--text);background:var(--paper);outline:none;font-family:'IBM Plex Sans',sans-serif" oninput="onLocSearch()" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--mist)'">
@@ -677,11 +747,16 @@ body.dark .help-footer{background:#1C1914}
           <span class="qf" data-loc="Africa">Africa</span>
           <span class="qf" data-loc="Europe">Europe</span>
         </div>
+        </div>
       </div>
 
-      <!-- 8. ORGANIZATION FILTER -->
-      <div class="fg">
-        <label class="fg-label">Organisation / Institution</label>
+      <!-- 9. ORGANIZATION FILTER -->
+      <div class="fg collapsed" id="fg-org">
+        <div class="fg-head" onclick="toggleFG('fg-org')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-org"></span>Organisation</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Searches named-entity organisation fields</div>
         <div style="position:relative;margin-bottom:7px">
           <input type="search" id="orgSearch" placeholder="e.g. NATO, WHO, ASEAN…" style="width:100%;padding:7px 10px 7px 28px;border:1px solid var(--mist);border-radius:3px;font-size:12px;color:var(--text);background:var(--paper);outline:none;font-family:'IBM Plex Sans',sans-serif" oninput="onOrgSearch()" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--mist)'">
@@ -704,11 +779,16 @@ body.dark .help-footer{background:#1C1914}
           <span class="qf" data-org="BRI">BRI</span>
           <span class="qf" data-org="US State Department">State Dept.</span>
         </div>
+        </div>
       </div>
 
-      <!-- 9. NAMED PERSON FILTER -->
-      <div class="fg">
-        <label class="fg-label">Named Person Tracker</label>
+      <!-- 10. NAMED PERSON FILTER -->
+      <div class="fg collapsed" id="fg-per">
+        <div class="fg-head" onclick="toggleFG('fg-per')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-per"></span>Named Person</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:5px">Searches named-entity person fields</div>
         <div style="position:relative;margin-bottom:7px">
           <input type="search" id="perSearch" placeholder="e.g. Trump, Tsai Ing-wen…" style="width:100%;padding:7px 10px 7px 28px;border:1px solid var(--mist);border-radius:3px;font-size:12px;color:var(--text);background:var(--paper);outline:none;font-family:'IBM Plex Sans',sans-serif" oninput="onPerSearch()" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--mist)'">
@@ -730,11 +810,16 @@ body.dark .help-footer{background:#1C1914}
           <span class="qf" data-per="Hu Jintao">Hu Jintao</span>
           <span class="qf" data-per="Moon Jae-in">Moon Jae-in</span>
         </div>
+        </div>
       </div>
 
-      <!-- 10. DIPLOMATIC TONE -->
-      <div class="fg">
-        <label class="fg-label">Diplomatic Tone (Quick Select)</label>
+      <!-- 11. DIPLOMATIC TONE -->
+      <div class="fg collapsed" id="fg-tone">
+        <div class="fg-head" onclick="toggleFG('fg-tone')">
+          <span class="fg-label"><span class="fg-active-dot" id="dot-tone"></span>Diplomatic Tone</span>
+          <span class="fg-caret">▾</span>
+        </div>
+        <div class="fg-body">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Pre-set sentiment windows — click to apply</div>
         <div class="sq-grid">
           <button class="sq-btn" data-sq="hostile_q"   onclick="setSQ(this)" title="Q sentiment < 2.0 — most adversarial questions">Hostile Q&lt;2.0</button>
@@ -755,6 +840,7 @@ body.dark .help-footer{background:#1C1914}
           <div class="sent-bar"></div>
           <div class="range-row"><span class="range-lbl">Min</span><input type="range" id="qMin" min="0" max="5" step="0.1" value="0"><span class="range-val" id="qMV">0.0</span></div>
           <div class="range-row"><span class="range-lbl">Max</span><input type="range" id="qMax" min="0" max="5" step="0.1" value="5" style="accent-color:var(--gold)"><span class="range-val" id="qMxV">5.0</span></div>
+        </div>
         </div>
       </div>
 
@@ -1290,8 +1376,8 @@ function render(){
         <td class="cq"><div class="clamp">${hi(trunc(r.question),q)}</div>
           <div class="th-badges">${themeBadges(r._themes)}${rrBadges(r._rr)}</div></td>
         <td class="ca"><div class="clamp">${hi(trunc(r.answer),q)}</div></td>
-        <td class="cse">${schip(r.q_sentiment)}</td>
-        <td class="cse">${schip(r.a_sentiment)}</td>
+        <td class="cse">${schipBar(r.q_sentiment)}</td>
+        <td class="cse">${schipBar(r.a_sentiment)}</td>
       </tr>`).join('');
     }
   } else {
@@ -1844,7 +1930,140 @@ function resetAll(){
 // NEW FEATURES — appended to original script, declared once only
 // ════════════════════════════════════════════════════════════════
 
-// ── DARK MODE ──────────────────────────────────────────────────
+// ── COLLAPSIBLE FILTER SECTIONS ────────────────────────────────────
+function toggleFG(id){
+  const el=document.getElementById(id);
+  if(el) el.classList.toggle('collapsed');
+}
+
+// ── ACTIVE FILTER DOTS + SIDEBAR BADGE ─────────────────────────────
+function updateFilterDots(){
+  const aMin=parseFloat($('aMin').value),aMax=parseFloat($('aMax').value);
+  const qMin=parseFloat($('qMin').value),qMax=parseFloat($('qMax').value);
+  const sps=getCB('spList'),med=getCB('mList');
+  const yF=parseInt($('yFrom').value)||2002,yT=parseInt($('yTo').value)||2025;
+  const q=$('sInput').value.trim();
+
+  const dots={
+    'dot-searchin': q.length>0,
+    'dot-year':     yF>2002||yT<2025,
+    'dot-era':      !!activeEra,
+    'dot-sp':       sps.length>0,
+    'dot-theme':    activeThemes.size>0,
+    'dot-rr':       activeRR.size>0,
+    'dot-media':    !!activeMO,
+    'dot-outlet':   med.length>0,
+    'dot-loc':      !!activeLoc,
+    'dot-org':      !!activeOrg,
+    'dot-per':      !!activePer,
+    'dot-tone':     !!activeSQ||aMin>0||aMax<5||qMin>0||qMax<5,
+  };
+
+  let total=0;
+  Object.entries(dots).forEach(([id,on])=>{
+    const el=$(id);if(el){el.classList.toggle('on',on);if(on)total++;}
+    // Also add red tint to collapsed sections that have active filters
+    const fgId='fg-'+id.replace('dot-','');
+    const fg=document.getElementById(fgId);
+    if(fg){
+      const head=fg.querySelector('.fg-label');
+      if(head) head.style.color=on?'var(--red)':'';
+    }
+  });
+
+  // Sidebar badge
+  const badge=$('filterBadge');
+  if(badge){badge.textContent=total||'';badge.classList.toggle('on',total>0);}
+}
+
+// ── SMART EMPTY STATE ───────────────────────────────────────────────
+function getSmartEmptyMsg(){
+  const active=[];
+  if($('sInput').value.trim()) active.push(`keyword "${$('sInput').value.trim()}"`);
+  if(activeEra){const l={hu:'Hu Jintao Era',early_xi:'Early Xi Era',wolf_era:'Wolf Warrior Era',recent:'Post-Pandemic Era'};active.push(l[activeEra]);}
+  const sps=getCB('spList');if(sps.length) active.push(sps.join(' + '));
+  if(activeMO){const l={western:'Western Media',chinese:'Chinese State Media',asian:'Asian/Regional',unattributed:'Unattributed'};active.push(l[activeMO]);}
+  if(activeLoc) active.push(`Location: ${activeLoc}`);
+  if(activeOrg) active.push(`Org: ${activeOrg}`);
+  if(activePer) active.push(`Person: ${activePer}`);
+  if(activeThemes.size) active.push([...activeThemes].map(t=>THEMES[t].label).join(' + '));
+  if(activeRR.size) active.push([...activeRR].map(r=>RR[r].label).join(' + '));
+  if(!active.length) return'<h3>No results</h3>Try broadening your search.';
+  const last=active.pop();
+  const hint=active.length?`Try removing <strong>${last}</strong> first, or click <strong>Clear All</strong>.`:`Try a different value for <strong>${last}</strong>, or click <strong>Clear All</strong>.`;
+  return`<h3>No results</h3><p style="font-size:13px;color:var(--sub);line-height:1.7">Active filters: <strong>${[...active,last].join(' · ')}</strong></p><p style="font-size:12px;color:var(--smoke)">${hint}</p>`;
+}
+
+// ── UNDO CLEAR ALL ──────────────────────────────────────────────────
+let _undoState=null,_undoTimer=null;
+const _origResetAll=resetAll;
+resetAll=function(){
+  // Snapshot current URL state for undo
+  _undoState=location.search;
+  _origResetAll();
+  // Show undo toast
+  const n=$('copyNotif');
+  if(n){
+    n.innerHTML='Filters cleared &nbsp;<button onclick="undoClear()" style="background:var(--gold);color:var(--ink);border:none;border-radius:2px;padding:2px 8px;font-family:\'IBM Plex Mono\',monospace;font-size:10px;cursor:pointer;margin-left:4px">↩ Undo</button>';
+    n.classList.add('show');
+    clearTimeout(_undoTimer);
+    _undoTimer=setTimeout(()=>{n.classList.remove('show');_undoState=null;},5000);
+  }
+};
+function undoClear(){
+  if(!_undoState)return;
+  clearTimeout(_undoTimer);
+  $('copyNotif').classList.remove('show');
+  history.replaceState(null,'',_undoState||location.pathname);
+  readUrlParams();af();
+  _undoState=null;
+}
+
+// ── STATS CONTEXT VS CORPUS MEAN ────────────────────────────────────
+// Corpus-wide means (computed from full 35k dataset)
+const CORPUS_Q_MEAN=2.18,CORPUS_A_MEAN=3.08;
+function updateStatsContext(){
+  const qEl=$('stQ'),aEl=$('stA');
+  if(!qEl||!aEl)return;
+  const qV=parseFloat(qEl.textContent),aV=parseFloat(aEl.textContent);
+  let qCtx=$('stQCtx'),aCtx=$('stACtx');
+  if(!qCtx){
+    qCtx=document.createElement('span');qCtx.id='stQCtx';
+    qCtx.style.cssText='font-family:"IBM Plex Mono",monospace;font-size:9px;margin-left:4px;opacity:.7';
+    qEl.parentNode.appendChild(qCtx);
+  }
+  if(!aCtx){
+    aCtx=document.createElement('span');aCtx.id='stACtx';
+    aCtx.style.cssText='font-family:"IBM Plex Mono",monospace;font-size:9px;margin-left:4px;opacity:.7';
+    aEl.parentNode.appendChild(aCtx);
+  }
+  if(isNaN(qV)){qCtx.textContent='';aCtx.textContent='';return;}
+  const qDiff=qV-CORPUS_Q_MEAN,aDiff=aV-CORPUS_A_MEAN;
+  const fmt=d=>(d>0?'↑':'↓')+Math.abs(d).toFixed(2)+' vs avg';
+  qCtx.textContent=fmt(qDiff);qCtx.style.color=qDiff<0?'#e07b3a':'#4C8F3A';
+  aCtx.textContent=fmt(aDiff);aCtx.style.color=aDiff<0?'#e07b3a':'#4C8F3A';
+}
+
+// ── SENTIMENT MINI-BARS IN TABLE ─────────────────────────────────────
+// Override schip to include a mini bar
+function schipBar(val){
+  const v=parseFloat(val);
+  if(isNaN(v))return`<span class="sc" style="background:rgba(191,184,172,.12);color:#BFB8AC">—</span>`;
+  const[c,b]=SC(v);
+  const pct=Math.round((v/5)*100);
+  return`<span class="scb" style="--pct:${pct}%;--clr:${c};background:${b};color:${c}">${v.toFixed(2)}</span>`;
+}
+
+// Hook into updateAF to also update dots
+const _origUpdateAF=updateAF;
+updateAF=function(...args){
+  _origUpdateAF(...args);
+  updateFilterDots();
+  updateStatsContext();
+};
+
+// Update empty state to smart message — merged into render patch below
+
 function toggleDark(){
   const on=document.body.classList.toggle('dark');
   $('darkToggle').textContent=on?'☀️':'🌙';
@@ -2067,10 +2286,16 @@ updateStats=function(){
   requestAnimationFrame(drawScrubber);
 };
 
-// ── PATCH: render — inject bookmark buttons into table rows ──────────
+// ── PATCH: render — bookmarks + smart empty state ──────────────────
 const _origRender=render;
 render=function(){
   _origRender();
+  // Smart empty state
+  const emT=$('emT'),emC=$('emC');
+  const msg=getSmartEmptyMsg();
+  if(emT&&emT.style.display!=='none') emT.innerHTML=msg;
+  if(emC&&emC.style.display!=='none') emC.innerHTML=msg;
+  // Inject bookmark buttons into table rows
   if(view==='table'){
     const s=(page-1)*pp,rows=FIL.slice(s,s+pp);
     const trs=$('tBody').querySelectorAll('tr');
