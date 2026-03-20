@@ -398,6 +398,78 @@ body.dark .preset-tag{color:var(--gold)}
 .scb::after{content:'';display:block;height:3px;border-radius:1px;background:var(--clr);width:var(--pct);max-width:100%;opacity:.6;margin-top:1px}
 /* Undo toast enhancement */
 .copy-notif button{pointer-events:all}
+
+/* ── RHETORIC ARC ─────────────────────────────────────────────────── */
+#arcPanel{background:var(--card);border-bottom:1px solid var(--mist);flex-shrink:0}
+body.dark #arcPanel{background:var(--card);border-bottom-color:var(--mist)}
+#arcHeader{display:flex;align-items:center;gap:10px;padding:5px 16px 4px;border-bottom:1px solid var(--mist)}
+.arc-title{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--sub);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.arc-label{font-size:9px;font-weight:400;color:var(--smoke);letter-spacing:0;text-transform:none}
+.arc-hint{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)}
+.arc-toggle{margin-left:auto;background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);cursor:pointer;padding:2px 6px;border-radius:2px;transition:color .15s}
+.arc-toggle:hover{color:var(--red)}
+#arcBody{position:relative;padding:4px 16px 8px}
+#arcCanvas{display:block;width:100%;cursor:crosshair}
+#arcPanel.arc-collapsed #arcBody{display:none}
+#arcPanel.arc-collapsed #arcHeader{border-bottom:none}
+#arcTooltip{position:fixed;background:var(--ink);color:white;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:7px 10px;border-radius:3px;pointer-events:none;display:none;z-index:900;line-height:1.7;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+body.dark #arcTooltip{background:#2D2820;color:var(--text);border:1px solid var(--smoke)}
+
+/* ── COMPARE BAR & MODAL ──────────────────────────────────────────── */
+#compareBar{display:none;background:rgba(21,101,192,.06);border-bottom:1px solid rgba(21,101,192,.18);padding:5px 16px;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+#compareBar.on{display:flex}
+body.dark #compareBar{background:rgba(21,101,192,.1);border-bottom-color:rgba(21,101,192,.25)}
+.cmp-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#1565C0;flex-shrink:0;font-weight:600}
+body.dark .cmp-lbl{color:#64B5F6}
+.cmp-desc{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cmp-btn{padding:3px 11px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:9px;cursor:pointer;transition:all .15s;border:1px solid;white-space:nowrap}
+.cmp-compare{background:#1565C0;color:white;border-color:#1565C0}
+.cmp-compare:hover{background:#0D47A1;border-color:#0D47A1}
+.cmp-clear{background:transparent;color:var(--smoke);border-color:var(--mist)}
+.cmp-clear:hover{color:var(--red);border-color:var(--red)}
+.pin-btn{padding:7px 10px;background:transparent;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);cursor:pointer;transition:all .15s;white-space:nowrap}
+.pin-btn:hover{border-color:#1565C0;color:#1565C0}
+.pin-btn.active{background:#1565C0;color:white;border-color:#1565C0}
+#compareMov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.75);z-index:600;backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px}
+#compareMov.open{display:flex}
+#compareBox{background:var(--card);border-radius:8px;width:min(900px,100%);max-height:90vh;overflow-y:auto;box-shadow:0 32px 100px rgba(0,0,0,.4);display:flex;flex-direction:column}
+body.dark #compareBox{background:#231F1A}
+.cmp-hd{padding:18px 24px 14px;border-bottom:1px solid var(--mist);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.cmp-hd h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text)}
+#cmpContent{padding:20px 24px;display:flex;flex-direction:column;gap:20px}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cmp-set{border-radius:6px;padding:16px;border:2px solid}
+.cmp-set-a{border-color:rgba(21,101,192,.35);background:rgba(21,101,192,.04)}
+.cmp-set-b{border-color:rgba(196,30,58,.25);background:rgba(196,30,58,.03)}
+body.dark .cmp-set-a{background:rgba(21,101,192,.07)}
+body.dark .cmp-set-b{background:rgba(196,30,58,.06)}
+.cmp-set-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.cmp-set-a .cmp-set-title{color:#1565C0}
+.cmp-set-b .cmp-set-title{color:var(--red)}
+.cmp-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+.cmp-stat{background:var(--paper);border-radius:4px;padding:10px 12px;text-align:center}
+.cmp-stat-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--smoke);margin-bottom:3px}
+.cmp-stat-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1}
+.cmp-stat-sub{font-size:10px;color:var(--sub);margin-top:2px}
+.cmp-filter-desc{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);line-height:1.7;margin-top:10px;padding-top:8px;border-top:1px solid var(--mist)}
+.cmp-delta{background:var(--paper);border-radius:6px;padding:16px}
+body.dark .cmp-delta{background:#1C1914}
+.cmp-delta-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);margin-bottom:12px;font-weight:600}
+.cmp-delta-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--mist)}
+.cmp-delta-row:last-child{border-bottom:none}
+.cmp-delta-metric{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);min-width:130px}
+.cmp-delta-bars{flex:1;display:flex;flex-direction:column;gap:4px}
+.cmp-delta-bar-wrap{display:flex;align-items:center;gap:6px}
+.cmp-delta-bar{height:12px;border-radius:2px;min-width:2px}
+.cmp-delta-barlabel{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);min-width:36px;text-align:right}
+.cmp-delta-diff{font-family:'IBM Plex Mono',monospace;font-size:10px;min-width:64px;text-align:right;font-weight:600}
+.cmp-arc-section{background:var(--paper);border-radius:6px;padding:16px}
+body.dark .cmp-arc-section{background:#1C1914}
+.cmp-arc-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);margin-bottom:10px;font-weight:600}
+.cmp-insight{background:rgba(21,101,192,.06);border:1px solid rgba(21,101,192,.18);border-radius:4px;padding:10px 14px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#1565C0;line-height:1.7}
+body.dark .cmp-insight{background:rgba(21,101,192,.1);border-color:rgba(21,101,192,.25);color:#64B5F6}
+.cmp-footer{padding:12px 24px;border-top:1px solid var(--mist);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--paper)}
+body.dark .cmp-footer{background:#1C1914}
 #simBar{display:none;background:rgba(196,30,58,.07);border-bottom:1px solid rgba(196,30,58,.18);padding:5px 16px;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
 #simBar.on{display:flex}
 .sim-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);flex-shrink:0}
@@ -855,6 +927,13 @@ body.dark .help-footer{background:#1C1914}
       <span id="simChips"></span>
       <button class="sim-clear" onclick="clearSimilar()">✕ clear</button>
     </div>
+    <!-- ── COMPARE BAR ── -->
+    <div id="compareBar">
+      <span class="cmp-lbl">📌 Set A pinned</span>
+      <span id="cmpALabel" class="cmp-desc"></span>
+      <button class="cmp-btn cmp-compare" onclick="openCompare()">⇆ Compare</button>
+      <button class="cmp-btn cmp-clear" onclick="clearPin()">✕ Clear pin</button>
+    </div>
     <div id="toolbar">
       <div class="s-wrap">
         <span class="si">⌕</span>
@@ -880,6 +959,7 @@ body.dark .help-footer{background:#1C1914}
       </div>
       <button class="exp-btn" onclick="exportCSV()">↓ Export</button>
       <button class="bm-only-btn" id="bmOnlyBtn" onclick="toggleBmOnly()" title="Show only bookmarked entries">⭐ Bookmarked</button>
+      <button class="pin-btn" id="pinBtn" onclick="pinSetA()" title="Pin current filters as Set A for comparison">📌 Pin</button>
     </div>
     <div id="stats">
       <div class="st"><span class="st-l">Results</span><span class="st-v" id="stN" style="color:white">—</span></div>
@@ -903,6 +983,18 @@ body.dark .help-footer{background:#1C1914}
       <span class="scr-lbl">Timeline</span>
       <canvas id="scrubberCanvas" height="36" title="Drag to zoom into a year range · Double-click to reset"></canvas>
       <span class="scr-lbl" id="scrLbl" style="min-width:72px;text-align:right">2002–2025</span>
+    </div>
+    <!-- ── RHETORIC ARC ── -->
+    <div id="arcPanel">
+      <div id="arcHeader">
+        <span class="arc-title">📈 Rhetoric Arc <span id="arcLabel" class="arc-label"></span></span>
+        <span class="arc-hint">avg sentiment per year for current filters · hover for details</span>
+        <button class="arc-toggle" id="arcToggleBtn" onclick="toggleArc()" title="Toggle arc chart">▴ hide</button>
+      </div>
+      <div id="arcBody">
+        <canvas id="arcCanvas" height="90"></canvas>
+        <div id="arcTooltip"></div>
+      </div>
     </div>
     <div id="results">
       <div class="vt on" id="vTable">
@@ -1878,6 +1970,21 @@ function resetAll(){
   </div>
 </div>
 
+<!-- ── COMPARE MODAL ──────────────────────────────────────── -->
+<div id="compareMov">
+  <div id="compareBox">
+    <div class="cmp-hd">
+      <h3>⇆ Filter Set Comparison</h3>
+      <button class="mclose" onclick="closeCompare()">×</button>
+    </div>
+    <div id="cmpContent"></div>
+    <div class="cmp-footer">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">Pin a new Set A at any time using the 📌 Pin button in the toolbar</span>
+      <button class="meth-copybtn" onclick="copyCmpText()" style="font-size:9px;padding:5px 14px">📋 Copy as text</button>
+    </div>
+  </div>
+</div>
+
 <!-- ── CITATION MODAL ─────────────────────────────────────── -->
 <div id="citeMov">
   <div class="cite-box">
@@ -2284,6 +2391,7 @@ updateStats=function(){
   const s=$('stBm');if(s)s.textContent=BM.size;
   if(statsExtOpen)refreshExtStats();
   requestAnimationFrame(drawScrubber);
+  requestAnimationFrame(drawArc);
 };
 
 // ── PATCH: render — bookmarks + smart empty state ──────────────────
@@ -2329,6 +2437,8 @@ init=function(){
   _origInit();
   renderPresets();
   requestAnimationFrame(drawScrubber);
+  requestAnimationFrame(drawArc);
+  new ResizeObserver(()=>requestAnimationFrame(drawArc)).observe($('arcCanvas').parentElement);
 };
 
 // ── FIND SIMILAR ──────────────────────────────────────────────────
@@ -2385,7 +2495,427 @@ function clearSimilar(){
   resetAll();
 }
 
-// ── HELP MODAL ─────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════
+// FEATURE: RHETORIC ARC — live per-year sentiment trend for FIL
+// ════════════════════════════════════════════════════════════════════
+let arcVisible=true;
+
+function toggleArc(){
+  arcVisible=!arcVisible;
+  $('arcPanel').classList.toggle('arc-collapsed',!arcVisible);
+  $('arcToggleBtn').textContent=arcVisible?'▴ hide':'▾ show';
+}
+
+function buildYearStats(rows){
+  // Returns {year: {qSum, aSum, qN, aN, n}}
+  const map={};
+  rows.forEach(r=>{
+    const y=parseInt(r.year);
+    if(!y||y<2002||y>2025)return;
+    if(!map[y])map[y]={qSum:0,aSum:0,qN:0,aN:0,n:0};
+    map[y].n++;
+    const qv=parseFloat(r.q_sentiment),av=parseFloat(r.a_sentiment);
+    if(!isNaN(qv)){map[y].qSum+=qv;map[y].qN++;}
+    if(!isNaN(av)){map[y].aSum+=av;map[y].aN++;}
+  });
+  return map;
+}
+
+function drawArc(){
+  const cv=$('arcCanvas');if(!cv)return;
+  if(!arcVisible)return;
+  if(!FIL||FIL.length===0){
+    const ctx=cv.getContext('2d');
+    cv.width=cv.parentElement.offsetWidth-32;cv.height=90;
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.fillStyle='rgba(107,98,89,.3)';ctx.font='11px IBM Plex Mono,monospace';ctx.textAlign='center';
+    ctx.fillText('No data for current filters',cv.width/2,50);
+    $('arcLabel').textContent='';
+    return;
+  }
+  const W=cv.parentElement.offsetWidth-32;if(W<80)return;
+  const H=90;cv.width=W;cv.height=H;
+  const ctx=cv.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+
+  const stats=buildYearStats(FIL);
+  const years=Object.keys(stats).map(Number).sort((a,b)=>a-b);
+  if(years.length<2){
+    ctx.fillStyle='rgba(107,98,89,.3)';ctx.font='10px IBM Plex Mono,monospace';ctx.textAlign='center';
+    ctx.fillText('Need data from 2+ years to draw arc',W/2,50);
+    return;
+  }
+
+  const PAD={t:8,b:22,l:36,r:12};
+  const cW=W-PAD.l-PAD.r,cH=H-PAD.t-PAD.b;
+  const minY=years[0],maxY=years[years.length-1];
+  const xRange=maxY-minY||1;
+  const xOf=y=>PAD.l+((y-minY)/xRange)*cW;
+  const yOf=v=>PAD.t+cH-(((v-0)/(5-0))*cH);
+
+  // Determine if dark mode
+  const dark=document.body.classList.contains('dark');
+  const gridCol=dark?'rgba(255,255,255,.06)':'rgba(0,0,0,.05)';
+  const textCol=dark?'rgba(221,213,200,.4)':'rgba(107,98,89,.55)';
+
+  // Draw grid lines at 1,2,3,4
+  [1,2,3,4].forEach(v=>{
+    const y=yOf(v);
+    ctx.strokeStyle=gridCol;ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(PAD.l,y);ctx.lineTo(W-PAD.r,y);ctx.stroke();
+    ctx.fillStyle=textCol;ctx.font='8px IBM Plex Mono,monospace';ctx.textAlign='right';
+    ctx.fillText(v.toFixed(0),PAD.l-4,y+3);
+  });
+
+  // Year labels on x axis
+  ctx.fillStyle=textCol;ctx.font='8px IBM Plex Mono,monospace';ctx.textAlign='center';
+  years.forEach(y=>{
+    if((y-minY)%(Math.ceil(xRange/8))===0||y===minY||y===maxY){
+      ctx.fillText(String(y),xOf(y),H-4);
+    }
+  });
+
+  // Helper: draw a smoothed line
+  function drawLine(pts,color,dash=[]){
+    if(pts.length<2)return;
+    ctx.strokeStyle=color;ctx.lineWidth=2;ctx.setLineDash(dash);
+    ctx.beginPath();
+    pts.forEach(([x,y],i)=>{i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+    ctx.stroke();ctx.setLineDash([]);
+    // Dots
+    pts.forEach(([x,y])=>{
+      ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);
+      ctx.fillStyle=color;ctx.fill();
+    });
+  }
+
+  const qPts=years.filter(y=>stats[y].qN>0).map(y=>[xOf(y),yOf(stats[y].qSum/stats[y].qN)]);
+  const aPts=years.filter(y=>stats[y].aN>0).map(y=>[xOf(y),yOf(stats[y].aSum/stats[y].aN)]);
+
+  // Fill gap area between Q and A lines
+  if(qPts.length>=2&&aPts.length>=2){
+    const allYears=years.filter(y=>stats[y].qN>0&&stats[y].aN>0);
+    if(allYears.length>=2){
+      ctx.beginPath();
+      allYears.forEach((y,i)=>{const x=xOf(y),yQ=yOf(stats[y].qSum/stats[y].qN);i===0?ctx.moveTo(x,yQ):ctx.lineTo(x,yQ);});
+      allYears.slice().reverse().forEach(y=>{const x=xOf(y),yA=yOf(stats[y].aSum/stats[y].aN);ctx.lineTo(x,yA);});
+      ctx.closePath();
+      ctx.fillStyle=dark?'rgba(212,168,67,.07)':'rgba(212,168,67,.08)';ctx.fill();
+    }
+  }
+
+  drawLine(qPts,'#C41E3A');
+  drawLine(aPts,'#D4A843');
+
+  // Corpus mean reference lines (dashed)
+  const qMeanY=yOf(CORPUS_Q_MEAN),aMeanY=yOf(CORPUS_A_MEAN);
+  ctx.strokeStyle=dark?'rgba(196,30,58,.25)':'rgba(196,30,58,.2)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(PAD.l,qMeanY);ctx.lineTo(W-PAD.r,qMeanY);ctx.stroke();
+  ctx.strokeStyle=dark?'rgba(212,168,67,.25)':'rgba(212,168,67,.2)';
+  ctx.beginPath();ctx.moveTo(PAD.l,aMeanY);ctx.lineTo(W-PAD.r,aMeanY);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Update label
+  const avgQ=FIL.map(r=>parseFloat(r.q_sentiment)).filter(v=>!isNaN(v));
+  const avgA=FIL.map(r=>parseFloat(r.a_sentiment)).filter(v=>!isNaN(v));
+  const mQ=avgQ.length?(avgQ.reduce((a,b)=>a+b,0)/avgQ.length).toFixed(2):'—';
+  const mA=avgA.length?(avgA.reduce((a,b)=>a+b,0)/avgA.length).toFixed(2):'—';
+  $('arcLabel').textContent=`${years[0]}–${years[years.length-1]} · ${FIL.length.toLocaleString()} entries · Q avg ${mQ} · A avg ${mA}`;
+
+  // Store point positions for tooltip
+  cv._qPts=years.filter(y=>stats[y].qN>0).map(y=>({x:xOf(y),y:yOf(stats[y].qSum/stats[y].qN),yr:y,qAvg:stats[y].qSum/stats[y].qN,aAvg:stats[y].aN>0?stats[y].aSum/stats[y].aN:null,n:stats[y].n}));
+  cv._aPts=aPts;
+  cv._stats=stats;
+  cv._years=years;
+  cv._xOf=xOf;
+  cv._yOf=yOf;
+}
+
+// Arc tooltip on hover
+(function initArcTooltip(){
+  document.addEventListener('DOMContentLoaded',()=>{});
+  window.addEventListener('load',()=>{
+    const cv=$('arcCanvas');const tt=$('arcTooltip');
+    if(!cv||!tt)return;
+    cv.addEventListener('mousemove',e=>{
+      if(!cv._qPts||!cv._stats)return;
+      const rect=cv.getBoundingClientRect();
+      const mx=e.clientX-rect.left;
+      // Find closest year
+      let closest=null,minDist=Infinity;
+      cv._years.forEach(y=>{
+        const d=Math.abs(cv._xOf(y)-mx);
+        if(d<minDist){minDist=d;closest=y;}
+      });
+      if(closest===null||minDist>28){tt.style.display='none';return;}
+      const s=cv._stats[closest];
+      const qAvg=s.qN>0?(s.qSum/s.qN).toFixed(3):'—';
+      const aAvg=s.aN>0?(s.aSum/s.aN).toFixed(3):'—';
+      const gap=(s.qN>0&&s.aN>0)?(s.aSum/s.aN-s.qSum/s.qN).toFixed(3):'—';
+      tt.innerHTML=`<strong>${closest}</strong> &nbsp;·&nbsp; ${s.n.toLocaleString()} entries<br>Q avg: <span style="color:#ff8a80">${qAvg}</span> &nbsp; A avg: <span style="color:#FFD54F">${aAvg}</span> &nbsp; Gap: <span style="color:#81C784">${gap}</span>`;
+      tt.style.display='block';
+      // Position tooltip above cursor
+      const ttW=tt.offsetWidth,ttH=tt.offsetHeight;
+      let tx=e.clientX-ttW/2,ty=e.clientY-ttH-12;
+      if(tx<4)tx=4;if(tx+ttW>window.innerWidth-4)tx=window.innerWidth-ttW-4;
+      if(ty<4)ty=e.clientY+16;
+      tt.style.left=tx+'px';tt.style.top=ty+'px';
+    });
+    cv.addEventListener('mouseleave',()=>{if(tt)tt.style.display='none';});
+  });
+})();
+
+// ════════════════════════════════════════════════════════════════════
+// FEATURE: COMPARE MODE — pin Filter Set A, compare with current
+// ════════════════════════════════════════════════════════════════════
+let pinnedSetA=null; // {url, stats, filterDesc, yearStats}
+
+function buildFilterDesc(){
+  const parts=[];
+  const yF=parseInt($('yFrom').value)||2002,yT=parseInt($('yTo').value)||2025;
+  const q=$('sInput').value.trim();
+  const sps=getCB('spList'),med=getCB('mList');
+  if(q) parts.push(`"${q}"`);
+  if(activeEra){const l={hu:'Hu Era',early_xi:'Early Xi',wolf_era:'Wolf Warrior',recent:'Post-Pandemic'};parts.push(l[activeEra]);}
+  else if(yF>2002||yT<2025) parts.push(`${yF}–${yT}`);
+  if(sps.length) parts.push(sps.join(' + '));
+  if(activeMO){const l={western:'Western Media',chinese:'Chinese State',asian:'Asian/Regional',unattributed:'Unattributed'};parts.push(l[activeMO]);}
+  if(med.length) parts.push(med.join(', '));
+  if(activeLoc) parts.push(`📍${activeLoc}`);
+  if(activeOrg) parts.push(`🏛${activeOrg}`);
+  if(activePer) parts.push(`👤${activePer}`);
+  if(activeThemes.size) parts.push([...activeThemes].map(t=>THEMES[t].label).join(' + '));
+  if(activeRR.size) parts.push([...activeRR].map(r=>RR[r].label).join(' + '));
+  if(!parts.length) parts.push('All entries (no filters)');
+  return parts.join(' · ');
+}
+
+function buildSetSnapshot(){
+  const qv=FIL.map(r=>parseFloat(r.q_sentiment)).filter(v=>!isNaN(v));
+  const av=FIL.map(r=>parseFloat(r.a_sentiment)).filter(v=>!isNaN(v));
+  const qMean=qv.length?qv.reduce((a,b)=>a+b,0)/qv.length:NaN;
+  const aMean=av.length?av.reduce((a,b)=>a+b,0)/av.length:NaN;
+  const gap=(!isNaN(qMean)&&!isNaN(aMean))?aMean-qMean:NaN;
+  // Median
+  const med=arr=>{if(!arr.length)return NaN;const s=[...arr].sort((a,b)=>a-b),m=Math.floor(s.length/2);return s.length%2?s[m]:(s[m-1]+s[m])/2;};
+  const spC={};FIL.forEach(r=>{if(r.spokesperson&&r.spokesperson!=='-'&&r.spokesperson!=='missing')spC[r.spokesperson]=(spC[r.spokesperson]||0)+1;});
+  const topSP=Object.entries(spC).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([n,c])=>`${n} (${c})`).join(', ')||'—';
+  const ds=FIL.map(r=>r.date).filter(Boolean).sort();
+  return{
+    n:FIL.length,
+    qMean:isNaN(qMean)?null:+qMean.toFixed(3),
+    aMean:isNaN(aMean)?null:+aMean.toFixed(3),
+    gap:isNaN(gap)?null:+gap.toFixed(3),
+    qMedian:+med(qv).toFixed(3),
+    aMedian:+med(av).toFixed(3),
+    dateRange:ds.length?`${ds[0].slice(0,10)} → ${ds[ds.length-1].slice(0,10)}`:'—',
+    topSP,
+    yearStats:buildYearStats(FIL),
+    filterDesc:buildFilterDesc(),
+    url:location.search
+  };
+}
+
+function pinSetA(){
+  if(!FIL.length){showToast('No entries to pin — apply some filters first.');return;}
+  pinnedSetA=buildSetSnapshot();
+  // Show compareBar
+  $('compareBar').classList.add('on');
+  $('cmpALabel').textContent=pinnedSetA.filterDesc;
+  $('pinBtn').classList.add('active');
+  $('pinBtn').title='Set A pinned — change filters to define Set B, then click ⇆ Compare';
+  showToast(`📌 Set A pinned: ${pinnedSetA.n.toLocaleString()} entries`);
+}
+
+function clearPin(){
+  pinnedSetA=null;
+  $('compareBar').classList.remove('on');
+  $('pinBtn').classList.remove('active');
+  $('pinBtn').title='Pin current filters as Set A for comparison';
+}
+
+function closeCompare(){$('compareMov').classList.remove('open');document.body.style.overflow='';}
+
+function openCompare(){
+  if(!pinnedSetA){showToast('Pin a Set A first using the 📌 button.');return;}
+  const setB=buildSetSnapshot();
+  const A=pinnedSetA,B=setB;
+
+  // Build stat card HTML
+  function statCard(label,valA,valB,fmt,colorFn){
+    const fA=fmt(valA),fB=fmt(valB);
+    const cA=colorFn?colorFn(valA):'var(--text)',cB=colorFn?colorFn(valB):'var(--text)';
+    return`<div class="cmp-stat"><div class="cmp-stat-label">${label}</div><div class="cmp-stat-val" style="color:${cA}">${fA}</div></div>
+           <div class="cmp-stat"><div class="cmp-stat-label">${label}</div><div class="cmp-stat-val" style="color:${cB}">${fB}</div></div>`;
+  }
+  const fNum=v=>v===null?'—':v.toFixed(2);
+  const fN=v=>v===null?'—':v.toLocaleString();
+  const sColor=v=>v===null?'var(--sub)':v<2?'#C41E3A':v<2.8?'#E07B3A':v<3.3?'#B5960A':v<4?'#4C8F3A':'#2E7D32';
+  const gColor=v=>v===null?'var(--sub)':v<0.4?'#C41E3A':v<0.7?'#E07B3A':v<1.0?'#B5960A':'#2E7D32';
+
+  // Delta bars
+  function deltaRow(metric,vA,vB,scale){
+    if(vA===null||vB===null)return`<div class="cmp-delta-row"><div class="cmp-delta-metric">${metric}</div><div class="cmp-delta-bars"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">No data</div></div></div>`;
+    const maxW=200;
+    const pA=Math.round((vA/scale)*maxW),pB=Math.round((vB/scale)*maxW);
+    const diff=vB-vA;
+    const diffStr=(diff>0?'+':'')+diff.toFixed(2);
+    const diffCol=diff>0.1?'#4C8F3A':diff<-0.1?'#C41E3A':'var(--sub)';
+    return`<div class="cmp-delta-row">
+      <div class="cmp-delta-metric">${metric}</div>
+      <div class="cmp-delta-bars">
+        <div class="cmp-delta-bar-wrap"><div class="cmp-delta-barlabel" style="color:#64B5F6">Set A</div><div class="cmp-delta-bar" style="width:${pA}px;background:#1565C0"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);margin-left:4px">${vA.toFixed(2)}</div></div>
+        <div class="cmp-delta-bar-wrap"><div class="cmp-delta-barlabel" style="color:#ff8a80">Set B</div><div class="cmp-delta-bar" style="width:${pB}px;background:#C41E3A"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);margin-left:4px">${vB.toFixed(2)}</div></div>
+      </div>
+      <div class="cmp-delta-diff" style="color:${diffCol}">${diffStr}</div>
+    </div>`;
+  }
+
+  // Generate insight sentence
+  function generateInsight(){
+    const insights=[];
+    if(A.qMean!==null&&B.qMean!==null){
+      const d=B.qMean-A.qMean;
+      if(Math.abs(d)>0.15) insights.push(`Set B questions are ${Math.abs(d).toFixed(2)} points ${d>0?'less hostile (more positive)':'more hostile (more negative)'} than Set A (Q avg: ${A.qMean} vs ${B.qMean}).`);
+    }
+    if(A.aMean!==null&&B.aMean!==null){
+      const d=B.aMean-A.aMean;
+      if(Math.abs(d)>0.15) insights.push(`MFA answers in Set B are ${Math.abs(d).toFixed(2)} points ${d>0?'more positive':'more defensive'} than in Set A (A avg: ${A.aMean} vs ${B.aMean}).`);
+    }
+    if(A.gap!==null&&B.gap!==null){
+      const d=B.gap-A.gap;
+      if(Math.abs(d)>0.1) insights.push(`The Q–A rhetorical gap is ${d>0?'wider':'narrower'} in Set B by ${Math.abs(d).toFixed(2)} points — suggesting ${d>0?'stronger assertiveness relative to question hostility':'more pressure or convergence in diplomatic tone'}.`);
+    }
+    if(A.n>0&&B.n>0){
+      const ratio=(B.n/A.n);
+      if(ratio<0.2) insights.push(`Set B has far fewer entries (${B.n.toLocaleString()} vs ${A.n.toLocaleString()}) — check if filters are too narrow.`);
+    }
+    if(!insights.length) insights.push(`Sets A and B show similar sentiment profiles. Difference in Q avg: ${((B.qMean||0)-(A.qMean||0)).toFixed(2)}, A avg: ${((B.aMean||0)-(A.aMean||0)).toFixed(2)}.`);
+    return insights.join(' ');
+  }
+
+  // Arc comparison chart (dual lines in canvas)
+  const arcId='cmpArcCanvas';
+
+  $('cmpContent').innerHTML=`
+    <div class="cmp-grid">
+      <div class="cmp-set cmp-set-a">
+        <div class="cmp-set-title">📌 Set A (pinned)</div>
+        <div class="cmp-stat-row">
+          <div class="cmp-stat"><div class="cmp-stat-label">Entries</div><div class="cmp-stat-val" style="color:#1565C0">${A.n.toLocaleString()}</div></div>
+          <div class="cmp-stat"><div class="cmp-stat-label">Date range</div><div class="cmp-stat-val" style="font-size:11px;color:var(--sub)">${A.dateRange}</div></div>
+        </div>
+        <div class="cmp-stat-row">
+          <div class="cmp-stat"><div class="cmp-stat-label">Avg Q Sent.</div><div class="cmp-stat-val" style="color:${sColor(A.qMean)}">${fNum(A.qMean)}</div></div>
+          <div class="cmp-stat"><div class="cmp-stat-label">Avg A Sent.</div><div class="cmp-stat-val" style="color:${sColor(A.aMean)}">${fNum(A.aMean)}</div></div>
+        </div>
+        <div class="cmp-stat-row">
+          <div class="cmp-stat"><div class="cmp-stat-label">Q–A Gap</div><div class="cmp-stat-val" style="color:${gColor(A.gap)}">${fNum(A.gap)}</div></div>
+          <div class="cmp-stat"><div class="cmp-stat-label">Median A</div><div class="cmp-stat-val" style="color:${sColor(A.aMedian)}">${fNum(A.aMedian)}</div></div>
+        </div>
+        <div class="cmp-filter-desc"><strong>Filters:</strong> ${esc(A.filterDesc)}<br><strong>Top SP:</strong> ${esc(A.topSP)}</div>
+      </div>
+      <div class="cmp-set cmp-set-b">
+        <div class="cmp-set-title">🔵 Set B (current)</div>
+        <div class="cmp-stat-row">
+          <div class="cmp-stat"><div class="cmp-stat-label">Entries</div><div class="cmp-stat-val" style="color:var(--red)">${B.n.toLocaleString()}</div></div>
+          <div class="cmp-stat"><div class="cmp-stat-label">Date range</div><div class="cmp-stat-val" style="font-size:11px;color:var(--sub)">${B.dateRange}</div></div>
+        </div>
+        <div class="cmp-stat-row">
+          <div class="cmp-stat"><div class="cmp-stat-label">Avg Q Sent.</div><div class="cmp-stat-val" style="color:${sColor(B.qMean)}">${fNum(B.qMean)}</div></div>
+          <div class="cmp-stat"><div class="cmp-stat-label">Avg A Sent.</div><div class="cmp-stat-val" style="color:${sColor(B.aMean)}">${fNum(B.aMean)}</div></div>
+        </div>
+        <div class="cmp-stat-row">
+          <div class="cmp-stat"><div class="cmp-stat-label">Q–A Gap</div><div class="cmp-stat-val" style="color:${gColor(B.gap)}">${fNum(B.gap)}</div></div>
+          <div class="cmp-stat"><div class="cmp-stat-label">Median A</div><div class="cmp-stat-val" style="color:${sColor(B.aMedian)}">${fNum(B.aMedian)}</div></div>
+        </div>
+        <div class="cmp-filter-desc"><strong>Filters:</strong> ${esc(B.filterDesc)}<br><strong>Top SP:</strong> ${esc(B.topSP)}</div>
+      </div>
+    </div>
+    <div class="cmp-insight">${generateInsight()}</div>
+    <div class="cmp-delta">
+      <div class="cmp-delta-title">Side-by-side metric comparison (Set A vs Set B)</div>
+      ${deltaRow('Avg Q Sentiment',A.qMean,B.qMean,5)}
+      ${deltaRow('Avg A Sentiment',A.aMean,B.aMean,5)}
+      ${deltaRow('Q–A Gap',A.gap,B.gap,3)}
+      ${deltaRow('Median Q',A.qMedian,B.qMedian,5)}
+      ${deltaRow('Median A',A.aMedian,B.aMedian,5)}
+    </div>
+    <div class="cmp-arc-section">
+      <div class="cmp-arc-title">Answer sentiment arc — Set A (blue) vs Set B (red) per year</div>
+      <canvas id="${arcId}" height="110" style="width:100%;display:block;cursor:default"></canvas>
+      <div style="display:flex;gap:18px;margin-top:6px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#1565C0">— Set A answer sentiment</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#C41E3A">— Set B answer sentiment</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(107,98,89,.5)">- - corpus mean (${CORPUS_A_MEAN})</span>
+      </div>
+    </div>`;
+
+  // Draw dual arc chart
+  requestAnimationFrame(()=>{
+    const cv=document.getElementById(arcId);if(!cv)return;
+    const W=cv.parentElement.offsetWidth-2;const H=110;
+    cv.width=W;cv.height=H;
+    const ctx=cv.getContext('2d');
+    ctx.clearRect(0,0,W,H);
+    const dark=document.body.classList.contains('dark');
+    const gridCol=dark?'rgba(255,255,255,.06)':'rgba(0,0,0,.05)';
+    const textCol=dark?'rgba(221,213,200,.4)':'rgba(107,98,89,.55)';
+    const PAD={t:8,b:22,l:36,r:12};
+    const cW=W-PAD.l-PAD.r,cH=H-PAD.t-PAD.b;
+
+    // Get all years from both sets
+    const allYrs=[...new Set([...Object.keys(A.yearStats),...Object.keys(B.yearStats)].map(Number))].sort((a,b)=>a-b);
+    if(allYrs.length<2){ctx.fillStyle=textCol;ctx.font='10px IBM Plex Mono,monospace';ctx.textAlign='center';ctx.fillText('Not enough year data',W/2,H/2);return;}
+    const minY=allYrs[0],maxY=allYrs[allYrs.length-1],xR=maxY-minY||1;
+    const xOf=y=>PAD.l+((y-minY)/xR)*cW;
+    const yOf=v=>PAD.t+cH-(((v-0)/5)*cH);
+
+    // Grid
+    [1,2,3,4].forEach(v=>{
+      const y=yOf(v);
+      ctx.strokeStyle=gridCol;ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(PAD.l,y);ctx.lineTo(W-PAD.r,y);ctx.stroke();
+      ctx.fillStyle=textCol;ctx.font='8px IBM Plex Mono,monospace';ctx.textAlign='right';
+      ctx.fillText(v.toFixed(0),PAD.l-4,y+3);
+    });
+
+    // X axis labels
+    ctx.fillStyle=textCol;ctx.font='8px IBM Plex Mono,monospace';ctx.textAlign='center';
+    allYrs.forEach(y=>{
+      if((y-minY)%(Math.ceil(xR/8))===0||y===minY||y===maxY) ctx.fillText(String(y),xOf(y),H-4);
+    });
+
+    // Corpus mean dashed
+    ctx.strokeStyle=dark?'rgba(107,98,89,.35)':'rgba(107,98,89,.25)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(PAD.l,yOf(CORPUS_A_MEAN));ctx.lineTo(W-PAD.r,yOf(CORPUS_A_MEAN));ctx.stroke();
+    ctx.setLineDash([]);
+
+    function drawSetLine(statsMap,color){
+      const pts=allYrs.filter(y=>statsMap[y]&&statsMap[y].aN>0).map(y=>[xOf(y),yOf(statsMap[y].aSum/statsMap[y].aN)]);
+      if(pts.length<2)return;
+      ctx.strokeStyle=color;ctx.lineWidth=2;ctx.setLineDash([]);
+      ctx.beginPath();pts.forEach(([x,y],i)=>i===0?ctx.moveTo(x,y):ctx.lineTo(x,y));ctx.stroke();
+      pts.forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();});
+    }
+    drawSetLine(A.yearStats,'#1565C0');
+    drawSetLine(B.yearStats,'#C41E3A');
+  });
+
+  $('compareMov').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function copyCmpText(){
+  if(!pinnedSetA)return;
+  const B=buildSetSnapshot();const A=pinnedSetA;
+  const text=`CMFA PressCon — Filter Set Comparison\n\nSET A (pinned)\nFilters: ${A.filterDesc}\nEntries: ${A.n.toLocaleString()}\nAvg Q Sentiment: ${A.qMean??'—'}\nAvg A Sentiment: ${A.aMean??'—'}\nQ–A Gap: ${A.gap??'—'}\nMedian A Sentiment: ${A.aMedian??'—'}\nDate Range: ${A.dateRange}\nTop Spokespersons: ${A.topSP}\n\nSET B (current)\nFilters: ${B.filterDesc}\nEntries: ${B.n.toLocaleString()}\nAvg Q Sentiment: ${B.qMean??'—'}\nAvg A Sentiment: ${B.aMean??'—'}\nQ–A Gap: ${B.gap??'—'}\nMedian A Sentiment: ${B.aMedian??'—'}\nDate Range: ${B.dateRange}\nTop Spokespersons: ${B.topSP}\n\nDataset: Mochtak & Turcsanyi (2021), CMFA PressCon v6, Harvard Dataverse, doi:10.7910/DVN/BAKGET`;
+  navigator.clipboard?.writeText(text).then(()=>showToast('Comparison copied!')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Comparison copied!');});
+}
+
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='compareMov')closeCompare();});
+
+// ── HOOK ARC INTO updateStats ───────────────────────────────────────
 function openHelp(){$('helpMov').classList.add('open');document.body.style.overflow='hidden';}
 function closeHelp(){$('helpMov').classList.remove('open');document.body.style.overflow='';}
 function showPanel(id,navEl){
