@@ -440,6 +440,65 @@ body.dark .cmp-lbl{color:#64B5F6}
 .pin-btn{padding:7px 10px;background:transparent;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);cursor:pointer;transition:all .15s;white-space:nowrap}
 .pin-btn:hover{border-color:#1565C0;color:#1565C0}
 .pin-btn.active{background:#1565C0;color:white;border-color:#1565C0}
+/* ── ANALYSE DROPDOWN ──────────────────────────────────────── */
+.analyse-wrap{position:relative;flex-shrink:0}
+.analyse-btn{padding:7px 10px;background:transparent;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);cursor:pointer;transition:all .15s;white-space:nowrap}
+.analyse-btn:hover,.analyse-btn.open{border-color:var(--red);color:var(--red);background:rgba(196,30,58,.04)}
+.analyse-menu{display:none;position:absolute;right:0;top:calc(100% + 4px);background:var(--card);border:1px solid var(--mist);border-radius:4px;box-shadow:0 8px 32px rgba(0,0,0,.18);z-index:300;min-width:180px;overflow:hidden}
+.analyse-menu.open{display:block}
+.analyse-menu button{display:block;width:100%;text-align:left;padding:9px 14px;background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text);cursor:pointer;transition:background .12s;letter-spacing:.03em}
+.analyse-menu button:hover{background:rgba(196,30,58,.06);color:var(--red)}
+body.dark .analyse-menu{background:var(--card);border-color:var(--mist)}
+/* ── PROFILE MODAL ─────────────────────────────────────────── */
+#profileMov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.75);z-index:601;backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px}
+#profileMov.open{display:flex}
+#profileBox{background:var(--card);border-radius:8px;width:min(820px,100%);max-height:90vh;overflow-y:auto;box-shadow:0 32px 100px rgba(0,0,0,.4);display:flex;flex-direction:column}
+body.dark #profileBox{background:#231F1A}
+.prof-hd{padding:16px 22px 12px;border-bottom:1px solid var(--mist);display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0;gap:12px}
+.prof-hd h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text);margin:0}
+.prof-hd-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-top:3px;letter-spacing:.05em}
+#profContent{padding:18px 22px 22px;display:flex;flex-direction:column;gap:16px}
+.prof-section{background:var(--paper);border-radius:5px;padding:14px 16px}
+body.dark .prof-section{background:#1C1914}
+.prof-section-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--smoke);margin-bottom:10px;font-weight:600}
+.prof-insight{font-size:12px;line-height:1.8;color:var(--text);margin-bottom:8px}
+.prof-insight strong{color:var(--red)}
+.prof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}
+.prof-stat{background:var(--card);border-radius:4px;padding:10px;text-align:center;border:1px solid var(--mist)}
+body.dark .prof-stat{background:#231F1A}
+.prof-stat-label{font-family:'IBM Plex Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:var(--smoke);margin-bottom:4px}
+.prof-stat-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1}
+.prof-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.prof-bar-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);min-width:110px;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prof-bar-track{flex:1;height:8px;background:var(--mist);border-radius:2px;overflow:hidden}
+.prof-bar-fill{height:100%;border-radius:2px;transition:width .4s ease}
+.prof-bar-val{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);min-width:38px;text-align:right}
+.prof-tag-cloud{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.prof-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:10px;background:var(--mist);color:var(--sub);border:1px solid var(--mist)}
+.prof-tag.hot{background:rgba(196,30,58,.1);border-color:rgba(196,30,58,.25);color:var(--red)}
+.prof-sparkline{display:flex;align-items:flex-end;gap:2px;height:28px;margin-top:6px}
+.prof-spark-bar{background:var(--red);border-radius:1px 1px 0 0;min-width:6px;opacity:.7;transition:opacity .15s;cursor:default;position:relative}
+.prof-spark-bar:hover{opacity:1}
+/* ── BEFORE/AFTER MODAL ────────────────────────────────────── */
+#baMov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.75);z-index:601;backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px}
+#baMov.open{display:flex}
+#baBox{background:var(--card);border-radius:8px;width:min(560px,100%);max-height:90vh;overflow-y:auto;box-shadow:0 32px 100px rgba(0,0,0,.4)}
+body.dark #baBox{background:#231F1A}
+.ba-hd{padding:16px 22px 12px;border-bottom:1px solid var(--mist);display:flex;align-items:center;justify-content:space-between}
+.ba-hd h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text)}
+.ba-body{padding:18px 22px 22px;display:flex;flex-direction:column;gap:12px}
+.ba-intro{font-size:12px;color:var(--sub);line-height:1.7}
+.ba-section-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--smoke);font-weight:600}
+.ba-events{display:flex;flex-direction:column;gap:4px;max-height:240px;overflow-y:auto}
+.ba-event-btn{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border:1px solid var(--mist);border-radius:4px;background:var(--paper);cursor:pointer;text-align:left;transition:all .15s}
+.ba-event-btn:hover{border-color:var(--red);background:rgba(196,30,58,.04)}
+body.dark .ba-event-btn{background:var(--paper)}
+.ba-event-date{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--red);font-weight:600;white-space:nowrap;min-width:80px}
+.ba-event-name{font-size:11px;color:var(--text);line-height:1.4}
+.ba-date-row{display:flex;gap:8px;align-items:center}
+.ba-date-row input{padding:8px 10px;border:1px solid var(--mist);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--paper);color:var(--text);outline:none;flex:1}
+.ba-date-row input:focus{border-color:var(--red)}
+.ba-note{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--smoke);line-height:1.6;min-height:16px}
 #compareMov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.75);z-index:600;backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px}
 #compareMov.open{display:flex}
 #compareBox{background:var(--card);border-radius:8px;width:min(900px,100%);max-height:90vh;overflow-y:auto;box-shadow:0 32px 100px rgba(0,0,0,.4);display:flex;flex-direction:column}
@@ -970,6 +1029,13 @@ body.dark .help-footer{background:#1C1914}
       <button class="exp-btn" onclick="exportCSV()">↓ Export</button>
       <button class="bm-only-btn" id="bmOnlyBtn" onclick="toggleBmOnly()" title="Show only bookmarked entries">⭐ Bookmarked</button>
       <button class="pin-btn" id="pinBtn" onclick="pinSetA()" title="Pin current filters as Set A for comparison">📌 Pin</button>
+      <div class="analyse-wrap" id="analyseWrap">
+        <button class="analyse-btn" onclick="toggleAnalyseMenu()" title="Research analysis tools">🔬 Analyse ▾</button>
+        <div class="analyse-menu" id="analyseMenu">
+          <button onclick="openProfile();toggleAnalyseMenu()">📋 Corpus Profile</button>
+          <button onclick="openBeforeAfter();toggleAnalyseMenu()">⚡ Before / After Split</button>
+        </div>
+      </div>
     </div>
     <div id="stats">
       <div class="st"><span class="st-l">Results</span><span class="st-v" id="stN" style="color:white">—</span></div>
@@ -1985,6 +2051,46 @@ function resetAll(){
   </div>
 </div>
 
+<!-- ── CORPUS PROFILE MODAL ──────────────────────────────── -->
+<div id="profileMov">
+  <div id="profileBox">
+    <div class="prof-hd">
+      <div>
+        <h3>📋 Corpus Profile</h3>
+        <div class="prof-hd-sub" id="profSubtitle"></div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="meth-copybtn" onclick="copyProfile()" style="font-size:9px;padding:5px 14px">📋 Copy</button>
+        <button class="mclose" onclick="closeProfile()">×</button>
+      </div>
+    </div>
+    <div id="profContent"></div>
+  </div>
+</div>
+
+<!-- ── BEFORE/AFTER SPLIT MODAL ───────────────────────────── -->
+<div id="baMov">
+  <div id="baBox">
+    <div class="ba-hd">
+      <h3>⚡ Before / After Split</h3>
+      <button class="mclose" onclick="closeBA()">×</button>
+    </div>
+    <div class="ba-body">
+      <div class="ba-intro">Split your current filtered set at a date or event to compare how rhetoric changed.</div>
+      <!-- Event presets -->
+      <div class="ba-section-label">Quick events</div>
+      <div class="ba-events" id="baEvents"></div>
+      <!-- Manual date -->
+      <div class="ba-section-label" style="margin-top:12px">Or enter a custom date</div>
+      <div class="ba-date-row">
+        <input type="date" id="baSplitDate" min="2002-01-01" max="2025-12-31" value="2022-02-24">
+        <button class="cmp-compare" onclick="runBeforeAfter()">Split &amp; Compare →</button>
+      </div>
+      <div class="ba-note" id="baNote"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ── COMPARE MODAL ──────────────────────────────────────── -->
 <div id="compareMov">
   <div id="compareBox">
@@ -2773,171 +2879,7 @@ function closeCompare(){$('compareMov').classList.remove('open');document.body.s
 function openCompare(){
   if(!pinnedSetA){showToast('Pin a Set A first using the 📌 button.');return;}
   const setB=buildSetSnapshot();
-  const A=pinnedSetA,B=setB;
-
-  // Build stat card HTML
-  function statCard(label,valA,valB,fmt,colorFn){
-    const fA=fmt(valA),fB=fmt(valB);
-    const cA=colorFn?colorFn(valA):'var(--text)',cB=colorFn?colorFn(valB):'var(--text)';
-    return`<div class="cmp-stat"><div class="cmp-stat-label">${label}</div><div class="cmp-stat-val" style="color:${cA}">${fA}</div></div>
-           <div class="cmp-stat"><div class="cmp-stat-label">${label}</div><div class="cmp-stat-val" style="color:${cB}">${fB}</div></div>`;
-  }
-  const fNum=v=>v===null?'—':v.toFixed(2);
-  const fN=v=>v===null?'—':v.toLocaleString();
-  const sColor=v=>v===null?'var(--sub)':v<2?'#C41E3A':v<2.8?'#E07B3A':v<3.3?'#B5960A':v<4?'#4C8F3A':'#2E7D32';
-  const gColor=v=>v===null?'var(--sub)':v<0.4?'#C41E3A':v<0.7?'#E07B3A':v<1.0?'#B5960A':'#2E7D32';
-
-  // Delta bars
-  function deltaRow(metric,vA,vB,scale){
-    if(vA===null||vB===null)return`<div class="cmp-delta-row"><div class="cmp-delta-metric">${metric}</div><div class="cmp-delta-bars"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">No data</div></div></div>`;
-    const maxW=200;
-    const pA=Math.round((vA/scale)*maxW),pB=Math.round((vB/scale)*maxW);
-    const diff=vB-vA;
-    const diffStr=(diff>0?'+':'')+diff.toFixed(2);
-    const diffCol=diff>0.1?'#4C8F3A':diff<-0.1?'#C41E3A':'var(--sub)';
-    return`<div class="cmp-delta-row">
-      <div class="cmp-delta-metric">${metric}</div>
-      <div class="cmp-delta-bars">
-        <div class="cmp-delta-bar-wrap"><div class="cmp-delta-barlabel" style="color:#64B5F6">Set A</div><div class="cmp-delta-bar" style="width:${pA}px;background:#1565C0"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);margin-left:4px">${vA.toFixed(2)}</div></div>
-        <div class="cmp-delta-bar-wrap"><div class="cmp-delta-barlabel" style="color:#ff8a80">Set B</div><div class="cmp-delta-bar" style="width:${pB}px;background:#C41E3A"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);margin-left:4px">${vB.toFixed(2)}</div></div>
-      </div>
-      <div class="cmp-delta-diff" style="color:${diffCol}">${diffStr}</div>
-    </div>`;
-  }
-
-  // Generate insight sentence
-  function generateInsight(){
-    const insights=[];
-    if(A.qMean!==null&&B.qMean!==null){
-      const d=B.qMean-A.qMean;
-      if(Math.abs(d)>0.15) insights.push(`Set B questions are ${Math.abs(d).toFixed(2)} points ${d>0?'less hostile (more positive)':'more hostile (more negative)'} than Set A (Q avg: ${A.qMean} vs ${B.qMean}).`);
-    }
-    if(A.aMean!==null&&B.aMean!==null){
-      const d=B.aMean-A.aMean;
-      if(Math.abs(d)>0.15) insights.push(`MFA answers in Set B are ${Math.abs(d).toFixed(2)} points ${d>0?'more positive':'more defensive'} than in Set A (A avg: ${A.aMean} vs ${B.aMean}).`);
-    }
-    if(A.gap!==null&&B.gap!==null){
-      const d=B.gap-A.gap;
-      if(Math.abs(d)>0.1) insights.push(`The Q–A rhetorical gap is ${d>0?'wider':'narrower'} in Set B by ${Math.abs(d).toFixed(2)} points — suggesting ${d>0?'stronger assertiveness relative to question hostility':'more pressure or convergence in diplomatic tone'}.`);
-    }
-    if(A.n>0&&B.n>0){
-      const ratio=(B.n/A.n);
-      if(ratio<0.2) insights.push(`Set B has far fewer entries (${B.n.toLocaleString()} vs ${A.n.toLocaleString()}) — check if filters are too narrow.`);
-    }
-    if(!insights.length) insights.push(`Sets A and B show similar sentiment profiles. Difference in Q avg: ${((B.qMean||0)-(A.qMean||0)).toFixed(2)}, A avg: ${((B.aMean||0)-(A.aMean||0)).toFixed(2)}.`);
-    return insights.join(' ');
-  }
-
-  // Arc comparison chart (dual lines in canvas)
-  const arcId='cmpArcCanvas';
-
-  $('cmpContent').innerHTML=`
-    <div class="cmp-grid">
-      <div class="cmp-set cmp-set-a">
-        <div class="cmp-set-title">📌 Set A (pinned)</div>
-        <div class="cmp-stat-row">
-          <div class="cmp-stat"><div class="cmp-stat-label">Entries</div><div class="cmp-stat-val" style="color:#1565C0">${A.n.toLocaleString()}</div></div>
-          <div class="cmp-stat"><div class="cmp-stat-label">Date range</div><div class="cmp-stat-val" style="font-size:11px;color:var(--sub)">${A.dateRange}</div></div>
-        </div>
-        <div class="cmp-stat-row">
-          <div class="cmp-stat"><div class="cmp-stat-label">Avg Q Sent.</div><div class="cmp-stat-val" style="color:${sColor(A.qMean)}">${fNum(A.qMean)}</div></div>
-          <div class="cmp-stat"><div class="cmp-stat-label">Avg A Sent.</div><div class="cmp-stat-val" style="color:${sColor(A.aMean)}">${fNum(A.aMean)}</div></div>
-        </div>
-        <div class="cmp-stat-row">
-          <div class="cmp-stat"><div class="cmp-stat-label">Q–A Gap</div><div class="cmp-stat-val" style="color:${gColor(A.gap)}">${fNum(A.gap)}</div></div>
-          <div class="cmp-stat"><div class="cmp-stat-label">Median A</div><div class="cmp-stat-val" style="color:${sColor(A.aMedian)}">${fNum(A.aMedian)}</div></div>
-        </div>
-        <div class="cmp-filter-desc"><strong>Filters:</strong> ${esc(A.filterDesc)}<br><strong>Top SP:</strong> ${esc(A.topSP)}</div>
-      </div>
-      <div class="cmp-set cmp-set-b">
-        <div class="cmp-set-title">🔵 Set B (current)</div>
-        <div class="cmp-stat-row">
-          <div class="cmp-stat"><div class="cmp-stat-label">Entries</div><div class="cmp-stat-val" style="color:var(--red)">${B.n.toLocaleString()}</div></div>
-          <div class="cmp-stat"><div class="cmp-stat-label">Date range</div><div class="cmp-stat-val" style="font-size:11px;color:var(--sub)">${B.dateRange}</div></div>
-        </div>
-        <div class="cmp-stat-row">
-          <div class="cmp-stat"><div class="cmp-stat-label">Avg Q Sent.</div><div class="cmp-stat-val" style="color:${sColor(B.qMean)}">${fNum(B.qMean)}</div></div>
-          <div class="cmp-stat"><div class="cmp-stat-label">Avg A Sent.</div><div class="cmp-stat-val" style="color:${sColor(B.aMean)}">${fNum(B.aMean)}</div></div>
-        </div>
-        <div class="cmp-stat-row">
-          <div class="cmp-stat"><div class="cmp-stat-label">Q–A Gap</div><div class="cmp-stat-val" style="color:${gColor(B.gap)}">${fNum(B.gap)}</div></div>
-          <div class="cmp-stat"><div class="cmp-stat-label">Median A</div><div class="cmp-stat-val" style="color:${sColor(B.aMedian)}">${fNum(B.aMedian)}</div></div>
-        </div>
-        <div class="cmp-filter-desc"><strong>Filters:</strong> ${esc(B.filterDesc)}<br><strong>Top SP:</strong> ${esc(B.topSP)}</div>
-      </div>
-    </div>
-    <div class="cmp-insight">${generateInsight()}</div>
-    <div class="cmp-delta">
-      <div class="cmp-delta-title">Side-by-side metric comparison (Set A vs Set B)</div>
-      ${deltaRow('Avg Q Sentiment',A.qMean,B.qMean,5)}
-      ${deltaRow('Avg A Sentiment',A.aMean,B.aMean,5)}
-      ${deltaRow('Q–A Gap',A.gap,B.gap,3)}
-      ${deltaRow('Median Q',A.qMedian,B.qMedian,5)}
-      ${deltaRow('Median A',A.aMedian,B.aMedian,5)}
-    </div>
-    <div class="cmp-arc-section">
-      <div class="cmp-arc-title">Answer sentiment arc — Set A (blue) vs Set B (red) per year</div>
-      <canvas id="${arcId}" height="110" style="width:100%;display:block;cursor:default"></canvas>
-      <div style="display:flex;gap:18px;margin-top:6px">
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#1565C0">— Set A answer sentiment</span>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#C41E3A">— Set B answer sentiment</span>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(107,98,89,.5)">- - corpus mean (${CORPUS_A_MEAN})</span>
-      </div>
-    </div>`;
-
-  // Draw dual arc chart
-  requestAnimationFrame(()=>{
-    const cv=document.getElementById(arcId);if(!cv)return;
-    const W=cv.parentElement.offsetWidth-2;const H=110;
-    cv.width=W;cv.height=H;
-    const ctx=cv.getContext('2d');
-    ctx.clearRect(0,0,W,H);
-    const dark=document.body.classList.contains('dark');
-    const gridCol=dark?'rgba(255,255,255,.06)':'rgba(0,0,0,.05)';
-    const textCol=dark?'rgba(221,213,200,.4)':'rgba(107,98,89,.55)';
-    const PAD={t:8,b:22,l:36,r:12};
-    const cW=W-PAD.l-PAD.r,cH=H-PAD.t-PAD.b;
-
-    // Get all years from both sets
-    const allYrs=[...new Set([...Object.keys(A.yearStats),...Object.keys(B.yearStats)].map(Number))].sort((a,b)=>a-b);
-    if(allYrs.length<2){ctx.fillStyle=textCol;ctx.font='10px IBM Plex Mono,monospace';ctx.textAlign='center';ctx.fillText('Not enough year data',W/2,H/2);return;}
-    const minY=allYrs[0],maxY=allYrs[allYrs.length-1],xR=maxY-minY||1;
-    const xOf=y=>PAD.l+((y-minY)/xR)*cW;
-    const yOf=v=>PAD.t+cH-(((v-0)/5)*cH);
-
-    // Grid
-    [1,2,3,4].forEach(v=>{
-      const y=yOf(v);
-      ctx.strokeStyle=gridCol;ctx.lineWidth=1;
-      ctx.beginPath();ctx.moveTo(PAD.l,y);ctx.lineTo(W-PAD.r,y);ctx.stroke();
-      ctx.fillStyle=textCol;ctx.font='8px IBM Plex Mono,monospace';ctx.textAlign='right';
-      ctx.fillText(v.toFixed(0),PAD.l-4,y+3);
-    });
-
-    // X axis labels
-    ctx.fillStyle=textCol;ctx.font='8px IBM Plex Mono,monospace';ctx.textAlign='center';
-    allYrs.forEach(y=>{
-      if((y-minY)%(Math.ceil(xR/8))===0||y===minY||y===maxY) ctx.fillText(String(y),xOf(y),H-4);
-    });
-
-    // Corpus mean dashed
-    ctx.strokeStyle=dark?'rgba(107,98,89,.35)':'rgba(107,98,89,.25)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
-    ctx.beginPath();ctx.moveTo(PAD.l,yOf(CORPUS_A_MEAN));ctx.lineTo(W-PAD.r,yOf(CORPUS_A_MEAN));ctx.stroke();
-    ctx.setLineDash([]);
-
-    function drawSetLine(statsMap,color){
-      const pts=allYrs.filter(y=>statsMap[y]&&statsMap[y].aN>0).map(y=>[xOf(y),yOf(statsMap[y].aSum/statsMap[y].aN)]);
-      if(pts.length<2)return;
-      ctx.strokeStyle=color;ctx.lineWidth=2;ctx.setLineDash([]);
-      ctx.beginPath();pts.forEach(([x,y],i)=>i===0?ctx.moveTo(x,y):ctx.lineTo(x,y));ctx.stroke();
-      pts.forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();});
-    }
-    drawSetLine(A.yearStats,'#1565C0');
-    drawSetLine(B.yearStats,'#C41E3A');
-  });
-
-  $('compareMov').classList.add('open');
-  document.body.style.overflow='hidden';
+  _renderCompare(pinnedSetA,setB);
 }
 
 function copyCmpText(){
@@ -2949,8 +2891,279 @@ function copyCmpText(){
 
 document.addEventListener('click',e=>{if(e.target&&e.target.id==='compareMov')closeCompare();});
 
-// ── HOOK ARC INTO updateStats ───────────────────────────────────────
-function openHelp(){$('helpMov').classList.add('open');document.body.style.overflow='hidden';}
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='compareMov')closeCompare();});
+
+// ── ANALYSE DROPDOWN MENU ──────────────────────────────────────────
+function toggleAnalyseMenu(){
+  const menu=$('analyseMenu'),btn=document.querySelector('.analyse-btn');
+  const isOpen=menu.classList.toggle('open');
+  if(btn)btn.classList.toggle('open',isOpen);
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#analyseWrap')){
+    const m=$('analyseMenu');if(m)m.classList.remove('open');
+    const b=document.querySelector('.analyse-btn');if(b)b.classList.remove('open');
+  }
+});
+
+// ════════════════════════════════════════════════════════════════════
+// FEATURE: CORPUS PROFILE
+// ════════════════════════════════════════════════════════════════════
+function closeProfile(){$('profileMov').classList.remove('open');document.body.style.overflow='';}
+
+function openProfile(){
+  if(!FIL.length){showToast('No entries — apply filters first.');return;}
+  $('profSubtitle').textContent=`${FIL.length.toLocaleString()} entries · ${buildFilterDesc()}`;
+  $('profContent').innerHTML='<div style="padding:20px;text-align:center;font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--smoke)">Computing profile…</div>';
+  $('profileMov').classList.add('open');
+  document.body.style.overflow='hidden';
+  requestAnimationFrame(()=>requestAnimationFrame(computeProfile));
+}
+
+function computeProfile(){
+  const rows=FIL;
+  const qv=rows.map(r=>parseFloat(r.q_sentiment)).filter(v=>!isNaN(v));
+  const av=rows.map(r=>parseFloat(r.a_sentiment)).filter(v=>!isNaN(v));
+  const qMean=qv.length?qv.reduce((a,b)=>a+b,0)/qv.length:NaN;
+  const aMean=av.length?av.reduce((a,b)=>a+b,0)/av.length:NaN;
+  const gap=(!isNaN(qMean)&&!isNaN(aMean))?aMean-qMean:NaN;
+  const med=arr=>{if(!arr.length)return NaN;const s=[...arr].sort((a,b)=>a-b),m=Math.floor(s.length/2);return s.length%2?s[m]:(s[m-1]+s[m])/2;};
+  const sd=arr=>{if(!arr.length)return NaN;const m=arr.reduce((a,b)=>a+b,0)/arr.length;return Math.sqrt(arr.reduce((a,b)=>a+(b-m)**2,0)/arr.length);};
+
+  const yearMap={};rows.forEach(r=>{const y=parseInt(r.year);if(y>=2002&&y<=2025)yearMap[y]=(yearMap[y]||0)+1;});
+  const years=Object.keys(yearMap).map(Number).sort((a,b)=>a-b);
+  const maxYearN=Math.max(...Object.values(yearMap),1);
+  const topYears=Object.entries(yearMap).sort((a,b)=>b[1]-a[1]).slice(0,3);
+
+  const yrStats=buildYearStats(rows);
+  let mostDefensiveYr=null,mostAssertiveYr=null,minA=Infinity,maxA=-Infinity;
+  years.forEach(y=>{const s=yrStats[y];if(!s||!s.aN)return;const a=s.aSum/s.aN;if(a<minA){minA=a;mostDefensiveYr={yr:y,val:a.toFixed(2)};}if(a>maxA){maxA=a;mostAssertiveYr={yr:y,val:a.toFixed(2)};}});
+
+  const spMap={};rows.forEach(r=>{if(!r.spokesperson||r.spokesperson==='-'||r.spokesperson==='missing')return;if(!spMap[r.spokesperson])spMap[r.spokesperson]={n:0,aSum:0,aN:0};spMap[r.spokesperson].n++;const a=parseFloat(r.a_sentiment);if(!isNaN(a)){spMap[r.spokesperson].aSum+=a;spMap[r.spokesperson].aN++;}});
+  const spList=Object.entries(spMap).sort((a,b)=>b[1].n-a[1].n).slice(0,6);
+
+  const CORPUS_RR_RATES={bureaucratic:.102,sovereignty:.113,wolf:.068,coop:.361,evasive:.042,denial:.055,warning:.076,coercive:.008,nationalist:.006,grievance:.005,pedagogical:.003,multilateral:.226,idiomatic:.007};
+  const rrMap={};rows.forEach(r=>{r._rr.forEach(t=>{rrMap[t]=(rrMap[t]||0)+1;});});
+  const rrList=Object.entries(rrMap).map(([k,n])=>({k,n,rate:n/rows.length,corpus:CORPUS_RR_RATES[k]||0,ratio:(n/rows.length)/(CORPUS_RR_RATES[k]||.001)})).sort((a,b)=>b.ratio-a.ratio).slice(0,5);
+
+  const thMap={};rows.forEach(r=>{r._themes.forEach(t=>{thMap[t]=(thMap[t]||0)+1;});});
+  const thList=Object.entries(thMap).sort((a,b)=>b[1]-a[1]).slice(0,6);
+
+  function topNER(field,n=8){const m={};rows.forEach(r=>{(r[field]||'').split(';').map(s=>s.trim()).filter(s=>s&&s!=='-'&&s.length>1).forEach(e=>{m[e]=(m[e]||0)+1;});});return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,n);}
+  const topLocs=topNER('a_loc'),topOrgs=topNER('a_org'),topPers=topNER('a_per');
+
+  const mediaMap={};rows.forEach(r=>{if(!r.who_asked||r.who_asked==='-')return;if(!mediaMap[r.who_asked])mediaMap[r.who_asked]={n:0,qSum:0,qN:0};mediaMap[r.who_asked].n++;const q=parseFloat(r.q_sentiment);if(!isNaN(q)){mediaMap[r.who_asked].qSum+=q;mediaMap[r.who_asked].qN++;}});
+  const mediaList=Object.entries(mediaMap).filter(([,v])=>v.n>=3).sort((a,b)=>(a[1].qSum/a[1].qN)-(b[1].qSum/b[1].qN)).slice(0,5);
+
+  const eraMap={hu:0,early_xi:0,wolf_era:0,recent:0};
+  rows.forEach(r=>{if(eraMap[r._era]!==undefined)eraMap[r._era]++;});
+  const eraLabels={hu:'Hu Jintao Era',early_xi:'Early Xi Era',wolf_era:'Wolf Warrior Era',recent:'Post-Pandemic Era'};
+
+  const insights=[];
+  if(!isNaN(qMean)){
+    const qD=qMean-CORPUS_Q_MEAN,aD=aMean-CORPUS_A_MEAN;
+    insights.push(`Question sentiment averages <strong>${qMean.toFixed(2)}</strong> (${qD>0?'+':''}${qD.toFixed(2)} vs corpus mean ${CORPUS_Q_MEAN}). Answer sentiment averages <strong>${aMean.toFixed(2)}</strong> (${aD>0?'+':''}${aD.toFixed(2)} vs corpus mean ${CORPUS_A_MEAN}).`);
+    if(!isNaN(gap))insights.push(`Q–A rhetorical gap: <strong>${gap.toFixed(2)}</strong> — ${gap>1.2?'unusually wide, indicating strong MFA assertiveness':gap<0.5?'unusually narrow, indicating rhetorical pressure or convergence':'near the corpus average of ~0.9'}.`);
+  }
+  if(mostDefensiveYr&&mostAssertiveYr&&mostDefensiveYr.yr!==mostAssertiveYr.yr)insights.push(`Most defensive year in set: <strong>${mostDefensiveYr.yr}</strong> (avg A: ${mostDefensiveYr.val}). Most assertive: <strong>${mostAssertiveYr.yr}</strong> (avg A: ${mostAssertiveYr.val}).`);
+  if(rrList.length&&rrList[0].ratio>2)insights.push(`Register "<strong>${RR[rrList[0].k].label}</strong>" is ${rrList[0].ratio.toFixed(1)}× overrepresented vs corpus baseline (${(rrList[0].rate*100).toFixed(1)}% in set vs ${(rrList[0].corpus*100).toFixed(1)}% corpus-wide).`);
+
+  const sparkHTML=years.map(y=>{const h=Math.max(4,Math.round((yearMap[y]/maxYearN)*28));const yrAvgA=yrStats[y]?.aN>0?(yrStats[y].aSum/yrStats[y].aN):null;const col=yrAvgA?SC(yrAvgA)[0]:'var(--red)';return`<div class="prof-spark-bar" style="height:${h}px;background:${col};flex:1" title="${y}: ${yearMap[y].toLocaleString()} entries${yrAvgA?', avg A: '+yrAvgA.toFixed(2):''}"></div>`;}).join('');
+  const bar=(n,max,col='var(--red)')=>`<div class="prof-bar-fill" style="width:${Math.min(100,Math.round((n/max)*100))}%;background:${col}"></div>`;
+  const sColor=v=>SC(v)[0];
+
+  $('profContent').innerHTML=`
+    ${insights.length?`<div class="prof-section"><div class="prof-section-title">Key Findings</div>${insights.map(i=>`<div class="prof-insight">${i}</div>`).join('')}</div>`:''}
+    <div class="prof-section">
+      <div class="prof-section-title">Core Statistics</div>
+      <div class="prof-grid">
+        <div class="prof-stat"><div class="prof-stat-label">Entries</div><div class="prof-stat-val" style="color:var(--text)">${rows.length.toLocaleString()}</div></div>
+        <div class="prof-stat"><div class="prof-stat-label">Avg Q Sent.</div><div class="prof-stat-val" style="color:${isNaN(qMean)?'var(--sub)':sColor(qMean)}">${isNaN(qMean)?'—':qMean.toFixed(3)}</div></div>
+        <div class="prof-stat"><div class="prof-stat-label">Avg A Sent.</div><div class="prof-stat-val" style="color:${isNaN(aMean)?'var(--sub)':sColor(aMean)}">${isNaN(aMean)?'—':aMean.toFixed(3)}</div></div>
+        <div class="prof-stat"><div class="prof-stat-label">Q–A Gap</div><div class="prof-stat-val" style="color:${isNaN(gap)?'var(--sub)':gap>1?'#2E7D32':gap<0.4?'#C41E3A':'#B5960A'}">${isNaN(gap)?'—':gap.toFixed(3)}</div></div>
+        <div class="prof-stat"><div class="prof-stat-label">Median Q</div><div class="prof-stat-val" style="color:${sColor(med(qv))}">${isNaN(med(qv))?'—':med(qv).toFixed(3)}</div></div>
+        <div class="prof-stat"><div class="prof-stat-label">Median A</div><div class="prof-stat-val" style="color:${sColor(med(av))}">${isNaN(med(av))?'—':med(av).toFixed(3)}</div></div>
+        <div class="prof-stat"><div class="prof-stat-label">SD (Q)</div><div class="prof-stat-val" style="font-size:16px;color:var(--text)">${isNaN(sd(qv))?'—':sd(qv).toFixed(3)}</div></div>
+        <div class="prof-stat"><div class="prof-stat-label">SD (A)</div><div class="prof-stat-val" style="font-size:16px;color:var(--text)">${isNaN(sd(av))?'—':sd(av).toFixed(3)}</div></div>
+      </div>
+    </div>
+    <div class="prof-section">
+      <div class="prof-section-title">Year Distribution <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--smoke)">(colour = avg A sentiment)</span></div>
+      <div class="prof-sparkline">${sparkHTML}</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-top:4px">Top years: ${topYears.map(([y,n])=>`${y} (${n.toLocaleString()})`).join(' · ')}</div>
+      ${Object.entries(eraMap).filter(([,v])=>v>0).map(([k,v])=>`<div class="prof-bar-row" style="margin-top:6px"><div class="prof-bar-label">${eraLabels[k]||k}</div><div class="prof-bar-track">${bar(v,rows.length,'var(--red)')}</div><div class="prof-bar-val">${v.toLocaleString()} <span style="color:var(--smoke)">(${(v/rows.length*100).toFixed(0)}%)</span></div></div>`).join('')}
+    </div>
+    ${spList.length?`<div class="prof-section"><div class="prof-section-title">Spokesperson Breakdown</div>${spList.map(([name,d])=>{const a=d.aN>0?d.aSum/d.aN:null;return`<div class="prof-bar-row"><div class="prof-bar-label">${esc(name)}</div><div class="prof-bar-track">${bar(a||0,5,a?SC(a)[0]:'var(--mist)')}</div><div class="prof-bar-val">${a?a.toFixed(2):'—'} <span style="color:var(--smoke)">${d.n.toLocaleString()}</span></div></div>`;}).join('')}</div>`:''}
+    ${rrList.length?`<div class="prof-section"><div class="prof-section-title">Top Rhetorical Registers vs Corpus Baseline</div>${rrList.map(d=>{const ov=d.ratio>1.5,col=ov?'#C41E3A':'#4C8F3A';return`<div class="prof-bar-row"><div class="prof-bar-label">${esc(RR[d.k].label)}</div><div class="prof-bar-track">${bar(d.rate,.5,col)}</div><div class="prof-bar-val">${(d.rate*100).toFixed(1)}% <span style="color:${col}">${ov?'↑':'↓'}${d.ratio.toFixed(1)}×</span></div></div>`;}).join('')}</div>`:''}
+    ${thList.length?`<div class="prof-section"><div class="prof-section-title">Topic Distribution</div>${thList.map(([t,n])=>`<div class="prof-bar-row"><div class="prof-bar-label">${esc(THEMES[t].label)}</div><div class="prof-bar-track">${bar(n,rows.length,THEME_COLORS[t]||'var(--red)')}</div><div class="prof-bar-val">${n.toLocaleString()} <span style="color:var(--smoke)">(${(n/rows.length*100).toFixed(0)}%)</span></div></div>`).join('')}</div>`:''}
+    ${mediaList.length?`<div class="prof-section"><div class="prof-section-title">Most Hostile Outlets (lowest avg Q sentiment)</div>${mediaList.map(([name,d])=>{const q=d.qSum/d.qN;return`<div class="prof-bar-row"><div class="prof-bar-label">${esc(name)}</div><div class="prof-bar-track">${bar(5-q,4,'#C41E3A')}</div><div class="prof-bar-val"><span style="color:${SC(q)[0]}">${q.toFixed(2)}</span> <span style="color:var(--smoke)">${d.n}</span></div></div>`;}).join('')}</div>`:''}
+    ${(topLocs.length||topOrgs.length||topPers.length)?`<div class="prof-section"><div class="prof-section-title">Named Entities in MFA Answers</div>${topLocs.length?`<div style="margin-bottom:8px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Locations</div><div class="prof-tag-cloud">${topLocs.map(([e,n])=>`<span class="prof-tag hot">${esc(e)} <span style="opacity:.6">${n}</span></span>`).join('')}</div></div>`:''}${topOrgs.length?`<div style="margin-bottom:8px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Organisations</div><div class="prof-tag-cloud">${topOrgs.map(([e,n])=>`<span class="prof-tag">${esc(e)} <span style="opacity:.6">${n}</span></span>`).join('')}</div></div>`:''}${topPers.length?`<div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);margin-bottom:4px">Persons</div><div class="prof-tag-cloud">${topPers.map(([e,n])=>`<span class="prof-tag">${esc(e)} <span style="opacity:.6">${n}</span></span>`).join('')}</div></div>`:''}</div>`:''}`;
+}
+
+function copyProfile(){
+  const rows=FIL;
+  const qv=rows.map(r=>parseFloat(r.q_sentiment)).filter(v=>!isNaN(v));
+  const av=rows.map(r=>parseFloat(r.a_sentiment)).filter(v=>!isNaN(v));
+  const mean=a=>a.length?(a.reduce((x,y)=>x+y,0)/a.length).toFixed(3):null;
+  const spMap={};rows.forEach(r=>{if(r.spokesperson&&r.spokesperson!=='-'&&r.spokesperson!=='missing')spMap[r.spokesperson]=(spMap[r.spokesperson]||0)+1;});
+  const topSP=Object.entries(spMap).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([n,c])=>`${n} (${c})`).join(', ');
+  const ds=rows.map(r=>r.date).filter(Boolean).sort();
+  const qM=mean(qv),aM=mean(av);
+  const text=`CMFA PressCon — Corpus Profile\nFilters: ${buildFilterDesc()}\n\nEntries: ${rows.length.toLocaleString()}\nDate range: ${ds[0]?.slice(0,10)||'—'} → ${ds[ds.length-1]?.slice(0,10)||'—'}\nAvg Q Sentiment: ${qM||'—'} (corpus mean: ${CORPUS_Q_MEAN})\nAvg A Sentiment: ${aM||'—'} (corpus mean: ${CORPUS_A_MEAN})\nQ–A Gap: ${(qM&&aM)?(+aM-+qM).toFixed(3):'—'}\nTop Spokespeople: ${topSP||'—'}\n\nDataset: Mochtak & Turcsanyi (2021), CMFA PressCon v6, doi:10.7910/DVN/BAKGET`;
+  navigator.clipboard?.writeText(text).then(()=>showToast('Profile copied!')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Profile copied!');});
+}
+
+// ════════════════════════════════════════════════════════════════════
+// FEATURE: BEFORE / AFTER SPLIT
+// ════════════════════════════════════════════════════════════════════
+const BA_EVENTS=[
+  {date:'2022-02-24',name:'Russia invades Ukraine'},
+  {date:'2022-08-02',name:'Pelosi visits Taiwan'},
+  {date:'2020-01-20',name:'COVID-19 confirmed outbreak'},
+  {date:'2018-07-06',name:'US–China trade war tariffs begin'},
+  {date:'2020-06-30',name:'Hong Kong National Security Law'},
+  {date:'2021-03-22',name:'Western Xinjiang sanctions'},
+  {date:'2023-08-24',name:'Fukushima water release begins'},
+  {date:'2017-01-20',name:'Trump inaugurated'},
+  {date:'2021-01-20',name:'Biden inaugurated'},
+  {date:'2016-07-12',name:'South China Sea arbitration ruling'},
+  {date:'2019-06-09',name:'Hong Kong protests begin'},
+  {date:'2021-09-15',name:'AUKUS pact announced'},
+  {date:'2024-05-20',name:'Lai Ching-te inaugurated in Taiwan'},
+];
+
+function closeBA(){$('baMov').classList.remove('open');document.body.style.overflow='';}
+
+function openBeforeAfter(){
+  if(!FIL.length){showToast('No entries — apply filters first.');return;}
+  const ds=FIL.map(r=>r.date).filter(Boolean).sort();
+  const firstDate=ds[0]?.slice(0,10)||'2002-01-01';
+  const lastDate=ds[ds.length-1]?.slice(0,10)||'2025-12-31';
+  const relevant=BA_EVENTS.filter(e=>e.date>firstDate&&e.date<lastDate);
+  $('baEvents').innerHTML=relevant.length
+    ?relevant.map(e=>`<button class="ba-event-btn" onclick="selectBAEvent('${e.date}')"><span class="ba-event-date">${e.date}</span><span class="ba-event-name">${esc(e.name)}</span></button>`).join('')
+    :`<div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke);padding:8px 0">No preset events in this date range — use the custom date below.</div>`;
+  $('baSplitDate').min=firstDate;$('baSplitDate').max=lastDate;
+  $('baNote').textContent=`Current set: ${FIL.length.toLocaleString()} entries (${firstDate} → ${lastDate})`;
+  $('baMov').classList.add('open');document.body.style.overflow='hidden';
+}
+
+function selectBAEvent(date){$('baSplitDate').value=date;runBeforeAfter();}
+
+function snapRows(rows,label){
+  const qv=rows.map(r=>parseFloat(r.q_sentiment)).filter(v=>!isNaN(v));
+  const av=rows.map(r=>parseFloat(r.a_sentiment)).filter(v=>!isNaN(v));
+  const qMean=qv.length?qv.reduce((a,b)=>a+b,0)/qv.length:NaN;
+  const aMean=av.length?av.reduce((a,b)=>a+b,0)/av.length:NaN;
+  const med=arr=>{if(!arr.length)return NaN;const s=[...arr].sort((a,b)=>a-b),m=Math.floor(s.length/2);return s.length%2?s[m]:(s[m-1]+s[m])/2;};
+  const ds=rows.map(r=>r.date).filter(Boolean).sort();
+  const spC={};rows.forEach(r=>{if(r.spokesperson&&r.spokesperson!=='-'&&r.spokesperson!=='missing')spC[r.spokesperson]=(spC[r.spokesperson]||0)+1;});
+  return{n:rows.length,qMean:isNaN(qMean)?null:+qMean.toFixed(3),aMean:isNaN(aMean)?null:+aMean.toFixed(3),gap:(!isNaN(qMean)&&!isNaN(aMean))?+(aMean-qMean).toFixed(3):null,qMedian:+med(qv).toFixed(3),aMedian:+med(av).toFixed(3),dateRange:ds.length?`${ds[0].slice(0,10)} → ${ds[ds.length-1].slice(0,10)}`:'—',topSP:Object.entries(spC).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([n,c])=>`${n} (${c})`).join(', ')||'—',yearStats:buildYearStats(rows),filterDesc:label,url:location.search};
+}
+
+function runBeforeAfter(){
+  const splitDate=$('baSplitDate').value;
+  if(!splitDate){showToast('Please enter a split date.');return;}
+  const before=FIL.filter(r=>r.date&&r.date.slice(0,10)<splitDate);
+  const after=FIL.filter(r=>r.date&&r.date.slice(0,10)>=splitDate);
+  if(!before.length||!after.length){$('baNote').textContent=`⚠ Split gives ${before.length} before and ${after.length} after — one side is empty. Try a different date.`;return;}
+  const evt=BA_EVENTS.find(e=>e.date===splitDate);
+  const base=buildFilterDesc();
+  const setA=snapRows(before,`${base} · Before ${splitDate}${evt?' ('+evt.name+')':''}`);
+  const setB=snapRows(after,`${base} · From ${splitDate}${evt?' (after '+evt.name+')':''}`);
+  // Update compare bar to reflect this
+  pinnedSetA=setA;
+  $('compareBar').classList.add('on');
+  $('cmpALabel').textContent=setA.filterDesc;
+  $('pinBtn').classList.add('active');
+  closeBA();
+  // Open compare modal directly with setA/setB
+  _renderCompare(setA,setB);
+}
+
+// Extracted from openCompare — renders the modal given explicit A and B snapshots
+function _renderCompare(A,B){
+  if(!A||!B)return;
+  const fNum=v=>v===null?'—':v.toFixed(2);
+  const sColor=v=>v===null?'var(--sub)':SC(v)[0];
+  const gColor=v=>v===null?'var(--sub)':v<0.4?'#C41E3A':v<0.7?'#E07B3A':v<1.0?'#B5960A':'#2E7D32';
+  function deltaRow(metric,vA,vB,scale){
+    if(vA===null||vB===null)return`<div class="cmp-delta-row"><div class="cmp-delta-metric">${metric}</div><div class="cmp-delta-bars"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--smoke)">No data</div></div></div>`;
+    const maxW=180,pA=Math.round((vA/scale)*maxW),pB=Math.round((vB/scale)*maxW);
+    const diff=vB-vA,diffStr=(diff>0?'+':'')+diff.toFixed(2),diffCol=diff>0.1?'#4C8F3A':diff<-0.1?'#C41E3A':'var(--sub)';
+    return`<div class="cmp-delta-row"><div class="cmp-delta-metric">${metric}</div><div class="cmp-delta-bars"><div class="cmp-delta-bar-wrap"><div class="cmp-delta-barlabel" style="color:#64B5F6">Set A</div><div class="cmp-delta-bar" style="width:${pA}px;background:#1565C0"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);margin-left:4px">${vA.toFixed(2)}</div></div><div class="cmp-delta-bar-wrap"><div class="cmp-delta-barlabel" style="color:#ff8a80">Set B</div><div class="cmp-delta-bar" style="width:${pB}px;background:#C41E3A"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);margin-left:4px">${vB.toFixed(2)}</div></div></div><div class="cmp-delta-diff" style="color:${diffCol}">${diffStr}</div></div>`;
+  }
+  function genInsight(){
+    const i=[];
+    if(A.qMean!==null&&B.qMean!==null){const d=B.qMean-A.qMean;if(Math.abs(d)>0.15)i.push(`Questions in Set B are ${Math.abs(d).toFixed(2)} pts ${d>0?'less hostile':'more hostile'} than Set A (${A.qMean} → ${B.qMean}).`);}
+    if(A.aMean!==null&&B.aMean!==null){const d=B.aMean-A.aMean;if(Math.abs(d)>0.15)i.push(`MFA answers in Set B are ${Math.abs(d).toFixed(2)} pts ${d>0?'more positive':'more defensive'} (${A.aMean} → ${B.aMean}).`);}
+    if(A.gap!==null&&B.gap!==null){const d=B.gap-A.gap;if(Math.abs(d)>0.1)i.push(`Q–A gap is ${d>0?'wider':'narrower'} in Set B by ${Math.abs(d).toFixed(2)} pts — ${d>0?'stronger assertiveness relative to question hostility':'more rhetorical convergence or pressure'}.`);}
+    if(!i.length)i.push(`Sets show similar sentiment profiles. ΔQ: ${((B.qMean||0)-(A.qMean||0)).toFixed(2)}, ΔA: ${((B.aMean||0)-(A.aMean||0)).toFixed(2)}.`);
+    return i.join(' ');
+  }
+  const arcId='cmpArcCanvas2';
+  $('cmpContent').innerHTML=`
+    <div class="cmp-grid">
+      <div class="cmp-set cmp-set-a">
+        <div class="cmp-set-title">📌 Set A</div>
+        <div class="cmp-stat-row"><div class="cmp-stat"><div class="cmp-stat-label">Entries</div><div class="cmp-stat-val" style="color:#1565C0">${A.n.toLocaleString()}</div></div><div class="cmp-stat"><div class="cmp-stat-label">Date range</div><div class="cmp-stat-val" style="font-size:11px;color:var(--sub)">${A.dateRange}</div></div></div>
+        <div class="cmp-stat-row"><div class="cmp-stat"><div class="cmp-stat-label">Avg Q</div><div class="cmp-stat-val" style="color:${sColor(A.qMean)}">${fNum(A.qMean)}</div></div><div class="cmp-stat"><div class="cmp-stat-label">Avg A</div><div class="cmp-stat-val" style="color:${sColor(A.aMean)}">${fNum(A.aMean)}</div></div></div>
+        <div class="cmp-stat-row"><div class="cmp-stat"><div class="cmp-stat-label">Gap</div><div class="cmp-stat-val" style="color:${gColor(A.gap)}">${fNum(A.gap)}</div></div><div class="cmp-stat"><div class="cmp-stat-label">Median A</div><div class="cmp-stat-val" style="color:${sColor(A.aMedian)}">${fNum(A.aMedian)}</div></div></div>
+        <div class="cmp-filter-desc"><strong>Filters:</strong> ${esc(A.filterDesc)}<br><strong>Top SP:</strong> ${esc(A.topSP)}</div>
+      </div>
+      <div class="cmp-set cmp-set-b">
+        <div class="cmp-set-title">🔵 Set B</div>
+        <div class="cmp-stat-row"><div class="cmp-stat"><div class="cmp-stat-label">Entries</div><div class="cmp-stat-val" style="color:var(--red)">${B.n.toLocaleString()}</div></div><div class="cmp-stat"><div class="cmp-stat-label">Date range</div><div class="cmp-stat-val" style="font-size:11px;color:var(--sub)">${B.dateRange}</div></div></div>
+        <div class="cmp-stat-row"><div class="cmp-stat"><div class="cmp-stat-label">Avg Q</div><div class="cmp-stat-val" style="color:${sColor(B.qMean)}">${fNum(B.qMean)}</div></div><div class="cmp-stat"><div class="cmp-stat-label">Avg A</div><div class="cmp-stat-val" style="color:${sColor(B.aMean)}">${fNum(B.aMean)}</div></div></div>
+        <div class="cmp-stat-row"><div class="cmp-stat"><div class="cmp-stat-label">Gap</div><div class="cmp-stat-val" style="color:${gColor(B.gap)}">${fNum(B.gap)}</div></div><div class="cmp-stat"><div class="cmp-stat-label">Median A</div><div class="cmp-stat-val" style="color:${sColor(B.aMedian)}">${fNum(B.aMedian)}</div></div></div>
+        <div class="cmp-filter-desc"><strong>Filters:</strong> ${esc(B.filterDesc)}<br><strong>Top SP:</strong> ${esc(B.topSP)}</div>
+      </div>
+    </div>
+    <div class="cmp-insight">${genInsight()}</div>
+    <div class="cmp-delta">
+      <div class="cmp-delta-title">Side-by-side metric comparison</div>
+      ${deltaRow('Avg Q Sentiment',A.qMean,B.qMean,5)}
+      ${deltaRow('Avg A Sentiment',A.aMean,B.aMean,5)}
+      ${deltaRow('Q–A Gap',A.gap,B.gap,3)}
+      ${deltaRow('Median Q',A.qMedian,B.qMedian,5)}
+      ${deltaRow('Median A',A.aMedian,B.aMedian,5)}
+    </div>
+    <div class="cmp-arc-section">
+      <div class="cmp-arc-title">Answer sentiment arc — Set A (blue) vs Set B (red)</div>
+      <canvas id="${arcId}" height="110" style="width:100%;display:block"></canvas>
+      <div style="display:flex;gap:18px;margin-top:6px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#1565C0">— Set A</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#C41E3A">— Set B</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(107,98,89,.5)">- - corpus mean</span>
+      </div>
+    </div>`;
+  requestAnimationFrame(()=>{
+    const cv=document.getElementById(arcId);if(!cv)return;
+    const W=cv.parentElement.offsetWidth-2,H=110;cv.width=W;cv.height=H;
+    const ctx=cv.getContext('2d');ctx.clearRect(0,0,W,H);
+    const dark=document.body.classList.contains('dark');
+    const gridCol=dark?'rgba(255,255,255,.06)':'rgba(0,0,0,.05)';
+    const textCol=dark?'rgba(221,213,200,.4)':'rgba(107,98,89,.55)';
+    const PAD={t:8,b:22,l:36,r:12},cW=W-PAD.l-PAD.r,cH=H-PAD.t-PAD.b;
+    const allYrs=[...new Set([...Object.keys(A.yearStats||{}),...Object.keys(B.yearStats||{})].map(Number))].sort((a,b)=>a-b);
+    if(allYrs.length<2){ctx.fillStyle=textCol;ctx.font='10px IBM Plex Mono,monospace';ctx.textAlign='center';ctx.fillText('Not enough year data',W/2,H/2);return;}
+    const minY=allYrs[0],maxY=allYrs[allYrs.length-1],xR=maxY-minY||1;
+    const xOf=y=>PAD.l+((y-minY)/xR)*cW,yOf=v=>PAD.t+cH-(v/5)*cH;
+    [1,2,3,4].forEach(v=>{ctx.strokeStyle=gridCol;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(PAD.l,yOf(v));ctx.lineTo(W-PAD.r,yOf(v));ctx.stroke();ctx.fillStyle=textCol;ctx.font='8px IBM Plex Mono,monospace';ctx.textAlign='right';ctx.fillText(v,PAD.l-4,yOf(v)+3);});
+    ctx.fillStyle=textCol;ctx.font='8px IBM Plex Mono,monospace';ctx.textAlign='center';
+    allYrs.forEach(y=>{if((y-minY)%(Math.ceil(xR/8))===0||y===minY||y===maxY)ctx.fillText(String(y),xOf(y),H-4);});
+    ctx.strokeStyle=dark?'rgba(107,98,89,.35)':'rgba(107,98,89,.25)';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(PAD.l,yOf(CORPUS_A_MEAN));ctx.lineTo(W-PAD.r,yOf(CORPUS_A_MEAN));ctx.stroke();ctx.setLineDash([]);
+    function drawLine(statsMap,color){const pts=allYrs.filter(y=>statsMap[y]&&statsMap[y].aN>0).map(y=>[xOf(y),yOf(statsMap[y].aSum/statsMap[y].aN)]);if(pts.length<2)return;ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();pts.forEach(([x,y],i)=>i===0?ctx.moveTo(x,y):ctx.lineTo(x,y));ctx.stroke();pts.forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();});}
+    drawLine(A.yearStats,'#1565C0');drawLine(B.yearStats,'#C41E3A');
+  });
+  $('compareMov').classList.add('open');document.body.style.overflow='hidden';
+}
+
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='profileMov')closeProfile();});
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='baMov')closeBA();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('profileMov')?.classList.contains('open'))closeProfile();if($('baMov')?.classList.contains('open'))closeBA();}});
+
+// ── HELP MODAL ─────────────────────────────────────────────────────$('helpMov').classList.add('open');document.body.style.overflow='hidden';}
 function closeHelp(){$('helpMov').classList.remove('open');document.body.style.overflow='';}
 function showPanel(id,navEl){
   document.querySelectorAll('.help-panel').forEach(p=>p.classList.remove('on'));
