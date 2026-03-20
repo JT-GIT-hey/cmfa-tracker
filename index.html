@@ -399,7 +399,17 @@ body.dark .preset-tag{color:var(--gold)}
 /* Undo toast enhancement */
 .copy-notif button{pointer-events:all}
 
-/* ── RHETORIC ARC ─────────────────────────────────────────────────── */
+/* ── CHARTS TOGGLE BAR ───────────────────────────────── */
+#chartsToggleBar{background:var(--paper);border-bottom:1px solid var(--mist);padding:0;flex-shrink:0;display:flex;align-items:center}
+body.dark #chartsToggleBar{background:var(--paper);border-bottom-color:var(--mist)}
+#chartsToggleBtn{width:100%;background:none;border:none;padding:5px 16px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);cursor:pointer;text-align:left;transition:color .15s,background .15s;display:flex;align-items:center;gap:6px}
+#chartsToggleBtn:hover{color:var(--red);background:rgba(196,30,58,.03)}
+#chartsPanel{flex-shrink:0;overflow:hidden}
+#chartsPanel.charts-hidden{display:none}
+/* Remove the old arc-toggle button style since we no longer need it */
+#arcPanel{border-top:1px solid var(--mist)}
+#arcHeader{border-bottom:1px solid var(--mist)}
+
 #arcPanel{background:var(--card);border-bottom:1px solid var(--mist);flex-shrink:0}
 body.dark #arcPanel{background:var(--card);border-bottom-color:var(--mist)}
 #arcHeader{display:flex;align-items:center;gap:10px;padding:5px 16px 4px;border-bottom:1px solid var(--mist)}
@@ -979,21 +989,26 @@ body.dark .help-footer{background:#1C1914}
       <span class="ste">⭐ Bookmarked: <strong id="stBm">0</strong></span>
       <span class="ste">Top SP: <strong id="stSP">—</strong></span>
     </div>
-    <div id="scrubber">
-      <span class="scr-lbl">Timeline</span>
-      <canvas id="scrubberCanvas" height="36" title="Drag to zoom into a year range · Double-click to reset"></canvas>
-      <span class="scr-lbl" id="scrLbl" style="min-width:72px;text-align:right">2002–2025</span>
+    <!-- ── CHARTS TOGGLE BAR ── -->
+    <div id="chartsToggleBar">
+      <button id="chartsToggleBtn" onclick="toggleCharts()">▾ Show Timeline &amp; Rhetoric Arc</button>
     </div>
-    <!-- ── RHETORIC ARC ── -->
-    <div id="arcPanel">
-      <div id="arcHeader">
-        <span class="arc-title">📈 Rhetoric Arc <span id="arcLabel" class="arc-label"></span></span>
-        <span class="arc-hint">avg sentiment per year for current filters · hover for details</span>
-        <button class="arc-toggle" id="arcToggleBtn" onclick="toggleArc()" title="Toggle arc chart">▴ hide</button>
+    <!-- ── CHARTS PANEL (hidden by default) ── -->
+    <div id="chartsPanel" class="charts-hidden">
+      <div id="scrubber">
+        <span class="scr-lbl">Timeline</span>
+        <canvas id="scrubberCanvas" height="36" title="Drag to zoom into a year range · Double-click to reset"></canvas>
+        <span class="scr-lbl" id="scrLbl" style="min-width:72px;text-align:right">2002–2025</span>
       </div>
-      <div id="arcBody">
-        <canvas id="arcCanvas" height="90"></canvas>
-        <div id="arcTooltip"></div>
+      <div id="arcPanel">
+        <div id="arcHeader">
+          <span class="arc-title">📈 Rhetoric Arc <span id="arcLabel" class="arc-label"></span></span>
+          <span class="arc-hint">avg sentiment per year for current filters · hover for details</span>
+        </div>
+        <div id="arcBody">
+          <canvas id="arcCanvas" height="90"></canvas>
+          <div id="arcTooltip"></div>
+        </div>
       </div>
     </div>
     <div id="results">
@@ -2390,8 +2405,10 @@ updateStats=function(){
   _origUpdateStats();
   const s=$('stBm');if(s)s.textContent=BM.size;
   if(statsExtOpen)refreshExtStats();
-  requestAnimationFrame(drawScrubber);
-  requestAnimationFrame(drawArc);
+  if(arcVisible){
+    requestAnimationFrame(drawScrubber);
+    requestAnimationFrame(drawArc);
+  }
 };
 
 // ── PATCH: render — bookmarks + smart empty state ──────────────────
@@ -2436,9 +2453,11 @@ const _origInit=init;
 init=function(){
   _origInit();
   renderPresets();
-  requestAnimationFrame(drawScrubber);
-  requestAnimationFrame(drawArc);
-  new ResizeObserver(()=>requestAnimationFrame(drawArc)).observe($('arcCanvas').parentElement);
+  if(arcVisible){
+    requestAnimationFrame(()=>{drawScrubber();drawArc();});
+  }
+  const arcParent=$('arcCanvas')?.parentElement;
+  if(arcParent) new ResizeObserver(()=>{if(arcVisible)requestAnimationFrame(drawArc);}).observe(arcParent);
 };
 
 // ── FIND SIMILAR ──────────────────────────────────────────────────
@@ -2498,13 +2517,28 @@ function clearSimilar(){
 // ════════════════════════════════════════════════════════════════════
 // FEATURE: RHETORIC ARC — live per-year sentiment trend for FIL
 // ════════════════════════════════════════════════════════════════════
-let arcVisible=true;
+let arcVisible=false; // hidden by default
 
-function toggleArc(){
+function toggleCharts(){
   arcVisible=!arcVisible;
-  $('arcPanel').classList.toggle('arc-collapsed',!arcVisible);
-  $('arcToggleBtn').textContent=arcVisible?'▴ hide':'▾ show';
+  $('chartsPanel').classList.toggle('charts-hidden',!arcVisible);
+  $('chartsToggleBtn').textContent=arcVisible?'▴ Hide Timeline & Rhetoric Arc':'▾ Show Timeline & Rhetoric Arc';
+  try{localStorage.setItem('cmfa_charts',arcVisible?'1':'0');}catch{}
+  if(arcVisible){
+    requestAnimationFrame(()=>{drawScrubber();drawArc();});
+  }
 }
+
+// Restore chart visibility preference on load
+(function initChartsVisibility(){
+  try{
+    if(localStorage.getItem('cmfa_charts')==='1'){
+      arcVisible=true;
+      const p=$('chartsPanel');if(p)p.classList.remove('charts-hidden');
+      const b=$('chartsToggleBtn');if(b)b.textContent='▴ Hide Timeline & Rhetoric Arc';
+    }
+  }catch{}
+})();
 
 function buildYearStats(rows){
   // Returns {year: {qSum, aSum, qN, aN, n}}
@@ -2523,7 +2557,7 @@ function buildYearStats(rows){
 
 function drawArc(){
   const cv=$('arcCanvas');if(!cv)return;
-  if(!arcVisible)return;
+  if(!arcVisible)return; // skip if panel is hidden
   if(!FIL||FIL.length===0){
     const ctx=cv.getContext('2d');
     cv.width=cv.parentElement.offsetWidth-32;cv.height=90;
