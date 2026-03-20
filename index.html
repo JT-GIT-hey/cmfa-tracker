@@ -375,6 +375,14 @@ body.dark .preset-tag{color:var(--gold)}
 .cite-pre{background:var(--paper);border:1px solid var(--mist);border-radius:3px;padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-all}
 .cite-copybtn{padding:3px 10px;background:var(--red);color:white;border:none;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-top:3px;float:right;transition:background .2s}
 .cite-copybtn:hover{background:#8a1428}
+/* ── FIND SIMILAR STRIP ───────────────────────────────── */
+#simBar{display:none;background:rgba(196,30,58,.07);border-bottom:1px solid rgba(196,30,58,.18);padding:5px 16px;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+#simBar.on{display:flex}
+.sim-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);flex-shrink:0}
+.sim-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:10px;background:var(--red);color:white;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600}
+.sim-clear{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0}
+.sim-clear:hover{color:var(--red)}
+body.dark #simBar{background:rgba(196,30,58,.1);border-bottom-color:rgba(196,30,58,.25)}
 /* ── HELP / GUIDE MODAL ──────────────────────────────────────────── */
 #helpMov{display:none;position:fixed;inset:0;background:rgba(13,13,13,.7);z-index:700;backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
 #helpMov.open{display:flex}
@@ -756,6 +764,11 @@ body.dark .help-footer{background:#1C1914}
   <!-- MAIN -->
   <div id="main">
     <div id="afBar"><span class="af-lbl">Active:</span><div id="afChips"></div></div>
+    <div id="simBar">
+      <span class="sim-lbl">🔍 Similar to</span>
+      <span id="simChips"></span>
+      <button class="sim-clear" onclick="clearSimilar()">✕ clear</button>
+    </div>
     <div id="toolbar">
       <div class="s-wrap">
         <span class="si">⌕</span>
@@ -853,6 +866,7 @@ body.dark .help-footer{background:#1C1914}
           <span id="mPos" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--smoke);padding:0 6px"></span>
           <button id="mBkBtn" class="mnbtn" onclick="mToggleBk()" style="color:var(--gold);border-color:rgba(212,168,67,.35)">⭐ Bookmark</button>
           <button class="mnbtn" onclick="openCiteModal(mIdx)" style="font-size:9px;letter-spacing:.03em">📋 Cite</button>
+          <button class="mnbtn" id="mSimilarBtn" onclick="findSimilar(mIdx)" style="font-size:9px;letter-spacing:.03em;color:var(--red);border-color:rgba(196,30,58,.35)" title="Apply this entry's spokesperson, year and top theme as filters">🔍 Find Similar</button>
         </div>
         <button class="mclose" onclick="closeM()">×</button>
       </div>
@@ -2091,6 +2105,60 @@ init=function(){
   renderPresets();
   requestAnimationFrame(drawScrubber);
 };
+
+// ── FIND SIMILAR ──────────────────────────────────────────────────
+function findSimilar(idx){
+  const r=FIL[idx];if(!r)return;
+
+  // 1. Close modal
+  closeM();
+
+  // 2. Reset all filters cleanly
+  resetAll();
+
+  // 3. Apply spokesperson
+  const sp=r.spokesperson;
+  if(sp&&sp!=='-'&&sp!=='missing'){
+    const cb=$('spList');
+    if(cb){
+      const inp=[...cb.querySelectorAll('input[type=checkbox]')].find(i=>i.value===sp);
+      if(inp){inp.checked=true;}
+    }
+  }
+
+  // 4. Apply year (±1 year window, min 2002 max 2025)
+  const yr=parseInt(r.year)||2002;
+  const yFrom=Math.max(2002,yr-1);
+  const yTo=Math.min(2025,yr+1);
+  ['yFrom','yfS'].forEach(id=>{$(id).value=yFrom;});
+  ['yTo','ytS'].forEach(id=>{$(id).value=yTo;});
+  $('yfV').textContent=yFrom;$('ytV').textContent=yTo;
+
+  // 5. Apply top theme (first detected theme on the entry)
+  const topTheme=r._themes&&r._themes[0];
+  if(topTheme){
+    activeThemes.add(topTheme);
+    const chip=document.querySelector(`.th-chip[data-th="${topTheme}"]`);
+    if(chip)chip.classList.add('on');
+  }
+
+  // 6. Show the simBar with applied-filter chips
+  const chips=[];
+  if(sp&&sp!=='-'&&sp!=='missing')chips.push(`<span class="sim-chip">🎙 ${esc(sp)}</span>`);
+  chips.push(`<span class="sim-chip">📅 ${yFrom}–${yTo}</span>`);
+  if(topTheme)chips.push(`<span class="sim-chip" style="background:${THEME_COLORS[topTheme]||'var(--red)'}">🏷 ${THEMES[topTheme].label}</span>`);
+  $('simChips').innerHTML=chips.join('');
+  $('simBar').classList.add('on');
+
+  // 7. Run the filter
+  af();
+}
+
+function clearSimilar(){
+  $('simBar').classList.remove('on');
+  $('simChips').innerHTML='';
+  resetAll();
+}
 
 // ── HELP MODAL ─────────────────────────────────────────────────────
 function openHelp(){$('helpMov').classList.add('open');document.body.style.overflow='hidden';}
